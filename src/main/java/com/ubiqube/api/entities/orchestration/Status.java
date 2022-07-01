@@ -21,7 +21,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Status {
-	private String details;
+	#private String details;
 	private String endingDate;
 	private long execNumber;
 	List<ProcessTaskStatus> processTaskStatus;

@@ -16,9 +16,11 @@
  */
 package com.ubiqube.etsi.mano.controller;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +29,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.ubiqube.etsi.mano.dao.mano.VnfPackage;
+import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.model.NotificationEvent;
+import com.ubiqube.etsi.mano.repository.ByteArrayResource;
+import com.ubiqube.etsi.mano.repository.ManoResource;
 import com.ubiqube.etsi.mano.service.GrantService;
 import com.ubiqube.etsi.mano.service.event.EventManager;
+import com.ubiqube.etsi.mano.service.pkg.PackageDescriptor;
+import com.ubiqube.etsi.mano.service.pkg.vnf.VnfPackageManager;
+import com.ubiqube.etsi.mano.service.pkg.vnf.VnfPackageOnboardingImpl;
+import com.ubiqube.etsi.mano.service.pkg.vnf.VnfPackageReader;
 
 @Controller
 @RequestMapping("/admin")
@@ -41,11 +54,15 @@ public class AdminController {
 
 	private final EventManager eventManager;
 	private final GrantService grantService;
+	private final VnfPackageManager packageManager;
+	private final VnfPackageOnboardingImpl vnfPackageOnboardingImpl;
 
-	public AdminController(final EventManager eventManager, final GrantService grantJpa) {
+	public AdminController(final EventManager eventManager, final GrantService grantJpa, final VnfPackageManager packageManager, final VnfPackageOnboardingImpl vnfPackageOnboardingImpl) {
 		super();
 		this.eventManager = eventManager;
 		this.grantService = grantJpa;
+		this.packageManager = packageManager;
+		this.vnfPackageOnboardingImpl = vnfPackageOnboardingImpl;
 	}
 
 	@GetMapping(value = "/event/{event}/{id}")
@@ -67,6 +84,20 @@ public class AdminController {
 		return ResponseEntity.accepted().build();
 	}
 
+	@PostMapping(value = "/validate/vnf")
+	public ResponseEntity<Void> validateVnf(@RequestParam("file") MultipartFile file) {
+		try {
+			ManoResource data = new ByteArrayResource(IOUtils.toByteArray(file.getInputStream()),"tmp.csar");
+			final PackageDescriptor<VnfPackageReader> packageProvider = packageManager.getProviderFor(data);
+			final VnfPackage vnfPackage = new VnfPackage();
+			vnfPackage.setId(UUID.randomUUID());
+			vnfPackageOnboardingImpl.mapVnfPackage(vnfPackage, data, packageProvider);
+		} catch (final IOException e) {
+			throw new GenericException(e);
+		}
+		return ResponseEntity.accepted().build();
+	}
+	
 	@SuppressWarnings("static-method")
 	@GetMapping("/whoami")
 	public ResponseEntity<Object> whoami() {

@@ -47,4 +47,6 @@ public class VnfContextExtractorTask extends NsTask {
 	private NsdPackage nsdPackage;
 
 	private String vnfdId;
+
+	private String vnfInstanceName;
 }

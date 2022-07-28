@@ -21,10 +21,10 @@ import java.util.List;
 import java.util.Optional;
 
 import com.ubiqube.etsi.mano.dao.mano.nsd.CpPair;
-import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsSfcTask;
+import com.ubiqube.etsi.mano.dao.mano.vnffg.VnffgPostTask;
 import com.ubiqube.etsi.mano.orchestrator.NamedDependency;
+import com.ubiqube.etsi.mano.orchestrator.nodes.nfvo.VnffgLoadbalancerNode;
 import com.ubiqube.etsi.mano.orchestrator.nodes.nfvo.VnffgPostNode;
-import com.ubiqube.etsi.mano.orchestrator.nodes.vnfm.VnfPortNode;
 import com.ubiqube.etsi.mano.service.graph.vt.NsVtBase;
 
 /**
@@ -32,24 +32,23 @@ import com.ubiqube.etsi.mano.service.graph.vt.NsVtBase;
  * @author Olivier Vignaud <ovi@ubiqube.com>
  *
  */
-public class NsVnffgPostVt extends NsVtBase<NsSfcTask> {
+public class NsVnffgPostVt extends NsVtBase<VnffgPostTask> {
 
-	public NsVnffgPostVt(final NsSfcTask nt) {
+	public NsVnffgPostVt(final VnffgPostTask nt) {
 		super(nt);
 	}
 
 	@Override
 	public List<NamedDependency> getNameDependencies() {
 		final ArrayList<NamedDependency> ret = new ArrayList<>();
-		final NsSfcTask task = getParameters();
+		final VnffgPostTask task = getParameters();
 		final List<CpPair> cpPairs = task.getVnffg().getNfpd()
 				.stream()
 				.flatMap(x -> x.getInstances().stream())
 				.flatMap(x -> x.getPairs().stream())
 				.toList();
 		cpPairs.forEach(x -> {
-			Optional.ofNullable(x.getIngress()).ifPresent(y -> ret.add(new NamedDependency(VnfPortNode.class, y)));
-			Optional.ofNullable(x.getEgress()).ifPresent(y -> ret.add(new NamedDependency(VnfPortNode.class, y)));
+			Optional.ofNullable(x.getToscaName()).ifPresent(y -> ret.add(new NamedDependency(VnffgLoadbalancerNode.class, y)));
 		});
 		return ret;
 	}

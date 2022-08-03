@@ -34,4 +34,5 @@ public interface PlanContributor<U, T extends VirtualTask<U>, P> {
 	List<T> contribute(Bundle bundle, P parameters);
 
 	Class<? extends Node> getNode();
+
 }

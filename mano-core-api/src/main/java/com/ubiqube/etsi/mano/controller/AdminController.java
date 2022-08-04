@@ -16,10 +16,14 @@
  */
 package com.ubiqube.etsi.mano.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,6 +49,7 @@ import com.ubiqube.etsi.mano.service.pkg.PackageDescriptor;
 import com.ubiqube.etsi.mano.service.pkg.vnf.VnfPackageManager;
 import com.ubiqube.etsi.mano.service.pkg.vnf.VnfPackageOnboardingImpl;
 import com.ubiqube.etsi.mano.service.pkg.vnf.VnfPackageReader;
+import com.ubiqube.etsi.mano.utils.TemporaryFileSentry;
 
 @Controller
 @RequestMapping("/admin")
@@ -85,13 +90,16 @@ public class AdminController {
 	}
 
 	@PostMapping(value = "/validate/vnf")
-	public ResponseEntity<Void> validateVnf(@RequestParam("file") MultipartFile file) {
-		try {
-			ManoResource data = new ByteArrayResource(IOUtils.toByteArray(file.getInputStream()),"tmp.csar");
-			final PackageDescriptor<VnfPackageReader> packageProvider = packageManager.getProviderFor(data);
-			final VnfPackage vnfPackage = new VnfPackage();
-			vnfPackage.setId(UUID.randomUUID());
-			vnfPackageOnboardingImpl.mapVnfPackage(vnfPackage, data, packageProvider);
+	public ResponseEntity<BufferedImage> validateVnf(@RequestParam("file") MultipartFile file) {
+		try (InputStream fis = file.getInputStream(); 
+				TemporaryFileSentry tfs = new TemporaryFileSentry()) {
+				final Path p = tfs.get();
+	            FileUtils.copyInputStreamToFile(fis, p.toFile());
+				ManoResource data = new ByteArrayResource(IOUtils.toByteArray(fis), p.toFile().getName());
+				final PackageDescriptor<VnfPackageReader> packageProvider = packageManager.getProviderFor(data);
+				final VnfPackage vnfPackage = new VnfPackage();
+				vnfPackage.setId(UUID.randomUUID());
+				vnfPackageOnboardingImpl.mapVnfPackage(vnfPackage, data, packageProvider);
 		} catch (final IOException e) {
 			throw new GenericException(e);
 		}

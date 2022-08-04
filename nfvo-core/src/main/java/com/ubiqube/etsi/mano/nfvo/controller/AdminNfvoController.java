@@ -18,11 +18,11 @@ package com.ubiqube.etsi.mano.nfvo.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Path;
 import java.util.UUID;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,12 +38,11 @@ import com.ubiqube.etsi.mano.repository.ByteArrayResource;
 import com.ubiqube.etsi.mano.repository.ManoResource;
 import com.ubiqube.etsi.mano.service.pkg.PackageDescriptor;
 import com.ubiqube.etsi.mano.service.pkg.ns.NsPackageProvider;
+import com.ubiqube.etsi.mano.utils.TemporaryFileSentry;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminNfvoController {
-
-	private static final Logger LOG = LoggerFactory.getLogger(AdminNfvoController.class);
 
 	private final NsPackageManager packageManager;
 	private final NsPackageOnboardingImpl nsPackageOnboardingImpl;
@@ -58,14 +57,15 @@ public class AdminNfvoController {
 	public ResponseEntity<Void> validateNs(@RequestParam("file") MultipartFile file) {
 		final NsdPackage nsPackage = new NsdPackage();
 		nsPackage.setId(UUID.randomUUID());
-		try (InputStream fis = file.getInputStream()) {
-			ManoResource data = new ByteArrayResource(IOUtils.toByteArray(fis),"tmp.csar");
+		try (InputStream fis = file.getInputStream(); 
+				TemporaryFileSentry tfs = new TemporaryFileSentry()) {
+			final Path p = tfs.get();
+            FileUtils.copyInputStreamToFile(fis, p.toFile());
+			ManoResource data = new ByteArrayResource(IOUtils.toByteArray(fis), p.toFile().getName());
 			final PackageDescriptor<NsPackageProvider> packageProvider = packageManager.getProviderFor(data);
 			if (null != packageProvider) {
 				try (InputStream is = data.getInputStream()) {
 					nsPackageOnboardingImpl.mapNsPackage(packageProvider.getNewReaderInstance(is, nsPackage.getId()), nsPackage);
-				} catch (IOException e) {
-					throw new GenericException(e);
 				}
 			}
 		} catch (IOException e) {

@@ -16,13 +16,16 @@
  */
 package com.ubiqube.etsi.mano.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Map;
 import java.util.UUID;
 
-import org.apache.commons.io.IOUtils;
+import org.jgrapht.ListenableGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -40,11 +43,16 @@ import com.ubiqube.etsi.mano.model.NotificationEvent;
 import com.ubiqube.etsi.mano.repository.ByteArrayResource;
 import com.ubiqube.etsi.mano.repository.ManoResource;
 import com.ubiqube.etsi.mano.service.GrantService;
+import com.ubiqube.etsi.mano.service.VnfPlanService;
 import com.ubiqube.etsi.mano.service.event.EventManager;
+import com.ubiqube.etsi.mano.service.graph.Edge2d;
+import com.ubiqube.etsi.mano.service.graph.GraphGenerator;
+import com.ubiqube.etsi.mano.service.graph.Vertex2d;
 import com.ubiqube.etsi.mano.service.pkg.PackageDescriptor;
 import com.ubiqube.etsi.mano.service.pkg.vnf.VnfPackageManager;
 import com.ubiqube.etsi.mano.service.pkg.vnf.VnfPackageOnboardingImpl;
 import com.ubiqube.etsi.mano.service.pkg.vnf.VnfPackageReader;
+import com.ubiqube.etsi.mano.utils.TemporaryFileSentry;
 
 @Controller
 @RequestMapping("/admin")
@@ -56,13 +64,16 @@ public class AdminController {
 	private final GrantService grantService;
 	private final VnfPackageManager packageManager;
 	private final VnfPackageOnboardingImpl vnfPackageOnboardingImpl;
+	private final VnfPlanService vnfPlanService;
 
-	public AdminController(final EventManager eventManager, final GrantService grantJpa, final VnfPackageManager packageManager, final VnfPackageOnboardingImpl vnfPackageOnboardingImpl) {
+	public AdminController(final EventManager eventManager, final GrantService grantJpa, final VnfPackageManager packageManager, 
+			final VnfPackageOnboardingImpl vnfPackageOnboardingImpl, final VnfPlanService vnfPlanService) {
 		super();
 		this.eventManager = eventManager;
 		this.grantService = grantJpa;
 		this.packageManager = packageManager;
 		this.vnfPackageOnboardingImpl = vnfPackageOnboardingImpl;
+		this.vnfPlanService = vnfPlanService;
 	}
 
 	@GetMapping(value = "/event/{event}/{id}")
@@ -85,19 +96,28 @@ public class AdminController {
 	}
 
 	@PostMapping(value = "/validate/vnf")
-	public ResponseEntity<Void> validateVnf(@RequestParam("file") MultipartFile file) {
-		try {
-			ManoResource data = new ByteArrayResource(IOUtils.toByteArray(file.getInputStream()),"tmp.csar");
-			final PackageDescriptor<VnfPackageReader> packageProvider = packageManager.getProviderFor(data);
-			final VnfPackage vnfPackage = new VnfPackage();
-			vnfPackage.setId(UUID.randomUUID());
-			vnfPackageOnboardingImpl.mapVnfPackage(vnfPackage, data, packageProvider);
+	public ResponseEntity<BufferedImage> validateVnf(@RequestParam("file") MultipartFile file) {
+		try (TemporaryFileSentry tfs = new TemporaryFileSentry()) {
+				final Path p = tfs.get();
+				ManoResource data = new ByteArrayResource(file.getBytes(), p.toFile().getName());
+				final PackageDescriptor<VnfPackageReader> packageProvider = packageManager.getProviderFor(data);
+				final VnfPackage vnfPackage = new VnfPackage();
+				vnfPackage.setId(UUID.randomUUID());
+				vnfPackageOnboardingImpl.mapVnfPackage(vnfPackage, data, packageProvider);
 		} catch (final IOException e) {
 			throw new GenericException(e);
 		}
 		return ResponseEntity.accepted().build();
 	}
-	
+
+	@GetMapping("/plan/vnf/2d/{id}")
+	public ResponseEntity<BufferedImage> getVnf2dPlan(@PathVariable("id") final UUID id) {
+		final ListenableGraph<Vertex2d, Edge2d> g = vnfPlanService.getPlanFor(id);
+		return ResponseEntity
+				.ok().contentType(MediaType.IMAGE_PNG)
+				.body(GraphGenerator.drawGraph2(g));
+	}
+
 	@SuppressWarnings("static-method")
 	@GetMapping("/whoami")
 	public ResponseEntity<Object> whoami() {

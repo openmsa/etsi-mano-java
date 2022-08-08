@@ -18,11 +18,15 @@ package com.ubiqube.etsi.mano.controller;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.UUID;
 
+
 import org.jgrapht.ListenableGraph;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -68,6 +72,7 @@ public class AdminController {
 
 	public AdminController(final EventManager eventManager, final GrantService grantJpa, final VnfPackageManager packageManager, 
 			final VnfPackageOnboardingImpl vnfPackageOnboardingImpl, final VnfPlanService vnfPlanService) {
+
 		super();
 		this.eventManager = eventManager;
 		this.grantService = grantJpa;
@@ -97,6 +102,7 @@ public class AdminController {
 
 	@PostMapping(value = "/validate/vnf")
 	public ResponseEntity<BufferedImage> validateVnf(@RequestParam("file") MultipartFile file) {
+
 		try (TemporaryFileSentry tfs = new TemporaryFileSentry()) {
 				final Path p = tfs.get();
 				ManoResource data = new ByteArrayResource(file.getBytes(), p.toFile().getName());

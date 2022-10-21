@@ -72,13 +72,13 @@ public class PlannerImpl<U> implements Planner<U> {
 		final ListenableGraph<UnitOfWorkV3<U>, ConnectivityEdge<UnitOfWorkV3<U>>> ng = (ListenableGraph) (Object) new DefaultListenableGraph<>(new DirectedAcyclicGraph<>(ConnectivityEdge.class));
 		ng.addGraphListener(new UnitOfWorkVertexListenerV3<>());
 		// First resolve implementation.
-		gf.vertexSet().forEach(x -> {
+		gf.vertexSet().stream().forEach(x -> {
 			final SystemBuilder<U> db = (SystemBuilder<U>) implementationService.getTargetSystem(x);
 			x.setSystemBuilder(db);
 			db.getVertexV3().forEach(ng::addVertex);
 		});
 		// Connect everything.
-		gf.edgeSet().forEach(x -> {
+		gf.edgeSet().stream().forEach(x -> {
 			final VirtualTaskV3<U> src = x.getSource();
 			final SystemBuilder<U> vsrc = src.getSystemBuilder();
 			final VirtualTaskV3<U> dst = x.getTarget();
@@ -111,20 +111,20 @@ public class PlannerImpl<U> implements Planner<U> {
 		}
 		// Execute create.
 		postPlanRunner.forEach(x -> x.runCreatePost(impl.getGraph()));
-		final ExecutionResults<UnitOfWorkV3<U>, String> res = execCreate(impl.getGraph(), listener);
+		final ExecutionResults<UnitOfWorkV3<U>, String> res = execCreate(impl, listener);
 		finalDelete.addAll(convertResults(res));
 		return convertResults(res);
 	}
 
 	private ExecutionResults<UnitOfWorkV3<U>, String> execDelete(final ListenableGraph<UnitOfWorkV3<U>, ConnectivityEdge<UnitOfWorkV3<U>>> g, final OrchExecutionListener<U> listener) {
 		final ListenableGraph<UnitOfWorkV3<U>, ConnectivityEdge<UnitOfWorkV3<U>>> rev = GraphTools.revert(g);
-		final Context3dNetFlow<U> context = new Context3dNetFlow<>(g);
+		final Context3dNetFlow<U> context = new Context3dNetFlow<>(g, List.of());
 		return executorService.execute(rev, new DeleteTaskProvider<>(context, listener));
 	}
 
-	private ExecutionResults<UnitOfWorkV3<U>, String> execCreate(final ListenableGraph<UnitOfWorkV3<U>, ConnectivityEdge<UnitOfWorkV3<U>>> g, final OrchExecutionListener<U> listener) {
-		final Context3dNetFlow<U> context = new Context3dNetFlow<>(g);
-		return executorService.execute(g, new CreateTaskProvider<>(context, listener));
+	private ExecutionResults<UnitOfWorkV3<U>, String> execCreate(final ExecutionGraphImplV3<U> impl, final OrchExecutionListener<U> listener) {
+		final Context3dNetFlow<U> context = new Context3dNetFlow<>(impl.getGraph(), impl.getGlobal());
+		return executorService.execute(impl.getGraph(), new CreateTaskProvider<>(context, listener));
 	}
 
 	private OrchExecutionResults<U> convertResults(final ExecutionResults<UnitOfWorkV3<U>, String> res) {

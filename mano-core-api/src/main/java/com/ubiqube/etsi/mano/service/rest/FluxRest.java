@@ -44,6 +44,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.HttpHeaders;
@@ -216,7 +217,8 @@ public class FluxRest {
 	}
 
 	public final <T> ResponseEntity<T> getWithReturn(final URI uri, final Class<T> clazz, final String version) {
-		final Mono<ResponseEntity<T>> resp = makeBaseQuery(uri, HttpMethod.GET, null, version)
+		final Map<String, String> map = Optional.ofNullable(version).map(x -> Map.of(VERSION, x)).orElseGet(Map::of);
+		final Mono<ResponseEntity<T>> resp = makeBaseQuery(uri, HttpMethod.GET, null, map)
 				.accept(MediaType.APPLICATION_JSON)
 				.retrieve()
 				.toEntity(clazz);
@@ -228,7 +230,8 @@ public class FluxRest {
 	}
 
 	public final <T> ResponseEntity<T> postWithReturn(final URI uri, final Object body, final Class<T> clazz, final String version) {
-		final Mono<ResponseEntity<T>> resp = makeBaseQuery(uri, HttpMethod.POST, body, version)
+		final Map<String, String> map = Optional.ofNullable(version).map(x -> Map.of(VERSION, x)).orElseGet(Map::of);
+		final Mono<ResponseEntity<T>> resp = makeBaseQuery(uri, HttpMethod.POST, body, map)
 				.accept(MediaType.APPLICATION_JSON)
 				.retrieve()
 				.toEntity(clazz);
@@ -236,7 +239,8 @@ public class FluxRest {
 	}
 
 	public final <T> ResponseEntity<T> deleteWithReturn(final URI uri, final Object body, final String version) {
-		final ResponseSpec resp = makeBaseQuery(uri, HttpMethod.DELETE, body, version)
+		final Map<String, String> map = Optional.ofNullable(version).map(x -> Map.of(VERSION, x)).orElseGet(Map::of);
+		final ResponseSpec resp = makeBaseQuery(uri, HttpMethod.DELETE, body, map)
 				.accept(MediaType.APPLICATION_JSON)
 				.retrieve();
 		return (ResponseEntity<T>) resp.toBodilessEntity().block();
@@ -250,23 +254,39 @@ public class FluxRest {
 		return call(uri, HttpMethod.POST, body, clazz, version);
 	}
 
+	/**
+	 *
+	 * @param <T>     Return class.
+	 * @param uri     URI to call.
+	 * @param body    The body as an {@link InputStream}.
+	 * @param clazz   Return Class.
+	 * @param version MANO Version null other wise.
+	 * @return
+	 */
+	public final <T> T put(final URI uri, final InputStream body, final Class<T> clazz, final String contentType) {
+		return innerCall(uri, HttpMethod.PUT, body, clazz, Map.of("Content-Type", contentType));
+	}
+
 	public final <T> T delete(final URI uri, final Class<T> clazz, final String version) {
 		return call(uri, HttpMethod.DELETE, clazz, version);
 	}
 
 	public final <T> T call(final URI uri, final HttpMethod method, final Class<T> clazz, final String version) {
-		return innerCall(uri, method, null, clazz, version);
+		final Map<String, String> map = Optional.ofNullable(version).map(x -> Map.of(VERSION, x)).orElseGet(Map::of);
+		return innerCall(uri, method, null, clazz, map);
 	}
 
 	public final <T> T call(final URI uri, final HttpMethod method, final Object body, final Class<T> clazz, final String version) {
-		return innerCall(uri, method, body, clazz, version);
+		final Map<String, String> map = Optional.ofNullable(version).map(x -> Map.of(VERSION, x)).orElseGet(Map::of);
+		return innerCall(uri, method, body, clazz, map);
 	}
 
 	public <T> T get(final URI uri, final ParameterizedTypeReference<T> myBean, final String version) {
-		final Mono<ResponseEntity<T>> resp = makeBaseQuery(uri, HttpMethod.GET, null, version)
+		final Map<String, String> map = Optional.ofNullable(version).map(x -> Map.of(VERSION, x)).orElseGet(Map::of);
+		final Mono<ResponseEntity<T>> resp = makeBaseQuery(uri, HttpMethod.GET, null, map)
 				.retrieve()
 				.toEntity(myBean);
-		return getBlockingResult(resp, null, version);
+		return getBlockingResult(resp, null, Map.of(VERSION, version));
 	}
 
 	public UriComponentsBuilder uriBuilder() {
@@ -292,31 +312,33 @@ public class FluxRest {
 		DataBufferUtils.write(dataBufferFlux, path, StandardOpenOption.CREATE).block();
 	}
 
-	private RequestHeadersSpec<?> makeBaseQuery(final URI uri, final HttpMethod method, final Object requestObject, final String version) {
+	private RequestHeadersSpec<?> makeBaseQuery(final URI uri, final HttpMethod method, final Object requestObject, final Map<String, String> headers) {
 		final RequestHeadersSpec<?> wc = webClient
 				.mutate()
 				.build()
 				.method(method)
 				.uri(uri)
-				.contentType(MediaType.APPLICATION_JSON);
+				.contentType(Optional.ofNullable(headers.get("Content-Type")).map(MediaType::parseMediaType).orElse(MediaType.APPLICATION_JSON));
 		if (null != requestObject) {
-			((RequestBodySpec) wc).bodyValue(requestObject);
+			if (requestObject instanceof final InputStream is) {
+				((RequestBodySpec) wc).body(BodyInserters.fromResource(new InputStreamResource(is)));
+			} else {
+				((RequestBodySpec) wc).bodyValue(requestObject);
+			}
 		}
-		if (null != version) {
-			wc.header(VERSION, version);
-		}
+		Optional.ofNullable(headers.get(VERSION)).ifPresent(x -> wc.header(VERSION, x));
 		return wc;
 	}
 
-	private final <T> T innerCall(final URI uri, final HttpMethod method, final Object requestObject, final Class<T> clazz, final String version) {
-		final Mono<ResponseEntity<T>> resp = makeBaseQuery(uri, method, requestObject, version)
+	private final <T> T innerCall(final URI uri, final HttpMethod method, final Object requestObject, final Class<T> clazz, final Map<String, String> headers) {
+		final Mono<ResponseEntity<T>> resp = makeBaseQuery(uri, method, requestObject, headers)
 				.accept(MediaType.APPLICATION_JSON)
 				.retrieve()
 				.toEntity(clazz);
-		return getBlockingResult(resp, clazz, version);
+		return getBlockingResult(resp, clazz, headers);
 	}
 
-	private <T> T getBlockingResult(final Mono<ResponseEntity<T>> resp, final Class<T> clazz, final String version) {
+	private <T> T getBlockingResult(final Mono<ResponseEntity<T>> resp, final Class<T> clazz, final Map<String, String> headers) {
 		final ResponseEntity<T> resp2 = resp.block();
 		if (null == resp2) {
 			return null;
@@ -324,7 +346,7 @@ public class FluxRest {
 		final Optional<URI> uri = Optional.ofNullable(resp2.getHeaders().getLocation()).filter(x -> !x.toString().isEmpty());
 		if (uri.isPresent()) {
 			LOG.info("Location: {}", uri);
-			return innerCall(uri.get(), HttpMethod.GET, null, clazz, version);
+			return innerCall(uri.get(), HttpMethod.GET, null, clazz, headers);
 		}
 		return resp2.getBody();
 	}
@@ -349,17 +371,18 @@ public class FluxRest {
 	}
 
 	public <T> T patch(final URI uri, final Class<T> clazz, final String ifMatch, final Map<String, Object> patch, final String version) {
-		final RequestHeadersSpec<?> base = makeBaseQuery(uri, HttpMethod.PATCH, patch, version);
+		final Map<String, String> map = Optional.ofNullable(version).map(x -> Map.of(VERSION, x)).orElseGet(Map::of);
+		final RequestHeadersSpec<?> base = makeBaseQuery(uri, HttpMethod.PATCH, patch, map);
 		if (ifMatch != null) {
 			base.header(HttpHeaders.IF_MATCH, ifMatch);
 		}
 		final Mono<ResponseEntity<T>> resp = base
 				.retrieve()
 				.toEntity(clazz);
-		return getBlockingResult(resp, null, version);
+		return getBlockingResult(resp, null, Map.of(VERSION, version));
 	}
 
-	public void doDownload(final String url, final Consumer<InputStream> target) {
+	public void doDownload(final String url, final Consumer<InputStream> target, final String version) {
 		final ExceptionHandler eh = new ExceptionHandler();
 		try (final PipedOutputStream osPipe = new PipedOutputStream();
 				final PipedInputStream isPipe = new PipedInputStream(osPipe)) {
@@ -367,6 +390,7 @@ public class FluxRest {
 					.get()
 					.uri(url)
 					.accept(MediaType.APPLICATION_OCTET_STREAM, MediaType.ALL)
+					.header(VERSION, version)
 					.retrieve()
 					.onRawStatus(i -> i != 200, exepctionFunction(osPipe))
 					.bodyToFlux(DataBuffer.class);

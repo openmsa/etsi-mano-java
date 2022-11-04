@@ -33,8 +33,8 @@ import org.springframework.stereotype.Service;
 
 import com.ubiqube.etsi.mano.dao.mano.VimConnectionInformation;
 import com.ubiqube.etsi.mano.dao.mano.vrqan.VrQan;
+import com.ubiqube.etsi.mano.jpa.VrQanJpa;
 import com.ubiqube.etsi.mano.model.NotificationEvent;
-import com.ubiqube.etsi.mano.nfvo.jpa.VrQanJpa;
 import com.ubiqube.etsi.mano.service.event.EventManager;
 import com.ubiqube.etsi.mano.service.vim.ResourceQuota;
 import com.ubiqube.etsi.mano.service.vim.Vim;

@@ -24,6 +24,7 @@ import org.springframework.core.ParameterizedTypeReference;
 
 import com.ubiqube.etsi.mano.dao.mano.CancelModeTypeEnum;
 import com.ubiqube.etsi.mano.dao.mano.GrantInterface;
+import com.ubiqube.etsi.mano.dao.mano.ScaleTypeEnum;
 import com.ubiqube.etsi.mano.dao.mano.pm.PmJob;
 import com.ubiqube.etsi.mano.dao.mano.pm.Threshold;
 import com.ubiqube.etsi.mano.model.EventMessage;
@@ -69,6 +70,16 @@ public class HttpGatewayBad extends AbstractHttpGateway {
 	@Override
 	public Class<?> getGrantRequest() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public Class<?> getVnfIndicatorValueChangeSubscriptionClass() {
+		return null;
+	}
+	
+	@Override
+	public Class<?> getVnfIndicatorValueChangeSubscriptionRequest() {
 		return null;
 	}
 
@@ -199,6 +210,18 @@ public class HttpGatewayBad extends AbstractHttpGateway {
 
 	@Override
 	public Object createVnfThresholdRequest(final Threshold req) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object createVnfInstanceScaleRequest(ScaleTypeEnum scaleTypeEnum, String aspectId, Integer numberOfSteps) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object createVnfInstanceHealRequest(String cause) {
 		// TODO Auto-generated method stub
 		return null;
 	}

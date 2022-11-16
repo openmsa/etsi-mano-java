@@ -14,19 +14,22 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package com.ubiqube.etsi.mano.nfvo.jpa;
+package com.ubiqube.etsi.mano.dao.mano.cnf;
 
-import java.util.UUID;
+public enum ConnectionType {
+	OCI("OCI"),
+	MAVEN2("MAVEN2"),
+	HELM("HELM");
 
-import org.springframework.data.repository.CrudRepository;
+	private String value;
 
-import com.ubiqube.etsi.mano.dao.mano.ind.VnfIndiValueChangeNotification;
+	ConnectionType(final String string) {
+		value = string;
+	}
 
-/**
- *
- * @author olivier
- *
- */
-public interface VnfIndiValueChangeNotificationJpa extends CrudRepository<VnfIndiValueChangeNotification, UUID> {
-	// Nothing
+	@Override
+	public String toString() {
+		return value;
+	}
+
 }

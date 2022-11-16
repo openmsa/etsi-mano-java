@@ -36,14 +36,18 @@ import com.ubiqube.etsi.mano.common.v261.model.vnf.PkgmSubscriptionRequest;
 import com.ubiqube.etsi.mano.common.v261.model.vnf.VnfPkgInfo;
 import com.ubiqube.etsi.mano.dao.mano.CancelModeTypeEnum;
 import com.ubiqube.etsi.mano.dao.mano.GrantInterface;
+import com.ubiqube.etsi.mano.dao.mano.ScaleTypeEnum;
 import com.ubiqube.etsi.mano.dao.mano.VnfPackage;
+import com.ubiqube.etsi.mano.dao.mano.nslcm.scale.ScaleType;
 import com.ubiqube.etsi.mano.dao.mano.pm.PmJob;
 import com.ubiqube.etsi.mano.dao.mano.pm.Threshold;
+import com.ubiqube.etsi.mano.dao.mano.v2.VnfBlueprint;
 import com.ubiqube.etsi.mano.model.EventMessage;
 import com.ubiqube.etsi.mano.nfvo.v261.model.lcmgrant.GrantRequest;
 import com.ubiqube.etsi.mano.nfvo.v261.model.lcmgrant.GrantRequestLinks;
 import com.ubiqube.etsi.mano.nfvo.v261.model.nsd.sol005.CreateNsdInfoRequest;
 import com.ubiqube.etsi.mano.nfvo.v261.model.nsd.sol005.NsdInfo;
+import com.ubiqube.etsi.mano.nfvo.v261.model.nslcm.ScaleVnfData.ScaleVnfTypeEnum;
 import com.ubiqube.etsi.mano.nfvo.v261.model.nsperfo.PmJobsCreatePmJobRequest;
 import com.ubiqube.etsi.mano.nfvo.v261.model.vnf.CreateVnfPkgInfoRequest;
 import com.ubiqube.etsi.mano.service.AbstractHttpGateway;
@@ -52,16 +56,21 @@ import com.ubiqube.etsi.mano.service.VnfmFactory;
 import com.ubiqube.etsi.mano.utils.Version;
 import com.ubiqube.etsi.mano.vnfm.v261.model.nslcm.ChangeExtVnfConnectivityRequest;
 import com.ubiqube.etsi.mano.vnfm.v261.model.nslcm.CreateVnfRequest;
+import com.ubiqube.etsi.mano.vnfm.v261.model.nslcm.HealVnfRequest;
 import com.ubiqube.etsi.mano.vnfm.v261.model.nslcm.InstantiateVnfRequest;
 import com.ubiqube.etsi.mano.vnfm.v261.model.nslcm.OperateVnfRequest;
 import com.ubiqube.etsi.mano.vnfm.v261.model.nslcm.ScaleVnfRequest;
+import com.ubiqube.etsi.mano.vnfm.v261.model.nslcm.ScaleVnfRequest.TypeEnum;
 import com.ubiqube.etsi.mano.vnfm.v261.model.nslcm.ScaleVnfToLevelRequest;
 import com.ubiqube.etsi.mano.vnfm.v261.model.nslcm.TerminateVnfRequest;
 import com.ubiqube.etsi.mano.vnfm.v261.model.nslcm.TerminateVnfRequest.TerminationTypeEnum;
 import com.ubiqube.etsi.mano.vnfm.v261.model.nslcm.VnfLcmOpOcc;
 import com.ubiqube.etsi.mano.vnfm.v261.model.nsperfo.CreateThresholdRequest;
+import com.ubiqube.etsi.mano.vnfm.v261.model.vnfind.VnfIndicatorSubscription;
+import com.ubiqube.etsi.mano.vnfm.v261.model.vnfind.VnfIndicatorSubscriptionRequest;
 
 import ma.glasnost.orika.MapperFacade;
+import nonapi.io.github.classgraph.scanspec.ScanSpec.ScanSpecPathMatch;
 
 /**
  *
@@ -96,6 +105,16 @@ public class VnfmGateway261 extends AbstractHttpGateway {
 	@Override
 	public Class<?> getPkgmSubscriptionRequest() {
 		return PkgmSubscriptionRequest.class;
+	}
+	
+	@Override
+	public Class<?> getVnfIndicatorValueChangeSubscriptionClass() {
+		return VnfIndicatorSubscription.class;
+	}
+	
+	@Override
+	public Class<?> getVnfIndicatorValueChangeSubscriptionRequest() {
+		return VnfIndicatorSubscriptionRequest.class;
 	}
 
 	@Override
@@ -167,6 +186,25 @@ public class VnfmGateway261 extends AbstractHttpGateway {
 	public Class<?> getVnfInstanceScaleToLevelRequest() {
 		return ScaleVnfToLevelRequest.class;
 	}
+	
+	@Override
+	public Object createVnfInstanceScaleRequest(final ScaleTypeEnum scaleType, final String aspectId,  final Integer numberOfSteps) {
+		final var req = new ScaleVnfRequest();
+		req.setAspectId(aspectId);
+		req.setNumberOfSteps(numberOfSteps);
+		if(scaleType.equals(ScaleTypeEnum.IN))
+			req.setType(ScaleVnfRequest.TypeEnum.IN);
+		if(scaleType.equals(ScaleTypeEnum.OUT))
+			req.setType(ScaleVnfRequest.TypeEnum.OUT);
+		return req;
+	}
+	
+	@Override
+	public Object createVnfInstanceHealRequest(final String cause) {
+		final var req = new HealVnfRequest();
+		req.setCause(cause);
+		return req;
+	}
 
 	@Override
 	public Class<?> getVnfInstanceScaleRequest() {
@@ -188,6 +226,7 @@ public class VnfmGateway261 extends AbstractHttpGateway {
 		return switch (event.getNotificationEvent()) {
 		case VNF_PKG_ONCHANGE, VNF_PKG_ONDELETION -> nfvoFactory.createVnfPackageChangeNotification(subscriptionId, event);
 		case VNF_PKG_ONBOARDING -> nfvoFactory.createNotificationVnfPackageOnboardingNotification(subscriptionId, event);
+		case VNF_INDICATOR_VALUE_CHANGED -> vnfmFactory.createVnfIndicatorValueChangeNotification(subscriptionId, event);
 		default -> {
 			LOG.warn("Could not find event.");
 			yield null;

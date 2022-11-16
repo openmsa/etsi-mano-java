@@ -28,11 +28,14 @@ import org.springframework.stereotype.Service;
 
 import com.ubiqube.etsi.mano.dao.mano.CancelModeTypeEnum;
 import com.ubiqube.etsi.mano.dao.mano.GrantInterface;
+import com.ubiqube.etsi.mano.dao.mano.ScaleTypeEnum;
 import com.ubiqube.etsi.mano.dao.mano.VnfInstance;
 import com.ubiqube.etsi.mano.dao.mano.VnfPackage;
 import com.ubiqube.etsi.mano.dao.mano.common.ApiVersionType;
 import com.ubiqube.etsi.mano.dao.mano.pm.PmJob;
 import com.ubiqube.etsi.mano.dao.mano.pm.Threshold;
+import com.ubiqube.etsi.mano.em.v361.model.vnfind.VnfIndicatorSubscription;
+import com.ubiqube.etsi.mano.em.v361.model.vnfind.VnfIndicatorSubscriptionRequest;
 import com.ubiqube.etsi.mano.em.v361.model.vnflcm.ChangeExtVnfConnectivityRequest;
 import com.ubiqube.etsi.mano.em.v361.model.vnflcm.CreateVnfRequest;
 import com.ubiqube.etsi.mano.em.v361.model.vnflcm.InstantiateVnfRequest;
@@ -88,6 +91,16 @@ public class HttpGateway361 extends AbstractHttpGateway {
 	@Override
 	public Class<?> getPkgmSubscriptionRequest() {
 		return PkgmSubscriptionRequest.class;
+	}
+	
+	@Override
+	public Class<?> getVnfIndicatorValueChangeSubscriptionClass() {
+		return VnfIndicatorSubscription.class;
+	}
+	
+	@Override
+	public Class<?> getVnfIndicatorValueChangeSubscriptionRequest() {
+		return VnfIndicatorSubscriptionRequest.class;
 	}
 
 	@Override
@@ -269,6 +282,18 @@ public class HttpGateway361 extends AbstractHttpGateway {
 	@Override
 	public Object createVnfThresholdRequest(final Threshold reqIn) {
 		return mapper.map(reqIn, CreateThresholdRequest.class);
+	}
+
+	@Override
+	public Object createVnfInstanceScaleRequest(ScaleTypeEnum scaleTypeEnum, String aspectId, Integer numberOfSteps) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object createVnfInstanceHealRequest(String cause) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

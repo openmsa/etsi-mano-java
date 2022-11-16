@@ -39,6 +39,11 @@ import com.ubiqube.etsi.mano.repository.VnfPackageRepository;
 import com.ubiqube.etsi.mano.service.vim.k8s.K8sClient;
 import com.ubiqube.etsi.mano.vnfm.jpa.K8sServerInfoJpa;
 
+/**
+ *
+ * @author Olivier Vignaud <ovi@ubiqube.com>
+ *
+ */
 public class HelmDeployUowV3 extends AbstractVnfmUowV3<HelmTask> {
 	private final K8sClient client;
 	private final HelmTask task;
@@ -60,11 +65,11 @@ public class HelmDeployUowV3 extends AbstractVnfmUowV3<HelmTask> {
 	public String execute(final Context3d context) {
 		final String server = context.get(OsContainerDeployableNode.class, task.getParentVdu());
 		final K8sServers s = serverInfoJpa.findById(UUID.fromString(server)).orElseThrow(() -> new GenericException("Unable to find erver " + server));
-		final String tmpFile = copyFile(task.getMciop().getArtifacts().entrySet().iterator().next().getValue().getImagePath(), task.getVnfPackageId());
-		return client.deploy(s, manoKey, tmpFile);
+		final File tmpFile = copyFile(task.getMciop().getArtifacts().entrySet().iterator().next().getValue().getImagePath(), task.getVnfPackageId());
+		return client.deploy(null, s, manoKey, tmpFile, UUID.randomUUID().toString());
 	}
 
-	private String copyFile(final String url, @NotNull final UUID id) {
+	private File copyFile(final String url, @NotNull final UUID id) {
 		final ManoResource f = vnfRepo.getBinary(id, new File(Constants.REPOSITORY_FOLDER_ARTIFACTS, url).toString());
 		final Path tmp = createTempFile();
 		try (final FileOutputStream fos = new FileOutputStream(tmp.toFile());
@@ -73,7 +78,7 @@ public class HelmDeployUowV3 extends AbstractVnfmUowV3<HelmTask> {
 		} catch (final IOException e) {
 			throw new GenericException(e);
 		}
-		return tmp.toString();
+		return tmp.toFile();
 	}
 
 	private static Path createTempFile() {
@@ -86,7 +91,7 @@ public class HelmDeployUowV3 extends AbstractVnfmUowV3<HelmTask> {
 
 	@Override
 	public String rollback(final Context3d context) {
-		client.undeploy(task.getVimResourceId());
+		client.undeploy(null, null, null, task.getVimResourceId());
 		return null;
 	}
 

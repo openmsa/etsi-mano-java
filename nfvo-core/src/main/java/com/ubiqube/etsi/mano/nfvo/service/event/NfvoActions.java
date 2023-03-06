@@ -16,17 +16,24 @@
  */
 package com.ubiqube.etsi.mano.nfvo.service.event;
 
+<<<<<<< HEAD
 import static com.ubiqube.etsi.mano.Constants.getSafeUUID;
 
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+=======
+import java.util.List;
+import java.util.UUID;
+
+>>>>>>> 4e21bd9a2 (NS Heal (#37))
 import org.springframework.stereotype.Service;
 
 import com.ubiqube.etsi.mano.dao.mano.Instance;
 import com.ubiqube.etsi.mano.dao.mano.NsLiveInstance;
 import com.ubiqube.etsi.mano.dao.mano.NsdInstance;
+<<<<<<< HEAD
 import com.ubiqube.etsi.mano.dao.mano.PackageBase;
 import com.ubiqube.etsi.mano.dao.mano.VimTask;
 import com.ubiqube.etsi.mano.dao.mano.VnfInstance;
@@ -34,6 +41,12 @@ import com.ubiqube.etsi.mano.dao.mano.dto.nsi.VnfInstanceDto;
 import com.ubiqube.etsi.mano.dao.mano.v2.Blueprint;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsVnfInstantiateTask;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsVnfTask;
+=======
+import com.ubiqube.etsi.mano.dao.mano.VimTask;
+import com.ubiqube.etsi.mano.dao.mano.VnfInstance;
+import com.ubiqube.etsi.mano.dao.mano.v2.Blueprint;
+import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsVnfInstantiateTask;
+>>>>>>> 4e21bd9a2 (NS Heal (#37))
 import com.ubiqube.etsi.mano.model.VnfHealRequest;
 import com.ubiqube.etsi.mano.nfvo.service.NsBlueprintService;
 import com.ubiqube.etsi.mano.nfvo.service.NsInstanceService;
@@ -43,12 +56,18 @@ import com.ubiqube.etsi.mano.service.NsScaleStrategyV3;
 import com.ubiqube.etsi.mano.service.VimResourceService;
 import com.ubiqube.etsi.mano.service.VnfInstanceGatewayService;
 import com.ubiqube.etsi.mano.service.event.AbstractGenericActionV3;
+<<<<<<< HEAD
 import com.ubiqube.etsi.mano.service.event.ActionType;
+=======
+>>>>>>> 4e21bd9a2 (NS Heal (#37))
 import com.ubiqube.etsi.mano.service.rest.ManoClient;
 import com.ubiqube.etsi.mano.service.rest.ManoClientFactory;
 
 import jakarta.validation.constraints.NotNull;
+<<<<<<< HEAD
 import ma.glasnost.orika.MapperFacade;
+=======
+>>>>>>> 4e21bd9a2 (NS Heal (#37))
 
 /**
  *

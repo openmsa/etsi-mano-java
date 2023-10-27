@@ -28,6 +28,7 @@ import com.ubiqube.etsi.mano.dao.mano.VimTask;
 import com.ubiqube.etsi.mano.dao.mano.VnfInstance;
 import com.ubiqube.etsi.mano.dao.mano.v2.Blueprint;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsVnfInstantiateTask;
+import com.ubiqube.etsi.mano.jpa.JujuCloudJpa;
 import com.ubiqube.etsi.mano.model.VnfHealRequest;
 import com.ubiqube.etsi.mano.nfvo.service.NsBlueprintService;
 import com.ubiqube.etsi.mano.nfvo.service.NsInstanceService;
@@ -37,6 +38,7 @@ import com.ubiqube.etsi.mano.service.NsScaleStrategyV3;
 import com.ubiqube.etsi.mano.service.VimResourceService;
 import com.ubiqube.etsi.mano.service.VnfInstanceGatewayService;
 import com.ubiqube.etsi.mano.service.event.AbstractGenericActionV3;
+import com.ubiqube.etsi.mano.service.juju.cli.JujuRemoteService;
 import com.ubiqube.etsi.mano.service.rest.ManoClient;
 import com.ubiqube.etsi.mano.service.rest.ManoClientFactory;
 
@@ -54,8 +56,9 @@ public class NfvoActions extends AbstractGenericActionV3 {
 	private final ManoClientFactory manoClientFactory;
 
 	public NfvoActions(final NfvoOrchestrationV3 workflow, final VimResourceService vimResourceService, final NsOrchestrationAdapter orchestrationAdapter, final NsScaleStrategyV3 nsScaleStrategy,
-			final NsBlueprintService blueprintService, final NsInstanceService nsInstanceService, final VnfInstanceGatewayService vnfInstancesService, final ManoClientFactory manoClientFactory) {
-		super(workflow, vimResourceService, orchestrationAdapter, nsScaleStrategy);
+			final NsBlueprintService blueprintService, final NsInstanceService nsInstanceService, final VnfInstanceGatewayService vnfInstancesService, final ManoClientFactory manoClientFactory,
+			final JujuRemoteService remoteService, final JujuCloudJpa jujuCloudJpa) {
+		super(workflow, vimResourceService, orchestrationAdapter, nsScaleStrategy, remoteService, jujuCloudJpa);
 		this.blueprintService = blueprintService;
 		this.nsInstanceService = nsInstanceService;
 		this.vnfInstancesService = vnfInstancesService;

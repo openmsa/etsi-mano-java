@@ -18,6 +18,7 @@ package com.ubiqube.etsi.mano.service.event;
 
 import java.time.OffsetDateTime;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -25,6 +26,7 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 
 import com.ubiqube.etsi.mano.dao.mano.ChangeType;
 import com.ubiqube.etsi.mano.dao.mano.Instance;
@@ -37,11 +39,15 @@ import com.ubiqube.etsi.mano.dao.mano.v2.OperationStatusType;
 import com.ubiqube.etsi.mano.dao.mano.v2.PlanOperationType;
 import com.ubiqube.etsi.mano.dao.mano.v2.Task;
 import com.ubiqube.etsi.mano.dao.rfc7807.FailureDetails;
+import com.ubiqube.etsi.mano.exception.VnfmException;
+import com.ubiqube.etsi.mano.jpa.JujuCloudJpa;
 import com.ubiqube.etsi.mano.orchestrator.OrchExecutionResults;
 import com.ubiqube.etsi.mano.orchestrator.v3.PreExecutionGraphV3;
 import com.ubiqube.etsi.mano.service.NsScaleStrategyV3;
 import com.ubiqube.etsi.mano.service.VimResourceService;
 import com.ubiqube.etsi.mano.service.graph.WorkflowEvent;
+import com.ubiqube.etsi.mano.service.juju.cli.JujuRemoteService;
+import com.ubiqube.etsi.mano.service.juju.entities.JujuCloud;
 
 /**
  *
@@ -59,12 +65,18 @@ public abstract class AbstractGenericActionV3 {
 	protected final OrchestrationAdapter<?, ?> orchestrationAdapter;
 
 	private final NsScaleStrategyV3 nsScaleStrategy;
+	private final JujuCloudJpa jujuCloudJpa;
+	private final JujuRemoteService remoteService;
 
-	protected AbstractGenericActionV3(final WorkflowV3 workflow, final VimResourceService vimResourceService, final OrchestrationAdapter<?, ?> orchestrationAdapter, final NsScaleStrategyV3 nsScaleStrategy) {
+	protected AbstractGenericActionV3(final WorkflowV3 workflow, final VimResourceService vimResourceService, 
+			final OrchestrationAdapter<?, ?> orchestrationAdapter, final NsScaleStrategyV3 nsScaleStrategy,
+			final JujuRemoteService remoteService, final JujuCloudJpa jujuCloudJpa) {
 		this.workflow = workflow;
 		this.vimResourceService = vimResourceService;
 		this.orchestrationAdapter = orchestrationAdapter;
 		this.nsScaleStrategy = nsScaleStrategy;
+		this.remoteService = remoteService;
+		this.jujuCloudJpa = jujuCloudJpa;
 	}
 
 	public final void instantiate(final UUID blueprintId) {
@@ -188,6 +200,64 @@ public abstract class AbstractGenericActionV3 {
 		instantiateShield(blueprintId, WorkflowEvent.SCALE_SUCCESS, WorkflowEvent.SCALE_FAILED);
 	}
 
+	public void jujuInstantiate(final UUID objectId) {
+		System.out.println("objectidinstantite= " + objectId);
+		final JujuCloud jCloud = jujuCloudJpa.findById(objectId)
+				.orElseThrow(() -> new VnfmException("Could not find Juju Cloud: " + objectId));
+		try {
+			if (jCloud.getName() != null) {
+				remoteService.addCloud(jCloud);
+				if (jCloud.getCredential().getName() != null) {
+					remoteService.addCredential(jCloud);
+					if (jCloud.getMetadata().getName() != null) {
+						remoteService.addController(jCloud.getName(), jCloud.getMetadata());
+						ResponseEntity<String> responseobject = remoteService
+								.controllerDetail(jCloud.getMetadata().getName());
+						if (responseobject.getBody() != null && !(responseobject.getBody().contains("ERROR"))) {
+							if (jCloud.getMetadata().getModels().get(0).getName() != null) {
+								remoteService.addModel(jCloud.getMetadata().getModels().get(0).getName());
+								if (jCloud.getMetadata().getModels().get(0).getCharmName() != null
+										&& jCloud.getMetadata().getModels().get(0).getAppName() != null) {
+									remoteService.deployApp(jCloud.getMetadata().getModels().get(0).getCharmName(),
+											jCloud.getMetadata().getModels().get(0).getAppName());
+								} else {
+									throw new VnfmException("Error Deploying Charm");
+								}
+							} else {
+								throw new VnfmException("Error Create Model");
+							}
+						} else {
+							jCloud.setStatus("FAIL");
+							jujuCloudJpa.save(jCloud);
+							throw new VnfmException("Error Create Controller");
+						}
+					} else {
+						throw new VnfmException("Error Create Controller");
+					}
+				} else {
+					throw new VnfmException("Error Create Credential");
+				}
+			} else {
+				throw new VnfmException("Error Create Cloud");
+			}
+		} catch (VnfmException e) {
+			jCloud.setStatus("FAIL");
+			jujuCloudJpa.save(jCloud);
+			throw e;
+		}
+		jCloud.setStatus("PASS");
+		jujuCloudJpa.save(jCloud);
+		LOG.info("Success");
+	}
+
+	public void jujuTerminate(final UUID objectId) {
+		final JujuCloud jCloud = jujuCloudJpa.findById(objectId)
+				.orElseThrow(() -> new VnfmException("Could not find Juju Cloud: " + objectId));
+		remoteService.removeController(jCloud.getMetadata().getName());
+		LOG.info("Success");
+		jujuCloudJpa.delete(jCloud);
+	}
+	
 	private void instantiateShield(final UUID blueprintId, final WorkflowEvent success, final WorkflowEvent failure) {
 		final Blueprint<? extends VimTask, ? extends Instance> blueprint = orchestrationAdapter.getBluePrint(blueprintId);
 		final Instance vnfInstance = orchestrationAdapter.getInstance(blueprint.getInstance().getId());

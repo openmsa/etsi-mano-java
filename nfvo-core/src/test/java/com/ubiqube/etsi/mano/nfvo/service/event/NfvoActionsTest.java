@@ -44,7 +44,6 @@ import com.ubiqube.etsi.mano.dao.mano.v2.OperationStatusType;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsBlueprint;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsTask;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsVnfInstantiateTask;
-import com.ubiqube.etsi.mano.jpa.JujuCloudJpa;
 import com.ubiqube.etsi.mano.nfvo.service.NsBlueprintService;
 import com.ubiqube.etsi.mano.nfvo.service.NsInstanceService;
 import com.ubiqube.etsi.mano.nfvo.service.graph.NfvoOrchestrationV3;
@@ -53,7 +52,6 @@ import com.ubiqube.etsi.mano.orchestrator.OrchExecutionResults;
 import com.ubiqube.etsi.mano.service.NsScaleStrategyV3;
 import com.ubiqube.etsi.mano.service.VimResourceService;
 import com.ubiqube.etsi.mano.service.VnfInstanceGatewayService;
-import com.ubiqube.etsi.mano.service.juju.cli.JujuRemoteService;
 import com.ubiqube.etsi.mano.service.rest.ManoClient;
 import com.ubiqube.etsi.mano.service.rest.ManoClientFactory;
 import com.ubiqube.etsi.mano.service.rest.ManoVnfInstanceId;
@@ -80,14 +78,10 @@ class NfvoActionsTest {
 	private ManoClient manoClient;
 	@Mock
 	private ManoVnfInstanceId manoCliVnfInst;
-	@Mock
-	private JujuCloudJpa jujuCloudJpa;
-	@Mock
-	private JujuRemoteService remoteService;
 
 	@Test
 	void testInstantiate00() {
-		final NfvoActions na = new NfvoActions(workflow, vimResource, orchAdapter, nsScaling, blueprintService, nsInstanceService, vnfInstanceService, manoClientFactory, remoteService, jujuCloudJpa);
+		final NfvoActions na = new NfvoActions(workflow, vimResource, orchAdapter, nsScaling, blueprintService, nsInstanceService, vnfInstanceService, manoClientFactory);
 		final UUID id = UUID.randomUUID();
 		final NsBlueprint blueprint = new NsBlueprint();
 		final NsdInstance nsInstance = new NsdInstance();
@@ -102,7 +96,7 @@ class NfvoActionsTest {
 
 	@Test
 	void testHeal01() {
-		final NfvoActions na = new NfvoActions(workflow, vimResource, orchAdapter, nsScaling, blueprintService, nsInstanceService, vnfInstanceService, manoClientFactory, remoteService, jujuCloudJpa);
+		final NfvoActions na = new NfvoActions(workflow, vimResource, orchAdapter, nsScaling, blueprintService, nsInstanceService, vnfInstanceService, manoClientFactory);
 		final UUID id = UUID.randomUUID();
 		final NsBlueprint blueprint = new NsBlueprint();
 		final NsdInstance nsInstance = new NsdInstance();
@@ -119,7 +113,7 @@ class NfvoActionsTest {
 
 	@Test
 	void testInstantiate() {
-		final NfvoActions na = new NfvoActions(workflow, vimResource, orchAdapter, nsScaling, blueprintService, nsInstanceService, vnfInstanceService, manoClientFactory, remoteService, jujuCloudJpa);
+		final NfvoActions na = new NfvoActions(workflow, vimResource, orchAdapter, nsScaling, blueprintService, nsInstanceService, vnfInstanceService, manoClientFactory);
 		final UUID id = UUID.randomUUID();
 		final NsBlueprint blueprint = new NsBlueprint();
 		final NsdInstance nsInstance = new NsdInstance();
@@ -146,7 +140,7 @@ class NfvoActionsTest {
 	@ParameterizedTest
 	@MethodSource("providerClass")
 	void testParam(final args arg) {
-		final NfvoActions na = new NfvoActions(workflow, vimResource, orchAdapter, nsScaling, blueprintService, nsInstanceService, vnfInstanceService, manoClientFactory, remoteService, jujuCloudJpa);
+		final NfvoActions na = new NfvoActions(workflow, vimResource, orchAdapter, nsScaling, blueprintService, nsInstanceService, vnfInstanceService, manoClientFactory);
 		final UUID id = UUID.randomUUID();
 		final NsBlueprint blueprint = new NsBlueprint();
 		final NsdInstance nsInstance = new NsdInstance();
@@ -181,7 +175,7 @@ class NfvoActionsTest {
 
 	@Test
 	void testHeal() throws Exception {
-		final NfvoActions na = new NfvoActions(workflow, vimResource, orchAdapter, nsScaling, blueprintService, nsInstanceService, vnfInstanceService, manoClientFactory, remoteService, jujuCloudJpa);
+		final NfvoActions na = new NfvoActions(workflow, vimResource, orchAdapter, nsScaling, blueprintService, nsInstanceService, vnfInstanceService, manoClientFactory);
 		final UUID id = UUID.randomUUID();
 		final NsBlueprint blueprint = new NsBlueprint();
 		final NsdInstance inst = new NsdInstance();

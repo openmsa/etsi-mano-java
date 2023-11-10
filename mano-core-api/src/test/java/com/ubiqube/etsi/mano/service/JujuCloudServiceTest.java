@@ -32,6 +32,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.ubiqube.etsi.mano.jpa.JujuCloudJpa;
 import com.ubiqube.etsi.mano.jpa.JujuCredentialJpa;
 import com.ubiqube.etsi.mano.jpa.JujuMetadataJpa;
+import com.ubiqube.etsi.mano.service.juju.cli.JujuRemoteService;
 import com.ubiqube.etsi.mano.service.juju.entities.JujuCloud;
 
 @ExtendWith(MockitoExtension.class)
@@ -46,26 +47,29 @@ public class JujuCloudServiceTest {
 	@Mock
 	private JujuMetadataJpa jujuMetadataJpa;
 
+	@Mock
+	private JujuRemoteService jujuRemoteService;
+	
 	private JujuCloudService jujuCloudService;
 
 	@BeforeEach
 	void init() {
-		jujuCloudService = new JujuCloudService(jujuCloudJpa, jujuCredentialJpa, jujuMetadataJpa);
+		jujuCloudService = new JujuCloudService(jujuCloudJpa, jujuCredentialJpa, jujuMetadataJpa, jujuRemoteService);
 	}
 
 	@Test
-	public void test_SaveCloud() throws Exception {
+	public void testSaveCloud() throws Exception {
 		JujuCloud jCloud = new JujuCloud();
 		jujuCloudService.saveCloud(jCloud);
 		assertTrue(true);
 	}
 
 	@Test
-	public void test_FindByControllerName() throws Exception {
+	public void testFindByMetadataName() throws Exception {
 		String controllerName = "testcontroller1";
 		JujuCloud jujuCloud1 = new JujuCloud();
 		List<JujuCloud> expectedResult = Arrays.asList(jujuCloud1);
-		when(jujuCloudJpa.findByControllerName(controllerName)).thenReturn(expectedResult);
-		assertEquals(1, jujuCloudService.findByControllerName(controllerName).size());
+		when(jujuCloudJpa.findByMetadataName(controllerName,"PASS")).thenReturn(expectedResult);
+		assertEquals(1, jujuCloudService.findByMetadataName(controllerName,"PASS").size());
 	}
 }

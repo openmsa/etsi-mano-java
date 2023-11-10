@@ -18,6 +18,7 @@ package com.ubiqube.etsi.mano.controller.vnf;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,10 +100,8 @@ public class JujuVnfController {
 	public ResponseEntity<String> terminate(@PathVariable("controllername") @NotNull final String controllername) {
 		ResponseEntity<String> responseobject = remoteService.controllerDetail(controllername);
 		if (responseobject.getBody() != null && !(responseobject.getBody().contains("ERROR"))) {
-			LOG.info("Juju terminating...");
-			List<JujuCloud> jClouds = jujuCloudService.findByControllerName(controllername);
-			if (jClouds.size() > 0)
-				eventManager.sendActionVnfm(ActionType.VNF_JUJU_TERMINATE, jClouds.get(0).getId(), new HashMap<>());
+			LOG.info("Juju terminating...");		
+			eventManager.sendActionVnfm(ActionType.VNF_JUJU_TERMINATE, UUID.randomUUID(), new HashMap<>());
 			//	eventManager.sendAction(ActionType.VNF_JUJU_TERMINATE, jClouds.get(0).getId());
 			return new ResponseEntity<String>(
 					"Accepted The request was accepted for processing, but the  processing has not been completed.",

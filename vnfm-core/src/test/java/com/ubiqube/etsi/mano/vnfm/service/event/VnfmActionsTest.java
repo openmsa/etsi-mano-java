@@ -38,10 +38,8 @@ import com.ubiqube.etsi.mano.dao.mano.v2.PlanOperationType;
 import com.ubiqube.etsi.mano.dao.mano.v2.VnfBlueprint;
 import com.ubiqube.etsi.mano.dao.mano.v2.VnfTask;
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
-import com.ubiqube.etsi.mano.jpa.JujuCloudJpa;
 import com.ubiqube.etsi.mano.orchestrator.OrchExecutionResults;
 import com.ubiqube.etsi.mano.service.VimResourceService;
-import com.ubiqube.etsi.mano.service.juju.cli.JujuRemoteService;
 import com.ubiqube.etsi.mano.service.vim.Vim;
 import com.ubiqube.etsi.mano.service.vim.VimManager;
 import com.ubiqube.etsi.mano.test.controllers.TestFactory;
@@ -70,14 +68,10 @@ class VnfmActionsTest {
 	private VnfInstanceServiceVnfm vnfInstanceServiceVnfm;
 	@Mock
 	private VnfWorkflow workflow;
-	@Mock
-	private JujuCloudJpa jujuCloudJpa;
-	@Mock
-	private JujuRemoteService remoteService;
 
 	@Test
 	void test() {
-		final VnfmActions srv = new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow, remoteService, jujuCloudJpa);
+		final VnfmActions srv = new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow);
 		final UUID id = UUID.randomUUID();
 		final VnfBlueprint value = new VnfBlueprint();
 		final VnfInstance vnfInst = new VnfInstance();
@@ -92,7 +86,7 @@ class VnfmActionsTest {
 
 	@Test
 	void test_Instantiate() {
-		final VnfmActions srv = new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow, remoteService, jujuCloudJpa);
+		final VnfmActions srv = new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow);
 		final UUID id = UUID.randomUUID();
 		final VnfBlueprint value = TestFactory.createBlueprint();
 		final VnfInstance vnfInst = TestFactory.createVnfInstance();
@@ -116,7 +110,7 @@ class VnfmActionsTest {
 
 	@Test
 	void testOperateStop() {
-		final VnfmActions srv = new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow, remoteService, jujuCloudJpa);
+		final VnfmActions srv = new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow);
 		final UUID id = UUID.randomUUID();
 		final VnfBlueprint blueprint = TestFactory.createBlueprint();
 		final VnfTask vnfTask = new ComputeTask();
@@ -135,7 +129,7 @@ class VnfmActionsTest {
 
 	@Test
 	void testOperateStart() {
-		final VnfmActions srv = new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow, remoteService, jujuCloudJpa);
+		final VnfmActions srv = new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow);
 		final UUID id = UUID.randomUUID();
 		final VnfBlueprint blueprint = TestFactory.createBlueprint();
 		final VnfTask vnfTask = new ComputeTask();
@@ -155,7 +149,7 @@ class VnfmActionsTest {
 
 	@Test
 	void testOperateEmptyTasks() {
-		final VnfmActions srv = new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow, remoteService, jujuCloudJpa);
+		final VnfmActions srv = new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow);
 		final UUID id = UUID.randomUUID();
 		final VnfBlueprint blueprint = TestFactory.createBlueprint();
 		final VnfInstance inst = TestFactory.createVnfInstance();
@@ -170,7 +164,7 @@ class VnfmActionsTest {
 
 	@Test
 	void testOperateFailed() {
-		final VnfmActions srv = new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow, remoteService, jujuCloudJpa);
+		final VnfmActions srv = new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow);
 		final UUID id = UUID.randomUUID();
 		final VnfBlueprint blueprint = TestFactory.createBlueprint();
 		final VnfInstance inst = new VnfInstance();
@@ -183,7 +177,7 @@ class VnfmActionsTest {
 
 	@Test
 	void testVnfHeal() {
-		final VnfmActions srv = new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow, remoteService, jujuCloudJpa);
+		final VnfmActions srv = new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow);
 		final UUID id = UUID.randomUUID();
 		final VnfBlueprint blueprint = TestFactory.createBlueprint();
 		final VnfInstance inst = TestFactory.createVnfInstance();
@@ -203,7 +197,7 @@ class VnfmActionsTest {
 
 	@Test
 	void testVnfHealFailed() {
-		final VnfmActions srv = new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow, remoteService, jujuCloudJpa);
+		final VnfmActions srv = new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow);
 		final UUID id = UUID.randomUUID();
 		final VnfBlueprint blueprint = TestFactory.createBlueprint();
 		final VnfInstance inst = TestFactory.createVnfInstance();

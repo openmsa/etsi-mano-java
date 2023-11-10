@@ -104,7 +104,6 @@ public class JujuVnfControllerTest {
 		jClouds.add(jujuCloud);
 		ResponseEntity<String> responseobject = new ResponseEntity<String>("test", HttpStatus.OK);
 		Mockito.when(remoteService.controllerDetail(Mockito.anyString())).thenReturn(responseobject);
-		Mockito.when(jujuCloudService.findByControllerName(Mockito.anyString())).thenReturn(jClouds);
 		jujuVnfController.terminate(controlername);
 		assertTrue(true);
 	}

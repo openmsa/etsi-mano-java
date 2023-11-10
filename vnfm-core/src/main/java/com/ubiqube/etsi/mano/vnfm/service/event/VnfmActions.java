@@ -36,11 +36,9 @@ import com.ubiqube.etsi.mano.dao.mano.v2.OperationStatusType;
 import com.ubiqube.etsi.mano.dao.mano.v2.VnfBlueprint;
 import com.ubiqube.etsi.mano.dao.mano.v2.VnfTask;
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
-import com.ubiqube.etsi.mano.jpa.JujuCloudJpa;
 import com.ubiqube.etsi.mano.service.NsScaleStrategyV3;
 import com.ubiqube.etsi.mano.service.VimResourceService;
 import com.ubiqube.etsi.mano.service.event.AbstractGenericActionV3;
-import com.ubiqube.etsi.mano.service.juju.cli.JujuRemoteService;
 import com.ubiqube.etsi.mano.service.vim.Vim;
 import com.ubiqube.etsi.mano.service.vim.VimManager;
 import com.ubiqube.etsi.mano.vnfm.jpa.VnfLiveInstanceJpa;
@@ -71,8 +69,8 @@ public class VnfmActions extends AbstractGenericActionV3 {
 
 	public VnfmActions(final VimManager vimManager, final VnfOrchestrationAdapter orchestrationAdapter, final VnfInstanceService vnfInstancesService,
 			final VnfBlueprintService blueprintService, final VimResourceService vimResourceService, final VnfLiveInstanceJpa vnfLiveInstanceJpa,
-			final VnfInstanceServiceVnfm vnfInstanceServiceVnfm, final VnfWorkflow workflow, final JujuRemoteService remoteService, final JujuCloudJpa jujuCloudJpa) {
-		super(workflow, vimResourceService, orchestrationAdapter, new NsScaleStrategyV3(), remoteService, jujuCloudJpa);
+			final VnfInstanceServiceVnfm vnfInstanceServiceVnfm, final VnfWorkflow workflow) {
+		super(workflow, vimResourceService, orchestrationAdapter, new NsScaleStrategyV3());
 		this.vimManager = vimManager;
 		this.vnfInstancesService = vnfInstancesService;
 		this.blueprintService = blueprintService;

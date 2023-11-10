@@ -18,16 +18,13 @@ package com.ubiqube.etsi.mano.service.event;
 
 import com.ubiqube.etsi.mano.dao.mano.Instance;
 import com.ubiqube.etsi.mano.dao.mano.v2.Blueprint;
-import com.ubiqube.etsi.mano.jpa.JujuCloudJpa;
 import com.ubiqube.etsi.mano.service.NsScaleStrategyV3;
 import com.ubiqube.etsi.mano.service.VimResourceService;
-import com.ubiqube.etsi.mano.service.juju.cli.JujuRemoteService;
 
 public class TestGenericAction extends AbstractGenericActionV3 {
 
-	protected TestGenericAction(final WorkflowV3 workflow, final VimResourceService vimResourceService, final OrchestrationAdapter<?, ?> orchestrationAdapter
-			, final NsScaleStrategyV3 nsScaleStrategy, final JujuRemoteService remoteService, final JujuCloudJpa jujuCloudJpa) {
-		super(workflow, vimResourceService, orchestrationAdapter, nsScaleStrategy, remoteService, jujuCloudJpa);
+	protected TestGenericAction(final WorkflowV3 workflow, final VimResourceService vimResourceService, final OrchestrationAdapter<?, ?> orchestrationAdapter, final NsScaleStrategyV3 nsScaleStrategy) {
+		super(workflow, vimResourceService, orchestrationAdapter, nsScaleStrategy);
 		// TODO Auto-generated constructor stub
 	}
 

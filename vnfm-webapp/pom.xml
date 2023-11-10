@@ -49,12 +49,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-bootstrap</artifactId>
 			<exclusions>
@@ -99,10 +93,6 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-rest-hal-explorer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate.search</groupId>
-			<artifactId>hibernate-search-mapper-orm-orm6</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
@@ -229,31 +219,10 @@
 			<artifactId>k8s-parser</artifactId>
 			<version>${version.k8s-parser}</version>
 		</dependency>
-		<!--
-		<dependency>
-			<groupId>com.ubiqube.mano.service.mon</groupId>
-			<artifactId>gnocchi-mon</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ubiqube.mano.service.mon.serializer</groupId>
-			<artifactId>jpa-serializer</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ubiqube.mano.service.mon.poller</groupId>
-			<artifactId>mano-pm-poller</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		-->
 		<dependency>
 			<groupId>com.ubiqube.mano.docker</groupId>
 			<artifactId>mano-docker-jib</artifactId>
 			<version>${version.mano-docker-jib}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.micrometer</groupId>
-			<artifactId>micrometer-registry-elastic</artifactId>
 		</dependency>
 	</dependencies>
 	<build>

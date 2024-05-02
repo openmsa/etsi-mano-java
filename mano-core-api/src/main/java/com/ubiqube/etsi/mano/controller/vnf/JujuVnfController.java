@@ -161,17 +161,17 @@ public class JujuVnfController {
 		return remoteService.modelDetail(name);
 	}
 
-	@GetExchange("/application/{name}")
+	@GetMapping("/application/{name}")
 	ResponseEntity<String> application(@PathVariable("name") final String name) {
 		return remoteService.application(name);
 	}
 
-	@GetExchange("/helmlist")
+	@GetMapping("/helmlist")
 	ResponseEntity<String> helmList() {
 		return remoteService.helmList();
 	}
 
-	@GetExchange("/isk8sready")
+	@GetMapping("/isk8sready")
 	ResponseEntity<Boolean> isK8sReady() {
 		return remoteService.isK8sReady();
 	}

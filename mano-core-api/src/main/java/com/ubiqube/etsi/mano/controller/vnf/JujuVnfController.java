@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.service.annotation.GetExchange;
 
 import com.ubiqube.etsi.mano.service.JujuCloudService;
 import com.ubiqube.etsi.mano.service.event.ActionType;
@@ -108,4 +109,71 @@ public class JujuVnfController {
 		}
 		return new ResponseEntity<>(responseobject.getBody(), HttpStatus.NOT_FOUND);
 	}
+
+	
+	@GetMapping("/cloud")
+	public ResponseEntity<String> clouds() {
+		return remoteService.clouds();
+	}
+
+	@GetMapping("/cloud/{cloudname}")
+	public ResponseEntity<String> cloudDetail(@PathVariable("cloudname") final String cloudname) {
+		return remoteService.cloudDetail(cloudname);
+	}
+
+	@GetMapping("/status")
+	ResponseEntity<String> status() {
+		return remoteService.status();
+	}
+
+	@GetMapping("/k8sconfig/{vnfId}")
+	public ResponseEntity<String> k8sconfig(@PathVariable("vnfId") final String vnfId) {
+		return remoteService.getKubeConfig(vnfId);
+	}
+
+	@GetMapping("/credential")
+	ResponseEntity<String> credentials() {
+		return remoteService.credentials();
+	}
+
+	@GetMapping("/credential/{cloudname}/{credname}")
+	ResponseEntity<String> credentialDetails(@PathVariable("cloudname") final String cloudname, @PathVariable("credname") final String credname) {
+		return remoteService.credentialDetails(cloudname,credname);
+	}
+
+	@GetMapping("/controller")
+	ResponseEntity<String> controllers(){
+		return remoteService.controllers();
+	}
+
+	@GetMapping("/controller/{controllername}")
+	ResponseEntity<String> controllerDetail(@PathVariable("controllername") final String controllername) {
+		return remoteService.controllerDetail(controllername);
+	}
+
+	@GetMapping("/model")
+	ResponseEntity<String> model() {
+		return remoteService.model();
+	}
+
+	@GetMapping("/model/{name}")
+	ResponseEntity<String> modelDetail(@PathVariable("name") final String name) {
+		return remoteService.modelDetail(name);
+	}
+
+	@GetExchange("/application/{name}")
+	ResponseEntity<String> application(@PathVariable("name") final String name) {
+		return remoteService.application(name);
+	}
+
+	@GetExchange("/helmlist")
+	ResponseEntity<String> helmList() {
+		return remoteService.helmList();
+	}
+
+	@GetExchange("/isk8sready")
+	ResponseEntity<Boolean> isK8sReady() {
+		return remoteService.isK8sReady();
+	}
+
 }

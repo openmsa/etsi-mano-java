@@ -28,6 +28,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.ubiqube.etsi.mano.Constants;
 import com.ubiqube.etsi.mano.dao.mano.pkg.OsContainer;
 import com.ubiqube.etsi.mano.dao.mano.v2.vnfm.OsContainerTask;
@@ -52,6 +55,7 @@ import com.ubiqube.etsi.mano.service.vim.Vim;
 import jakarta.annotation.Nullable;
 
 public class OsContainerUow extends AbstractVnfmUow<OsContainerTask> {
+	private static final Logger LOG = LoggerFactory.getLogger(OsContainerUow.class);
 	private final Vim vim;
 	private final VimConnectionInformation vimConnectionInformation;
 	private final OsContainerTask task;
@@ -106,9 +110,14 @@ public class OsContainerUow extends AbstractVnfmUow<OsContainerTask> {
 			final String endpoint = interfaceInfo.get("endpoint");
 			final String controllerName = vimConnectionInformation.getVimId() + "-" + vimConnectionInformation.getJujuInfo().getRegion().toLowerCase();
 			final String imageId = vimConnectionInformation.getJujuInfo().getImageId();
-			final String constraints = vimConnectionInformation.getJujuInfo().getConstraints();
+			String constraints = vimConnectionInformation.getJujuInfo().getConstraints();
+			String flavorName = vimConnectionInformation.getJujuInfo().getFlavorName();
+			if(flavorName !=null) {
+				constraints = constraints+" instance-type="+flavorName;
+						}
 			final String region = vimConnectionInformation.getJujuInfo().getRegion();
 			final String networkId = vimConnectionInformation.getJujuInfo().getNetworkId();
+			
 			String charmName = vimConnectionInformation.getJujuInfo().getCharmName();
 			String appName = vimConnectionInformation.getJujuInfo().getAppName();
 			final String osSeries = vimConnectionInformation.getJujuInfo().getOsSeries();
@@ -132,15 +141,21 @@ public class OsContainerUow extends AbstractVnfmUow<OsContainerTask> {
 			jujuCloudService.saveCloud(jCloud);
 			final boolean isSuccess = jujuCloudService.jujuInstantiate(jCloud.getId());
 			try {
+				if(task.getOsContainer() == null || task.getOsContainer().getArtifacts() == null || !task.getOsContainer().getArtifacts().entrySet().iterator().hasNext()) {
+					return "FAIL";
+				}
 				final String helmName = task.getOsContainer().getArtifacts().entrySet().iterator().next().getValue().getName();
 				final File tmpFile = copyFile(
 						task.getOsContainer().getArtifacts().entrySet().iterator().next().getValue().getImagePath(),
 						task.getBlueprint().getInstance().getVnfPkg().getId());
 				if (tmpFile.length() <= 0) {
-					throw new GenericException("File is Null or Empty ");
+					throw new GenericException("File is Empty ");
 				}
 				jujuCloudService.installHelm(helmName, tmpFile);
 			} catch (final URISyntaxException se) {
+				return "FAIL";
+			} catch (final GenericException ge) {
+				LOG.info("Checking file : ",ge);
 				return "FAIL";
 			}
 			return isSuccess ? "SUCCESS" : "FAIL";

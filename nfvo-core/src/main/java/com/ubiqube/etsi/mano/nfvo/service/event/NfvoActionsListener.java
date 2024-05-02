@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 
+import com.ubiqube.etsi.mano.auth.config.TenantHolder;
 import com.ubiqube.etsi.mano.service.event.ActionController;
 import com.ubiqube.etsi.mano.service.event.ActionMessage;
 
@@ -49,6 +50,7 @@ public class NfvoActionsListener implements ActionController {
 	@org.springframework.transaction.annotation.Transactional(propagation = Propagation.NEVER)
 	public void onEvent(final ActionMessage ev) {
 		LOG.info("JMS ActionController Receiving Action: {}", ev);
+		TenantHolder.setTenantId(ev.getTenantId());
 		actionController.dispatch(ev.getActionType(), ev.getObjectId(), ev.getParameters());
 		LOG.info("JMS ActionController Done for event: {}", ev);
 	}

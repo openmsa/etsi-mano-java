@@ -91,13 +91,9 @@ public class JujuCloudService {
 			if (jCloud.getMetadata().getName() == null) {
 				throw new VnfmException("Error Create Controller");
 			}
-			remoteService.addController(jCloud.getName(), jCloud.getMetadata());
-			final ResponseEntity<String> responseobject = remoteService
-					.controllerDetail(jCloud.getMetadata().getName());
+			ResponseEntity<String> responseobject = remoteService.addController(jCloud.getName(), jCloud.getMetadata());
 			if ((responseobject.getBody() == null) || (responseobject.getBody().contains("ERROR"))) {
-				jCloud.setStatus("FAIL");
-				jujuCloudJpa.save(jCloud);
-				throw new VnfmException("Error Create Controller");
+				throw new VnfmException("Error Create Controller: "+responseobject.getBody());
 			}
 			if (jCloud.getMetadata().getModels().get(0).getName() == null) {
 				throw new VnfmException("Error Create Model");
@@ -109,6 +105,7 @@ public class JujuCloudService {
 			remoteService.deployApp(jCloud.getMetadata().getModels().get(0).getCharmName(),
 					jCloud.getMetadata().getModels().get(0).getAppName());
 		} catch (final VnfmException e) {
+			LOG.info("jujuInstantiate error : ", e);
 			jCloud.setStatus("FAIL");
 			jujuCloudJpa.save(jCloud);
 			return false;
@@ -131,18 +128,26 @@ public class JujuCloudService {
 	}
 
 	public boolean installHelm(final String helmname, final File helmFile) throws URISyntaxException {
-		final Boolean opt = Optional.ofNullable(remoteService.isK8sReady())
-				.map(ResponseEntity::getBody)
-				.map(Boolean::booleanValue)
-				.orElse(Boolean.FALSE);
-		while (Boolean.FALSE.equals(opt)) {
+		long startTime = System.currentTimeMillis();
+		long timeoutMillis = 2 * 60 * 60 * 1000; // 2h
+		while (System.currentTimeMillis() - startTime < timeoutMillis) {
+			final Boolean opt = Optional.ofNullable(remoteService.isK8sReady()).map(ResponseEntity::getBody)
+					.map(Boolean::booleanValue).orElse(Boolean.FALSE);
+
+			if (opt) {
+				break;
+			}
 			LOG.info("Kubernetes Not Ready.  Waiting...");
 			try {
 				Thread.sleep(5000);
 			} catch (final InterruptedException e) {
-				LOG.info("", e);
+				LOG.info("Error in installHelm :  ", e);
 				Thread.currentThread().interrupt();
 			}
+		}
+		if (System.currentTimeMillis() - startTime >= timeoutMillis) {
+			LOG.info("Timeout reached. Kubernetes is not ready after" + timeoutMillis);
+			return false;
 		}
 		remoteService.addKubeConfig("/home/ubuntu/.kube/config");
 		final String jujuUrl = environment.getProperty("mano.juju.url");

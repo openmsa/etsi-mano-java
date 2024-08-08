@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.ubiqube.mano</groupId>
 		<artifactId>mano-super-webapp</artifactId>
-		<version>4.0.0</version>
+		<version>4.0.1-SNAPSHOT</version>
 		<relativePath />
 	</parent>
 	<artifactId>vnfm-webapp</artifactId>
@@ -95,87 +95,87 @@
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>vnfm-core</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>etsi-vnfm-261-controllers</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>etsi-vnfm-271-controllers</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>etsi-vnfm-281-controllers</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>etsi-vnfm-331-controllers</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>etsi-vnfm-351-controllers</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>etsi-vnfm-361-controllers</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>etsi-vnfm-431-controllers</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>etsi-nfvem-431-controllers</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>etsi-vnfm-451-controllers</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>etsi-nfvem-451-controllers</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>etsi-sol012-341</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>orchestration-core</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano.auth</groupId>
 			<artifactId>auth-keycloak</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>mano-vim-openstack</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano.pkg</groupId>
 			<artifactId>mano-pkg-tosca</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>ubi-spring-config</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -198,12 +198,12 @@
 		<dependency>
 			<groupId>com.ubiqube.mano.repository</groupId>
 			<artifactId>mano-repo-fs</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano.event</groupId>
 			<artifactId>event-jms</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate.validator</groupId>
@@ -212,17 +212,17 @@
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>mano-vim-k8s</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano.pkg</groupId>
 			<artifactId>k8s-parser</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano.docker</groupId>
 			<artifactId>mano-docker-jib</artifactId>
-			<version>4.0.0</version>
+			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -383,8 +383,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-  <scm>
-    <tag>vnfm-webapp-4.0.0</tag>
-  </scm>
 </project>

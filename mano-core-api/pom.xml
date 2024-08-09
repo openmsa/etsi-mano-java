@@ -40,17 +40,14 @@
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>mano-commons</artifactId>
-			<version>${version.mano-commons}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>mano-vim-api</artifactId>
-			<version>${version.mano-vim-api}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano.pkg</groupId>
 			<artifactId>mano-pkg-api</artifactId>
-			<version>${version.mano-pkg-api}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -143,52 +140,42 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.16.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
 			<artifactId>maven-model</artifactId>
-			<version>3.9.3</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>mano-fluxrest</artifactId>
-			<version>${version.mano-fluxrest}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>bean-walker</artifactId>
-			<version>${version.mano-bean-walker}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>mano-condition</artifactId>
-			<version>${version.mano-condition}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>mano-grammar-api</artifactId>
-			<version>${version.mano-grammar-api}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano.auth</groupId>
 			<artifactId>auth-api</artifactId>
-			<version>${version.auth-api}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano.repository</groupId>
 			<artifactId>mano-repo-api</artifactId>
-			<version>${version.mano-repo-api}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano.event</groupId>
 			<artifactId>event-api</artifactId>
-			<version>${version.event-api}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano.docker</groupId>
 			<artifactId>mano-docker-api</artifactId>
-			<version>${version.mano-docker-api}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.bytebuddy</groupId>
@@ -236,12 +223,10 @@
 		<dependency>
 			<groupId>com.ubiqube.mano.juju</groupId>
 			<artifactId>juju-client</artifactId>
-			<version>${version.mano-juju}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano.service.search</groupId>
 			<artifactId>mano-search-api</artifactId>
-			<version>${version.search-api}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -277,7 +262,6 @@
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>mano-grammar-v1</artifactId>
-			<version>${version.mano-grammar-api}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -293,7 +277,6 @@
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>mano-vim-dummy</artifactId>
-			<version>${version.mano-vim-api}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -314,7 +297,6 @@
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>mano-vim-k8s</artifactId>
-			<version>4.0.0</version>
 		</dependency>
 	</dependencies>
 	<build>

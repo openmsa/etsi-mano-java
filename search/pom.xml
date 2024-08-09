@@ -19,7 +19,7 @@
 	</modules>
 
 	<scm>
-		<developerConnection>scm:git:https://github.com/openmsa/etsi-mano-java.git</developerConnection>
+		<developerConnection>scm:git:ssh://git@github.com/openmsa/etsi-mano-java.git</developerConnection>
 		<tag>search-aggregator-4.0.0</tag>
 	</scm>
 </project>

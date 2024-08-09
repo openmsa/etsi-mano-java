@@ -22,17 +22,14 @@
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>mano-commons</artifactId>
-			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano.pkg</groupId>
 			<artifactId>mano-pkg-api</artifactId>
-			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>mano-vim-api</artifactId>
-			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -42,7 +39,6 @@
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>mano-core-api</artifactId>
-			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -101,7 +97,6 @@
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>orchestration-api</artifactId>
-			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
@@ -111,7 +106,6 @@
 		<dependency>
 			<groupId>com.ubiqube.mano.service.search</groupId>
 			<artifactId>mano-search-api</artifactId>
-			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -145,12 +139,10 @@
 		<dependency>
 			<groupId>com.ubiqube.mano.docker</groupId>
 			<artifactId>mano-docker-jib</artifactId>
-			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>mano-condition</artifactId>
-			<version>4.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mapstruct</groupId>
@@ -164,13 +156,11 @@
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>orchestration-core</artifactId>
-			<version>4.0.1-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>mano-vim-dummy</artifactId>
-			<version>4.0.1-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

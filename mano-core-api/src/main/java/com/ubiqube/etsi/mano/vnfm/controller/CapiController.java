@@ -38,6 +38,8 @@ import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.exception.PreConditionException;
 import com.ubiqube.etsi.mano.service.CapiServerService;
 import com.ubiqube.etsi.mano.service.Patcher;
+import com.ubiqube.etsi.mano.service.event.ActionType;
+import com.ubiqube.etsi.mano.service.event.EventManager;
 import com.ubiqube.etsi.mano.vim.k8s.K8s;
 import com.ubiqube.etsi.mano.vim.k8s.OsClusterService;
 import com.ubiqube.etsi.mano.vnfm.service.plan.contributors.uow.capi.CapiServerMapping;
@@ -51,12 +53,14 @@ public class CapiController {
 	private final OsClusterService osClusterService;
 	private final CapiServerMapping mapper;
 	private final Patcher patcher;
+	private final EventManager eventManager;
 
-	public CapiController(final CapiServerService capiServerJpa, final OsClusterService osClusterService, final CapiServerMapping mapper, final Patcher patcher) {
+	public CapiController(final CapiServerService capiServerJpa, final OsClusterService osClusterService, final CapiServerMapping mapper, final Patcher patcher, final EventManager eventManager) {
 		this.capiServer = capiServerJpa;
 		this.osClusterService = osClusterService;
 		this.mapper = mapper;
 		this.patcher = patcher;
+		this.eventManager = eventManager;
 	}
 
 	@GetMapping
@@ -68,6 +72,7 @@ public class CapiController {
 	@PostMapping
 	public ResponseEntity<CapiServer> post(@RequestBody final CapiServer srv) {
 		final CapiServer res = capiServer.save(srv);
+		eventManager.sendAction(ActionType.REGISTER_CAPI, res.getId());
 		return ResponseEntity.ok(res);
 	}
 
@@ -84,7 +89,7 @@ public class CapiController {
 	}
 
 	@PatchMapping(value = "/{id}")
-	public ResponseEntity<CapiServer> patchVim(@PathVariable("id") final UUID id, @RequestBody final String body,
+	public ResponseEntity<CapiServer> patchVim(@PathVariable final UUID id, @RequestBody final String body,
 			@RequestHeader(name = HttpHeaders.IF_MATCH, required = false) @Nullable final String ifMatch) {
 		final CapiServer capi = capiServer.findById(id).orElseThrow(() -> new NotFoundException("Unable to find capi serveer: " + id));
 		if ((ifMatch != null) && !(capi.getVersion() + "").equals(ifMatch)) {
@@ -92,6 +97,7 @@ public class CapiController {
 		}
 		patcher.patch(body, capi);
 		final CapiServer newCapi = capiServer.save(capi);
+		eventManager.sendAction(ActionType.REGISTER_CAPI, newCapi.getId());
 		return ResponseEntity.ok(newCapi);
 	}
 

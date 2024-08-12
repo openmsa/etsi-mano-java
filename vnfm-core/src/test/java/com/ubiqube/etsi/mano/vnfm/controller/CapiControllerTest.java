@@ -17,6 +17,7 @@
 package com.ubiqube.etsi.mano.vnfm.controller;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -28,7 +29,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ubiqube.etsi.mano.dao.mano.cnf.capi.CapiServer;
 import com.ubiqube.etsi.mano.service.CapiServerService;
+import com.ubiqube.etsi.mano.service.Patcher;
+import com.ubiqube.etsi.mano.service.event.EventManager;
 import com.ubiqube.etsi.mano.vim.k8s.OsClusterService;
 import com.ubiqube.etsi.mano.vnfm.service.plan.contributors.uow.capi.CapiServerMapping;
 
@@ -40,9 +44,13 @@ class CapiControllerTest {
 	private OsClusterService osClusterService;
 	@Mock
 	private CapiServerMapping mapper;
+	@Mock
+	private Patcher patcher;
+	@Mock
+	private EventManager eventManager;
 
 	CapiController createService() {
-		return new CapiController(capiServerJpa, osClusterService, mapper);
+		return new CapiController(capiServerJpa, osClusterService, mapper, patcher, eventManager);
 	}
 
 	@Test
@@ -55,7 +63,9 @@ class CapiControllerTest {
 	@Test
 	void testPost() {
 		final CapiController srv = createService();
-		srv.post(null);
+		final CapiServer e = new CapiServer();
+		when(capiServerJpa.save(e)).thenReturn(e);
+		srv.post(e);
 		assertTrue(true);
 	}
 

@@ -29,15 +29,18 @@ import org.springframework.stereotype.Service;
 @Service
 public class CommonActionDispatcherImpl implements CommonActionDispatcher {
 	private final CommonActionController controller;
+	private final CapiServerChecker capiServerChecker;
 
-	public CommonActionDispatcherImpl(final CommonActionController controller) {
+	public CommonActionDispatcherImpl(final CommonActionController controller, final CapiServerChecker capiServerChecker) {
 		this.controller = controller;
+		this.capiServerChecker = capiServerChecker;
 	}
 
 	@Override
 	public void dispatch(final ActionType actionType, final UUID objectId, final Map<String, Object> parameters) {
 		switch (actionType) {
 		case REGISTER_SERVER -> controller.registerServer(objectId, parameters);
+		case REGISTER_CAPI -> capiServerChecker.verify(objectId, parameters);
 		default -> throw new IllegalArgumentException("Unexpected value: " + actionType);
 		}
 

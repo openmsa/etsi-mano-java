@@ -28,9 +28,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 class CommonActionDispatcherImplTest {
 	@Mock
 	private CommonActionController controller;
+	@Mock
+	private CapiServerChecker checker;
 
 	private CommonActionDispatcherImpl createService() {
-		return new CommonActionDispatcherImpl(controller);
+		return new CommonActionDispatcherImpl(controller, checker);
 	}
 
 	@Test

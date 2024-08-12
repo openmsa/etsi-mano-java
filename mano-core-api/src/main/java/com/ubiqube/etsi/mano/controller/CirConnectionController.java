@@ -43,49 +43,49 @@ import jakarta.annotation.Nullable;
 @RequestMapping(value = "/admin/cir", produces = "application/json")
 public class CirConnectionController {
 	private final CirConnectionControllerMapping cirConnectionControllerMapping;
-	private final CirConnectionManager vimManager;
+	private final CirConnectionManager cirManager;
 	private final Patcher patcher;
 
 	public CirConnectionController(final CirConnectionControllerMapping cirConnectionControllerMapping, final CirConnectionManager vimManager, final Patcher patcher) {
 		this.cirConnectionControllerMapping = cirConnectionControllerMapping;
-		this.vimManager = vimManager;
+		this.cirManager = vimManager;
 		this.patcher = patcher;
 	}
 
 	@PostMapping
 	public ResponseEntity<ConnectionInformation> registerVim(@RequestBody final ConnectionInformationDto body) {
 		final ConnectionInformation nvci = cirConnectionControllerMapping.map(body);
-		final ConnectionInformation vci = vimManager.save(nvci);
+		final ConnectionInformation vci = cirManager.save(nvci);
 		return ResponseEntity.ok(vci);
 	}
 
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> deleteVim(@PathVariable("id") final String id) {
-		vimManager.deleteVim(UUID.fromString(id));
+		cirManager.deleteVim(UUID.fromString(id));
 		return ResponseEntity.noContent().build();
 	}
 
 	@PatchMapping(value = "/{id}")
 	public ResponseEntity<ConnectionInformation> patchVim(@PathVariable("id") final UUID id, @Nullable @RequestBody final String body,
 			@RequestHeader(name = HttpHeaders.IF_MATCH, required = false) @Nullable final String ifMatch) {
-		final ConnectionInformation vim = vimManager.findVimById(id);
+		final ConnectionInformation vim = cirManager.findVimById(id);
 		if ((ifMatch != null) && !(vim.getVersion() + "").equals(ifMatch)) {
 			throw new PreConditionException(ifMatch + " does not match " + vim.getVersion());
 		}
 		patcher.patch(body, vim);
-		final ConnectionInformation newVim = vimManager.save(vim);
+		final ConnectionInformation newVim = cirManager.save(vim);
 		return ResponseEntity.ok(newVim);
 	}
 
 	@GetMapping(value = "/{id}/connect")
-	public ResponseEntity<Boolean> connectVim(@PathVariable("id") final UUID id) {
-		vimManager.checkConnectivity(id);
+	public ResponseEntity<Boolean> connectVim(@PathVariable final UUID id) {
+		cirManager.checkConnectivity(id);
 		return ResponseEntity.ok(true);
 	}
 
 	@GetMapping()
 	public ResponseEntity<Iterable<ConnectionInformation>> listVim() {
-		final Iterable<ConnectionInformation> vci = vimManager.findAll();
+		final Iterable<ConnectionInformation> vci = cirManager.findAll();
 		return ResponseEntity.ok(vci);
 	}
 

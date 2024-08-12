@@ -19,22 +19,30 @@ package com.ubiqube.etsi.mano.vnfm.controller;
 import java.io.IOException;
 import java.util.UUID;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ubiqube.etsi.mano.dao.mano.cnf.capi.CapiServer;
+import com.ubiqube.etsi.mano.exception.NotFoundException;
+import com.ubiqube.etsi.mano.exception.PreConditionException;
 import com.ubiqube.etsi.mano.service.CapiServerService;
+import com.ubiqube.etsi.mano.service.Patcher;
 import com.ubiqube.etsi.mano.vim.k8s.K8s;
 import com.ubiqube.etsi.mano.vim.k8s.OsClusterService;
 import com.ubiqube.etsi.mano.vnfm.service.plan.contributors.uow.capi.CapiServerMapping;
+
+import jakarta.annotation.Nullable;
 
 @RestController
 @RequestMapping("/vnfm-admin/capi")
@@ -42,11 +50,13 @@ public class CapiController {
 	private final CapiServerService capiServer;
 	private final OsClusterService osClusterService;
 	private final CapiServerMapping mapper;
+	private final Patcher patcher;
 
-	public CapiController(final CapiServerService capiServerJpa, final OsClusterService osClusterService, final CapiServerMapping mapper) {
+	public CapiController(final CapiServerService capiServerJpa, final OsClusterService osClusterService, final CapiServerMapping mapper, final Patcher patcher) {
 		this.capiServer = capiServerJpa;
 		this.osClusterService = osClusterService;
 		this.mapper = mapper;
+		this.patcher = patcher;
 	}
 
 	@GetMapping
@@ -72,4 +82,17 @@ public class CapiController {
 	public void delete(@PathVariable("id") final UUID id) {
 		capiServer.deleteById(id);
 	}
+
+	@PatchMapping(value = "/{id}")
+	public ResponseEntity<CapiServer> patchVim(@PathVariable("id") final UUID id, @RequestBody final String body,
+			@RequestHeader(name = HttpHeaders.IF_MATCH, required = false) @Nullable final String ifMatch) {
+		final CapiServer capi = capiServer.findById(id).orElseThrow(() -> new NotFoundException("Unable to find capi serveer: " + id));
+		if ((ifMatch != null) && !(capi.getVersion() + "").equals(ifMatch)) {
+			throw new PreConditionException(ifMatch + " does not match " + capi.getVersion());
+		}
+		patcher.patch(body, capi);
+		final CapiServer newCapi = capiServer.save(capi);
+		return ResponseEntity.ok(newCapi);
+	}
+
 }

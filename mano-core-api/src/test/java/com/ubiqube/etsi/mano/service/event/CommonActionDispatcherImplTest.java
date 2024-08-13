@@ -24,15 +24,19 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import com.ubiqube.etsi.mano.service.vim.CirConnectionManager;
+
 @ExtendWith(MockitoExtension.class)
 class CommonActionDispatcherImplTest {
 	@Mock
 	private CommonActionController controller;
 	@Mock
 	private CapiServerChecker checker;
+	@Mock
+	private CirConnectionManager cirConnectionManager;
 
 	private CommonActionDispatcherImpl createService() {
-		return new CommonActionDispatcherImpl(controller, checker);
+		return new CommonActionDispatcherImpl(controller, checker, cirConnectionManager);
 	}
 
 	@Test

@@ -21,6 +21,8 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import com.ubiqube.etsi.mano.service.vim.CirConnectionManager;
+
 /**
  *
  * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
@@ -30,10 +32,12 @@ import org.springframework.stereotype.Service;
 public class CommonActionDispatcherImpl implements CommonActionDispatcher {
 	private final CommonActionController controller;
 	private final CapiServerChecker capiServerChecker;
+	private final CirConnectionManager cirConnectionManager;
 
-	public CommonActionDispatcherImpl(final CommonActionController controller, final CapiServerChecker capiServerChecker) {
+	public CommonActionDispatcherImpl(final CommonActionController controller, final CapiServerChecker capiServerChecker, final CirConnectionManager cirConnectionManager) {
 		this.controller = controller;
 		this.capiServerChecker = capiServerChecker;
+		this.cirConnectionManager = cirConnectionManager;
 	}
 
 	@Override
@@ -41,6 +45,7 @@ public class CommonActionDispatcherImpl implements CommonActionDispatcher {
 		switch (actionType) {
 		case REGISTER_SERVER -> controller.registerServer(objectId, parameters);
 		case REGISTER_CAPI -> capiServerChecker.verify(objectId, parameters);
+		case REGISTER_CIR -> cirConnectionManager.checkConnectivity(objectId);
 		default -> throw new IllegalArgumentException("Unexpected value: " + actionType);
 		}
 

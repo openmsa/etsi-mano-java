@@ -16,27 +16,26 @@
  */
 package com.ubiqube.etsi.mano.service.vim;
 
-import java.net.URI;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.ubiqube.etsi.mano.dao.mano.cnf.ConnectionInformation;
 import com.ubiqube.etsi.mano.jpa.ConnectionInformationJpa;
-import com.ubiqube.etsi.mano.service.rest.FluxRest;
+import com.ubiqube.etsi.mano.service.event.CirServerChecker;
 
 @Service
 public class CirConnectionManager {
-
+	/** Logger. */
+	private static final Logger LOG = LoggerFactory.getLogger(CirConnectionManager.class);
 	private final ConnectionInformationJpa cirConnectionInformationJpa;
+	private final CirServerChecker cirServerChecker;
 
-	public CirConnectionManager(final ConnectionInformationJpa cirConnectionInformationJpa) {
+	public CirConnectionManager(final ConnectionInformationJpa cirConnectionInformationJpa, final CirServerChecker cirServerChecker) {
 		this.cirConnectionInformationJpa = cirConnectionInformationJpa;
-	}
-
-	public ConnectionInformation register(final ConnectionInformation vci) {
-		checkConnectivity(vci);
-		return save(vci);
+		this.cirServerChecker = cirServerChecker;
 	}
 
 	public void deleteVim(final UUID id) {
@@ -47,25 +46,17 @@ public class CirConnectionManager {
 		return cirConnectionInformationJpa.findById(id).orElseThrow();
 	}
 
-	public ConnectionInformation save(final ConnectionInformation vim) {
-		return cirConnectionInformationJpa.save(vim);
+	public ConnectionInformation save(final ConnectionInformation conn) {
+		return cirConnectionInformationJpa.save(conn);
 	}
 
 	public Iterable<ConnectionInformation> findAll() {
 		return cirConnectionInformationJpa.findAll();
 	}
 
-	@SuppressWarnings("static-method")
-	public boolean checkConnectivity(final ConnectionInformation vci) {
-		final FluxRest fr = new FluxRest(vci.toServers());
-		final URI url = vci.getUrl();
-		fr.get(url, String.class, null);
-		return true;
-	}
-
 	public void checkConnectivity(final UUID id) {
 		final ConnectionInformation vci = findVimById(id);
-		checkConnectivity(vci);
+		cirServerChecker.verify(vci);
 	}
 
 }

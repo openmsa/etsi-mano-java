@@ -26,11 +26,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import com.ubiqube.etsi.mano.docker.HelmDockerService;
+import com.ubiqube.etsi.mano.docker.HelmOciDockerService;
 import com.ubiqube.etsi.mano.docker.JibDockerService;
 
 @SpringBootApplication
 @EnableJms
 @EnableScheduling
+@SuppressWarnings("static-method")
 public class NfvoApplication extends SpringBootServletInitializer {
 
 	public static void main(final String[] args) {
@@ -42,4 +45,15 @@ public class NfvoApplication extends SpringBootServletInitializer {
 	JibDockerService jib() {
 		return new JibDockerService();
 	}
+
+	@Bean
+	HelmOciDockerService helmOciDockerService() {
+		return new HelmOciDockerService();
+	}
+
+	@Bean
+	HelmDockerService helmDockerService() {
+		return new HelmDockerService();
+	}
+
 }

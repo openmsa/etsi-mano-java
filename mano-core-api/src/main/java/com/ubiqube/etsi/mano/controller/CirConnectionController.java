@@ -32,8 +32,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ubiqube.etsi.mano.dao.mano.cnf.ConnectionInformation;
 import com.ubiqube.etsi.mano.dao.mano.dto.ConnectionInformationDto;
+import com.ubiqube.etsi.mano.dao.mano.vim.PlanStatusType;
 import com.ubiqube.etsi.mano.exception.PreConditionException;
 import com.ubiqube.etsi.mano.service.Patcher;
+import com.ubiqube.etsi.mano.service.event.ActionType;
+import com.ubiqube.etsi.mano.service.event.EventManager;
 import com.ubiqube.etsi.mano.service.mapping.CirConnectionControllerMapping;
 import com.ubiqube.etsi.mano.service.vim.CirConnectionManager;
 
@@ -45,17 +48,20 @@ public class CirConnectionController {
 	private final CirConnectionControllerMapping cirConnectionControllerMapping;
 	private final CirConnectionManager cirManager;
 	private final Patcher patcher;
+	private final EventManager eventManager;
 
-	public CirConnectionController(final CirConnectionControllerMapping cirConnectionControllerMapping, final CirConnectionManager vimManager, final Patcher patcher) {
+	public CirConnectionController(final CirConnectionControllerMapping cirConnectionControllerMapping, final CirConnectionManager vimManager, final Patcher patcher, final EventManager eventManager) {
 		this.cirConnectionControllerMapping = cirConnectionControllerMapping;
 		this.cirManager = vimManager;
 		this.patcher = patcher;
+		this.eventManager = eventManager;
 	}
 
 	@PostMapping
 	public ResponseEntity<ConnectionInformation> registerVim(@RequestBody final ConnectionInformationDto body) {
 		final ConnectionInformation nvci = cirConnectionControllerMapping.map(body);
 		final ConnectionInformation vci = cirManager.save(nvci);
+		eventManager.sendAction(ActionType.REGISTER_CIR, vci.getId());
 		return ResponseEntity.ok(vci);
 	}
 
@@ -68,13 +74,15 @@ public class CirConnectionController {
 	@PatchMapping(value = "/{id}")
 	public ResponseEntity<ConnectionInformation> patchVim(@PathVariable("id") final UUID id, @Nullable @RequestBody final String body,
 			@RequestHeader(name = HttpHeaders.IF_MATCH, required = false) @Nullable final String ifMatch) {
-		final ConnectionInformation vim = cirManager.findVimById(id);
-		if ((ifMatch != null) && !(vim.getVersion() + "").equals(ifMatch)) {
-			throw new PreConditionException(ifMatch + " does not match " + vim.getVersion());
+		final ConnectionInformation cir = cirManager.findVimById(id);
+		if ((ifMatch != null) && !(cir.getVersion() + "").equals(ifMatch)) {
+			throw new PreConditionException(ifMatch + " does not match " + cir.getVersion());
 		}
-		patcher.patch(body, vim);
-		final ConnectionInformation newVim = cirManager.save(vim);
-		return ResponseEntity.ok(newVim);
+		patcher.patch(body, cir);
+		cir.setServerStatus(PlanStatusType.STARTED);
+		final ConnectionInformation newCir = cirManager.save(cir);
+		eventManager.sendAction(ActionType.REGISTER_CIR, newCir.getId());
+		return ResponseEntity.ok(newCir);
 	}
 
 	@GetMapping(value = "/{id}/connect")

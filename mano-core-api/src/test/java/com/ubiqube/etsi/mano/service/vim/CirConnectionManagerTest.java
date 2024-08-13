@@ -36,15 +36,18 @@ import com.github.tomakehurst.wiremock.junit5.WireMockRuntimeInfo;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
 import com.ubiqube.etsi.mano.dao.mano.cnf.ConnectionInformation;
 import com.ubiqube.etsi.mano.jpa.ConnectionInformationJpa;
+import com.ubiqube.etsi.mano.service.event.CirServerChecker;
 
 @WireMockTest
 @ExtendWith(MockitoExtension.class)
 class CirConnectionManagerTest {
 	@Mock
 	private ConnectionInformationJpa cirConnJpa;
+	@Mock
+	private CirServerChecker cirServerChecker;
 
 	private CirConnectionManager createService() {
-		return new CirConnectionManager(cirConnJpa);
+		return new CirConnectionManager(cirConnJpa, cirServerChecker);
 	}
 
 	@Test
@@ -56,16 +59,6 @@ class CirConnectionManagerTest {
 		conn.setUrl(URI.create(wmRuntimeInfo.getHttpBaseUrl()));
 		when(cirConnJpa.findById(id)).thenReturn(Optional.ofNullable(conn));
 		srv.checkConnectivity(id);
-		assertTrue(true);
-	}
-
-	@Test
-	void testRegister(final WireMockRuntimeInfo wmRuntimeInfo) {
-		final CirConnectionManager srv = createService();
-		stubFor(get(urlMatching("/")).willReturn(aResponse().withStatus(200)));
-		final ConnectionInformation conn = new ConnectionInformation();
-		conn.setUrl(URI.create(wmRuntimeInfo.getHttpBaseUrl()));
-		srv.register(conn);
 		assertTrue(true);
 	}
 

@@ -32,6 +32,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.ubiqube.etsi.mano.dao.mano.cnf.ConnectionInformation;
 import com.ubiqube.etsi.mano.exception.PreConditionException;
 import com.ubiqube.etsi.mano.service.Patcher;
+import com.ubiqube.etsi.mano.service.event.EventManager;
 import com.ubiqube.etsi.mano.service.mapping.CirConnectionControllerMapping;
 import com.ubiqube.etsi.mano.service.vim.CirConnectionManager;
 
@@ -48,38 +49,40 @@ class CirConnectionControllerTest {
 	private CirConnectionManager vimManager;
 	@Mock
 	private Patcher patcher;
+	@Mock
+	private EventManager eventManager;
 
 	@Test
 	void testConnectVim() {
-		final CirConnectionController srv = new CirConnectionController(mapper, vimManager, patcher);
+		final CirConnectionController srv = createService();
 		srv.connectVim(null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testDeleteVim() {
-		final CirConnectionController srv = new CirConnectionController(mapper, vimManager, patcher);
+		final CirConnectionController srv = createService();
 		srv.deleteVim(UUID.randomUUID().toString());
 		assertTrue(true);
 	}
 
 	@Test
 	void testListVim() {
-		final CirConnectionController srv = new CirConnectionController(mapper, vimManager, patcher);
+		final CirConnectionController srv = createService();
 		srv.listVim();
 		assertTrue(true);
 	}
 
 	@Test
 	void testPatchVim() {
-		final CirConnectionController srv = new CirConnectionController(mapper, vimManager, patcher);
+		final CirConnectionController srv = createService();
 		srv.patchVim(null, null, null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testPatchVim2() {
-		final CirConnectionController srv = new CirConnectionController(mapper, vimManager, patcher);
+		final CirConnectionController srv = createService();
 		final ConnectionInformation conn = new ConnectionInformation();
 		when(vimManager.findVimById(any())).thenReturn(conn);
 		assertThrows(PreConditionException.class, () -> srv.patchVim(null, null, ""));
@@ -88,7 +91,7 @@ class CirConnectionControllerTest {
 
 	@Test
 	void testPatchVim3() {
-		final CirConnectionController srv = new CirConnectionController(mapper, vimManager, patcher);
+		final CirConnectionController srv = createService();
 		final ConnectionInformation conn = new ConnectionInformation();
 		conn.setVersion(1);
 		when(vimManager.findVimById(any())).thenReturn(conn);
@@ -98,9 +101,13 @@ class CirConnectionControllerTest {
 
 	@Test
 	void testRegisterVim() {
-		final CirConnectionController srv = new CirConnectionController(mapper, vimManager, patcher);
+		final CirConnectionController srv = createService();
 		srv.registerVim(null);
 		assertTrue(true);
+	}
+
+	private CirConnectionController createService() {
+		return new CirConnectionController(mapper, vimManager, patcher, eventManager);
 	}
 
 }

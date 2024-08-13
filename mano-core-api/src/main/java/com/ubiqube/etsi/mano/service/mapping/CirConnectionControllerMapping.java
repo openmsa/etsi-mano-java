@@ -29,7 +29,7 @@ public interface CirConnectionControllerMapping extends StringToUriMapping {
 
 	@Mapping(target = "capabilities", ignore = true)
 	@Mapping(target = "failureDetails", ignore = true)
-	@Mapping(target = "serverStatus", ignore = true)
+	@Mapping(target = "serverStatus", constant = "STARTED")
 	@Mapping(target = "audit", ignore = true)
 	@Mapping(target = "version", ignore = true)
 	ConnectionInformation map(ConnectionInformationDto o);

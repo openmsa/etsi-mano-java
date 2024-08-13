@@ -42,6 +42,7 @@ public class CapiServerChecker {
 			final Pod pod = new Pod();
 			executor.get(cfg, c -> c.resource(pod).get());
 			res.setServerStatus(PlanStatusType.SUCCESS);
+			res.setError(null);
 			return capiServer.save(res);
 		} catch (final RuntimeException e) {
 			LOG.error("", e);

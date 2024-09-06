@@ -156,22 +156,6 @@ spring:
   output:
     ansi:
       enabled: always
-  quartz:
-    jdbc:
-      commentPrefix: '" - "'
-      initialize-schema: always
-    job-store-type: jdbc
-    properties:
-      org:
-        quartz:
-          jobStore:
-            clusterCheckinInterval: 5000
-            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
-            isClustered: true
-          scheduler:
-            instanceId: AUTO
-          threadPool:
-            threadCount: 10
   security:
     oauth2:
       resourceserver:

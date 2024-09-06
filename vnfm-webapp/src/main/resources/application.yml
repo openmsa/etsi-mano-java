@@ -145,12 +145,7 @@ spring:
     properties:
       hibernate:
         enable_lazy_load_no_trans: true
-        search:
-          backend:
-            directory:
-              root: /tmp/etsi-mano-vnfm/indexes
-            type: lucene
-          enabled: false
+        format_sql: false
   mvc:
     log-request-details: true
   output:

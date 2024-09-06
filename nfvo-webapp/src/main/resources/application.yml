@@ -134,8 +134,6 @@ spring:
               root: /tmp/etsi-mano-nfvo/indexes
             type: lucene
           enabled: false
-  liquibase:
-    enabled: false
   mvc:
     log-request-details: true
   output:

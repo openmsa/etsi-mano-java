@@ -30,7 +30,6 @@ logging:
           spi:
             AbstractPersistentCollection: ERROR
         SQL: INFO
-      keycloak: INFO
       openstack4j: INFO
       springframework:
         boot:

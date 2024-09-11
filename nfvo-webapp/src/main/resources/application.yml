@@ -94,6 +94,10 @@ server:
 spring:
   application:
     name: mano-nfvo
+  artemis:
+    broker-url: tcp://mano-artemis:61616
+    user: artemis
+    password: simetraehcapa
   data:
     rest:
       base-path: /api

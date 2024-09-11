@@ -115,8 +115,6 @@ server:
 spring:
   application:
     name: mano-vnfm
-  artemis:
-    mode: embedded
   data:
     rest:
       base-path: /api

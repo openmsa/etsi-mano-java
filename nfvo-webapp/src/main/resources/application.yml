@@ -94,8 +94,6 @@ server:
 spring:
   application:
     name: mano-nfvo
-  artemis:
-    mode: embedded
   data:
     rest:
       base-path: /api

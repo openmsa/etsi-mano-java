@@ -23,6 +23,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.ubiqube.etsi.mano.dao.mano.cnf.ConnectionInformation;
+import com.ubiqube.etsi.mano.dao.mano.vim.PlanStatusType;
+import com.ubiqube.etsi.mano.dao.rfc7807.FailureDetails;
 import com.ubiqube.etsi.mano.jpa.ConnectionInformationJpa;
 import com.ubiqube.etsi.mano.service.event.CirServerChecker;
 
@@ -54,9 +56,19 @@ public class CirConnectionManager {
 		return cirConnectionInformationJpa.findAll();
 	}
 
-	public void checkConnectivity(final UUID id) {
+	public ConnectionInformation checkConnectivity(final UUID id) {
 		final ConnectionInformation vci = findVimById(id);
-		cirServerChecker.verify(vci);
+		try {
+			cirServerChecker.verify(vci);
+			vci.setFailureDetails(null);
+			vci.setServerStatus(PlanStatusType.STARTED);
+			return save(vci);
+		} catch (final RuntimeException e) {
+			LOG.warn("", e);
+			vci.setFailureDetails(new FailureDetails(500, e.getMessage()));
+			vci.setServerStatus(PlanStatusType.FAILED);
+			return save(vci);
+		}
 	}
 
 }

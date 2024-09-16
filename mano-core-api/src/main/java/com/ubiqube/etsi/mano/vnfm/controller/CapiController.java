@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ubiqube.etsi.mano.dao.mano.cnf.capi.CapiServer;
+import com.ubiqube.etsi.mano.dao.mano.vim.PlanStatusType;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.exception.PreConditionException;
 import com.ubiqube.etsi.mano.service.CapiServerService;
@@ -96,6 +97,7 @@ public class CapiController {
 			throw new PreConditionException(ifMatch + " does not match " + capi.getVersion());
 		}
 		patcher.patch(body, capi);
+		capi.setServerStatus(PlanStatusType.STARTED);
 		final CapiServer newCapi = capiServer.save(capi);
 		eventManager.sendAction(ActionType.REGISTER_CAPI, newCapi.getId());
 		return ResponseEntity.ok(newCapi);

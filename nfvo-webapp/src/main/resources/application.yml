@@ -1,7 +1,7 @@
 #debug: true
 logging:
   level:
-    com.ubiqube.etsi.mano.service.rest.ManoLoggingHandler: WARN
+    "[com.ubiqube.etsi.mano.service.rest.ManoLoggingHandler]": WARN
     com:
       ubiqube:
         etsi: DEBUG
@@ -103,7 +103,7 @@ spring:
     generator:
       ignore-unknown: false
     serialization:
-      WRITE_DATES_AS_TIMESTAMPS: false
+      write-dates-as-timestamps: false
       indent-output: true
       write-empty-json-arrays: false
   jmx:
@@ -114,7 +114,7 @@ spring:
     open-in-view: true
     properties:
       hibernate:
-        enable_lazy_load_no_trans: true
+        "[enable_lazy_load_no_trans]": true
   mvc:
     log-request-details: true
   output:

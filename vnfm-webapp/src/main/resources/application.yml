@@ -142,12 +142,14 @@ spring:
     enabled: true
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     open-in-view: true
     properties:
       hibernate:
         enable_lazy_load_no_trans: true
         format_sql: false
+  liquibase:
+    enabled: true
   mvc:
     log-request-details: true
   output:

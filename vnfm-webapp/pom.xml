@@ -198,6 +198,10 @@
 			<artifactId>mano-vim-k8s</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.ubiqube.mano</groupId>
+			<artifactId>liquibase-updater</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.ubiqube.mano.pkg</groupId>
 			<artifactId>k8s-parser</artifactId>
 		</dependency>

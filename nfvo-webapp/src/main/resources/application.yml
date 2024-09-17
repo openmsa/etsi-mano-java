@@ -120,7 +120,7 @@ spring:
     enabled: true
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     open-in-view: true
     properties:
       hibernate:

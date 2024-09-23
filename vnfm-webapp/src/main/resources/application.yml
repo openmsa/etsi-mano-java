@@ -109,7 +109,7 @@ server:
       enabled: false
   port: 8090
   servlet:
-    contextPath: /ubi-etsi-mano
+    contextPath: /vnfm-webapp
 
 spring:
   application:

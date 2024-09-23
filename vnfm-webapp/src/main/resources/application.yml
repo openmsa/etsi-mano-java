@@ -134,7 +134,7 @@ spring:
     generator:
       ignore-unknown: false
     serialization:
-      WRITE_DATES_AS_TIMESTAMPS: false
+      write-dates-as-timestamps: false
       indent-output: true
       write-empty-json-arrays: false
   jmx:
@@ -145,8 +145,8 @@ spring:
     open-in-view: true
     properties:
       hibernate:
-        enable_lazy_load_no_trans: true
-        format_sql: false
+        "[enable_lazy_load_no_trans]": true
+        "[format_sql]": false
   liquibase:
     enabled: true
   mvc:

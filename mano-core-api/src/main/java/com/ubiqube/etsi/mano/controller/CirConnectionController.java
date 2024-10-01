@@ -18,8 +18,11 @@ package com.ubiqube.etsi.mano.controller;
 
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -41,10 +44,15 @@ import com.ubiqube.etsi.mano.service.mapping.CirConnectionControllerMapping;
 import com.ubiqube.etsi.mano.service.vim.CirConnectionManager;
 
 import jakarta.annotation.Nullable;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/admin/cir", produces = "application/json")
+@Validated
 public class CirConnectionController {
+	/** Logger. */
+	private static final Logger LOG = LoggerFactory.getLogger(CirConnectionController.class);
+
 	private final CirConnectionControllerMapping cirConnectionControllerMapping;
 	private final CirConnectionManager cirManager;
 	private final Patcher patcher;
@@ -58,7 +66,7 @@ public class CirConnectionController {
 	}
 
 	@PostMapping
-	public ResponseEntity<ConnectionInformation> registerVim(@RequestBody final ConnectionInformationDto body) {
+	public ResponseEntity<ConnectionInformation> registerVim(@RequestBody final @Valid ConnectionInformationDto body) {
 		final ConnectionInformation nvci = cirConnectionControllerMapping.map(body);
 		final ConnectionInformation vci = cirManager.save(nvci);
 		eventManager.sendAction(ActionType.REGISTER_CIR, vci.getId());
@@ -86,13 +94,20 @@ public class CirConnectionController {
 	}
 
 	@GetMapping(value = "/{id}/connect")
-	public ResponseEntity<Boolean> connectVim(@PathVariable final UUID id) {
-		cirManager.checkConnectivity(id);
-		return ResponseEntity.ok(true);
+	public ResponseEntity<ConnectionInformation> connectVim(@PathVariable final UUID id) {
+		final ConnectionInformation res = cirManager.checkConnectivity(id);
+		return ResponseEntity.ok(res);
+	}
+
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<ConnectionInformation> findById(@PathVariable final UUID id) {
+		final ConnectionInformation res = cirManager.findVimById(id);
+		return ResponseEntity.ok(res);
 	}
 
 	@GetMapping()
 	public ResponseEntity<Iterable<ConnectionInformation>> listVim() {
+		LOG.info("Done");
 		final Iterable<ConnectionInformation> vci = cirManager.findAll();
 		return ResponseEntity.ok(vci);
 	}

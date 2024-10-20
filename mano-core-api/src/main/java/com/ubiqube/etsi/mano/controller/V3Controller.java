@@ -17,7 +17,11 @@
 package com.ubiqube.etsi.mano.controller;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.file.Path;
 import java.util.UUID;
 
@@ -45,6 +49,8 @@ import com.ubiqube.etsi.mano.service.pkg.vnf.VnfPackageManager;
 import com.ubiqube.etsi.mano.service.pkg.vnf.VnfPackageOnboardingImpl;
 import com.ubiqube.etsi.mano.service.pkg.vnf.VnfPackageReader;
 import com.ubiqube.etsi.mano.utils.TemporaryFileSentry;
+import com.ubiqube.etsi.mano.utils.Version;
+import com.ubiqube.parser.tosca.ParseException;
 
 /**
  *
@@ -57,9 +63,9 @@ public class V3Controller {
 	private final VnfPackageManager packageManager;
 	private final VnfPackageOnboardingImpl vnfPackageOnboardingImpl;
 	private final VnfPlanService vnfPlanService;
+	private static final String JAR_PATH = "/tosca-class-%s-2.0.0-SNAPSHOT.jar";
 
 	public V3Controller(final VnfPackageManager packageManager, final VnfPackageOnboardingImpl vnfPackageOnboardingImpl, final VnfPlanService vnfPlanService) {
-		super();
 		this.packageManager = packageManager;
 		this.vnfPackageOnboardingImpl = vnfPackageOnboardingImpl;
 		this.vnfPlanService = vnfPlanService;
@@ -89,4 +95,29 @@ public class V3Controller {
 				.body(GraphGenerator.drawGraph2(g));
 	}
 
+	@GetMapping("/json-schema/{type:vnfd|nsd|pnfd}/{version}")
+	public ResponseEntity<String> getSchemaVersion(@PathVariable final String type, @PathVariable final Version version) {
+		String ret = "{}";
+		final String jarPath = String.format(JAR_PATH, toJarVersions(version));
+		final URL cls = this.getClass().getResource(jarPath);
+		if (null == cls) {
+			throw new ParseException("Unable to find " + jarPath);
+		}
+		final URLClassLoader urlLoader = URLClassLoader.newInstance(new URL[] { cls }, this.getClass().getClassLoader());
+		Thread.currentThread().setContextClassLoader(urlLoader);
+		final String filename = "%s/schema-%s.json".formatted(version.toString(), type);
+		try (InputStream is = urlLoader.getResourceAsStream(filename);
+				ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+			is.transferTo(baos);
+			baos.flush();
+			ret = baos.toString();
+		} catch (final IOException e) {
+			throw new GenericException(e);
+		}
+		return ResponseEntity.ok(ret);
+	}
+
+	private static String toJarVersions(final Version v) {
+		return v.toString().replace(".", "");
+	}
 }

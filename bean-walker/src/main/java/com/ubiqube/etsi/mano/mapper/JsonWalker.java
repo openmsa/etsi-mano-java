@@ -78,6 +78,8 @@ public class JsonWalker {
 				}
 				beanListener.listElementEnd();
 			}
+		} else if (jsonNode.isNull()) {
+			beanListener.addProperty(null);
 		} else if (jsonNode.isValueNode()) {
 			beanListener.addProperty(jsonNode.asText());
 		}

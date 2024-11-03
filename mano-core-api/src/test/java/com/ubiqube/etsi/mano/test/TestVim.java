@@ -16,6 +16,7 @@
  */
 package com.ubiqube.etsi.mano.test;
 
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -39,4 +40,6 @@ public class TestVim {
 	private List<String> basicList;
 
 	private List<GeoPoint> advList;
+
+	private OffsetDateTime date;
 }

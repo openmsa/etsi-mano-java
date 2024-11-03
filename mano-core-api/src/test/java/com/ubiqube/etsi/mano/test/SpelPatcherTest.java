@@ -56,7 +56,8 @@ class SpelPatcherTest {
 							"lng": 45.75801,
 							"lat": 4.8001016
 						}
-					]
+					],
+					"date": "2024-11-03T07:56:58.255739Z"
 				}
 				""", vim);
 		assertNotNull(vim.getAccessInfo());
@@ -66,6 +67,8 @@ class SpelPatcherTest {
 		assertEquals(3, vim.getBasicList().size());
 		assertEquals(1, vim.getAdvList().size());
 		assertEquals(4.8001016, vim.getAdvList().get(0).getLat());
+		assertNotNull(vim.getDate());
+		assertEquals("2024-11-03T07:56:58.255739Z", vim.getDate().toString());
 	}
 
 	@Test

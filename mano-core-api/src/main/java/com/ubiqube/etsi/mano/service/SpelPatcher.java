@@ -21,10 +21,15 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.web.format.DateTimeFormatters;
+import org.springframework.boot.autoconfigure.web.format.WebConversionService;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.TypeConverter;
 import org.springframework.expression.spel.SpelParserConfiguration;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
+import org.springframework.expression.spel.support.StandardTypeConverter;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -70,6 +75,9 @@ public class SpelPatcher implements Patcher {
 		final SpelParserConfiguration config = new SpelParserConfiguration(true, true); // auto create objects if null
 		final ExpressionParser parser = new SpelExpressionParser(config);
 		final StandardEvaluationContext modelContext = new StandardEvaluationContext(entity);
+		final ConversionService sc = new WebConversionService(new DateTimeFormatters());
+		final TypeConverter tc = new StandardTypeConverter(sc);
+		modelContext.setTypeConverter(tc);
 		LOG.debug("Patching attr: {}", attrs);
 		attrs.forEach(x -> parser.parseExpression(x.getAttribute()).setValue(modelContext, x.getValue()));
 	}

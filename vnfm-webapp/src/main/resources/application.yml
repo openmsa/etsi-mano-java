@@ -76,7 +76,7 @@ mano:
       scope:
         - openid
       token-endpoint: http://mano-auth:8080/auth/realms/mano-realm/protocol/openid-connect/token
-  frontend-url: http://mano-vnfm:8090/ubi-etsi-mano/sol003
+  frontend-url: http://mano-vnfm:8090/vnfm-webapp/sol003
   helmv3:
     oauth2:
       client-id: mano-helm

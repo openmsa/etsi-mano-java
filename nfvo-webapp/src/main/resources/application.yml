@@ -67,7 +67,7 @@ mano:
     type: nfvo
   election:
     script-path: /tmp/etsi-mano/election/groovy
-  frontend-url: http://mano-nfvo:8100/ubi-etsi-mano/sol003
+  frontend-url: http://mano-nfvo:8100/nfvo-webapp/sol003
   repository:
     phys-root: /tmp/etsi-mano/repository
   swagger-o-auth2: http://mano-auth:8080/auth/realms/mano-realm/protocol/openid-connect/token

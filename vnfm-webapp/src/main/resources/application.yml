@@ -118,6 +118,9 @@ spring:
     broker-url: tcp://mano-artemis:61616
     user: artemis
     password: simetraehcapa
+  cloud:
+    compatibility-verifier:
+      enabled: false
   data:
     rest:
       base-path: /api

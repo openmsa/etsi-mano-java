@@ -33,7 +33,6 @@ import java.util.zip.ZipOutputStream;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.MediaTypeFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
@@ -61,6 +60,8 @@ import jakarta.servlet.http.HttpServletRequest;
  */
 @Service
 public class OnboardedPackageFrontControllerImpl implements OnboardedPackageFrontController {
+	private static final MediaType MEDIA_TYPE_ZIP = MediaType.parseMediaType("application/zip");
+
 	private final VnfPackageManagement vnfManagement;
 
 	private final VnfPackageService vnfPackageService;
@@ -78,7 +79,7 @@ public class OnboardedPackageFrontControllerImpl implements OnboardedPackageFron
 		final VnfPackage vnfPkg = vnfPackageService.findByVnfdId(vnfdId);
 		final ManoResource content = vnfManagement.onboardedVnfPackagesVnfdIdVnfdGet(vnfPkg.getVnfdId(), accept, includeSignature);
 		if (null == includeSignature) {
-			return returnDownloadable(content);
+			return returnDownloadable(content, MEDIA_TYPE_ZIP);
 		}
 		return handleSignature(vnfPkg.getId(), "vnfd.sig", content);
 	}
@@ -88,7 +89,7 @@ public class OnboardedPackageFrontControllerImpl implements OnboardedPackageFron
 		final VnfPackage vnfPkg = vnfPackageService.findByVnfdId(vnfdId);
 		final ManoResource content = vnfPackageRepository.getBinary(vnfPkg.getId(), Constants.REPOSITORY_FILENAME_VNFD);
 		if (null == includeSignatures) {
-			return returnDownloadable(content);
+			return returnDownloadable(content, MEDIA_TYPE_ZIP);
 		}
 		return handleSignature(vnfPkg.getId(), "vnfd.sig", content);
 	}
@@ -100,7 +101,7 @@ public class OnboardedPackageFrontControllerImpl implements OnboardedPackageFron
 		final File f = new File(Constants.REPOSITORY_FOLDER_ARTIFACTS, path);
 		final ManoResource content = vnfPackageRepository.getBinary(vnfPkgId, f.toString());
 		if (null == includeSignatures) {
-			return returnDownloadable(content);
+			return returnDownloadable(content, MEDIA_TYPE_ZIP);
 		}
 		return handleSignature(vnfPkgId, path, content);
 	}
@@ -109,7 +110,7 @@ public class OnboardedPackageFrontControllerImpl implements OnboardedPackageFron
 		final VnfPackage pkg = vnfPackageService.findById(safeUUID);
 		final AdditionalArtifact artifact = findArtifact(path, pkg.getAdditionalArtifacts());
 		if (null == artifact.getSignature()) {
-			return returnDownloadable(content);
+			return returnDownloadable(content, MEDIA_TYPE_ZIP);
 		}
 		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		try (final ZipOutputStream zipOut = new ZipOutputStream(bos)) {
@@ -129,7 +130,7 @@ public class OnboardedPackageFrontControllerImpl implements OnboardedPackageFron
 			throw new GenericException("Problem adding " + path + " to zip.", e);
 		}
 		final ManoResource ret = new ByteArrayResource(bos.toByteArray(), artifact.getArtifactPath() + ".zip");
-		return returnDownloadable(ret);
+		return returnDownloadable(ret, MEDIA_TYPE_ZIP);
 	}
 
 	private static void addEntry(final ZipOutputStream zipOut, final String path) {
@@ -141,12 +142,10 @@ public class OnboardedPackageFrontControllerImpl implements OnboardedPackageFron
 		}
 	}
 
-	private static ResponseEntity<Resource> returnDownloadable(final ManoResource content) {
+	private static ResponseEntity<Resource> returnDownloadable(final ManoResource content, final MediaType contentType) {
 		final MetaStreamResource res = new MetaStreamResource(content);
 		return ResponseEntity.status(HttpStatus.OK)
-				.contentType(MediaTypeFactory
-						.getMediaType(res)
-						.orElse(MediaType.APPLICATION_OCTET_STREAM))
+				.contentType(contentType)
 				.body(res);
 	}
 
@@ -165,14 +164,14 @@ public class OnboardedPackageFrontControllerImpl implements OnboardedPackageFron
 	public ResponseEntity<Resource> onboardedGetArtifactByVnfdId(final String vnfdId) {
 		final VnfPackage vnfPkg = vnfPackageService.findByVnfdId(vnfdId);
 		final ManoResource content = vnfPackageRepository.getBinary(vnfPkg.getId(), Constants.REPOSITORY_ZIP_ARTIFACT);
-		return returnDownloadable(content);
+		return returnDownloadable(content, MEDIA_TYPE_ZIP);
 	}
 
 	@Override
 	public ResponseEntity<Resource> onboardedGetManifestByVnfd(final String vnfdId, final @Nullable String includeSignature) {
 		final VnfPackage vnfPkg = vnfPackageService.findByVnfdId(vnfdId);
 		final ManoResource content = vnfPackageRepository.getBinary(vnfPkg.getId(), Constants.REPOSITORY_ZIP_ARTIFACT);
-		return returnDownloadable(content);
+		return returnDownloadable(content, MEDIA_TYPE_ZIP);
 	}
 
 	@Override

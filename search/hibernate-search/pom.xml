@@ -10,7 +10,6 @@
 		<dependency>
 			<groupId>com.ubiqube.mano.service.search</groupId>
 			<artifactId>mano-search-api</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate.search</groupId>

@@ -78,14 +78,16 @@ public class CapiController {
 	}
 
 	@PostMapping("kube-config/{context}")
-	public ResponseEntity<CapiServer> postKubeConfig(@PathVariable("context") final String context, @RequestParam("file") final MultipartFile file) throws IOException {
+	public ResponseEntity<CapiServer> postKubeConfig(@PathVariable final String context, @RequestParam final MultipartFile file) throws IOException {
 		final K8s srv = osClusterService.fromKubeConfig(context, file.getBytes());
 		final CapiServer res = capiServer.save(mapper.map(srv));
+		eventManager.sendAction(ActionType.REGISTER_CAPI, res.getId());
+		eventManager.sendAction(ActionType.REGISTER_CAPI, res.getId());
 		return ResponseEntity.ok(res);
 	}
 
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable("id") final UUID id) {
+	public void delete(@PathVariable final UUID id) {
 		capiServer.deleteById(id);
 	}
 

@@ -15,12 +15,10 @@
 		<dependency>
 			<groupId>com.ubiqube.mano.event</groupId>
 			<artifactId>event-api</artifactId>
-			<version>${version.event-api}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ubiqube.mano</groupId>
 			<artifactId>bean-walker</artifactId>
-			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 		  <groupId>org.projectlombok</groupId>

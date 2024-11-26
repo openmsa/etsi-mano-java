@@ -10,7 +10,6 @@
 	  <dependency>
 		  <groupId>com.ubiqube.mano</groupId>
 		  <artifactId>mano-grammar-api</artifactId>
-		  <version>5.0.0</version>
 	  </dependency>
   </dependencies>
 </project>

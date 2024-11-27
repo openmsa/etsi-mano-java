@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import java.io.InputStream;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -124,7 +123,6 @@ class OnboardedPackageFrontControllerImplTest {
 		arte.setArtifactPath("vnfd.sig");
 		vnfPackage.setAdditionalArtifacts(Set.of(arte));
 		when(vnfPackageService.findByVnfdId(id.toString())).thenReturn(vnfPackage);
-		when(vnfPackageService.findById(id)).thenReturn(vnfPackage);
 		srv.onboardedGetContentByVnfdId(id.toString(), null, "false");
 		assertTrue(true);
 	}
@@ -140,11 +138,6 @@ class OnboardedPackageFrontControllerImplTest {
 		arte.setSignature("");
 		vnfPackage.setAdditionalArtifacts(Set.of(arte));
 		when(vnfPackageService.findByVnfdId(id.toString())).thenReturn(vnfPackage);
-		when(vnfPackageService.findById(id)).thenReturn(vnfPackage);
-		when(vnfManagement.onboardedVnfPackagesVnfdIdVnfdGet(any(), any(), any())).thenReturn(manoResource);
-		when(manoResource.getInputStream()).thenReturn(InputStream.nullInputStream());
-		when(vnfPackageRepo.getBinary(any(), any())).thenReturn(manoResource2);
-		when(manoResource2.getInputStream()).thenReturn(InputStream.nullInputStream());
 		srv.onboardedGetContentByVnfdId(id.toString(), null, "false");
 		assertTrue(true);
 	}

@@ -42,14 +42,14 @@ class CommonActionDispatcherImplTest {
 	@Test
 	void testGood() {
 		final CommonActionDispatcherImpl srv = createService();
-		srv.dispatch(ActionType.REGISTER_SERVER, null, null);
+		srv.dispatch(ActionType.REGISTER_SERVER, null, null, null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testBad() {
 		final CommonActionDispatcherImpl srv = createService();
-		assertThrows(IllegalArgumentException.class, () -> srv.dispatch(ActionType.GRANT_REQUEST, null, null));
+		assertThrows(IllegalArgumentException.class, () -> srv.dispatch(ActionType.GRANT_REQUEST, null, null, null));
 	}
 
 }

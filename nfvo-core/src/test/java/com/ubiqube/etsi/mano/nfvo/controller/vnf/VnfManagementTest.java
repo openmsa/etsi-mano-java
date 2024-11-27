@@ -45,6 +45,7 @@ import com.ubiqube.etsi.mano.repository.ManoResource;
 import com.ubiqube.etsi.mano.repository.VnfPackageRepository;
 import com.ubiqube.etsi.mano.service.SearchableService;
 import com.ubiqube.etsi.mano.service.VnfPackageService;
+import com.ubiqube.etsi.mano.service.content.ContentDetector;
 
 @ExtendWith(MockitoExtension.class)
 class VnfManagementTest {
@@ -56,6 +57,8 @@ class VnfManagementTest {
 	private SearchableService searchService;
 	@Mock
 	private ManoResource manoRes;
+	@Mock
+	private ContentDetector contentDetector;
 
 	@Test
 	void testName() throws Exception {
@@ -69,7 +72,7 @@ class VnfManagementTest {
 	}
 
 	private VnfManagement createService() {
-		return new VnfManagement(vnfPkgRepo, vnfPackageJpa, searchService);
+		return new VnfManagement(vnfPkgRepo, vnfPackageJpa, searchService, contentDetector);
 	}
 
 	@Test

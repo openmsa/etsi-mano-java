@@ -31,8 +31,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.MediaTypeFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
@@ -54,6 +52,7 @@ import com.ubiqube.etsi.mano.repository.ManoResource;
 import com.ubiqube.etsi.mano.repository.VnfPackageRepository;
 import com.ubiqube.etsi.mano.service.SearchableService;
 import com.ubiqube.etsi.mano.service.VnfPackageService;
+import com.ubiqube.etsi.mano.service.content.ContentDetector;
 
 import jakarta.validation.Valid;
 
@@ -70,11 +69,13 @@ public class VnfManagement implements VnfPackageManagement {
 	private final VnfPackageRepository vnfPackageRepository;
 	private final VnfPackageService vnfPackageService;
 	private final SearchableService searchableService;
+	private final ContentDetector contentDetector;
 
-	public VnfManagement(final VnfPackageRepository vnfPackageRepository, final VnfPackageService vnfPackageService, final SearchableService searchableService) {
+	public VnfManagement(final VnfPackageRepository vnfPackageRepository, final VnfPackageService vnfPackageService, final SearchableService searchableService, final ContentDetector contentDetector) {
 		this.vnfPackageRepository = vnfPackageRepository;
 		this.vnfPackageService = vnfPackageService;
 		this.searchableService = searchableService;
+		this.contentDetector = contentDetector;
 		LOG.info("Starting VNF Package Management For NFVO+VNFM or NFVO Only Management.");
 	}
 
@@ -115,7 +116,7 @@ public class VnfManagement implements VnfPackageManagement {
 				if (entry.getName().equals(artifactPath)) {
 					final MetaStreamResource res = new MetaStreamResource(content);
 					return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT)
-							.contentType(MediaTypeFactory.getMediaType(res).orElse(MediaType.APPLICATION_OCTET_STREAM))
+							.contentType(contentDetector.getMediaType(content))
 							.body(res);
 				}
 			}
@@ -136,8 +137,7 @@ public class VnfManagement implements VnfPackageManagement {
 		vnfPackageRepository.get(vnfPkgId);
 		final ManoResource content = vnfPackageRepository.getBinary(vnfPkgId, Constants.REPOSITORY_FILENAME_PACKAGE);
 		final MetaStreamResource res = new MetaStreamResource(content);
-		return ResponseEntity.status(HttpStatus.OK).contentType(MediaTypeFactory
-				.getMediaType(res).orElse(MediaType.APPLICATION_OCTET_STREAM))
+		return ResponseEntity.status(HttpStatus.OK).contentType(contentDetector.getMediaType(content))
 				.body(res);
 	}
 

@@ -77,11 +77,7 @@ public class OnboardedPackageFrontControllerImpl implements OnboardedPackageFron
 	@Override
 	public ResponseEntity<Resource> onboardedGetContentByVnfdId(final String vnfdId, final String accept, final @Nullable String includeSignature) {
 		final VnfPackage vnfPkg = vnfPackageService.findByVnfdId(vnfdId);
-		final ManoResource content = vnfManagement.onboardedVnfPackagesVnfdIdVnfdGet(vnfPkg.getVnfdId(), accept, includeSignature);
-		if (null == includeSignature) {
-			return returnDownloadable(content, MEDIA_TYPE_ZIP);
-		}
-		return handleSignature(vnfPkg.getId(), "vnfd.sig", content);
+		return vnfManagement.onboardedVnfPackagesVnfdIdPackageContentGet(vnfPkg.getVnfdId());
 	}
 
 	@Override

@@ -17,6 +17,7 @@
 package com.ubiqube.etsi.mano.vnfm.controller;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
@@ -73,6 +74,8 @@ class CapiControllerTest {
 	void testPostKubeConfig() throws IOException {
 		final CapiController srv = createService();
 		final MultipartFile file = Mockito.mock(MultipartFile.class);
+		final CapiServer e = new CapiServer();
+		when(capiServerJpa.save(any())).thenReturn(e);
 		srv.postKubeConfig("ctx", file);
 		assertTrue(true);
 	}

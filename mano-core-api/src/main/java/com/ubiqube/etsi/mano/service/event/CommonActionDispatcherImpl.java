@@ -21,6 +21,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import com.ubiqube.etsi.mano.auth.config.TenantHolder;
 import com.ubiqube.etsi.mano.service.vim.CirConnectionManager;
 
 /**
@@ -41,7 +42,8 @@ public class CommonActionDispatcherImpl implements CommonActionDispatcher {
 	}
 
 	@Override
-	public void dispatch(final ActionType actionType, final UUID objectId, final Map<String, Object> parameters) {
+	public void dispatch(final ActionType actionType, final UUID objectId, final String tenantId, final Map<String, Object> parameters) {
+		TenantHolder.setTenantId(tenantId);
 		switch (actionType) {
 		case REGISTER_SERVER -> controller.registerServer(objectId, parameters);
 		case REGISTER_CAPI -> capiServerChecker.verify(objectId, parameters);

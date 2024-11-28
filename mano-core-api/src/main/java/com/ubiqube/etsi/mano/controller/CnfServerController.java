@@ -20,6 +20,7 @@ import java.util.UUID;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -68,13 +69,13 @@ public class CnfServerController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<CnfServer> findCnfServer(final UUID id) {
+	public ResponseEntity<CnfServer> findCnfServer(final @PathVariable UUID id) {
 		final CnfServer resp = cnfServerService.findById(id).orElseThrow(() -> new NotFoundException("Could not find cnf server: " + id));
 		return ResponseEntity.ok(resp);
 	}
 
 	@GetMapping("/{id}/merge")
-	public ResponseEntity<VimConnectionInformation> mergeCnfServer(final UUID id) {
+	public ResponseEntity<VimConnectionInformation> mergeCnfServer(final @PathVariable UUID id) {
 		final CnfServer resp = cnfServerService.findById(id).orElseThrow(() -> new NotFoundException("Could not find cnf server: " + id));
 		final VimConnectionInformation vim = vimManager.findVimById(id);
 		vim.setCnfInfo(resp.getInfo());

@@ -27,6 +27,7 @@ import com.ubiqube.etsi.mano.dao.mano.VnfPackage;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface VnfInstanceMapping {
 
+	@Mapping(target = "cismConnectionInfo", ignore = true)
 	@Mapping(target = "blueprints", ignore = true)
 	@Mapping(target = "cirConnectionInfo", ignore = true)
 	@Mapping(target = "extManagedVirtualLinks", ignore = true)

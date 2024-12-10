@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
+import java.io.ByteArrayInputStream;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -164,11 +165,14 @@ class OnboardedPackageFrontControllerImplTest {
 		vnfPackage.setId(id);
 		final AdditionalArtifact arte = new AdditionalArtifact();
 		arte.setArtifactPath("");
+		arte.setSignature("sig");
 		vnfPackage.setAdditionalArtifacts(Set.of(arte));
 		when(vnfPackageService.findByVnfdId(id.toString())).thenReturn(vnfPackage);
 		//
 		when(vnfPackageService.findById(id)).thenReturn(vnfPackage);
 		when(vnfPackageRepo.getBinary(any(), any())).thenReturn(manoResource2);
+		//
+		when(manoResource2.getInputStream()).thenReturn(new ByteArrayInputStream("test".getBytes()));
 		srv.onboardedGetArtifact(req, id.toString(), "");
 		assertTrue(true);
 	}

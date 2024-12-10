@@ -68,20 +68,23 @@ public class OnboardedPackageFrontControllerImpl implements OnboardedPackageFron
 
 	private final VnfPackageRepository vnfPackageRepository;
 
-	public OnboardedPackageFrontControllerImpl(final VnfPackageManagement vnfManagement, final VnfPackageService vnfPackageService, final VnfPackageRepository vnfPackageRepository) {
+	public OnboardedPackageFrontControllerImpl(final VnfPackageManagement vnfManagement,
+			final VnfPackageService vnfPackageService, final VnfPackageRepository vnfPackageRepository) {
 		this.vnfManagement = vnfManagement;
 		this.vnfPackageService = vnfPackageService;
 		this.vnfPackageRepository = vnfPackageRepository;
 	}
 
 	@Override
-	public ResponseEntity<Resource> onboardedGetContentByVnfdId(final String vnfdId, final String accept, final @Nullable String includeSignature) {
+	public ResponseEntity<Resource> onboardedGetContentByVnfdId(final String vnfdId, final String accept,
+			final @Nullable String includeSignature) {
 		final VnfPackage vnfPkg = vnfPackageService.findByVnfdId(vnfdId);
 		return vnfManagement.onboardedVnfPackagesVnfdIdPackageContentGet(vnfPkg.getVnfdId());
 	}
 
 	@Override
-	public ResponseEntity<Resource> onboardedGetVnfdByVnfdId(final String vnfdId, final @Nullable String includeSignatures) {
+	public ResponseEntity<Resource> onboardedGetVnfdByVnfdId(final String vnfdId,
+			final @Nullable String includeSignatures) {
 		final VnfPackage vnfPkg = vnfPackageService.findByVnfdId(vnfdId);
 		final ManoResource content = vnfPackageRepository.getBinary(vnfPkg.getId(), Constants.REPOSITORY_FILENAME_VNFD);
 		if (null == includeSignatures) {
@@ -91,7 +94,8 @@ public class OnboardedPackageFrontControllerImpl implements OnboardedPackageFron
 	}
 
 	@Override
-	public ResponseEntity<Resource> onboardedGetArtifact(final HttpServletRequest request, final String vnfdId, final @Nullable String includeSignatures) {
+	public ResponseEntity<Resource> onboardedGetArtifact(final HttpServletRequest request, final String vnfdId,
+			final @Nullable String includeSignatures) {
 		final UUID vnfPkgId = vnfPackageService.findByVnfdId(vnfdId).getId();
 		final String path = SpringUtils.extractParams(request);
 		final File f = new File(Constants.REPOSITORY_FOLDER_ARTIFACTS, path);
@@ -102,7 +106,8 @@ public class OnboardedPackageFrontControllerImpl implements OnboardedPackageFron
 		return handleSignature(vnfPkgId, path, content);
 	}
 
-	private ResponseEntity<Resource> handleSignature(final UUID safeUUID, final String path, final ManoResource content) {
+	private ResponseEntity<Resource> handleSignature(final UUID safeUUID, final String path,
+			final ManoResource content) {
 		final VnfPackage pkg = vnfPackageService.findById(safeUUID);
 		final AdditionalArtifact artifact = findArtifact(path, pkg.getAdditionalArtifacts());
 		if (null == artifact.getSignature()) {
@@ -110,18 +115,10 @@ public class OnboardedPackageFrontControllerImpl implements OnboardedPackageFron
 		}
 		final ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		try (final ZipOutputStream zipOut = new ZipOutputStream(bos)) {
-			addEntry(zipOut, path);
-			try (final InputStream tgt = content.getInputStream()) {
-				tgt.transferTo(zipOut);
-				zipOut.closeEntry();
-			}
+			addEntryToZip(zipOut, path, content);
 			final File f = new File(Constants.REPOSITORY_FOLDER_ARTIFACTS, artifact.getSignature());
 			final ManoResource sig = vnfPackageRepository.getBinary(safeUUID, f.toString());
-			addEntry(zipOut, artifact.getSignature());
-			try (final InputStream tgt = sig.getInputStream()) {
-				tgt.transferTo(zipOut);
-				zipOut.closeEntry();
-			}
+			addEntryToZip(zipOut, artifact.getSignature(), sig);
 		} catch (final IOException e) {
 			throw new GenericException("Problem adding " + path + " to zip.", e);
 		}
@@ -138,7 +135,16 @@ public class OnboardedPackageFrontControllerImpl implements OnboardedPackageFron
 		}
 	}
 
-	private static ResponseEntity<Resource> returnDownloadable(final ManoResource content, final MediaType contentType) {
+	private static void addEntryToZip(final ZipOutputStream zipOut, final String path, final ManoResource resource) throws IOException {
+		addEntry(zipOut, path);
+		try (final InputStream tgt = resource.getInputStream()) {
+			tgt.transferTo(zipOut);
+			zipOut.closeEntry();
+		}
+	}
+
+	private static ResponseEntity<Resource> returnDownloadable(final ManoResource content,
+			final MediaType contentType) {
 		final MetaStreamResource res = new MetaStreamResource(content);
 		return ResponseEntity.status(HttpStatus.OK)
 				.contentType(contentType)
@@ -146,11 +152,13 @@ public class OnboardedPackageFrontControllerImpl implements OnboardedPackageFron
 	}
 
 	private static AdditionalArtifact findArtifact(final String p, final Set<AdditionalArtifact> aa) {
-		return aa.stream().filter(x -> x.getArtifactPath().equals(p)).findFirst().orElseThrow(() -> new GenericException("Cannot find artifact " + p));
+		return aa.stream().filter(x -> x.getArtifactPath().equals(p)).findFirst()
+				.orElseThrow(() -> new GenericException("Cannot find artifact " + p));
 	}
 
 	@Override
-	public <U> ResponseEntity<U> onboardedFindById(final String vnfdId, final Function<VnfPackage, U> mapper, final Consumer<U> makeLinks) {
+	public <U> ResponseEntity<U> onboardedFindById(final String vnfdId, final Function<VnfPackage, U> mapper,
+			final Consumer<U> makeLinks) {
 		final U vnfPkgInfo = vnfManagement.vnfPackagesVnfPkgVnfdIdGet(vnfdId, mapper);
 		makeLinks.accept(vnfPkgInfo);
 		return new ResponseEntity<>(vnfPkgInfo, HttpStatus.OK);
@@ -164,15 +172,18 @@ public class OnboardedPackageFrontControllerImpl implements OnboardedPackageFron
 	}
 
 	@Override
-	public ResponseEntity<Resource> onboardedGetManifestByVnfd(final String vnfdId, final @Nullable String includeSignature) {
+	public ResponseEntity<Resource> onboardedGetManifestByVnfd(final String vnfdId,
+			final @Nullable String includeSignature) {
 		final VnfPackage vnfPkg = vnfPackageService.findByVnfdId(vnfdId);
 		final ManoResource content = vnfPackageRepository.getBinary(vnfPkg.getId(), Constants.REPOSITORY_ZIP_ARTIFACT);
 		return returnDownloadable(content, MEDIA_TYPE_ZIP);
 	}
 
 	@Override
-	public <U> ResponseEntity<String> onboardedSearch(final MultiValueMap<String, String> requestParams, final Function<VnfPackage, U> mapper, final Consumer<U> makeLinks, final Class<?> frontClass) {
-		return vnfManagement.searchOnboarded(requestParams, mapper, VNF_SEARCH_DEFAULT_EXCLUDE_FIELDS, VNF_SEARCH_MANDATORY_FIELDS, makeLinks, frontClass);
+	public <U> ResponseEntity<String> onboardedSearch(final MultiValueMap<String, String> requestParams,
+			final Function<VnfPackage, U> mapper, final Consumer<U> makeLinks, final Class<?> frontClass) {
+		return vnfManagement.searchOnboarded(requestParams, mapper, VNF_SEARCH_DEFAULT_EXCLUDE_FIELDS,
+				VNF_SEARCH_MANDATORY_FIELDS, makeLinks, frontClass);
 	}
 
 }

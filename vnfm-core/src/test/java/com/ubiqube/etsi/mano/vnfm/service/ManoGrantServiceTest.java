@@ -72,6 +72,8 @@ class ManoGrantServiceTest {
 		final UUID id = UUID.randomUUID();
 		response.setId(id);
 		response.setZoneGroups(Set.of());
+		response.setZones(Set.of());
+		response.setExtManagedVirtualLinks(Set.of());
 		final VimConnectionInformation vim01 = new VimConnectionInformation();
 		vim01.setVimType("TYPE");
 		vim01.setVimId("ID");
@@ -104,6 +106,8 @@ class ManoGrantServiceTest {
 		final UUID id = UUID.randomUUID();
 		response.setId(id);
 		response.setZoneGroups(Set.of());
+		response.setZones(Set.of());
+		response.setExtManagedVirtualLinks(Set.of());
 		final VimConnectionInformation vim01 = new VimConnectionInformation();
 		vim01.setVimType("TYPE");
 		vim01.setVimId("ID");

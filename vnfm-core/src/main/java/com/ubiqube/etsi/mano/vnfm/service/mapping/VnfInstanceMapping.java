@@ -47,5 +47,6 @@ public interface VnfInstanceMapping {
 	@Mapping(target = "versionDependency", ignore = true)
 	@Mapping(target = "vnfPkg", ignore = true)
 	@Mapping(target = "nsInstance", ignore = true)
+	@Mapping(target = "id", ignore = true)
 	void map(VnfPackage src, @MappingTarget VnfInstance dst);
 }

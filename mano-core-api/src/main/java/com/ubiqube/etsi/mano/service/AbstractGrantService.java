@@ -33,6 +33,7 @@ import org.slf4j.LoggerFactory;
 
 import com.ubiqube.etsi.mano.dao.mano.BlueZoneGroupInformation;
 import com.ubiqube.etsi.mano.dao.mano.ChangeType;
+import com.ubiqube.etsi.mano.dao.mano.ExtManagedVirtualLinkDataEntity;
 import com.ubiqube.etsi.mano.dao.mano.GrantInformationExt;
 import com.ubiqube.etsi.mano.dao.mano.GrantResponse;
 import com.ubiqube.etsi.mano.dao.mano.GrantVimAssetsEntity;
@@ -43,6 +44,7 @@ import com.ubiqube.etsi.mano.dao.mano.VimSoftwareImageEntity;
 import com.ubiqube.etsi.mano.dao.mano.VimTask;
 import com.ubiqube.etsi.mano.dao.mano.VnfCompute;
 import com.ubiqube.etsi.mano.dao.mano.ZoneGroupInformation;
+import com.ubiqube.etsi.mano.dao.mano.ZoneInfoEntity;
 import com.ubiqube.etsi.mano.dao.mano.cnf.ConnectionInformation;
 import com.ubiqube.etsi.mano.dao.mano.cnf.ConnectionType;
 import com.ubiqube.etsi.mano.dao.mano.v2.Blueprint;
@@ -126,8 +128,15 @@ public abstract class AbstractGrantService implements VimResourceService {
 				});
 		returnedGrant.getVimConnections().forEach(plan::addVimConnection);
 		plan.setZoneGroups(mapAsSet(returnedGrant.getZoneGroups()));
-		plan.setZones(returnedGrant.getZones());
-		plan.addExtManagedVirtualLinks(returnedGrant.getExtManagedVirtualLinks());
+
+		Set<ZoneInfoEntity> zoneInfoEntities = returnedGrant.getZones();
+		zoneInfoEntities.stream().forEach(o -> o.setId(null));
+		plan.setZones(zoneInfoEntities);
+		
+		Set<ExtManagedVirtualLinkDataEntity> extManagedVirtualLinkDataEntities = returnedGrant.getExtManagedVirtualLinks();
+		extManagedVirtualLinkDataEntities.stream().forEach(o -> o.setId(null));
+		plan.addExtManagedVirtualLinks(extManagedVirtualLinkDataEntities);
+		
 		Optional.ofNullable(returnedGrant.getExtVirtualLinks()).ifPresent(plan::addExtVirtualLinks);
 		plan.setGrantsRequestId(returnedGrant.getId().toString());
 		mapVimAsset(plan.getTasks(), returnedGrant.getVimAssets());

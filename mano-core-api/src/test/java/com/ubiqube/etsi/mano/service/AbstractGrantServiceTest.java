@@ -76,6 +76,8 @@ class AbstractGrantServiceTest {
 		final UUID id = UUID.randomUUID();
 		response.setId(id);
 		response.setZoneGroups(Set.of());
+		response.setZones(Set.of());
+		response.setExtManagedVirtualLinks(Set.of());
 		final VimConnectionInformation vim01 = new VimConnectionInformation();
 		final Set<VimConnectionInformation> s = Set.of(vim01);
 		bp.setVimConnections(s);
@@ -111,6 +113,8 @@ class AbstractGrantServiceTest {
 		final UUID id = UUID.randomUUID();
 		response.setId(id);
 		response.setZoneGroups(Set.of());
+		response.setZones(Set.of());
+		response.setExtManagedVirtualLinks(Set.of());
 		final VimConnectionInformation vim01 = new VimConnectionInformation();
 		vim01.setVimId("CDE");
 		vim01.setVimType("TYPE");
@@ -143,6 +147,8 @@ class AbstractGrantServiceTest {
 		final UUID id = UUID.randomUUID();
 		response.setId(id);
 		response.setZoneGroups(Set.of());
+		response.setZones(Set.of());
+		response.setExtManagedVirtualLinks(Set.of());
 		final TestTask task = new TestTask(ResourceTypeEnum.COMPUTE);
 		task.setChangeType(ChangeType.ADDED);
 		task.setId(tid);
@@ -162,6 +168,8 @@ class AbstractGrantServiceTest {
 		response2.setZoneGroups(Set.of());
 		response2.setAddResources(Set.of(gie01));
 		response2.setVimConnections(Set.of(vim01));
+		response2.setZones(Set.of());
+		response2.setExtManagedVirtualLinks(Set.of());
 		when(nfvo.sendSyncGrantRequest(any())).thenReturn(response2);
 		when(vimManager.registerIfNeeded(vim01)).thenReturn(vim01);
 		srv.allocate(bp);

@@ -16,6 +16,8 @@
  */
 package com.ubiqube.etsi.mano.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -30,6 +32,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ubiqube.etsi.mano.exception.GenericException;
@@ -41,6 +45,7 @@ import com.ubiqube.etsi.mano.service.pkg.PackageDescriptor;
 import com.ubiqube.etsi.mano.service.pkg.vnf.VnfPackageManager;
 import com.ubiqube.etsi.mano.service.pkg.vnf.VnfPackageOnboardingImpl;
 import com.ubiqube.etsi.mano.service.pkg.vnf.VnfPackageReader;
+import com.ubiqube.etsi.mano.utils.Version;
 
 @ExtendWith(MockitoExtension.class)
 class V3ControllerTest {
@@ -78,5 +83,30 @@ class V3ControllerTest {
 		when(vnfPlanService.getPlanFor(any())).thenReturn(g);
 		srv.getVnf2dPlan(null);
 		assertTrue(true);
+	}
+
+	@Test
+	void test_valid_type_returns_schema() {
+		final Version version = new Version("3.3.1");
+		final String type = "vnfd";
+		final V3Controller controller = new V3Controller(null, null, null);
+
+		final ResponseEntity<String> response = controller.getSchemaVersion(type, version);
+
+		assertNotNull(response);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertEquals("{}\n", response.getBody());
+	}
+
+	// Invalid type parameter not matching vnfd|nsd|pnfd pattern
+	@Test
+	void test_invalid_type_throws_exception() {
+		final Version version = new Version("3.7.1");
+		final String type = "invalid";
+		final V3Controller controller = new V3Controller(null, null, null);
+
+		assertThrows(IllegalArgumentException.class, () -> {
+			controller.getSchemaVersion(type, version);
+		});
 	}
 }

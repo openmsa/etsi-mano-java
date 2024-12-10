@@ -50,7 +50,6 @@ import com.ubiqube.etsi.mano.service.pkg.vnf.VnfPackageOnboardingImpl;
 import com.ubiqube.etsi.mano.service.pkg.vnf.VnfPackageReader;
 import com.ubiqube.etsi.mano.utils.TemporaryFileSentry;
 import com.ubiqube.etsi.mano.utils.Version;
-import com.ubiqube.parser.tosca.ParseException;
 
 /**
  *
@@ -101,7 +100,7 @@ public class V3Controller {
 		final String jarPath = String.format(JAR_PATH, toJarVersions(version));
 		final URL cls = this.getClass().getResource(jarPath);
 		if (null == cls) {
-			throw new ParseException("Unable to find " + jarPath);
+			throw new IllegalArgumentException("Unable to find " + jarPath);
 		}
 		final URLClassLoader urlLoader = URLClassLoader.newInstance(new URL[] { cls }, this.getClass().getClassLoader());
 		Thread.currentThread().setContextClassLoader(urlLoader);

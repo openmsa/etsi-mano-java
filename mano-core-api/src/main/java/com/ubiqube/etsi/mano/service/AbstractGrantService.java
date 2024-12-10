@@ -128,15 +128,11 @@ public abstract class AbstractGrantService implements VimResourceService {
 				});
 		returnedGrant.getVimConnections().forEach(plan::addVimConnection);
 		plan.setZoneGroups(mapAsSet(returnedGrant.getZoneGroups()));
-
-		Set<ZoneInfoEntity> zoneInfoEntities = returnedGrant.getZones();
-		zoneInfoEntities.stream().forEach(o -> o.setId(null));
-		plan.setZones(zoneInfoEntities);
-		
-		Set<ExtManagedVirtualLinkDataEntity> extManagedVirtualLinkDataEntities = returnedGrant.getExtManagedVirtualLinks();
+		plan.setZones(filterId(returnedGrant.getZones()));
+		final Set<ExtManagedVirtualLinkDataEntity> extManagedVirtualLinkDataEntities = returnedGrant.getExtManagedVirtualLinks();
 		extManagedVirtualLinkDataEntities.stream().forEach(o -> o.setId(null));
 		plan.addExtManagedVirtualLinks(extManagedVirtualLinkDataEntities);
-		
+
 		Optional.ofNullable(returnedGrant.getExtVirtualLinks()).ifPresent(plan::addExtVirtualLinks);
 		plan.setGrantsRequestId(returnedGrant.getId().toString());
 		mapVimAsset(plan.getTasks(), returnedGrant.getVimAssets());
@@ -144,6 +140,11 @@ public abstract class AbstractGrantService implements VimResourceService {
 		fixUnknownTask(plan.getTasks(), plan.getVimConnections());
 		fixContainerBefore431(plan);
 		check(plan);
+	}
+
+	private static Set<ZoneInfoEntity> filterId(final Set<ZoneInfoEntity> zones) {
+		zones.forEach(x -> x.setId(null));
+		return zones;
 	}
 
 	private Set<BlueZoneGroupInformation> mapAsSet(final Set<ZoneGroupInformation> zoneGroups) {

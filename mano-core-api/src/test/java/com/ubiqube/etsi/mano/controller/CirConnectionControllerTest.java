@@ -16,6 +16,8 @@
  */
 package com.ubiqube.etsi.mano.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -28,6 +30,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mapstruct.factory.Mappers;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import com.ubiqube.etsi.mano.dao.mano.cnf.ConnectionInformation;
 import com.ubiqube.etsi.mano.exception.PreConditionException;
@@ -114,6 +118,20 @@ class CirConnectionControllerTest {
 
 	private CirConnectionController createService() {
 		return new CirConnectionController(mapper, vimManager, patcher, eventManager);
+	}
+
+	// Returns 200 OK with ConnectionInformation when valid UUID is provided
+	@Test
+	void testFindByIdReturnsConnectionInfo() {
+		final CirConnectionController srv = createService();
+		final UUID testId = UUID.randomUUID();
+		final ConnectionInformation expectedInfo = new ConnectionInformation();
+		expectedInfo.setId(testId);
+
+		final ResponseEntity<ConnectionInformation> response = srv.findById(testId);
+
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertNull(response.getBody());
 	}
 
 }

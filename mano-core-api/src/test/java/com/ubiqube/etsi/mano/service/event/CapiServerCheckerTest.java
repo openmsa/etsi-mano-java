@@ -84,9 +84,9 @@ class CapiServerCheckerTest {
 		final CapiServerChecker checker = createService();
 		final UUID id = UUID.randomUUID();
 		when(capiServer.findById(id)).thenReturn(Optional.empty());
-
+		final Map<String, Object> map = Map.of();
 		assertThrows(NoSuchElementException.class, () -> {
-			checker.verify(id, Map.of());
+			checker.verify(id, map);
 		});
 
 		verify(executor, never()).get(any(), any());

@@ -142,7 +142,8 @@ class BeanWalkerTest {
 					},
 					"userData": {
 						"key": "lav"
-					}
+					},
+					"links": null
 				}
 				""";
 		jw.walk(patch, beanListener);

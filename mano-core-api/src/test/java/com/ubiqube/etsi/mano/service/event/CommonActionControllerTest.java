@@ -78,7 +78,7 @@ class CommonActionControllerTest {
 	private final ApiVersionMapping apiVersionMapping = Mappers.getMapper(ApiVersionMapping.class);
 
 	@Test
-	void testVnfm() throws Exception {
+	void testVnfm() {
 		final CommonActionController cac = createService();
 		final UUID id = UUID.randomUUID();
 		final Servers server = Servers.builder()
@@ -110,7 +110,7 @@ class CommonActionControllerTest {
 	}
 
 	@Test
-	void testVnfmFail() throws Exception {
+	void testVnfmFail() {
 		final CommonActionController cac = createService();
 		final UUID id = UUID.randomUUID();
 		final Servers server = Servers.builder()
@@ -199,7 +199,7 @@ class CommonActionControllerTest {
 		final ServerAdapter serverAdapter = new ServerAdapter(hg, server, fluxRest);
 		when(serverService.buildServerAdapter(server)).thenReturn(serverAdapter);
 		when(hg.getUrlFor(any())).thenReturn("http://localhost/");
-		when(fluxRest.uriBuilder()).thenReturn(UriComponentsBuilder.fromHttpUrl("http://test/"));
+		when(fluxRest.uriBuilder()).thenReturn(UriComponentsBuilder.fromUriString("http://test/"));
 		return serverAdapter;
 	}
 }

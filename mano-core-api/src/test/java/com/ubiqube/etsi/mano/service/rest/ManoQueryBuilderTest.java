@@ -230,6 +230,6 @@ class ManoQueryBuilderTest {
 		when(manoClient.getQueryType()).thenReturn(ApiVersionType.SOL002_VNFFM);
 		when(manoClient.getFragment()).thenReturn("frg");
 		when(httpGateway.getUrlFor(any())).thenReturn("http://localhost/");
-		when(fluxRest.uriBuilder()).thenReturn(UriComponentsBuilder.fromHttpUrl("http://localhost/"));
+		when(fluxRest.uriBuilder()).thenReturn(UriComponentsBuilder.fromUriString("http://localhost/"));
 	}
 }

@@ -65,7 +65,7 @@ public class AdminVnfPackage {
 
 	private URI buildUri(final String urlRoot, final String url) {
 		final Map<String, Object> uriParams = Optional.ofNullable(client.getObjectId()).map(x -> Map.of("id", (Object) x.toString())).orElseGet(Map::of);
-		return UriComponentsBuilder.fromHttpUrl(urlRoot).pathSegment(url).buildAndExpand(uriParams).toUri();
+		return UriComponentsBuilder.fromUriString(urlRoot).pathSegment(url).buildAndExpand(uriParams).toUri();
 	}
 
 }

@@ -86,6 +86,9 @@ public class CirConnectionController {
 		if ((ifMatch != null) && !(cir.getVersion() + "").equals(ifMatch)) {
 			throw new PreConditionException(ifMatch + " does not match " + cir.getVersion());
 		}
+		if (null == body) {
+			return ResponseEntity.ok(cir);
+		}
 		patcher.patch(body, cir);
 		cir.setServerStatus(PlanStatusType.STARTED);
 		final ConnectionInformation newCir = cirManager.save(cir);

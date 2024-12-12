@@ -31,7 +31,8 @@ import com.ubiqube.etsi.mano.dao.mano.ii.K8sInterfaceInfo;
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
 import com.ubiqube.etsi.mano.dao.mano.vim.k8s.K8sServers;
 import com.ubiqube.etsi.mano.dao.mano.vim.k8s.StatusType;
-import com.ubiqube.etsi.mano.vim.k8s.K8s;
+import com.ubiqube.etsi.mano.vim.k8s.conn.CertificateAuthInfo;
+import com.ubiqube.etsi.mano.vim.k8s.conn.K8s;
 import com.ubiqube.etsi.mano.vnfm.jpa.K8sServerInfoJpa;
 
 @Service
@@ -76,8 +77,15 @@ public class CcmManager {
 		r.setMasterAddresses(List.of(ret.getApiUrl()));
 		r.setStatus(StatusType.CREATE_COMPLETE);
 		r.setToscaName(name);
-		r.setUserCrt(ret.getClientCrt());
-		r.setUserKey(ret.getClientKey());
+		if (ret.getCertificateAuthInfo() != null) {
+			final CertificateAuthInfo cert = ret.getCertificateAuthInfo();
+			r.setUserCrt(cert.getClientCertificate());
+			r.setUserKey(cert.getClientCertificateKey());
+		} else if (ret.getOpenIdAuthInfo() != null) {
+			throw new UnsupportedOperationException("Could not login using openid.");
+		} else if (ret.getTokenAuthInfo() != null) {
+			r.setToken(ret.getTokenAuthInfo().getToken());
+		}
 		return r;
 	}
 

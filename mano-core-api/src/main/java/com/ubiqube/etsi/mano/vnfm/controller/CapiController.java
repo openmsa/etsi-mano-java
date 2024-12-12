@@ -41,8 +41,8 @@ import com.ubiqube.etsi.mano.service.CapiServerService;
 import com.ubiqube.etsi.mano.service.Patcher;
 import com.ubiqube.etsi.mano.service.event.ActionType;
 import com.ubiqube.etsi.mano.service.event.EventManager;
-import com.ubiqube.etsi.mano.vim.k8s.K8s;
 import com.ubiqube.etsi.mano.vim.k8s.OsClusterService;
+import com.ubiqube.etsi.mano.vim.k8s.conn.K8s;
 import com.ubiqube.etsi.mano.vnfm.service.plan.contributors.uow.capi.CapiServerMapping;
 
 import jakarta.annotation.Nullable;

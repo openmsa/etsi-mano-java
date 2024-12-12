@@ -20,7 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
-import com.ubiqube.etsi.mano.vim.k8s.K8s;
+import com.ubiqube.etsi.mano.vim.k8s.conn.K8s;
 
 /**
  * This pseudo service is added for debugging purpose.
@@ -37,7 +37,7 @@ public class NoopCcmServerService implements CcmServerService {
 	@Override
 	public K8s createCluster(final VimConnectionInformation vci, final String name) {
 		LOG.warn("Noop: Delete cluster: {}", name);
-		return null;
+		return K8s.builder().build();
 	}
 
 }

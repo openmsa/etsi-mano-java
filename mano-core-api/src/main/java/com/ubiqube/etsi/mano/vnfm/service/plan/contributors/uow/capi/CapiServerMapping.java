@@ -21,20 +21,26 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
 import com.ubiqube.etsi.mano.dao.mano.cnf.capi.CapiServer;
-import com.ubiqube.etsi.mano.vim.k8s.K8s;
+import com.ubiqube.etsi.mano.vim.k8s.conn.K8s;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CapiServerMapping {
+	@Mapping(target = "openIdAuthInfo", ignore = true)
+	@Mapping(target = "tokenAuthInfo.token", source = "token")
 	@Mapping(target = "apiUrl", source = "url")
 	@Mapping(target = "caData", source = "certificateAuthorityData")
-	@Mapping(target = "clientCrt", source = "clientCertificateData")
-	@Mapping(target = "clientKey", source = "clientKeyData")
+	@Mapping(target = "certificateAuthInfo.clientCertificate", source = "clientCertificateData")
+	@Mapping(target = "certificateAuthInfo.clientCertificateKey", source = "clientKeyData")
 	@Mapping(target = "namespace", constant = "default")
 	K8s map(CapiServer capiSrv);
 
+	@Mapping(target = "token", source = "tokenAuthInfo.token")
+	@Mapping(target = "error", ignore = true)
+	@Mapping(target = "serverStatus", ignore = true)
+	@Mapping(target = "version", ignore = true)
 	@Mapping(target = "certificateAuthorityData", source = "caData")
-	@Mapping(target = "clientCertificateData", source = "clientCrt")
-	@Mapping(target = "clientKeyData", source = "clientKey")
+	@Mapping(target = "clientCertificateData", source = "certificateAuthInfo.clientCertificate")
+	@Mapping(target = "clientKeyData", source = "certificateAuthInfo.clientCertificateKey")
 	@Mapping(target = "id", ignore = true)
 	@Mapping(target = "name", ignore = true)
 	@Mapping(target = "url", source = "apiUrl")

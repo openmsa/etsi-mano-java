@@ -17,7 +17,7 @@
 package com.ubiqube.etsi.mano.service.grant.ccm;
 
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
-import com.ubiqube.etsi.mano.vim.k8s.K8s;
+import com.ubiqube.etsi.mano.vim.k8s.conn.K8s;
 
 public interface CcmServerService {
 

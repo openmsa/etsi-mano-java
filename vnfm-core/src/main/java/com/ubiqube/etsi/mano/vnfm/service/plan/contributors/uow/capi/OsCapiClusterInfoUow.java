@@ -32,8 +32,9 @@ import com.ubiqube.etsi.mano.orchestrator.Context3d;
 import com.ubiqube.etsi.mano.orchestrator.nodes.vnfm.OsContainerDeployableNode;
 import com.ubiqube.etsi.mano.orchestrator.nodes.vnfm.OsK8sInformationsNode;
 import com.ubiqube.etsi.mano.orchestrator.vt.VirtualTaskV3;
-import com.ubiqube.etsi.mano.vim.k8s.K8s;
 import com.ubiqube.etsi.mano.vim.k8s.OsClusterService;
+import com.ubiqube.etsi.mano.vim.k8s.conn.CertificateAuthInfo;
+import com.ubiqube.etsi.mano.vim.k8s.conn.K8s;
 import com.ubiqube.etsi.mano.vnfm.jpa.K8sServerInfoJpa;
 import com.ubiqube.etsi.mano.vnfm.service.plan.contributors.uow.AbstractVnfmUow;
 
@@ -78,8 +79,15 @@ public class OsCapiClusterInfoUow extends AbstractVnfmUow<K8sInformationsTask> {
 		r.setMasterAddresses(List.of(ret.getApiUrl()));
 		r.setStatus(StatusType.CREATE_COMPLETE);
 		r.setToscaName(task.getToscaName());
-		r.setUserCrt(ret.getClientCrt());
-		r.setUserKey(ret.getClientKey());
+		if (ret.getCertificateAuthInfo() != null) {
+			final CertificateAuthInfo cert = ret.getCertificateAuthInfo();
+			r.setUserCrt(cert.getClientCertificate());
+			r.setUserKey(cert.getClientCertificateKey());
+		} else if (ret.getTokenAuthInfo() != null) {
+			r.setToken(ret.getTokenAuthInfo().getToken());
+		} else if (ret.getOpenIdAuthInfo() != null) {
+			throw new UnsupportedOperationException("Could not login using openid.");
+		}
 		return r;
 	}
 

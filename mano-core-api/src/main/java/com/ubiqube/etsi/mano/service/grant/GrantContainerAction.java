@@ -28,7 +28,6 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -50,8 +49,9 @@ import com.ubiqube.etsi.mano.jpa.ConnectionInformationJpa;
 import com.ubiqube.etsi.mano.repository.ManoResource;
 import com.ubiqube.etsi.mano.repository.VnfPackageRepository;
 import com.ubiqube.etsi.mano.service.VnfPackageService;
-import com.ubiqube.etsi.mano.service.mapping.ConnectionMapping;
 import com.ubiqube.etsi.mano.service.rest.FluxRest;
+
+import jakarta.annotation.Nullable;
 
 @Service
 public class GrantContainerAction {
@@ -66,14 +66,11 @@ public class GrantContainerAction {
 
 	private final VnfPackageRepository vnfRepository;
 
-	private final ConnectionMapping connectionMapping;
-
 	public GrantContainerAction(final ConnectionInformationJpa connJpa, final DockerService dockerService, final VnfPackageService vnfPackageService, final VnfPackageRepository vnfRepository) {
 		this.connJpa = connJpa;
 		this.dockerService = dockerService;
 		this.vnfPackageService = vnfPackageService;
 		this.vnfRepository = vnfRepository;
-		this.connectionMapping = Mappers.getMapper(ConnectionMapping.class);
 	}
 
 	public void handleGrant(final GrantResponse grants) {
@@ -131,6 +128,7 @@ public class GrantContainerAction {
 		return sb.toString();
 	}
 
+	@Nullable
 	private ConnectionInformation getConnection(final SoftwareImage img) {
 		if (img.getRepository() != null) {
 			return connJpa.findByName(img.getRepository());
@@ -190,6 +188,7 @@ public class GrantContainerAction {
 		return uri.getPath() + component + "/" + name;
 	}
 
+	@Nullable
 	private static SoftwareImage find(final Set<OsContainer> osContainer, final String vduId) {
 		for (final OsContainer oscon : osContainer) {
 			if (oscon.getArtifacts().isEmpty()) {

@@ -36,8 +36,8 @@ import com.ubiqube.etsi.mano.dao.mano.vim.k8s.K8sServers;
 import com.ubiqube.etsi.mano.jpa.CapiServerJpa;
 import com.ubiqube.etsi.mano.orchestrator.Context3d;
 import com.ubiqube.etsi.mano.orchestrator.vt.VirtualTaskV3;
-import com.ubiqube.etsi.mano.vim.k8s.K8s;
 import com.ubiqube.etsi.mano.vim.k8s.OsClusterService;
+import com.ubiqube.etsi.mano.vim.k8s.conn.K8s;
 import com.ubiqube.etsi.mano.vnfm.jpa.K8sServerInfoJpa;
 import com.ubiqube.etsi.mano.vnfm.service.plan.contributors.vt.OsK8sClusterVt;
 

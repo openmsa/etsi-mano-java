@@ -82,7 +82,6 @@ class CirConnectionControllerTest {
 		final CirConnectionController srv = createService();
 		final ConnectionInformation conn = new ConnectionInformation();
 		when(vimManager.findVimById(any())).thenReturn(conn);
-		when(vimManager.save(conn)).thenReturn(conn);
 		srv.patchVim(null, null, null);
 		assertTrue(true);
 	}
@@ -102,7 +101,6 @@ class CirConnectionControllerTest {
 		final ConnectionInformation conn = new ConnectionInformation();
 		conn.setVersion(1);
 		when(vimManager.findVimById(any())).thenReturn(conn);
-		when(vimManager.save(any())).thenReturn(conn);
 		srv.patchVim(null, null, "1");
 		assertTrue(true);
 	}

@@ -44,12 +44,9 @@ public class CnfInformationVerifier {
 			return;
 		}
 		checkNetwork(cnfInfo);
-		final List<Flavor> lst = vim.getFlavorList(vci);
-
-		final ClusterMachine master = cnfInfo.getMaster();
-		verifyMachine(master, lst);
-		final ClusterMachine worker = cnfInfo.getWorker();
-		verifyMachine(worker, lst);
+		final List<Flavor> flavors = vim.getFlavorList(vci);
+		verifyMachine(cnfInfo.getMaster(), flavors);
+		verifyMachine(cnfInfo.getWorker(), flavors);
 	}
 
 	private void checkNetwork(final CnfInformations cnfInfo) {
@@ -58,35 +55,35 @@ public class CnfInformationVerifier {
 		if ((null == netName) && (null == netId)) {
 			throw new VimException("You must have an external network name or ID.");
 		}
-		if (null != netName) {
-			final List<NetworkObject> res = vim.network(vci).search(NetowrkSearchField.NAME, List.of(netName));
-			if (res.size() != 1) {
-				throw new VimException("External network must be unique but was " + res.size());
-			}
-			final NetworkObject no = res.get(0);
+		final List<NetworkObject> res = findNetworkByNameOrId(netName, netId);
+		if (res.size() != 1) {
+			throw new VimException("External network must be unique but was " + res.size());
+		}
+		final NetworkObject no = res.get(0);
+		if (netName != null) {
 			cnfInfo.setExtNetworkId(no.id());
 		} else {
-			final List<NetworkObject> res = vim.network(vci).search(NetowrkSearchField.ID, List.of(netId));
-			if (res.size() != 1) {
-				throw new VimException("External network must be unique but was " + res.size());
-			}
-			final NetworkObject no = res.get(0);
 			cnfInfo.setExtNetwork(no.name());
 		}
 	}
 
-	private void verifyMachine(final ClusterMachine machine, final List<Flavor> lst) {
-		final String flav = machine.getFlavor();
-		final String flavId = machine.getFlavorId();
-		if ((null == flav) && (null == flavId)) {
+	private List<NetworkObject> findNetworkByNameOrId(final String netName, final String netId) {
+		if (netName != null) {
+			return vim.network(vci).search(NetowrkSearchField.NAME, List.of(netName));
+		}
+		return vim.network(vci).search(NetowrkSearchField.ID, List.of(netId));
+	}
+
+	private void verifyMachine(final ClusterMachine machine, final List<Flavor> flavors) {
+		final String flavor = machine.getFlavor();
+		final String flavorId = machine.getFlavorId();
+		if (flavor == null && flavorId == null) {
 			throw new VimException("You must have a flavor or a flavorId");
 		}
-		if (null != flav) {
-			final Flavor f = findFlavorByName(lst, flav);
-			machine.setFlavorId(f.getId());
+		if (flavor != null) {
+			machine.setFlavorId(findFlavorByName(flavors, flavor).getId());
 		} else {
-			final Flavor f = findFlavorById(lst, flavId);
-			machine.setFlavor(f.getName());
+			machine.setFlavor(findFlavorById(flavors, flavorId).getName());
 		}
 		if (machine.getMinNumberInstance() < 1) {
 			throw new VimException("Number of instance must be at least 1");
@@ -95,15 +92,17 @@ public class CnfInformationVerifier {
 		Objects.requireNonNull(res, () -> "Unable to find image: " + machine.getImage());
 	}
 
-	private static Flavor findFlavorById(final List<Flavor> lst, final String flav) {
-		return lst.stream().filter(x -> x.getId().equals(flav))
+	private static Flavor findFlavorById(final List<Flavor> flavors, final String flavorId) {
+		return flavors.stream()
+				.filter(flavor -> flavor.getId().equals(flavorId))
 				.findFirst()
-				.orElseThrow(() -> new VimException("Unable to find flavor: " + flav));
+				.orElseThrow(() -> new VimException("Unable to find flavor: " + flavorId));
 	}
 
-	private static Flavor findFlavorByName(final List<Flavor> lst, final String flav) {
-		return lst.stream().filter(x -> x.getName().equals(flav))
+	private static Flavor findFlavorByName(final List<Flavor> flavors, final String flavorName) {
+		return flavors.stream()
+				.filter(flavor -> flavor.getName().equals(flavorName))
 				.findFirst()
-				.orElseThrow(() -> new VimException("Unable to find flavor: " + flav));
+				.orElseThrow(() -> new VimException("Unable to find flavor: " + flavorName));
 	}
 }

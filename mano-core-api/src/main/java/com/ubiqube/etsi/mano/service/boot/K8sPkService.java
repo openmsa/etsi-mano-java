@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see https://www.gnu.org/licenses/.
  */
 package com.ubiqube.etsi.mano.service.boot;
 
@@ -65,7 +65,7 @@ import jakarta.annotation.Nullable;
 public class K8sPkService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(K8sPkService.class);
-
+	private static final String SIGNING_ALGORITHM = "SHA256withRSA";
 	private static final String K8S_PRIVATE_KEY = "k8s.private-key";
 	private static final String K8S_PUBLIC_KEY = "k8s.public-key";
 
@@ -129,8 +129,7 @@ public class K8sPkService {
 
 	@SuppressWarnings("unchecked")
 	private static <T> T decodePem(final String pem) {
-		try (Reader reader = new StringReader(pem);
-				PEMParser pemParser = new PEMParser(reader)) {
+		try (Reader reader = new StringReader(pem); PEMParser pemParser = new PEMParser(reader)) {
 			return (T) pemParser.readObject();
 		} catch (final IOException e) {
 			throw new GenericException(e);
@@ -151,8 +150,7 @@ public class K8sPkService {
 	}
 
 	private static String pemEncode(final Object key) {
-		try (final Writer out = new StringWriter();
-				final PemWriter pw = new PemWriter(out)) {
+		try (final Writer out = new StringWriter(); final PemWriter pw = new PemWriter(out)) {
 			pw.writeObject(new JcaMiscPEMGenerator(key));
 			pw.flush();
 			return out.toString();
@@ -175,18 +173,24 @@ public class K8sPkService {
 		return pemEncode(keyPair.getPrivate());
 	}
 
-	public String createCsr(final String object) {
-		final JcaContentSignerBuilder csBuilder = new JcaContentSignerBuilder("SHA256withRSA");
-		ContentSigner signer;
+	public String createCsr(final String subjectName) {
+		final ContentSigner signer = createContentSigner();
+		final X500Name subject = new X500Name(subjectName);
+		final PKCS10CertificationRequest csr = buildCertificationRequest(subject, signer);
+		return pemEncode(csr);
+	}
+
+	private ContentSigner createContentSigner() {
 		try {
-			signer = csBuilder.build(keyPair.getPrivate());
+			final JcaContentSignerBuilder csBuilder = new JcaContentSignerBuilder(SIGNING_ALGORITHM);
+			return csBuilder.build(keyPair.getPrivate());
 		} catch (final OperatorCreationException e) {
 			throw new GenericException(e);
 		}
-		final X500Name subject = new X500Name(object);
-		final PKCS10CertificationRequestBuilder original = new JcaPKCS10CertificationRequestBuilder(subject, keyPair.getPublic());
-		final PKCS10CertificationRequestBuilder rq = new PKCS10CertificationRequestBuilder(original);
-		final PKCS10CertificationRequest csr = rq.build(signer);
-		return pemEncode(csr);
+	}
+
+	private PKCS10CertificationRequest buildCertificationRequest(final X500Name subject, final ContentSigner signer) {
+		final PKCS10CertificationRequestBuilder csrBuilder = new JcaPKCS10CertificationRequestBuilder(subject, keyPair.getPublic());
+		return csrBuilder.build(signer);
 	}
 }

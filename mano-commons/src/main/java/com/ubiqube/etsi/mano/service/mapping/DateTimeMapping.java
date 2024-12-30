@@ -22,7 +22,7 @@ import java.time.ZoneOffset;
 
 import org.mapstruct.Mapper;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 @Mapper
 public interface DateTimeMapping {

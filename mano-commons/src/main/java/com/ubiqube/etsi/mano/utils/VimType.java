@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 
 import com.ubiqube.etsi.mano.exception.GenericException;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import lombok.Getter;
 
 @Getter

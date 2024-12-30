@@ -18,7 +18,7 @@ package com.ubiqube.etsi.mano.service.mapping;
 
 import java.net.URI;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public interface StringToUriMapping {
 	@Nullable

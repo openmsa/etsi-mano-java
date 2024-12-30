@@ -19,7 +19,7 @@ package com.ubiqube.etsi.mano.repository;
 import java.io.InputStream;
 import java.util.UUID;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public interface BinaryRepository {
 

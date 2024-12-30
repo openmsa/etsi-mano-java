@@ -20,7 +20,7 @@ import java.util.List;
 
 import com.ubiqube.etsi.mano.dao.mano.policy.ActivationStatusType;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 

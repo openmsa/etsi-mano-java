@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ubiqube.etsi.mano.exception.GenericException;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  *

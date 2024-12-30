@@ -21,9 +21,9 @@
  *
  *
  */
-@NonNullApi
-@NonNullFields
+@NullMarked
+
 package com.ubiqube.etsi.mano.uri;
 
-import org.springframework.lang.NonNullApi;
-import org.springframework.lang.NonNullFields;
+import org.jspecify.annotations.NullMarked;
+

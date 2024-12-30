@@ -24,7 +24,7 @@ import com.ubiqube.etsi.mano.controller.Protocols;
 import com.ubiqube.etsi.mano.dao.mano.version.ApiVersionType;
 import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.utils.Version;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;

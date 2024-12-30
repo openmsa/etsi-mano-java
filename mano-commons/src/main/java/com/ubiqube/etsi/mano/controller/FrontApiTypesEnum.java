@@ -18,7 +18,7 @@ package com.ubiqube.etsi.mano.controller;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public enum FrontApiTypesEnum {
 	SOL003(String.valueOf("SOL003")),

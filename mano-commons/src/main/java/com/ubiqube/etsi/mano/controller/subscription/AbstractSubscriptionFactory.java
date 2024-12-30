@@ -22,13 +22,13 @@ import java.util.stream.Collectors;
 
 import com.ubiqube.etsi.mano.exception.GenericException;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * @author olivier
  */
 public abstract class AbstractSubscriptionFactory {
-	@Nonnull
+	@NonNull
 	private final Map<ApiAndType, SubscriptionLinkable> subscriptions;
 
 	protected AbstractSubscriptionFactory(final List<? extends SubscriptionLinkable> subs) {

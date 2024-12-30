@@ -21,8 +21,8 @@ import java.util.List;
 
 import com.ubiqube.etsi.mano.exception.GenericException;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  *
@@ -53,7 +53,7 @@ public class Node<U> {
 	@Nullable
 	private String name;
 	private Operand op;
-	@Nonnull
+	@NonNull
 	private List<U> value = new ArrayList<>();
 
 	public Node() {

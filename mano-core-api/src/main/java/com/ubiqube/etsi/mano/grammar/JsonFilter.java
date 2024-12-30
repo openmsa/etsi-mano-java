@@ -115,6 +115,15 @@ public class JsonFilter {
 		return new DocumentStatus(DocumentStatus.Status.NOSTATE);
 	}
 
+	/**
+	 * Decides the result of a comparison between two string values based on the provided operand.
+	 *
+	 * @param objectValue the first value to be compared, as a string
+	 * @param value the second value to be compared, as a string
+	 * @param operand the operand that defines the type of comparison to be performed; can be EQ, NEQ, GT, LT, GTE, or LTE
+	 * @return true if the comparison based on the operand is satisfied, false otherwise
+	 * @throws NumberFormatException if the operand is GT, LT, GTE, or LTE and the values cannot be parsed as integers
+	 */
 	private static boolean decide(final String objectValue, final String value, final @Nullable Operand operand) {
 		if (null == operand) {
 			return true;

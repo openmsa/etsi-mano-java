@@ -81,8 +81,6 @@ public class VimManager {
 
 	private final VimTypeConverter vimTypeConverter;
 
-	private final ConnectionMapping connectionMapping = Mappers.getMapper(ConnectionMapping.class);
-
 	public VimManager(final List<Vim> vims, final VimConnectionInformationJpa vimConnectionInformationJpa, final SystemService systemService,
 			final CnfServerJpa cnfServerJpa, final VrQanJpa vrQanJpa, final EventManager em, final ManoSearch manoSearch, final CnfInformationsMapping cnfMapper, final VimTypeConverter vimTypeConverter) {
 		this.vims = vims;

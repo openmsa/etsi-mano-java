@@ -46,9 +46,13 @@ import jakarta.annotation.Nullable;
 @Service
 public class EndpointService {
 	private static final Logger LOG = LoggerFactory.getLogger(EndpointService.class);
-	private static Pattern p = Pattern.compile("/.*/(?<part>\\w+)/v\\d");
+	private static final Pattern URL_PATTERN = Pattern.compile("/.*/(?<part>\\w+)/v\\d");
 	private final ApplicationContext applicationContext;
-	public static final Set<String> FRAGMENTS = Set.of("/vrqan/", "/vnfpkgm/", "/grant/", "/vnfpm/", "/vnflcm/", "/vnfind/", "/vnffm/", "/vrgan/", "/nsd/", "/nsfm/", "/nslcm/", "/nspm/", "/vnfconfig/", "/vnfsnapshotpkgm/", "/nsiun/");
+	public static final Set<String> FRAGMENTS = Set.of(
+		"/vrqan/", "/vnfpkgm/", "/grant/", "/vnfpm/", "/vnflcm/", "/vnfind/", 
+		"/vnffm/", "/vrgan/", "/nsd/", "/nsfm/", "/nslcm/", "/nspm/", 
+		"/vnfconfig/", "/vnfsnapshotpkgm/", "/nsiun/"
+	);
 	private static final MultiValueMap<String, Endpoint> dedupe = new LinkedMultiValueMap<>();
 
 	public EndpointService(final ApplicationContext applicationContext) {
@@ -57,49 +61,56 @@ public class EndpointService {
 	}
 
 	public void extractVersions() {
-		final String[] beans = applicationContext.getBeanNamesForAnnotation(Controller.class);
-		final List<String> list = Arrays.asList(beans);
-		final Map<String, Endpoint> res = new HashMap<>();
-		list.stream().forEach(x -> {
-			LOG.trace("Reading: {}", x);
-			if (isSkippable(x)) {
+		final String[] beanNames = applicationContext.getBeanNamesForAnnotation(Controller.class);
+		final List<String> beanList = Arrays.asList(beanNames);
+		final Map<String, Endpoint> endpoints = new HashMap<>();
+
+		beanList.forEach(beanName -> {
+			LOG.trace("Reading: {}", beanName);
+			if (isSkippable(beanName)) {
 				return;
 			}
-			final Object obj = applicationContext.getBean(x);
-			final RequestMapping req = AnnotationUtils.findAnnotation(obj.getClass(), RequestMapping.class);
-			if (haveUsableRequest(req) && (req != null)) {
-				final String part = extractPart(req.value()[0]);
-				final List<Version> version = getVersion(req.headers());
-				if (null == part) {
-					LOG.warn("Ignoring controller: {}", x);
+
+			final Object bean = applicationContext.getBean(beanName);
+			final RequestMapping requestMapping = AnnotationUtils.findAnnotation(bean.getClass(), RequestMapping.class);
+
+			if (requestMapping != null && haveUsableRequest(requestMapping)) {
+				final String part = extractPart(requestMapping.value()[0]);
+				final List<Version> versions = getVersion(requestMapping.headers());
+
+				if (part == null) {
+					LOG.warn("Ignoring controller: {}", beanName);
 				} else {
-					final List<HttpMethod> lst = extractMethod(obj.getClass());
-					version.forEach(y -> res.put(part + y, new Endpoint(part, y, x, lst)));
+					final List<HttpMethod> methods = extractMethods(bean.getClass());
+					versions.forEach(version -> endpoints.put(part + version, new Endpoint(part, version, beanName, methods)));
 				}
 			}
 		});
-		res.forEach((key, value) -> dedupe.add(value.part, value));
+
+		endpoints.forEach((key, value) -> dedupe.add(value.part, value));
 	}
 
-	private List<HttpMethod> extractMethod(final Class<? extends Object> clazz) {
-		final List<HttpMethod> ret = new ArrayList<>();
-		final Method[] meths = clazz.getMethods();
-		for (final Method method : meths) {
-			final Set<RequestMapping> res = AnnotatedElementUtils.findAllMergedAnnotations(method, RequestMapping.class);
-			if (!res.isEmpty()) {
-				final RequestMapping req = res.iterator().next();
-				ret.add(new HttpMethod(req.method()[0].name(), safeGetAArray(req.value())));
+	private List<HttpMethod> extractMethods(final Class<?> clazz) {
+		final List<HttpMethod> methods = new ArrayList<>();
+		final Method[] classMethods = clazz.getMethods();
+
+		for (final Method method : classMethods) {
+			final Set<RequestMapping> requestMappings = AnnotatedElementUtils.findAllMergedAnnotations(method, RequestMapping.class);
+			if (!requestMappings.isEmpty()) {
+				final RequestMapping requestMapping = requestMappings.iterator().next();
+				methods.add(new HttpMethod(requestMapping.method()[0].name(), safeGetArrayValue(requestMapping.value())));
 			}
 		}
-		return ret;
+
+		return methods;
 	}
 
 	@Nullable
-	private static String safeGetAArray(final @Nullable String[] val) {
-		if ((null == val) || (val.length == 0)) {
+	private static String safeGetArrayValue(final @Nullable String[] values) {
+		if (values == null || values.length == 0) {
 			return null;
 		}
-		return val[0];
+		return values[0];
 	}
 
 	@SuppressWarnings("static-method")
@@ -110,41 +121,43 @@ public class EndpointService {
 		return dedupe;
 	}
 
-	private static @Nullable String extractPart(final String string) {
-		final Matcher m = p.matcher(string);
-		if (!m.matches()) {
+	private static @Nullable String extractPart(final String url) {
+		final Matcher matcher = URL_PATTERN.matcher(url);
+		if (!matcher.matches()) {
 			return null;
 		}
-		return m.group("part");
+		return matcher.group("part");
 	}
 
-	private static boolean haveUsableRequest(final @Nullable RequestMapping req) {
-		return (null != req) && (req.headers() != null) && (req.value().length > 0);
+	private static boolean haveUsableRequest(final @Nullable RequestMapping requestMapping) {
+		return requestMapping != null && requestMapping.headers() != null && requestMapping.value().length > 0;
 	}
 
-	private static boolean isSkippable(final String versionName) {
-		return "nfvoApiVersion".equals(versionName) || "vnfmApiVersion".equals(versionName) || "swaggerWelcome".equals(versionName);
+	private static boolean isSkippable(final String beanName) {
+		return "nfvoApiVersion".equals(beanName) || "vnfmApiVersion".equals(beanName) || "swaggerWelcome".equals(beanName);
 	}
 
 	private static List<Version> getVersion(final String[] headers) {
-		final List<Version> res = new ArrayList<>();
+		final List<Version> versions = new ArrayList<>();
 		if (headers.length == 0) {
-			return res;
+			return versions;
 		}
-		for (final String string : headers) {
-			if (string.startsWith("Version=")) {
-				final String ver = string.substring("version=".length());
-				res.add(new Version(ver));
+
+		for (final String header : headers) {
+			if (header.startsWith("Version=")) {
+				final String version = header.substring("Version=".length());
+				versions.add(new Version(version));
 			}
 		}
-		return res;
+
+		return versions;
 	}
 
-	public record Endpoint(String part, Version version, Object bean, List<HttpMethod> lst) {
+	public record Endpoint(String part, Version version, Object bean, List<HttpMethod> methods) {
 		//
 	}
 
-	record HttpMethod(String action, @Nullable String payh) {
+	record HttpMethod(String action, @Nullable String path) {
 		//
 	}
 }

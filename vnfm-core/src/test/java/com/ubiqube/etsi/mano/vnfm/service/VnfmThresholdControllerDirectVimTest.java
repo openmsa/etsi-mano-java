@@ -35,7 +35,7 @@ import com.ubiqube.etsi.mano.dao.mano.v2.VnfBlueprint;
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.jpa.ThresholdJpa;
-import com.ubiqube.etsi.mano.service.SearchableService;
+import com.ubiqube.etsi.mano.service.search.SearchableService;
 import com.ubiqube.etsi.mano.vnfm.jpa.VnfBlueprintJpa;
 import com.ubiqube.etsi.mano.vnfm.service.alarm.AlarmSystem;
 

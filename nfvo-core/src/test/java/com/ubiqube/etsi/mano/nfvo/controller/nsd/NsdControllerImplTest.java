@@ -37,8 +37,8 @@ import com.ubiqube.etsi.mano.dao.mano.UsageStateEnum;
 import com.ubiqube.etsi.mano.exception.PreConditionException;
 import com.ubiqube.etsi.mano.repository.NsdRepository;
 import com.ubiqube.etsi.mano.service.Patcher;
-import com.ubiqube.etsi.mano.service.SearchableService;
 import com.ubiqube.etsi.mano.service.event.EventManager;
+import com.ubiqube.etsi.mano.service.search.SearchableService;
 
 @ExtendWith(MockitoExtension.class)
 class NsdControllerImplTest {

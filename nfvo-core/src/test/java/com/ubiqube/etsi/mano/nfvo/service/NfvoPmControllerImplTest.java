@@ -31,7 +31,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.ubiqube.etsi.mano.dao.mano.pm.PmJob;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.jpa.PmJobsJpa;
-import com.ubiqube.etsi.mano.service.SearchableService;
+import com.ubiqube.etsi.mano.service.search.SearchableService;
 
 @ExtendWith(MockitoExtension.class)
 class NfvoPmControllerImplTest {

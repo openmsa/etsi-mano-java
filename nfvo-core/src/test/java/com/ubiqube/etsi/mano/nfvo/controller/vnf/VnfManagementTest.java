@@ -43,9 +43,9 @@ import com.ubiqube.etsi.mano.dao.mano.pkg.ExternalArtifactsAccessConfigArtifact;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.repository.ManoResource;
 import com.ubiqube.etsi.mano.repository.VnfPackageRepository;
-import com.ubiqube.etsi.mano.service.SearchableService;
 import com.ubiqube.etsi.mano.service.VnfPackageService;
 import com.ubiqube.etsi.mano.service.content.ContentDetector;
+import com.ubiqube.etsi.mano.service.search.SearchableService;
 
 @ExtendWith(MockitoExtension.class)
 class VnfManagementTest {

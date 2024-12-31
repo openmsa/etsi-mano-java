@@ -58,9 +58,9 @@ import com.ubiqube.etsi.mano.nfvo.service.NsInstanceService;
 import com.ubiqube.etsi.mano.nfvo.service.NsdPackageService;
 import com.ubiqube.etsi.mano.nfvo.service.mapping.NsBlueprintMapping;
 import com.ubiqube.etsi.mano.nfvo.service.mapping.nsinstance.NsInstanceMapping;
-import com.ubiqube.etsi.mano.service.SearchableService;
 import com.ubiqube.etsi.mano.service.event.ActionType;
 import com.ubiqube.etsi.mano.service.event.EventManager;
+import com.ubiqube.etsi.mano.service.search.SearchableService;
 
 @ExtendWith(MockitoExtension.class)
 class NsInstanceControllerServiceImplTest {

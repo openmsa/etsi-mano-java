@@ -24,7 +24,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ubiqube.etsi.mano.repository.PnfdInfoRepository;
-import com.ubiqube.etsi.mano.service.SearchableService;
+import com.ubiqube.etsi.mano.service.search.SearchableService;
 
 @ExtendWith(MockitoExtension.class)
 class PnfdControllerImplTest {

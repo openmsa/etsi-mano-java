@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 package com.ubiqube.etsi.mano.nfvo.controller.vnf;
 
@@ -50,9 +50,10 @@ import com.ubiqube.etsi.mano.grammar.GrammarOperandType;
 import com.ubiqube.etsi.mano.grammar.GrammarValue;
 import com.ubiqube.etsi.mano.repository.ManoResource;
 import com.ubiqube.etsi.mano.repository.VnfPackageRepository;
-import com.ubiqube.etsi.mano.service.SearchableService;
 import com.ubiqube.etsi.mano.service.VnfPackageService;
 import com.ubiqube.etsi.mano.service.content.ContentDetector;
+import com.ubiqube.etsi.mano.service.search.SearchParamBuilder;
+import com.ubiqube.etsi.mano.service.search.SearchableService;
 
 import jakarta.validation.Valid;
 
@@ -115,16 +116,13 @@ public class VnfManagement implements VnfPackageManagement {
 				}
 				if (entry.getName().equals(artifactPath)) {
 					final MetaStreamResource res = new MetaStreamResource(content);
-					return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT)
-							.contentType(contentDetector.getMediaType(content))
-							.body(res);
+					return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).contentType(contentDetector.getMediaType(content)).body(res);
 				}
 			}
 		} catch (final IOException e) {
 			throw new GenericException(e);
 		}
-		throw new NotFoundException(new StringBuilder("VNF package artifact not found for vnfPack with id: ")
-				.append(vnfPkgId).append(" artifactPath: ").append(artifactPath).toString());
+		throw new NotFoundException(new StringBuilder("VNF package artifact not found for vnfPack with id: ").append(vnfPkgId).append(" artifactPath: ").append(artifactPath).toString());
 	}
 
 	@Override
@@ -137,8 +135,7 @@ public class VnfManagement implements VnfPackageManagement {
 		vnfPackageRepository.get(vnfPkgId);
 		final ManoResource content = vnfPackageRepository.getBinary(vnfPkgId, Constants.REPOSITORY_FILENAME_PACKAGE);
 		final MetaStreamResource res = new MetaStreamResource(content);
-		return ResponseEntity.status(HttpStatus.OK).contentType(contentDetector.getMediaType(content))
-				.body(res);
+		return ResponseEntity.status(HttpStatus.OK).contentType(contentDetector.getMediaType(content)).body(res);
 	}
 
 	@Override
@@ -194,14 +191,28 @@ public class VnfManagement implements VnfPackageManagement {
 	}
 
 	@Override
-	public <U> ResponseEntity<String> search(final MultiValueMap<String, String> requestParams, final Function<VnfPackage, U> mapper, final String excludeDefaults, final Set<String> mandatoryFields, final Consumer<U> makeLink, final Class<?> frontClass) {
-		return searchableService.search(VnfPackage.class, requestParams, mapper, excludeDefaults, mandatoryFields, makeLink, List.of(), frontClass);
+	public <U> ResponseEntity<String> search(final MultiValueMap<String, String> requestParams, final Function<VnfPackage, U> mapper, final String excludeDefaults, final Set<String> mandatoryFields, final Consumer<U> makeLink, final Class<U> frontClass) {
+		final SearchParamBuilder<VnfPackage, U> params = SearchParamBuilder.of(VnfPackage.class, frontClass)
+				.requestParams(requestParams)
+				.mapper(mapper)
+				.excludeDefaults(excludeDefaults)
+				.mandatoryFields(mandatoryFields)
+				.makeLink(makeLink)
+				.build();
+		return searchableService.search(params);
 	}
 
 	@Override
-	public <U> ResponseEntity<String> searchOnboarded(final MultiValueMap<String, String> requestParams, final Function<VnfPackage, U> mapper, final String excludeDefaults, final Set<String> mandatoryFields, final Consumer<U> makeLinks, final Class<?> frontClass) {
+	public <U> ResponseEntity<String> searchOnboarded(final MultiValueMap<String, String> requestParams, final Function<VnfPackage, U> mapper, final String excludeDefaults, final Set<String> mandatoryFields, final Consumer<U> makeLinks, final Class<U> frontClass) {
 		final GrammarNode onBoardedNode = new BooleanExpression(new GrammarLabel("onboardingState"), GrammarOperandType.EQ, new GrammarValue("ONBOARDED"));
-		return searchableService.search(VnfPackage.class, requestParams, mapper, excludeDefaults, mandatoryFields, makeLinks, List.of(onBoardedNode), frontClass);
+		return searchableService.search(SearchParamBuilder.of(VnfPackage.class, frontClass)
+				.requestParams(requestParams)
+				.additionalNodes(List.of(onBoardedNode))
+				.mapper(mapper)
+				.excludeDefaults(excludeDefaults)
+				.mandatoryFields(mandatoryFields)
+				.makeLink(makeLinks)
+				.build());
 	}
 
 	@Override

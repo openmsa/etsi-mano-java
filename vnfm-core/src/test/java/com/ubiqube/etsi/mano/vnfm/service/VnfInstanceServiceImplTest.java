@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see https://www.gnu.org/licenses/.
  */
 package com.ubiqube.etsi.mano.vnfm.service;
 
@@ -71,21 +71,21 @@ class VnfInstanceServiceImplTest {
 	}
 
 	@Test
-	void testDeleteLive() throws Exception {
+	void testDeleteLive() {
 		final VnfInstanceServiceImpl srv = new VnfInstanceServiceImpl(vnfInstanceJpa, vnfLiveInstance, patcher, eventManager, serchableService);
 		srv.deleteLiveInstanceById(null);
 		assertTrue(true);
 	}
 
 	@Test
-	void testFindByVnfInstFail() throws Exception {
+	void testFindByVnfInstFail() {
 		final VnfInstanceServiceImpl srv = new VnfInstanceServiceImpl(vnfInstanceJpa, vnfLiveInstance, patcher, eventManager, serchableService);
 		final NsdInstance nsdInst = new NsdInstance();
 		assertThrows(NotFoundException.class, () -> srv.findBVnfInstanceyVnfPackageId(nsdInst, null));
 	}
 
 	@Test
-	void testFindByVnfInstSuccess() throws Exception {
+	void testFindByVnfInstSuccess() {
 		final VnfInstanceServiceImpl srv = new VnfInstanceServiceImpl(vnfInstanceJpa, vnfLiveInstance, patcher, eventManager, serchableService);
 		final VnfInstance vnfInst = new VnfInstance();
 		when(vnfInstanceJpa.findByVnfPkg_IdAndNsInstance_Id(null, null)).thenReturn(Optional.of(vnfInst));
@@ -188,7 +188,8 @@ class VnfInstanceServiceImplTest {
 	@Test
 	void testSearch() {
 		final VnfInstanceServiceImpl srv = new VnfInstanceServiceImpl(vnfInstanceJpa, vnfLiveInstance, patcher, eventManager, serchableService);
-		srv.search(null, null, null, null, null, null);
+		srv.search(null, x -> null, null, null, x -> {
+		}, getClass());
 		assertTrue(true);
 	}
 

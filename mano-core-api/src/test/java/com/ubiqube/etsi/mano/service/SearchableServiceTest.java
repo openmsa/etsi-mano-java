@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see https://www.gnu.org/licenses/.
  */
 package com.ubiqube.etsi.mano.service;
 
@@ -26,11 +26,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.util.LinkedMultiValueMap;
 
 import com.ubiqube.etsi.mano.grammar.GrammarNodeResult;
 import com.ubiqube.etsi.mano.grammar.GrammarParser;
 import com.ubiqube.etsi.mano.service.search.ManoSearch;
+import com.ubiqube.etsi.mano.service.search.ManoSearchResponseService;
+import com.ubiqube.etsi.mano.service.search.SearchParamBuilder;
+import com.ubiqube.etsi.mano.service.search.SearchableService;
 
 import jakarta.persistence.EntityManager;
 
@@ -53,7 +55,13 @@ class SearchableServiceTest {
 	void testSearch() {
 		final SearchableService srv = createService();
 		when(grammarParser.parse(any())).thenReturn(new GrammarNodeResult(List.of()));
-		srv.search(getClass(), new LinkedMultiValueMap<>(), null, null, null, null, List.of(), null);
+		final SearchParamBuilder<? extends SearchableServiceTest, ? extends SearchableServiceTest> p = SearchParamBuilder.of(getClass(), getClass())
+				.makeLink(x -> {
+					//
+				})
+				.mapper(x -> null)
+				.build();
+		srv.search(p);
 		assertTrue(true);
 	}
 

@@ -1,39 +1,33 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see https://www.gnu.org/licenses/.
  */
-package com.ubiqube.etsi.mano.service;
+package com.ubiqube.etsi.mano.service.search;
 
 import static com.ubiqube.etsi.mano.Constants.getSingleField;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.MultiValueMap;
 
 import com.ubiqube.etsi.mano.grammar.GrammarNode;
 import com.ubiqube.etsi.mano.grammar.GrammarNodeResult;
 import com.ubiqube.etsi.mano.grammar.GrammarParser;
-import com.ubiqube.etsi.mano.service.search.ManoSearch;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 
@@ -57,13 +51,13 @@ public class SearchableService {
 	}
 
 	@Transactional
-	public <T, U> ResponseEntity<String> search(final Class<?> dbClass, final MultiValueMap<String, String> requestParams, final Function<T, U> mapper, @Nullable final String excludeDefaults, @Nullable final Set<String> mandatoryFields, final Consumer<U> makeLink, final List<GrammarNode> additionalNodes, final Class<?> frontClass) {
-		final String filter = getSingleField(requestParams, "filter");
+	public <T, U> ResponseEntity<String> search(final SearchParamBuilder<T, U> params) {
+		final String filter = getSingleField(params.getRequestParams(), "filter");
 		final GrammarNodeResult nodes = grammarParser.parse(filter);
 		final ArrayList<GrammarNode> lst = new ArrayList<>(nodes.getNodes());
-		lst.addAll(additionalNodes);
-		final List<?> result = manoSearch.getCriteria(lst, dbClass);
-		return searchService.search(requestParams, frontClass, excludeDefaults, mandatoryFields, result, mapper, makeLink);
+		lst.addAll(params.getAdditionalNodes());
+		final List<T> result = manoSearch.getCriteria(lst, params.getDbClass());
+		return searchService.search(result, params);
 	}
 
 	public <U> List<U> query(final Class<U> clazz, final String filter) {

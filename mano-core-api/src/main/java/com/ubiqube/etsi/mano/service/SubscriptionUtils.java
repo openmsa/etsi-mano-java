@@ -19,6 +19,10 @@ import jakarta.annotation.Nullable;
 public class SubscriptionUtils {
 	private static final Logger LOG = LoggerFactory.getLogger(SubscriptionUtils.class);
 
+	private SubscriptionUtils() {
+		//
+	}
+
 	public static Optional<Subscription> getMatchingSubscription(final Subscription subscription, final List<Subscription> existingSubscriptions) {
 		final List<FilterAttributes> filters = Optional.ofNullable(subscription.getFilters()).orElseGet(List::of);
 		if (filters.isEmpty()) {
@@ -50,24 +54,24 @@ public class SubscriptionUtils {
 	@Nullable
 	public static String convert(final NotificationEvent notificationEvent) {
 		return switch (notificationEvent) {
-			case VNF_PKG_ONBOARDING -> "VnfPackageOnboardingNotification";
-			case VNF_PKG_ONCHANGE, VNF_PKG_ONDELETION -> "VnfPackageChangeNotification";
-			case NS_PKG_ONBOARDING -> "NsdOnBoardingNotification";
-			case NS_PKG_ONBOARDING_FAILURE -> "NsdOnboardingFailureNotification";
-			case NS_PKG_ONCHANGE -> "NsdChangeNotification";
-			case NS_PKG_ONDELETION -> "NsdDeletionNotification";
-			case NS_INSTANCE_CREATE -> "NsIdentifierCreationNotification";
-			case NS_INSTANCE_DELETE -> "NsIdentifierDeletionNotification";
-			case NS_INSTANTIATE, NS_TERMINATE -> "NsLcmOperationOccurrenceNotification";
-			case VNF_INSTANCE_DELETE -> "VnfIdentifierDeletionNotification";
-			case VNF_INSTANCE_CREATE -> "VnfIdentifierCreationNotification";
-			case VNF_INSTANCE_CHANGED, VNF_TERMINATE -> "VnfLcmOperationOccurrenceNotification";
-			case VNF_INDICATOR_VALUE_CHANGED -> "VnfIndicatorValueChangeNotification";
-			case VRQAN -> "VrQuotaAvailNotification";
-			default -> {
-				LOG.warn("Unexpected value: {}", notificationEvent);
-				yield null;
-			}
+		case VNF_PKG_ONBOARDING -> "VnfPackageOnboardingNotification";
+		case VNF_PKG_ONCHANGE, VNF_PKG_ONDELETION -> "VnfPackageChangeNotification";
+		case NS_PKG_ONBOARDING -> "NsdOnBoardingNotification";
+		case NS_PKG_ONBOARDING_FAILURE -> "NsdOnboardingFailureNotification";
+		case NS_PKG_ONCHANGE -> "NsdChangeNotification";
+		case NS_PKG_ONDELETION -> "NsdDeletionNotification";
+		case NS_INSTANCE_CREATE -> "NsIdentifierCreationNotification";
+		case NS_INSTANCE_DELETE -> "NsIdentifierDeletionNotification";
+		case NS_INSTANTIATE, NS_TERMINATE -> "NsLcmOperationOccurrenceNotification";
+		case VNF_INSTANCE_DELETE -> "VnfIdentifierDeletionNotification";
+		case VNF_INSTANCE_CREATE -> "VnfIdentifierCreationNotification";
+		case VNF_INSTANCE_CHANGED, VNF_TERMINATE -> "VnfLcmOperationOccurrenceNotification";
+		case VNF_INDICATOR_VALUE_CHANGED -> "VnfIndicatorValueChangeNotification";
+		case VRQAN -> "VrQuotaAvailNotification";
+		default -> {
+			LOG.warn("Unexpected value: {}", notificationEvent);
+			yield null;
+		}
 		};
 	}
 }

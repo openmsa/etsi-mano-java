@@ -1,20 +1,20 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see https://www.gnu.org/licenses/.
  */
-package com.ubiqube.etsi.mano.service;
+package com.ubiqube.etsi.mano.service.search;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -24,15 +24,11 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
-import java.util.function.Consumer;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -62,24 +58,22 @@ public class ManoSearchResponseServiceImpl implements ManoSearchResponseService 
 	}
 
 	@Override
-	public <T, U> ResponseEntity<String> search(final @Nullable MultiValueMap<String, String> parameters, final Class<?> clazz, @Nullable final String excludeDefaults, final Set<String> mandatoryFields, final List<?> list, final Function<T, U> mapper, final Consumer<U> makeLink) {
-		final MultiValueMap<String, String> params = Optional.ofNullable(parameters).orElse(new LinkedMultiValueMap<>());
+	public <T, U> ResponseEntity<String> search(final List<T> result, final SearchParamBuilder<T, U> parameters) {
+		final MultiValueMap<String, String> params = parameters.getRequestParams();
 		checkParameters(params);
 		final List<String> fields = params.get("fields");
 		final List<String> excludeFields = params.get("exclude_fields");
 		final boolean haveDefaultFields = params.containsKey("exclude_default");
 		final boolean allFields = params.containsKey("all_fields");
-		final List<U> vnfPkginfos = list.stream()
-				.map(x -> mapper.apply((T) x))
-				.toList();
-		vnfPkginfos.forEach(makeLink);
+		final List<U> vnfPkginfos = result.stream().map(x -> parameters.getMapper().apply(x)).toList();
+		vnfPkginfos.forEach(parameters.getMakeLink());
 
-		final Set<String> fieldsSet = getFields(fields, mandatoryFields);
-		checkAllFields(fieldsSet, clazz);
+		final Set<String> fieldsSet = getFields(fields, parameters.getMandatoryFields());
+		checkAllFields(fieldsSet, parameters.getDbClass());
 
 		Set<String> excluded = getExcludedFields(excludeFields);
 		if (haveDefaultFields || (excluded.isEmpty() && fieldsSet.isEmpty() && !allFields)) {
-			excluded = applyDefault(excludeDefaults);
+			excluded = applyDefault(parameters.getExcludeDefaults());
 		}
 		final ObjectMapper mapperForQuery = MapperForView.getMapperForView(excluded, fieldsSet);
 

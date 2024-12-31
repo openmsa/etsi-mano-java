@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see https://www.gnu.org/licenses/.
  */
 package com.ubiqube.etsi.mano.controller.policy;
 
@@ -31,7 +31,8 @@ import com.ubiqube.etsi.mano.dao.mano.policy.Policies;
 import com.ubiqube.etsi.mano.dao.mano.policy.PolicyVersion;
 import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.service.PolicyService;
-import com.ubiqube.etsi.mano.service.SearchableService;
+import com.ubiqube.etsi.mano.service.search.SearchParamBuilder;
+import com.ubiqube.etsi.mano.service.search.SearchableService;
 
 /**
  *
@@ -117,8 +118,13 @@ public class PolicyControllerImpl implements PolicyController {
 	}
 
 	@Override
-	public <U> ResponseEntity<String> search(final MultiValueMap<String, String> requestParams, final Function<Policies, U> mapper, final Consumer<U> makeLinks, final Class<?> frontClass) {
-		return searchableService.search(Policies.class, requestParams, mapper, null, null, makeLinks, List.of(), frontClass);
+	public <U> ResponseEntity<String> search(final MultiValueMap<String, String> requestParams, final Function<Policies, U> mapper, final Consumer<U> makeLinks, final Class<U> frontClass) {
+		final SearchParamBuilder<Policies, U> params = SearchParamBuilder.of(Policies.class, frontClass)
+				.requestParams(requestParams)
+				.mapper(mapper)
+				.makeLink(makeLinks)
+				.build();
+		return searchableService.search(params);
 	}
 
 }

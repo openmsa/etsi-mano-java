@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 import com.ubiqube.etsi.mano.dao.mano.NsdPackage;
 import com.ubiqube.etsi.mano.dao.mano.common.ListKeyPair;
 import com.ubiqube.etsi.mano.dao.mano.nsd.ForwarderMapping;
-import com.ubiqube.etsi.mano.nfvo.service.NsdPackageRepositoryService;
+import com.ubiqube.etsi.mano.nfvo.service.repository.NsdPackageRepositoryService;
 import com.ubiqube.etsi.mano.orchestrator.Edge2d;
 import com.ubiqube.etsi.mano.orchestrator.Relation;
 import com.ubiqube.etsi.mano.orchestrator.Vertex2d;

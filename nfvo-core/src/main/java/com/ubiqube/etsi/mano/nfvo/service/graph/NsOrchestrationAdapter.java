@@ -35,7 +35,7 @@ import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.nfvo.jpa.NsLiveInstanceJpa;
 import com.ubiqube.etsi.mano.nfvo.service.NsBlueprintService;
 import com.ubiqube.etsi.mano.nfvo.service.NsInstanceService;
-import com.ubiqube.etsi.mano.nfvo.service.NsdPackageRepositoryService;
+import com.ubiqube.etsi.mano.nfvo.service.repository.NsdPackageRepositoryService;
 import com.ubiqube.etsi.mano.service.event.EventManager;
 import com.ubiqube.etsi.mano.service.event.OrchestrationAdapter;
 import com.ubiqube.etsi.mano.service.event.model.NotificationEvent;

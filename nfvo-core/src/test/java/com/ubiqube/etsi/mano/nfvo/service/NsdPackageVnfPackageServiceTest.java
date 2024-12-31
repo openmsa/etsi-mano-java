@@ -24,6 +24,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ubiqube.etsi.mano.nfvo.jpa.NsdPackageVnfPackageJpa;
+import com.ubiqube.etsi.mano.nfvo.service.repository.NsdPackageVnfPackageRepositoryService;
 
 @ExtendWith(MockitoExtension.class)
 class NsdPackageVnfPackageServiceTest {

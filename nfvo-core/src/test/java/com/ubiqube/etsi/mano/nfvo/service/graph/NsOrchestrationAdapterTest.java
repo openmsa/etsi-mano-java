@@ -36,7 +36,7 @@ import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsBlueprint;
 import com.ubiqube.etsi.mano.nfvo.jpa.NsLiveInstanceJpa;
 import com.ubiqube.etsi.mano.nfvo.service.NsBlueprintService;
 import com.ubiqube.etsi.mano.nfvo.service.NsInstanceService;
-import com.ubiqube.etsi.mano.nfvo.service.NsdPackageRepositoryService;
+import com.ubiqube.etsi.mano.nfvo.service.repository.NsdPackageRepositoryService;
 import com.ubiqube.etsi.mano.service.event.EventManager;
 import com.ubiqube.etsi.mano.service.graph.WorkflowEvent;
 import com.ubiqube.etsi.mano.tf.entities.NetworkPolicyTask;

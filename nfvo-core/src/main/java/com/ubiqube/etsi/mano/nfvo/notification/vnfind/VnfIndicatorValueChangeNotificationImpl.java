@@ -63,11 +63,11 @@ import com.ubiqube.etsi.mano.nfvo.jpa.NsBlueprintJpa;
 import com.ubiqube.etsi.mano.nfvo.jpa.NsLiveInstanceJpa;
 import com.ubiqube.etsi.mano.nfvo.jpa.NsdInstanceJpa;
 import com.ubiqube.etsi.mano.nfvo.service.plan.uow.UowUtils;
-import com.ubiqube.etsi.mano.service.VnfPackageRepositoryService;
 import com.ubiqube.etsi.mano.service.auth.model.ServerType;
 import com.ubiqube.etsi.mano.service.cond.ConditionService;
 import com.ubiqube.etsi.mano.service.cond.Context;
 import com.ubiqube.etsi.mano.service.cond.Node;
+import com.ubiqube.etsi.mano.service.repository.VnfPackageRepositoryService;
 
 import jakarta.annotation.Nonnull;
 import jakarta.validation.constraints.NotNull;

@@ -34,6 +34,7 @@ import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.jpa.NsdPackageJpa;
 import com.ubiqube.etsi.mano.nfvo.jpa.NsdPackageNsdPackageJpa;
 import com.ubiqube.etsi.mano.nfvo.jpa.NsdPackageVnfPackageJpa;
+import com.ubiqube.etsi.mano.nfvo.service.repository.NsdPackageRepositoryService;
 
 @ExtendWith(MockitoExtension.class)
 class NsdPackageServiceTest {

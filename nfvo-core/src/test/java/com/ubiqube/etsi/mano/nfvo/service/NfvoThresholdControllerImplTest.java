@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 package com.ubiqube.etsi.mano.nfvo.service;
 
@@ -41,14 +41,14 @@ class NfvoThresholdControllerImplTest {
 	private ThresholdJpa thresholdJpa;
 
 	@Test
-	void testSave() throws Exception {
+	void testSave() {
 		final NfvoThresholdControllerImpl srv = new NfvoThresholdControllerImpl(searchService, thresholdJpa);
 		srv.save(null);
 		assertTrue(true);
 	}
 
 	@Test
-	void testDelete() throws Exception {
+	void testDelete() {
 		final NfvoThresholdControllerImpl srv = new NfvoThresholdControllerImpl(searchService, thresholdJpa);
 		final Threshold thres = new Threshold();
 		when(thresholdJpa.findById(any())).thenReturn(Optional.of(thres));
@@ -57,7 +57,7 @@ class NfvoThresholdControllerImplTest {
 	}
 
 	@Test
-	void testFindById() throws Exception {
+	void testFindById() {
 		final NfvoThresholdControllerImpl srv = new NfvoThresholdControllerImpl(searchService, thresholdJpa);
 		final Threshold thres = new Threshold();
 		when(thresholdJpa.findById(any())).thenReturn(Optional.of(thres));
@@ -66,15 +66,16 @@ class NfvoThresholdControllerImplTest {
 	}
 
 	@Test
-	void testFindById_Fail() throws Exception {
+	void testFindById_Fail() {
 		final NfvoThresholdControllerImpl srv = new NfvoThresholdControllerImpl(searchService, thresholdJpa);
 		assertThrows(NotFoundException.class, () -> srv.findById(null));
 	}
 
 	@Test
-	void testSearch() throws Exception {
+	void testSearch() {
 		final NfvoThresholdControllerImpl srv = new NfvoThresholdControllerImpl(searchService, thresholdJpa);
-		srv.search(null, null, null, null, null, null);
+		srv.search(null, x -> null, null, null, x -> {
+		}, getClass());
 		assertTrue(true);
 	}
 }

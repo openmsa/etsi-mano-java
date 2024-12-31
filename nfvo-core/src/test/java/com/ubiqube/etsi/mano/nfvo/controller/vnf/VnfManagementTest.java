@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 package com.ubiqube.etsi.mano.nfvo.controller.vnf;
 
@@ -22,7 +22,6 @@ import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -61,7 +60,7 @@ class VnfManagementTest {
 	private ContentDetector contentDetector;
 
 	@Test
-	void testName() throws Exception {
+	void testName() {
 		final VnfManagement mng = createService();
 		final UUID id = UUID.randomUUID();
 		final VnfPackage vnfPackage = new VnfPackage();
@@ -76,7 +75,7 @@ class VnfManagementTest {
 	}
 
 	@Test
-	void testOnboardedGetMananifest() throws Exception {
+	void testOnboardedGetMananifest() {
 		final VnfManagement mng = createService();
 		final UUID id = UUID.randomUUID();
 		final VnfPackage vnfPackage = new VnfPackage();
@@ -117,7 +116,7 @@ class VnfManagementTest {
 	}
 
 	@Test
-	void testOnboardedSet() throws Exception {
+	void testOnboardedSet() {
 		final VnfManagement mng = createService();
 		final UUID id = UUID.randomUUID();
 		final VnfPackage vnfPackage = new VnfPackage();
@@ -128,7 +127,7 @@ class VnfManagementTest {
 	}
 
 	@Test
-	void testOnboardedManif() throws Exception {
+	void testOnboardedManif() {
 		final VnfManagement mng = createService();
 		final UUID id = UUID.randomUUID();
 		final VnfPackage vnfPackage = new VnfPackage();
@@ -211,14 +210,16 @@ class VnfManagementTest {
 	@Test
 	void testSearch() {
 		final VnfManagement mng = createService();
-		mng.search(null, null, null, null, null, null);
+		mng.search(null, x -> null, null, null, x -> {
+		}, getClass());
 		assertTrue(true);
 	}
 
 	@Test
 	void testSearchOnboarded() {
 		final VnfManagement mng = createService();
-		mng.searchOnboarded(null, null, null, null, null, null);
+		mng.searchOnboarded(null, x -> null, null, null, x -> {
+		}, getClass());
 		assertTrue(true);
 	}
 
@@ -241,7 +242,7 @@ class VnfManagementTest {
 		assertTrue(true);
 	}
 
-	private static void createZip(final String innerFilename) throws FileNotFoundException, IOException {
+	private static void createZip(final String innerFilename) throws IOException {
 		try (FileOutputStream fos = new FileOutputStream("/tmp/test.zip")) {
 			try (ZipOutputStream zipOut = new ZipOutputStream(fos)) {
 				try (InputStream is = new ByteArrayInputStream("content".getBytes())) {

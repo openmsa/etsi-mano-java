@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 package com.ubiqube.etsi.mano.nfvo.controller.nslcm;
 
@@ -142,7 +142,7 @@ class NsInstanceControllerServiceImplTest {
 	}
 
 	@Test
-	void testInstantiate() throws Exception {
+	void testInstantiate() {
 		final NsInstanceControllerServiceImpl srv = createService();
 		final UUID id = UUID.randomUUID();
 		final NsInstantiate req = new NsInstantiate();
@@ -158,7 +158,7 @@ class NsInstanceControllerServiceImplTest {
 	}
 
 	@Test
-	void testTerminate() throws Exception {
+	void testTerminate() {
 		final NsInstanceControllerServiceImpl srv = createService();
 		final UUID id = UUID.randomUUID();
 		final NsdInstance inst = new NsdInstance();
@@ -170,7 +170,7 @@ class NsInstanceControllerServiceImplTest {
 	}
 
 	@Test
-	void testHeal() throws Exception {
+	void testHeal() {
 		final NsInstanceControllerServiceImpl srv = createService();
 		final UUID id = UUID.randomUUID();
 		final NsdInstance inst = new NsdInstance();
@@ -183,7 +183,7 @@ class NsInstanceControllerServiceImplTest {
 	}
 
 	@Test
-	void testScale() throws Exception {
+	void testScale() {
 		final NsInstanceControllerServiceImpl srv = createService();
 		final UUID id = UUID.randomUUID();
 		final NsdInstance inst = new NsdInstance();
@@ -196,9 +196,10 @@ class NsInstanceControllerServiceImplTest {
 	}
 
 	@Test
-	void testSearch() throws Exception {
+	void testSearch() {
 		final NsInstanceControllerServiceImpl srv = createService();
-		srv.search(null, null, null, null, null, null);
+		srv.search(null, x -> null, null, null, x -> {
+		}, getClass());
 		assertTrue(true);
 	}
 }

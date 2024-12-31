@@ -14,7 +14,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see https://www.gnu.org/licenses/.
  */
-package com.ubiqube.etsi.mano.service;
+package com.ubiqube.etsi.mano.service.repository;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -28,6 +28,7 @@ import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.jpa.VnfInstanceJpa;
 import com.ubiqube.etsi.mano.jpa.VnfPackageJpa;
 import com.ubiqube.etsi.mano.repository.VnfPackageRepository;
+import com.ubiqube.etsi.mano.service.VnfPackageService;
 
 import jakarta.annotation.Nonnull;
 

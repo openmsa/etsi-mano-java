@@ -14,41 +14,39 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see https://www.gnu.org/licenses/.
  */
-package com.ubiqube.etsi.mano.service;
+package com.ubiqube.etsi.mano.service.repository;
 
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.ubiqube.etsi.mano.dao.mano.cnf.capi.CapiServer;
-import com.ubiqube.etsi.mano.jpa.CapiServerJpa;
+import com.ubiqube.etsi.mano.dao.mano.cnf.CnfServer;
+import com.ubiqube.etsi.mano.jpa.CnfServerJpa;
 
 /**
- * Manage the list of CAPI kubernets server connections.
+ *
+ * @author olivier
+ *
  */
 @Service
-public class CapiServerRepositoryService {
-	private final CapiServerJpa capiServerJpa;
+public class CnfServerRepositoryService {
+	private final CnfServerJpa cnfServerJpa;
 
-	public CapiServerRepositoryService(final CapiServerJpa capiServerJpa) {
-		this.capiServerJpa = capiServerJpa;
+	public CnfServerRepositoryService(final CnfServerJpa cnfServerJpa) {
+		this.cnfServerJpa = cnfServerJpa;
 	}
 
-	public Iterable<CapiServer> findAll() {
-		return capiServerJpa.findAll();
+	public Iterable<CnfServer> findAll() {
+		return cnfServerJpa.findAll();
 	}
 
-	public CapiServer save(final CapiServer srv) {
-		return capiServerJpa.save(srv);
+	public CnfServer save(final CnfServer in) {
+		return cnfServerJpa.save(in);
 	}
 
-	public void deleteById(final UUID id) {
-		capiServerJpa.deleteById(id);
-	}
-
-	public Optional<CapiServer> findById(final UUID id) {
-		return capiServerJpa.findById(id);
+	public Optional<CnfServer> findById(final UUID id) {
+		return cnfServerJpa.findById(id);
 	}
 
 }

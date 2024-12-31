@@ -14,7 +14,7 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see https://www.gnu.org/licenses/.
  */
-package com.ubiqube.etsi.mano.service;
+package com.ubiqube.etsi.mano.service.repository;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
 import com.ubiqube.etsi.mano.jpa.VimConnectionInformationJpa;
+import com.ubiqube.etsi.mano.service.VimService;
 
 /**
  *

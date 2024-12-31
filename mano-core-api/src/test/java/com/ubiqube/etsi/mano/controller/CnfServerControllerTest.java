@@ -32,8 +32,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.ubiqube.etsi.mano.dao.mano.cnf.CnfServer;
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
-import com.ubiqube.etsi.mano.service.CnfServerRepositoryService;
 import com.ubiqube.etsi.mano.service.mapping.CnfServerDtoMapping;
+import com.ubiqube.etsi.mano.service.repository.CnfServerRepositoryService;
 import com.ubiqube.etsi.mano.service.vim.VimManager;
 
 /**

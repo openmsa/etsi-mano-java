@@ -28,6 +28,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ubiqube.etsi.mano.jpa.VimConnectionInformationJpa;
 import com.ubiqube.etsi.mano.service.mapping.ConnectionMapping;
+import com.ubiqube.etsi.mano.service.repository.VimRepositoryService;
 
 @ExtendWith(MockitoExtension.class)
 class VimServiceImplTest {

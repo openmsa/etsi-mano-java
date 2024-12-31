@@ -34,6 +34,7 @@ import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.jpa.VnfInstanceJpa;
 import com.ubiqube.etsi.mano.jpa.VnfPackageJpa;
 import com.ubiqube.etsi.mano.repository.VnfPackageRepository;
+import com.ubiqube.etsi.mano.service.repository.VnfPackageRepositoryService;
 
 @ExtendWith(MockitoExtension.class)
 class VnfPackageServiceImplTest {

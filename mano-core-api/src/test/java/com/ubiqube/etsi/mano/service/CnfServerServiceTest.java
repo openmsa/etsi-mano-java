@@ -24,6 +24,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ubiqube.etsi.mano.jpa.CnfServerJpa;
+import com.ubiqube.etsi.mano.service.repository.CnfServerRepositoryService;
 
 @ExtendWith(MockitoExtension.class)
 class CnfServerServiceTest {

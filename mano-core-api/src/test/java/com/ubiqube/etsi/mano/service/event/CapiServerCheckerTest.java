@@ -21,7 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ubiqube.etsi.mano.dao.mano.cnf.capi.CapiServer;
 import com.ubiqube.etsi.mano.dao.mano.vim.PlanStatusType;
-import com.ubiqube.etsi.mano.service.CapiServerRepositoryService;
+import com.ubiqube.etsi.mano.service.repository.CapiServerRepositoryService;
 import com.ubiqube.etsi.mano.vim.k8sexecutor.K8sExecutor;
 
 import io.fabric8.kubernetes.api.model.Pod;

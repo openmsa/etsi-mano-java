@@ -56,7 +56,7 @@ import com.ubiqube.etsi.mano.service.event.model.Subscription;
 import com.ubiqube.etsi.mano.service.mon.MonitoringManager;
 import com.ubiqube.etsi.mano.service.search.SearchParamBuilder;
 import com.ubiqube.etsi.mano.service.search.SearchableService;
-import com.ubiqube.etsi.mano.vnfm.service.PmJobsRepositoryService;
+import com.ubiqube.etsi.mano.vnfm.service.repository.PmJobsRepositoryService;
 
 import jakarta.annotation.Nullable;
 import jakarta.transaction.Transactional;

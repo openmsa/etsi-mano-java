@@ -33,31 +33,36 @@ import com.ubiqube.etsi.mano.dao.mano.VnfComputeAspectDelta;
 import com.ubiqube.etsi.mano.dao.mano.VnfInstance;
 import com.ubiqube.etsi.mano.dao.mano.VnfPackage;
 import com.ubiqube.etsi.mano.dao.mano.v2.BlueprintParameters;
-import com.ubiqube.etsi.mano.vnfm.service.VnfBlueprintService;
 import com.ubiqube.etsi.mano.vnfm.service.plan.ScalingStrategy.NumberOfCompute;
+import com.ubiqube.etsi.mano.vnfm.service.repository.VnfBlueprintRepositoryService;
 
 @Service
 public class ScaleByStep {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ScaleByStep.class);
 
-	private final VnfBlueprintService planService;
+	private final VnfBlueprintRepositoryService planService;
 
-	public ScaleByStep(final VnfBlueprintService planService) {
+	public ScaleByStep(final VnfBlueprintRepositoryService planService) {
 		this.planService = planService;
 	}
 
 	public NumberOfCompute handleStep(final BlueprintParameters parameters, final VnfPackage vnfPackage, final VnfCompute compute, final VnfInstance instance) {
+		LOG.debug("Handling step with parameters: {}, vnfPackage: {}, compute: {}, instance: {}", parameters, vnfPackage, compute, instance);
 		final int currentInst = planService.getNumberOfLiveInstance(instance, compute);
+		LOG.debug("Current number of live instances: {}", currentInst);
 		final int baseStep = getBaseStep(instance, parameters.getAspectId());
+		LOG.debug("Base step for aspectId {}: {}", parameters.getAspectId(), baseStep);
 		final List<VnfComputeAspectDelta> stepMapping = findStepMapping(parameters.getAspectId(), compute);
 		if (stepMapping.isEmpty()) {
+			LOG.warn("No step mapping found for aspectId: {}", parameters.getAspectId());
 			final Set<String> uniqAspect = vnfPackage.getScaleStatus().stream().map(ScaleInfo::getAspectId).collect(Collectors.toSet());
 			if (uniqAspect.isEmpty()) {
+				LOG.debug("No unique aspect found, returning default NumberOfCompute");
 				return new NumberOfCompute(currentInst, 1, new ScaleInfo(parameters.getAspectId(), 0));
 			}
 			if (uniqAspect.size() > 1) {
-				LOG.warn("There is multiple aspectId, taking the first one: {}", uniqAspect);
+				LOG.warn("Multiple aspectIds found, taking the first one: {}", uniqAspect);
 			}
 			final String currentAspect = uniqAspect.iterator().next();
 			final Optional<ScaleInfo> instanceLevel = instance.getInstantiatedVnfInfo().getScaleStatus().stream().filter(x -> x.getAspectId().equals(currentAspect)).findFirst();
@@ -68,13 +73,17 @@ public class ScaleByStep {
 			}
 			if (instanceLevel.isEmpty()) {
 				final int s = getStep(instStep, 0);
+				LOG.debug("Instance level is empty, returning step: {}", s);
 				return new NumberOfCompute(currentInst, s, new ScaleInfo(parameters.getAspectId(), s));
 			}
 			final int s = getStep(instStep, instanceLevel.get().getScaleLevel());
+			LOG.debug("Returning step: {}", s);
 			return new NumberOfCompute(currentInst, s, new ScaleInfo(parameters.getAspectId(), s));
 		}
 		final int newLevel = computeLevel(parameters, baseStep);
+		LOG.debug("Computed new level: {}", newLevel);
 		final int s = getStep(stepMapping, newLevel);
+		LOG.debug("Returning step: {}", s);
 		return new NumberOfCompute(currentInst, s, new ScaleInfo(parameters.getAspectId(), s));
 	}
 

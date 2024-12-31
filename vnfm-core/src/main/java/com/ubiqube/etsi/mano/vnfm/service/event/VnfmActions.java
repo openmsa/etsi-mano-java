@@ -44,10 +44,10 @@ import com.ubiqube.etsi.mano.service.event.AbstractGenericActionV3;
 import com.ubiqube.etsi.mano.service.vim.Vim;
 import com.ubiqube.etsi.mano.service.vim.VimManager;
 import com.ubiqube.etsi.mano.vnfm.jpa.VnfLiveInstanceJpa;
-import com.ubiqube.etsi.mano.vnfm.service.VnfBlueprintRepositoryService;
 import com.ubiqube.etsi.mano.vnfm.service.VnfInstanceService;
 import com.ubiqube.etsi.mano.vnfm.service.VnfInstanceServiceVnfm;
 import com.ubiqube.etsi.mano.vnfm.service.graph.VnfWorkflow;
+import com.ubiqube.etsi.mano.vnfm.service.repository.VnfBlueprintRepositoryService;
 
 /**
  *

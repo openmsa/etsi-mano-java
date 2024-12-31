@@ -41,9 +41,9 @@ import com.ubiqube.etsi.mano.service.event.OrchestrationAdapter;
 import com.ubiqube.etsi.mano.service.event.model.NotificationEvent;
 import com.ubiqube.etsi.mano.service.graph.WorkflowEvent;
 import com.ubiqube.etsi.mano.vnfm.jpa.VnfLiveInstanceJpa;
-import com.ubiqube.etsi.mano.vnfm.service.VnfBlueprintRepositoryService;
 import com.ubiqube.etsi.mano.vnfm.service.VnfInstanceService;
 import com.ubiqube.etsi.mano.vnfm.service.VnfInstanceServiceVnfm;
+import com.ubiqube.etsi.mano.vnfm.service.repository.VnfBlueprintRepositoryService;
 import com.ubiqube.etsi.mano.vnfm.service.vnflcm.VnfLcmExtractor;
 
 /**

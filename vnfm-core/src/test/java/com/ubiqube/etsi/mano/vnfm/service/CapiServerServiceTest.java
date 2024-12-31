@@ -24,7 +24,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ubiqube.etsi.mano.jpa.CapiServerJpa;
-import com.ubiqube.etsi.mano.service.CapiServerRepositoryService;
+import com.ubiqube.etsi.mano.service.repository.CapiServerRepositoryService;
 
 @ExtendWith(MockitoExtension.class)
 class CapiServerServiceTest {

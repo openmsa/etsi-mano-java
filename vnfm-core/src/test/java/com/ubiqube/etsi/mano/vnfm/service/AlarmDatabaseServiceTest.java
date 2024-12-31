@@ -24,6 +24,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ubiqube.etsi.mano.vnfm.jpa.AlarmsJpa;
+import com.ubiqube.etsi.mano.vnfm.service.repository.AlarmRepositoryService;
 
 @ExtendWith(MockitoExtension.class)
 class AlarmDatabaseServiceTest {

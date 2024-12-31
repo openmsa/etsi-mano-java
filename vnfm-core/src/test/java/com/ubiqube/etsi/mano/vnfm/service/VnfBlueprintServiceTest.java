@@ -35,6 +35,7 @@ import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.test.controllers.TestFactory;
 import com.ubiqube.etsi.mano.vnfm.jpa.VnfBlueprintJpa;
 import com.ubiqube.etsi.mano.vnfm.jpa.VnfLiveInstanceJpa;
+import com.ubiqube.etsi.mano.vnfm.service.repository.VnfBlueprintRepositoryService;
 
 @ExtendWith(MockitoExtension.class)
 class VnfBlueprintServiceTest {

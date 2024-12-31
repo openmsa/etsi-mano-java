@@ -24,6 +24,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ubiqube.etsi.mano.jpa.PmJobsJpa;
+import com.ubiqube.etsi.mano.vnfm.service.repository.PmJobsRepositoryService;
 
 @ExtendWith(MockitoExtension.class)
 class PmJobsServiceTest {

@@ -33,7 +33,7 @@ import com.ubiqube.etsi.mano.exception.ConflictException;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.exception.PreConditionException;
 import com.ubiqube.etsi.mano.service.search.SearchableService;
-import com.ubiqube.etsi.mano.vnfm.service.AlarmRepositoryService;
+import com.ubiqube.etsi.mano.vnfm.service.repository.AlarmRepositoryService;
 
 @ExtendWith(MockitoExtension.class)
 class AlarmVnfmControllerImplTest {

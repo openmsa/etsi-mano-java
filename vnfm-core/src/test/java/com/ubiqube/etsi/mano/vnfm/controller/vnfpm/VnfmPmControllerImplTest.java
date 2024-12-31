@@ -48,7 +48,7 @@ import com.ubiqube.etsi.mano.service.event.model.Subscription;
 import com.ubiqube.etsi.mano.service.mon.MonitoringManager;
 import com.ubiqube.etsi.mano.service.search.SearchableService;
 import com.ubiqube.etsi.mano.test.controllers.TestFactory;
-import com.ubiqube.etsi.mano.vnfm.service.PmJobsRepositoryService;
+import com.ubiqube.etsi.mano.vnfm.service.repository.PmJobsRepositoryService;
 
 @ExtendWith(MockitoExtension.class)
 class VnfmPmControllerImplTest {

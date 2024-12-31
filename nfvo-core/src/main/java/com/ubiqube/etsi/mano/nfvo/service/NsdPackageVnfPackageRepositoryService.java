@@ -25,11 +25,11 @@ import com.ubiqube.etsi.mano.dao.mano.NsdPackageVnfPackage;
 import com.ubiqube.etsi.mano.nfvo.jpa.NsdPackageVnfPackageJpa;
 
 @Service
-public class NsdPackageVnfPackageService {
+public class NsdPackageVnfPackageRepositoryService {
 
 	private final NsdPackageVnfPackageJpa nsdPackageVnfPackageJpa;
 
-	public NsdPackageVnfPackageService(final NsdPackageVnfPackageJpa nsdPackageVnfPackageJpa) {
+	public NsdPackageVnfPackageRepositoryService(final NsdPackageVnfPackageJpa nsdPackageVnfPackageJpa) {
 		this.nsdPackageVnfPackageJpa = nsdPackageVnfPackageJpa;
 	}
 

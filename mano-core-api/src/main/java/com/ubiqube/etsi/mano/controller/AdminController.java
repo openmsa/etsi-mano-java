@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ubiqube.etsi.mano.service.GrantService;
+import com.ubiqube.etsi.mano.service.GrantRepositoryService;
 import com.ubiqube.etsi.mano.service.event.EventManager;
 import com.ubiqube.etsi.mano.service.event.model.NotificationEvent;
 
@@ -43,9 +43,9 @@ public class AdminController {
 	private static final Logger LOG = LoggerFactory.getLogger(AdminController.class);
 
 	private final EventManager eventManager;
-	private final GrantService grantService;
+	private final GrantRepositoryService grantService;
 
-	public AdminController(final EventManager eventManager, final GrantService grantJpa) {
+	public AdminController(final EventManager eventManager, final GrantRepositoryService grantJpa) {
 		this.eventManager = eventManager;
 		this.grantService = grantJpa;
 	}

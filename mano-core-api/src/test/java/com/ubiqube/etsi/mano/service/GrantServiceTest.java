@@ -30,34 +30,34 @@ class GrantServiceTest {
 	@Mock
 	private GrantsResponseJpa grantsJpa;
 
-	private GrantService createService() {
-		return new GrantService(grantsJpa);
+	private GrantRepositoryService createService() {
+		return new GrantRepositoryService(grantsJpa);
 	}
 
 	@Test
 	void testDelete() {
-		final GrantService srv = createService();
+		final GrantRepositoryService srv = createService();
 		srv.delete(null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testFindAll() {
-		final GrantService srv = createService();
+		final GrantRepositoryService srv = createService();
 		srv.findAll();
 		assertTrue(true);
 	}
 
 	@Test
 	void testSave() {
-		final GrantService srv = createService();
+		final GrantRepositoryService srv = createService();
 		srv.save(null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testFindById() {
-		final GrantService srv = createService();
+		final GrantRepositoryService srv = createService();
 		srv.findById(null);
 		assertTrue(true);
 	}

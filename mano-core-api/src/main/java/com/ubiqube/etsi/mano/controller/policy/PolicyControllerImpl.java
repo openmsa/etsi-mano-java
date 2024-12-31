@@ -30,7 +30,7 @@ import org.springframework.util.MultiValueMap;
 import com.ubiqube.etsi.mano.dao.mano.policy.Policies;
 import com.ubiqube.etsi.mano.dao.mano.policy.PolicyVersion;
 import com.ubiqube.etsi.mano.exception.GenericException;
-import com.ubiqube.etsi.mano.service.PolicyService;
+import com.ubiqube.etsi.mano.service.PolicyRepositoryService;
 import com.ubiqube.etsi.mano.service.search.SearchParamBuilder;
 import com.ubiqube.etsi.mano.service.search.SearchableService;
 
@@ -42,10 +42,10 @@ import com.ubiqube.etsi.mano.service.search.SearchableService;
 @Service
 public class PolicyControllerImpl implements PolicyController {
 
-	private final PolicyService policyService;
+	private final PolicyRepositoryService policyService;
 	private final SearchableService searchableService;
 
-	public PolicyControllerImpl(final PolicyService policyService, final SearchableService searchableService) {
+	public PolicyControllerImpl(final PolicyRepositoryService policyService, final SearchableService searchableService) {
 		this.policyService = policyService;
 		this.searchableService = searchableService;
 	}

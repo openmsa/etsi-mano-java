@@ -24,34 +24,34 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ubiqube.etsi.mano.jpa.CapiServerJpa;
-import com.ubiqube.etsi.mano.service.CapiServerService;
+import com.ubiqube.etsi.mano.service.CapiServerRepositoryService;
 
 @ExtendWith(MockitoExtension.class)
 class CapiServerServiceTest {
 	@Mock
 	private CapiServerJpa capiServerJpa;
 
-	CapiServerService createService() {
-		return new CapiServerService(capiServerJpa);
+	CapiServerRepositoryService createService() {
+		return new CapiServerRepositoryService(capiServerJpa);
 	}
 
 	@Test
 	void testDelete() {
-		final CapiServerService srv = createService();
+		final CapiServerRepositoryService srv = createService();
 		srv.deleteById(null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testFindAll() {
-		final CapiServerService srv = createService();
+		final CapiServerRepositoryService srv = createService();
 		srv.findAll();
 		assertTrue(true);
 	}
 
 	@Test
 	void testSave() {
-		final CapiServerService srv = createService();
+		final CapiServerRepositoryService srv = createService();
 		srv.save(null);
 		assertTrue(true);
 	}

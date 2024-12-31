@@ -56,7 +56,7 @@ import com.ubiqube.etsi.mano.service.event.model.Subscription;
 import com.ubiqube.etsi.mano.service.mon.MonitoringManager;
 import com.ubiqube.etsi.mano.service.search.SearchParamBuilder;
 import com.ubiqube.etsi.mano.service.search.SearchableService;
-import com.ubiqube.etsi.mano.vnfm.service.PmJobsService;
+import com.ubiqube.etsi.mano.vnfm.service.PmJobsRepositoryService;
 
 import jakarta.annotation.Nullable;
 import jakarta.transaction.Transactional;
@@ -68,7 +68,7 @@ import jakarta.transaction.Transactional;
  */
 @Service
 public class VnfmPmControllerImpl implements VnfmPmController {
-	private final PmJobsService pmJobsJpa;
+	private final PmJobsRepositoryService pmJobsJpa;
 	private final SearchableService searchableService;
 	private final MetricGroupService metricGroupService;
 	private final SubscriptionService subscriptionService;
@@ -78,7 +78,7 @@ public class VnfmPmControllerImpl implements VnfmPmController {
 	@Nullable
 	private final URI frontendUrl;
 
-	public VnfmPmControllerImpl(final PmJobsService pmJobsJpa, final SearchableService searchableService, final MetricGroupService metricGroupService,
+	public VnfmPmControllerImpl(final PmJobsRepositoryService pmJobsJpa, final SearchableService searchableService, final MetricGroupService metricGroupService,
 			final SubscriptionService subscriptionService, final com.ubiqube.etsi.mano.config.properties.ManoProperties props,
 			final VnfInstanceGatewayService vnfInstanceGatewayService, final MonitoringManager monitoringManager) {
 		this.pmJobsJpa = pmJobsJpa;

@@ -30,27 +30,27 @@ class CnfServerServiceTest {
 	@Mock
 	private CnfServerJpa cnfServerJpa;
 
-	private CnfServerService createService() {
-		return new CnfServerService(cnfServerJpa);
+	private CnfServerRepositoryService createService() {
+		return new CnfServerRepositoryService(cnfServerJpa);
 	}
 
 	@Test
 	void testFindAll() {
-		final CnfServerService srv = createService();
+		final CnfServerRepositoryService srv = createService();
 		srv.findAll();
 		assertTrue(true);
 	}
 
 	@Test
 	void testFindById() {
-		final CnfServerService srv = createService();
+		final CnfServerRepositoryService srv = createService();
 		srv.findById(null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testSave() {
-		final CnfServerService srv = createService();
+		final CnfServerRepositoryService srv = createService();
 		srv.save(null);
 		assertTrue(true);
 	}

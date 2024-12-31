@@ -32,14 +32,14 @@ class NsdPackageVnfPackageServiceTest {
 
 	@Test
 	void testFindByNsdPackage() throws Exception {
-		final NsdPackageVnfPackageService srv = new NsdPackageVnfPackageService(nsdPackageVnfPackageJpa);
+		final NsdPackageVnfPackageRepositoryService srv = new NsdPackageVnfPackageRepositoryService(nsdPackageVnfPackageJpa);
 		srv.findByNsdPackage(null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testFindByVnfdId() throws Exception {
-		final NsdPackageVnfPackageService srv = new NsdPackageVnfPackageService(nsdPackageVnfPackageJpa);
+		final NsdPackageVnfPackageRepositoryService srv = new NsdPackageVnfPackageRepositoryService(nsdPackageVnfPackageJpa);
 		srv.findByVnfdId(null);
 		assertTrue(true);
 	}

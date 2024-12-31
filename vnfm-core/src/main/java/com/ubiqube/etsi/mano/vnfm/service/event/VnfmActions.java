@@ -44,7 +44,7 @@ import com.ubiqube.etsi.mano.service.event.AbstractGenericActionV3;
 import com.ubiqube.etsi.mano.service.vim.Vim;
 import com.ubiqube.etsi.mano.service.vim.VimManager;
 import com.ubiqube.etsi.mano.vnfm.jpa.VnfLiveInstanceJpa;
-import com.ubiqube.etsi.mano.vnfm.service.VnfBlueprintService;
+import com.ubiqube.etsi.mano.vnfm.service.VnfBlueprintRepositoryService;
 import com.ubiqube.etsi.mano.vnfm.service.VnfInstanceService;
 import com.ubiqube.etsi.mano.vnfm.service.VnfInstanceServiceVnfm;
 import com.ubiqube.etsi.mano.vnfm.service.graph.VnfWorkflow;
@@ -63,14 +63,14 @@ public class VnfmActions extends AbstractGenericActionV3 {
 
 	private final VnfInstanceService vnfInstancesService;
 
-	private final VnfBlueprintService blueprintService;
+	private final VnfBlueprintRepositoryService blueprintService;
 
 	private final VnfLiveInstanceJpa vnfLiveInstanceJpa;
 
 	private final VnfInstanceServiceVnfm vnfInstanceServiceVnfm;
 
 	public VnfmActions(final VimManager vimManager, final VnfOrchestrationAdapter orchestrationAdapter, final VnfInstanceService vnfInstancesService,
-			final VnfBlueprintService blueprintService, final VimResourceService vimResourceService, final VnfLiveInstanceJpa vnfLiveInstanceJpa,
+			final VnfBlueprintRepositoryService blueprintService, final VimResourceService vimResourceService, final VnfLiveInstanceJpa vnfLiveInstanceJpa,
 			final VnfInstanceServiceVnfm vnfInstanceServiceVnfm, final VnfWorkflow workflow, final Planner<Task> planv2) {
 		super(workflow, vimResourceService, orchestrationAdapter, new NsScaleStrategyV3(), planv2);
 		this.vimManager = vimManager;

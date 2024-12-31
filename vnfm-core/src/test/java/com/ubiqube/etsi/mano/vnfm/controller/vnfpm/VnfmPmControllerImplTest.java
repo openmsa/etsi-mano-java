@@ -48,12 +48,12 @@ import com.ubiqube.etsi.mano.service.event.model.Subscription;
 import com.ubiqube.etsi.mano.service.mon.MonitoringManager;
 import com.ubiqube.etsi.mano.service.search.SearchableService;
 import com.ubiqube.etsi.mano.test.controllers.TestFactory;
-import com.ubiqube.etsi.mano.vnfm.service.PmJobsService;
+import com.ubiqube.etsi.mano.vnfm.service.PmJobsRepositoryService;
 
 @ExtendWith(MockitoExtension.class)
 class VnfmPmControllerImplTest {
 	@Mock
-	private PmJobsService pmJobsJpa;
+	private PmJobsRepositoryService pmJobsJpa;
 	@Mock
 	private SearchableService searchableService;
 	@Mock

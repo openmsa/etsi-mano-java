@@ -55,7 +55,7 @@ import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.ExternalPortRecord;
 import com.ubiqube.etsi.mano.dao.mano.vim.vnffg.Classifier;
 import com.ubiqube.etsi.mano.nfvo.service.NsBlueprintService;
 import com.ubiqube.etsi.mano.nfvo.service.NsInstanceService;
-import com.ubiqube.etsi.mano.nfvo.service.NsdPackageService;
+import com.ubiqube.etsi.mano.nfvo.service.NsdPackageRepositoryService;
 import com.ubiqube.etsi.mano.nfvo.service.mapping.NsBlueprintMapping;
 import com.ubiqube.etsi.mano.nfvo.service.mapping.nsinstance.NsInstanceMapping;
 import com.ubiqube.etsi.mano.service.event.ActionType;
@@ -65,7 +65,7 @@ import com.ubiqube.etsi.mano.service.search.SearchableService;
 @ExtendWith(MockitoExtension.class)
 class NsInstanceControllerServiceImplTest {
 	@Mock
-	private NsdPackageService nsdPackageService;
+	private NsdPackageRepositoryService nsdPackageService;
 	@Mock
 	private NsInstanceService nsInstanceService;
 	@Mock

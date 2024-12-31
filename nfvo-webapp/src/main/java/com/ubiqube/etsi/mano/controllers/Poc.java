@@ -55,7 +55,7 @@ import com.ubiqube.etsi.mano.dao.mano.VnfPackage;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsBlueprint;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsTask;
 import com.ubiqube.etsi.mano.nfvo.jpa.NsBlueprintJpa;
-import com.ubiqube.etsi.mano.nfvo.service.NsdPackageService;
+import com.ubiqube.etsi.mano.nfvo.service.NsdPackageRepositoryService;
 import com.ubiqube.etsi.mano.nfvo.service.graph.NsPlanService;
 import com.ubiqube.etsi.mano.orchestrator.Edge2d;
 import com.ubiqube.etsi.mano.orchestrator.Vertex2d;
@@ -88,7 +88,7 @@ public class Poc {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Poc.class);
 	private final VnfPackageService vnfPackageService;
-	private final NsdPackageService nsdPackageService;
+	private final NsdPackageRepositoryService nsdPackageService;
 	private final EventManager eventManager;
 	private final NsBlueprintJpa nsBlueprintJpa;
 	private final VnfPlanService vnfPlanService;
@@ -96,7 +96,7 @@ public class Poc {
 	private final ObjectMapper om;
 
 	public Poc(final NsBlueprintJpa nsBlueprintJpa, final VnfPlanService vnfPlanService,
-			final NsPlanService nsPlanService, final VnfPackageService vnfPackageService, final NsdPackageService nsdPackageService,
+			final NsPlanService nsPlanService, final VnfPackageService vnfPackageService, final NsdPackageRepositoryService nsdPackageService,
 			final ObjectMapper om, final EventManager eventManager) {
 		this.eventManager = eventManager;
 		this.nsBlueprintJpa = nsBlueprintJpa;

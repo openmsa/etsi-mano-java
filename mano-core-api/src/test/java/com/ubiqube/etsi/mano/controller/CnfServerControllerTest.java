@@ -32,7 +32,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.ubiqube.etsi.mano.dao.mano.cnf.CnfServer;
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
-import com.ubiqube.etsi.mano.service.CnfServerService;
+import com.ubiqube.etsi.mano.service.CnfServerRepositoryService;
 import com.ubiqube.etsi.mano.service.mapping.CnfServerDtoMapping;
 import com.ubiqube.etsi.mano.service.vim.VimManager;
 
@@ -45,7 +45,7 @@ import com.ubiqube.etsi.mano.service.vim.VimManager;
 @ExtendWith(MockitoExtension.class)
 class CnfServerControllerTest {
 	@Mock
-	private CnfServerService cnfServerService;
+	private CnfServerRepositoryService cnfServerService;
 	@Mock
 	private VimManager vimManager;
 	private final CnfServerDtoMapping mapper = Mappers.getMapper(CnfServerDtoMapping.class);

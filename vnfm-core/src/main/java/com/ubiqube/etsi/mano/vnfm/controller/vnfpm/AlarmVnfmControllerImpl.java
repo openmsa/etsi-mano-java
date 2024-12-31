@@ -35,7 +35,7 @@ import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.exception.PreConditionException;
 import com.ubiqube.etsi.mano.service.search.SearchParamBuilder;
 import com.ubiqube.etsi.mano.service.search.SearchableService;
-import com.ubiqube.etsi.mano.vnfm.service.AlarmDatabaseService;
+import com.ubiqube.etsi.mano.vnfm.service.AlarmRepositoryService;
 
 import jakarta.annotation.Nullable;
 
@@ -47,10 +47,10 @@ import jakarta.annotation.Nullable;
 @Service
 public class AlarmVnfmControllerImpl implements AlarmVnfmController {
 
-	private final AlarmDatabaseService alarmsService;
+	private final AlarmRepositoryService alarmsService;
 	private final SearchableService searchableService;
 
-	public AlarmVnfmControllerImpl(final SearchableService searchableService, final AlarmDatabaseService alarmsService) {
+	public AlarmVnfmControllerImpl(final SearchableService searchableService, final AlarmRepositoryService alarmsService) {
 		this.searchableService = searchableService;
 		this.alarmsService = alarmsService;
 	}

@@ -31,7 +31,7 @@ import com.ubiqube.etsi.mano.nfvo.jpa.NsdPackageNsdPackageJpa;
 import com.ubiqube.etsi.mano.nfvo.jpa.NsdPackageVnfPackageJpa;
 
 @Service
-public class NsdPackageService {
+public class NsdPackageRepositoryService {
 
 	private final NsdPackageJpa nsdPackageJpa;
 
@@ -39,7 +39,7 @@ public class NsdPackageService {
 
 	private final NsdPackageVnfPackageJpa nsdPackageVnfPackageJpa;
 
-	public NsdPackageService(final NsdPackageJpa nsdPackageJpa, final NsdPackageNsdPackageJpa nsdPackageNsdPackageJpa, final NsdPackageVnfPackageJpa nsdPackageVnfPackageJpa) {
+	public NsdPackageRepositoryService(final NsdPackageJpa nsdPackageJpa, final NsdPackageNsdPackageJpa nsdPackageNsdPackageJpa, final NsdPackageVnfPackageJpa nsdPackageVnfPackageJpa) {
 		this.nsdPackageJpa = nsdPackageJpa;
 		this.nsdPackageNsdPackageJpa = nsdPackageNsdPackageJpa;
 		this.nsdPackageVnfPackageJpa = nsdPackageVnfPackageJpa;

@@ -34,7 +34,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.ubiqube.etsi.mano.dao.mano.GrantResponse;
 import com.ubiqube.etsi.mano.exception.GenericException;
-import com.ubiqube.etsi.mano.service.GrantService;
+import com.ubiqube.etsi.mano.service.GrantRepositoryService;
 import com.ubiqube.etsi.mano.service.event.EventManager;
 
 /**
@@ -47,7 +47,7 @@ class AdminControllerTest {
 	@Mock
 	private EventManager eventManager;
 	@Mock
-	private GrantService grantJpa;
+	private GrantRepositoryService grantJpa;
 
 	@Test
 	void testDeleteAllGrant() {

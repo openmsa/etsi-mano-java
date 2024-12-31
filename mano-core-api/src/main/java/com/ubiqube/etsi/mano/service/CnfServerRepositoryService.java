@@ -14,36 +14,39 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see https://www.gnu.org/licenses/.
  */
-package com.ubiqube.etsi.mano.vnfm.service;
+package com.ubiqube.etsi.mano.service;
 
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.ubiqube.etsi.mano.dao.mano.alarm.Alarms;
-import com.ubiqube.etsi.mano.vnfm.jpa.AlarmsJpa;
+import com.ubiqube.etsi.mano.dao.mano.cnf.CnfServer;
+import com.ubiqube.etsi.mano.jpa.CnfServerJpa;
 
 /**
  *
- * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
+ * @author olivier
  *
  */
 @Service
-public class AlarmDatabaseService {
-	private final AlarmsJpa alarmsJpa;
+public class CnfServerRepositoryService {
+	private final CnfServerJpa cnfServerJpa;
 
-	public AlarmDatabaseService(final AlarmsJpa alarmsJpa) {
-		super();
-		this.alarmsJpa = alarmsJpa;
+	public CnfServerRepositoryService(final CnfServerJpa cnfServerJpa) {
+		this.cnfServerJpa = cnfServerJpa;
 	}
 
-	public Optional<Alarms> findById(final UUID id) {
-		return alarmsJpa.findById(id);
+	public Iterable<CnfServer> findAll() {
+		return cnfServerJpa.findAll();
 	}
 
-	public Alarms save(final Alarms alarm) {
-		return alarmsJpa.save(alarm);
+	public CnfServer save(final CnfServer in) {
+		return cnfServerJpa.save(in);
+	}
+
+	public Optional<CnfServer> findById(final UUID id) {
+		return cnfServerJpa.findById(id);
 	}
 
 }

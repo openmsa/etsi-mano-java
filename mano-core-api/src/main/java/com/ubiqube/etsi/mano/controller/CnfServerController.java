@@ -30,7 +30,7 @@ import com.ubiqube.etsi.mano.dao.mano.cnf.CnfServer;
 import com.ubiqube.etsi.mano.dao.mano.dto.CnfServerDto;
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
-import com.ubiqube.etsi.mano.service.CnfServerService;
+import com.ubiqube.etsi.mano.service.CnfServerRepositoryService;
 import com.ubiqube.etsi.mano.service.mapping.CnfServerDtoMapping;
 import com.ubiqube.etsi.mano.service.vim.VimManager;
 
@@ -45,11 +45,11 @@ import jakarta.validation.constraints.NotNull;
 @RestController
 @RequestMapping("/admin/cnf")
 public class CnfServerController {
-	private final CnfServerService cnfServerService;
+	private final CnfServerRepositoryService cnfServerService;
 	private final VimManager vimManager;
 	private final CnfServerDtoMapping cnfServerDtoMapping;
 
-	public CnfServerController(final CnfServerService cnfServerService, final VimManager vimManager, final CnfServerDtoMapping cnfServerDtoMapping) {
+	public CnfServerController(final CnfServerRepositoryService cnfServerService, final VimManager vimManager, final CnfServerDtoMapping cnfServerDtoMapping) {
 		this.cnfServerService = cnfServerService;
 		this.vimManager = vimManager;
 		this.cnfServerDtoMapping = cnfServerDtoMapping;

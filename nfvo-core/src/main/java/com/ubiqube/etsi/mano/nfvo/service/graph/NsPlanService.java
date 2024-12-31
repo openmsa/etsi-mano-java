@@ -26,7 +26,7 @@ import org.springframework.stereotype.Service;
 import com.ubiqube.etsi.mano.dao.mano.NsdPackage;
 import com.ubiqube.etsi.mano.dao.mano.common.ListKeyPair;
 import com.ubiqube.etsi.mano.dao.mano.nsd.ForwarderMapping;
-import com.ubiqube.etsi.mano.nfvo.service.NsdPackageService;
+import com.ubiqube.etsi.mano.nfvo.service.NsdPackageRepositoryService;
 import com.ubiqube.etsi.mano.orchestrator.Edge2d;
 import com.ubiqube.etsi.mano.orchestrator.Relation;
 import com.ubiqube.etsi.mano.orchestrator.Vertex2d;
@@ -54,9 +54,9 @@ import com.ubiqube.etsi.mano.service.graph.Graph2dBuilder;
  */
 @Service
 public class NsPlanService {
-	private final NsdPackageService nsdPackageService;
+	private final NsdPackageRepositoryService nsdPackageService;
 
-	public NsPlanService(final NsdPackageService nsdPackageService) {
+	public NsPlanService(final NsdPackageRepositoryService nsdPackageService) {
 		this.nsdPackageService = nsdPackageService;
 	}
 

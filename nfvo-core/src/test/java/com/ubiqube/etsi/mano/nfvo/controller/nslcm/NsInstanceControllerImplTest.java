@@ -43,7 +43,7 @@ import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsVnfTask;
 import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.nfvo.service.NsBlueprintService;
 import com.ubiqube.etsi.mano.nfvo.service.NsInstanceService;
-import com.ubiqube.etsi.mano.nfvo.service.NsdPackageService;
+import com.ubiqube.etsi.mano.nfvo.service.NsdPackageRepositoryService;
 import com.ubiqube.etsi.mano.nfvo.service.mapping.NsInstanceDtoMapping;
 import com.ubiqube.etsi.mano.service.VnfInstanceGatewayService;
 import com.ubiqube.etsi.mano.service.event.EventManager;
@@ -58,7 +58,7 @@ class NsInstanceControllerImplTest {
 	@Mock
 	private VnfInstanceGatewayService vnfInstancesService;
 	@Mock
-	private NsdPackageService nsdPackageJpa;
+	private NsdPackageRepositoryService nsdPackageJpa;
 	@Mock
 	private EventManager eventManager;
 

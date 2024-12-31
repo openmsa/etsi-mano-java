@@ -14,6 +14,10 @@ import jakarta.annotation.Nullable;
 
 public class AuthChecker {
 
+	private AuthChecker() {
+		//
+	}
+
 	public static void checkAuthData(final Subscription subscription) {
 		final AuthentificationInformations authInfo = subscription.getAuthentication();
 		if (authInfo == null) {
@@ -24,10 +28,10 @@ public class AuthChecker {
 
 	private static void check(final AuthType authType, final AuthentificationInformations authInfo) {
 		switch (authType) {
-			case BASIC -> checkBasic(authInfo.getAuthParamBasic());
-			case OAUTH2_CLIENT_CREDENTIALS -> checkOauth2(authInfo.getAuthParamOauth2());
-			case TLS_CERT -> checkTls(authInfo.getAuthTlsCert());
-			default -> throw new IllegalArgumentException("Unexpected value: " + authType);
+		case BASIC -> checkBasic(authInfo.getAuthParamBasic());
+		case OAUTH2_CLIENT_CREDENTIALS -> checkOauth2(authInfo.getAuthParamOauth2());
+		case TLS_CERT -> checkTls(authInfo.getAuthTlsCert());
+		default -> throw new IllegalArgumentException("Unexpected value: " + authType);
 		}
 	}
 

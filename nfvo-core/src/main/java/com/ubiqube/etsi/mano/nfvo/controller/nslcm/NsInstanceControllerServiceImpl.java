@@ -70,7 +70,7 @@ import com.ubiqube.etsi.mano.dao.mano.vim.vnffg.Classifier;
 import com.ubiqube.etsi.mano.nfvo.factory.LcmFactory;
 import com.ubiqube.etsi.mano.nfvo.service.NsBlueprintService;
 import com.ubiqube.etsi.mano.nfvo.service.NsInstanceService;
-import com.ubiqube.etsi.mano.nfvo.service.NsdPackageService;
+import com.ubiqube.etsi.mano.nfvo.service.NsdPackageRepositoryService;
 import com.ubiqube.etsi.mano.nfvo.service.mapping.NsBlueprintMapping;
 import com.ubiqube.etsi.mano.nfvo.service.mapping.nsinstance.NsInstanceMapping;
 import com.ubiqube.etsi.mano.service.event.ActionType;
@@ -81,7 +81,7 @@ import com.ubiqube.etsi.mano.service.search.SearchableService;
 @Service
 public class NsInstanceControllerServiceImpl implements NsInstanceControllerService {
 
-	private final NsdPackageService nsdPackageService;
+	private final NsdPackageRepositoryService nsdPackageService;
 
 	private final NsInstanceService nsInstanceService;
 
@@ -95,7 +95,7 @@ public class NsInstanceControllerServiceImpl implements NsInstanceControllerServ
 
 	private final NsInstanceMapping nsInstanceMapping;
 
-	public NsInstanceControllerServiceImpl(final NsdPackageService nsdPackageService, final NsInstanceService nsInstanceService, final EventManager eventManager,
+	public NsInstanceControllerServiceImpl(final NsdPackageRepositoryService nsdPackageService, final NsInstanceService nsInstanceService, final EventManager eventManager,
 			final NsBlueprintMapping mapper, final NsBlueprintService nsBlueprintService, final SearchableService searchableService, final NsInstanceMapping nsInstanceMapping) {
 		this.nsdPackageService = nsdPackageService;
 		this.nsInstanceService = nsInstanceService;

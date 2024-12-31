@@ -39,7 +39,7 @@ import com.ubiqube.etsi.mano.dao.mano.VnfPackage;
 import com.ubiqube.etsi.mano.dao.mano.pkg.UploadUriParameters;
 import com.ubiqube.etsi.mano.exception.ConflictException;
 import com.ubiqube.etsi.mano.exception.PreConditionException;
-import com.ubiqube.etsi.mano.nfvo.service.NsdPackageVnfPackageService;
+import com.ubiqube.etsi.mano.nfvo.service.NsdPackageVnfPackageRepositoryService;
 import com.ubiqube.etsi.mano.repository.VnfPackageRepository;
 import com.ubiqube.etsi.mano.service.Patcher;
 import com.ubiqube.etsi.mano.service.VnfPackageService;
@@ -56,7 +56,7 @@ class VnfPackageControllerImplTest {
 	@Mock
 	private VnfPackageRepository vnfPkgRepo;
 	@Mock
-	private NsdPackageVnfPackageService nsdVnfPkgService;
+	private NsdPackageVnfPackageRepositoryService nsdVnfPkgService;
 
 	@Test
 	void testName() throws Exception {

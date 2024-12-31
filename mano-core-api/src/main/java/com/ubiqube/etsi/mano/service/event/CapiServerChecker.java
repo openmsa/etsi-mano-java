@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ubiqube.etsi.mano.dao.mano.cnf.capi.CapiServer;
 import com.ubiqube.etsi.mano.dao.mano.vim.PlanStatusType;
 import com.ubiqube.etsi.mano.dao.rfc7807.FailureDetails;
-import com.ubiqube.etsi.mano.service.CapiServerService;
+import com.ubiqube.etsi.mano.service.CapiServerRepositoryService;
 import com.ubiqube.etsi.mano.vim.k8sexecutor.K8sExecutor;
 
 import io.fabric8.kubernetes.api.model.Pod;
@@ -22,10 +22,10 @@ public class CapiServerChecker {
 	/** Logger. */
 	private static final Logger LOG = LoggerFactory.getLogger(CapiServerChecker.class);
 
-	private final CapiServerService capiServer;
+	private final CapiServerRepositoryService capiServer;
 	private final K8sExecutor executor;
 
-	public CapiServerChecker(final CapiServerService capiServer, final K8sExecutor executor) {
+	public CapiServerChecker(final CapiServerRepositoryService capiServer, final K8sExecutor executor) {
 		this.capiServer = capiServer;
 		this.executor = executor;
 	}

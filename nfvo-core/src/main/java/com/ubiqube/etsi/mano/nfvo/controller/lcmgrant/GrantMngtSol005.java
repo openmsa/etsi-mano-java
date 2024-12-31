@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
 import com.ubiqube.etsi.mano.controller.lcmgrant.GrantManagement;
 import com.ubiqube.etsi.mano.dao.mano.GrantResponse;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
-import com.ubiqube.etsi.mano.service.GrantService;
+import com.ubiqube.etsi.mano.service.GrantRepositoryService;
 import com.ubiqube.etsi.mano.service.event.EventManager;
 
 import jakarta.transaction.Transactional;
@@ -46,10 +46,10 @@ public class GrantMngtSol005 implements GrantManagement {
 
 	private static final Logger LOG = LoggerFactory.getLogger(GrantMngtSol005.class);
 
-	private final GrantService grantsResponseJpa;
+	private final GrantRepositoryService grantsResponseJpa;
 	private final EventManager eventManager;
 
-	public GrantMngtSol005(final GrantService grantsJpa, final EventManager eventManager) {
+	public GrantMngtSol005(final GrantRepositoryService grantsJpa, final EventManager eventManager) {
 		this.grantsResponseJpa = grantsJpa;
 		this.eventManager = eventManager;
 	}

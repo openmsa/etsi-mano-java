@@ -44,7 +44,7 @@ import com.ubiqube.etsi.mano.dao.mano.cnf.capi.CapiServer;
 import com.ubiqube.etsi.mano.dao.mano.vim.PlanStatusType;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.exception.PreConditionException;
-import com.ubiqube.etsi.mano.service.CapiServerService;
+import com.ubiqube.etsi.mano.service.CapiServerRepositoryService;
 import com.ubiqube.etsi.mano.service.Patcher;
 import com.ubiqube.etsi.mano.service.event.ActionType;
 import com.ubiqube.etsi.mano.service.event.EventManager;
@@ -54,7 +54,7 @@ import com.ubiqube.etsi.mano.vnfm.service.plan.contributors.uow.capi.CapiServerM
 @ExtendWith(MockitoExtension.class)
 class CapiControllerTest {
 	@Mock
-	private CapiServerService capiServerJpa;
+	private CapiServerRepositoryService capiServerJpa;
 	@Mock
 	private OsClusterService osClusterService;
 	@Mock

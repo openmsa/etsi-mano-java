@@ -32,7 +32,7 @@ import com.ubiqube.etsi.mano.dao.mano.vim.vnfi.ClusterMachine;
 import com.ubiqube.etsi.mano.dao.mano.vim.vnfi.ClusterOptionVersion;
 import com.ubiqube.etsi.mano.dao.mano.vim.vnfi.CnfInformations;
 import com.ubiqube.etsi.mano.exception.GenericException;
-import com.ubiqube.etsi.mano.service.CapiServerService;
+import com.ubiqube.etsi.mano.service.CapiServerRepositoryService;
 import com.ubiqube.etsi.mano.service.grant.ccm.cni.CniInstaller;
 import com.ubiqube.etsi.mano.service.grant.ccm.csi.CsiInstaller;
 import com.ubiqube.etsi.mano.vim.k8s.OsClusterService;
@@ -52,14 +52,14 @@ public class CapiCcmServerService implements CcmServerService {
 	/** Logger. */
 	private static final Logger LOG = LoggerFactory.getLogger(CapiCcmServerService.class);
 
-	private final CapiServerService capiServerService;
+	private final CapiServerRepositoryService capiServerService;
 	private final OsClusterService osClusterService;
 	private final CapiServerMapping mapper;
 	private final List<CniInstaller> cniInstallers;
 	private final List<CsiInstaller> csiInstallers;
 	private final List<CcmInstaller> ccmInstallers;
 
-	public CapiCcmServerService(final CapiServerService capiServerService, final OsClusterService osClusterService, final CapiServerMapping mapper, final List<CniInstaller> cniInstallers, final List<CsiInstaller> csiInstallers, final List<CcmInstaller> ccmInstallers) {
+	public CapiCcmServerService(final CapiServerRepositoryService capiServerService, final OsClusterService osClusterService, final CapiServerMapping mapper, final List<CniInstaller> cniInstallers, final List<CsiInstaller> csiInstallers, final List<CcmInstaller> ccmInstallers) {
 		this.capiServerService = capiServerService;
 		this.osClusterService = osClusterService;
 		this.mapper = mapper;

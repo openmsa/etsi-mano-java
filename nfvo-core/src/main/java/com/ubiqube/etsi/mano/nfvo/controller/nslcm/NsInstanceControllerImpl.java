@@ -45,7 +45,7 @@ import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.nfvo.factory.LcmFactory;
 import com.ubiqube.etsi.mano.nfvo.service.NsBlueprintService;
 import com.ubiqube.etsi.mano.nfvo.service.NsInstanceService;
-import com.ubiqube.etsi.mano.nfvo.service.NsdPackageService;
+import com.ubiqube.etsi.mano.nfvo.service.NsdPackageRepositoryService;
 import com.ubiqube.etsi.mano.nfvo.service.mapping.NsInstanceDtoMapping;
 import com.ubiqube.etsi.mano.service.VnfInstanceGatewayService;
 import com.ubiqube.etsi.mano.service.event.ActionType;
@@ -57,12 +57,12 @@ public class NsInstanceControllerImpl implements NsInstanceController {
 	private final NsBlueprintService blueprintService;
 	private final NsInstanceService nsInstanceService;
 	private final VnfInstanceGatewayService vnfInstancesService;
-	private final NsdPackageService nsdPackageJpa;
+	private final NsdPackageRepositoryService nsdPackageJpa;
 	private final EventManager eventManager;
 	private final NsInstanceDtoMapping nsInstanceDtoMapping;
 
 	public NsInstanceControllerImpl(final NsInstanceService nsInstanceService, final NsBlueprintService lcmOpOccsService,
-			final VnfInstanceGatewayService vnfInstancesService, final NsdPackageService nsdPackageJpa, final EventManager eventManager, final NsInstanceDtoMapping nsInstanceDtoMapping) {
+			final VnfInstanceGatewayService vnfInstancesService, final NsdPackageRepositoryService nsdPackageJpa, final EventManager eventManager, final NsInstanceDtoMapping nsInstanceDtoMapping) {
 		this.nsInstanceService = nsInstanceService;
 		this.blueprintService = lcmOpOccsService;
 		this.vnfInstancesService = vnfInstancesService;

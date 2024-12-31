@@ -21,32 +21,35 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.ubiqube.etsi.mano.dao.mano.cnf.CnfServer;
-import com.ubiqube.etsi.mano.jpa.CnfServerJpa;
+import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
+import com.ubiqube.etsi.mano.jpa.VimConnectionInformationJpa;
 
 /**
  *
- * @author olivier
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *
  */
 @Service
-public class CnfServerService {
-	private final CnfServerJpa cnfServerJpa;
+public class VimRepositoryService implements VimService {
+	private final VimConnectionInformationJpa vimConnectionInformationJpa;
 
-	public CnfServerService(final CnfServerJpa cnfServerJpa) {
-		this.cnfServerJpa = cnfServerJpa;
+	public VimRepositoryService(final VimConnectionInformationJpa vimConnectionInformationJpa) {
+		this.vimConnectionInformationJpa = vimConnectionInformationJpa;
 	}
 
-	public Iterable<CnfServer> findAll() {
-		return cnfServerJpa.findAll();
+	@Override
+	public Optional<VimConnectionInformation> findById(final UUID id) {
+		return vimConnectionInformationJpa.findById(id);
 	}
 
-	public CnfServer save(final CnfServer in) {
-		return cnfServerJpa.save(in);
+	@Override
+	public Iterable<VimConnectionInformation> findAll() {
+		return vimConnectionInformationJpa.findAll();
 	}
 
-	public Optional<CnfServer> findById(final UUID id) {
-		return cnfServerJpa.findById(id);
+	@Override
+	public VimConnectionInformation save(final VimConnectionInformation body) {
+		return vimConnectionInformationJpa.save(body);
 	}
 
 }

@@ -46,14 +46,14 @@ class VnfPackageServiceImplTest {
 
 	@Test
 	void testFindByIdFailed() throws Exception {
-		final VnfPackageServiceImpl srv = new VnfPackageServiceImpl(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
+		final VnfPackageRepositoryService srv = new VnfPackageRepositoryService(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
 		final UUID id = UUID.randomUUID();
 		assertThrows(NotFoundException.class, () -> srv.findById(id));
 	}
 
 	@Test
 	void testFindByIdOk() throws Exception {
-		final VnfPackageServiceImpl srv = new VnfPackageServiceImpl(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
+		final VnfPackageRepositoryService srv = new VnfPackageRepositoryService(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
 		final UUID id = UUID.randomUUID();
 		final Optional<VnfPackage> optPkg = Optional.of(new VnfPackage());
 		when(vnfPackageJpa.findById(id)).thenReturn(optPkg);
@@ -63,42 +63,42 @@ class VnfPackageServiceImplTest {
 
 	@Test
 	void testSave() throws Exception {
-		final VnfPackageServiceImpl srv = new VnfPackageServiceImpl(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
+		final VnfPackageRepositoryService srv = new VnfPackageRepositoryService(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
 		srv.save(null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testByDescriptorId() throws Exception {
-		final VnfPackageServiceImpl srv = new VnfPackageServiceImpl(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
+		final VnfPackageRepositoryService srv = new VnfPackageRepositoryService(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
 		srv.findByVnfdIdOpt("");
 		assertTrue(true);
 	}
 
 	@Test
 	void testByDescriptorIdAndSoftwareVersion() throws Exception {
-		final VnfPackageServiceImpl srv = new VnfPackageServiceImpl(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
+		final VnfPackageRepositoryService srv = new VnfPackageRepositoryService(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
 		srv.findByVnfdIdAndSoftwareVersion(null, null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testByDescriptorIdFlavorIdVnfdVersion() throws Exception {
-		final VnfPackageServiceImpl srv = new VnfPackageServiceImpl(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
+		final VnfPackageRepositoryService srv = new VnfPackageRepositoryService(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
 		srv.findByVnfdIdFlavorIdVnfdVersion(null, null, null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testByVnfdIdFailed() throws Exception {
-		final VnfPackageServiceImpl srv = new VnfPackageServiceImpl(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
+		final VnfPackageRepositoryService srv = new VnfPackageRepositoryService(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
 		final String id = UUID.randomUUID().toString();
 		assertThrows(NotFoundException.class, () -> srv.findByVnfdId(id));
 	}
 
 	@Test
 	void testByVnfdId() throws Exception {
-		final VnfPackageServiceImpl srv = new VnfPackageServiceImpl(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
+		final VnfPackageRepositoryService srv = new VnfPackageRepositoryService(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
 		final String id = UUID.randomUUID().toString();
 		final Optional<VnfPackage> optPkg = Optional.of(new VnfPackage());
 		when(vnfPackageJpa.findByVnfdIdAndOnboardingState(id.toString(), OnboardingStateType.ONBOARDED)).thenReturn(optPkg);
@@ -108,7 +108,7 @@ class VnfPackageServiceImplTest {
 
 	@Test
 	void testDelete() throws Exception {
-		final VnfPackageServiceImpl srv = new VnfPackageServiceImpl(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
+		final VnfPackageRepositoryService srv = new VnfPackageRepositoryService(vnfPackageJpa, vnfInstanceJpa, vnfPackageRepository);
 		srv.delete(UUID.randomUUID());
 		assertTrue(true);
 	}

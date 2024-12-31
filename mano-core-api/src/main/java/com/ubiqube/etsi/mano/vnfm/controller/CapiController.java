@@ -37,7 +37,7 @@ import com.ubiqube.etsi.mano.dao.mano.cnf.capi.CapiServer;
 import com.ubiqube.etsi.mano.dao.mano.vim.PlanStatusType;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.exception.PreConditionException;
-import com.ubiqube.etsi.mano.service.CapiServerService;
+import com.ubiqube.etsi.mano.service.CapiServerRepositoryService;
 import com.ubiqube.etsi.mano.service.Patcher;
 import com.ubiqube.etsi.mano.service.event.ActionType;
 import com.ubiqube.etsi.mano.service.event.EventManager;
@@ -50,13 +50,13 @@ import jakarta.annotation.Nullable;
 @RestController
 @RequestMapping("/vnfm-admin/capi")
 public class CapiController {
-	private final CapiServerService capiServer;
+	private final CapiServerRepositoryService capiServer;
 	private final OsClusterService osClusterService;
 	private final CapiServerMapping mapper;
 	private final Patcher patcher;
 	private final EventManager eventManager;
 
-	public CapiController(final CapiServerService capiServerJpa, final OsClusterService osClusterService, final CapiServerMapping mapper, final Patcher patcher, final EventManager eventManager) {
+	public CapiController(final CapiServerRepositoryService capiServerJpa, final OsClusterService osClusterService, final CapiServerMapping mapper, final Patcher patcher, final EventManager eventManager) {
 		this.capiServer = capiServerJpa;
 		this.osClusterService = osClusterService;
 		this.mapper = mapper;

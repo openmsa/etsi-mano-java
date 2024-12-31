@@ -35,35 +35,35 @@ class PolicyServiceTest {
 
 	@Test
 	void testSave() throws Exception {
-		final PolicyService ps = new PolicyService(policiesJpa, policyVersionJpa);
+		final PolicyRepositoryService ps = new PolicyRepositoryService(policiesJpa, policyVersionJpa);
 		ps.policiesSave(null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testPoliciesById() throws Exception {
-		final PolicyService ps = new PolicyService(policiesJpa, policyVersionJpa);
+		final PolicyRepositoryService ps = new PolicyRepositoryService(policiesJpa, policyVersionJpa);
 		ps.findPoliciesById(null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testFindByPoliciesAndVersion() throws Exception {
-		final PolicyService ps = new PolicyService(policiesJpa, policyVersionJpa);
+		final PolicyRepositoryService ps = new PolicyRepositoryService(policiesJpa, policyVersionJpa);
 		ps.findByPolicyIdAndVersion(null, null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testDeletePolicyById() throws Exception {
-		final PolicyService ps = new PolicyService(policiesJpa, policyVersionJpa);
+		final PolicyRepositoryService ps = new PolicyRepositoryService(policiesJpa, policyVersionJpa);
 		ps.deletePoliciesById(null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testDeletePolicyByIdAndVersion() throws Exception {
-		final PolicyService ps = new PolicyService(policiesJpa, policyVersionJpa);
+		final PolicyRepositoryService ps = new PolicyRepositoryService(policiesJpa, policyVersionJpa);
 		ps.deleteByIdAndVersionsVersion(null, null);
 		assertTrue(true);
 	}

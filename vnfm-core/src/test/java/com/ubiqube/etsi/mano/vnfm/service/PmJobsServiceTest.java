@@ -32,21 +32,21 @@ class PmJobsServiceTest {
 
 	@Test
 	void testDeleteById() {
-		final PmJobsService srv = new PmJobsService(pmJpa);
+		final PmJobsRepositoryService srv = new PmJobsRepositoryService(pmJpa);
 		srv.deleteById(null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testSave() {
-		final PmJobsService srv = new PmJobsService(pmJpa);
+		final PmJobsRepositoryService srv = new PmJobsRepositoryService(pmJpa);
 		srv.save(null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testFindById() {
-		final PmJobsService srv = new PmJobsService(pmJpa);
+		final PmJobsRepositoryService srv = new PmJobsRepositoryService(pmJpa);
 		srv.findById(null);
 		assertTrue(true);
 	}

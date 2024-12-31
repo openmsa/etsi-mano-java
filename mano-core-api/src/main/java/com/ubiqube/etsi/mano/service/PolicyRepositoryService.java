@@ -32,11 +32,11 @@ import com.ubiqube.etsi.mano.jpa.policy.PolicyVersionJpa;
  *
  */
 @Service
-public class PolicyService {
+public class PolicyRepositoryService {
 	private final PoliciesJpa policiesJpa;
 	private final PolicyVersionJpa policyVersionJpa;
 
-	public PolicyService(final PoliciesJpa policiesJpa, final PolicyVersionJpa policyVersionJpa) {
+	public PolicyRepositoryService(final PoliciesJpa policiesJpa, final PolicyVersionJpa policyVersionJpa) {
 		super();
 		this.policiesJpa = policiesJpa;
 		this.policyVersionJpa = policyVersionJpa;

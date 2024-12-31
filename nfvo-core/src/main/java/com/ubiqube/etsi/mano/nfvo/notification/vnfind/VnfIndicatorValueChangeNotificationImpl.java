@@ -63,7 +63,7 @@ import com.ubiqube.etsi.mano.nfvo.jpa.NsBlueprintJpa;
 import com.ubiqube.etsi.mano.nfvo.jpa.NsLiveInstanceJpa;
 import com.ubiqube.etsi.mano.nfvo.jpa.NsdInstanceJpa;
 import com.ubiqube.etsi.mano.nfvo.service.plan.uow.UowUtils;
-import com.ubiqube.etsi.mano.service.VnfPackageServiceImpl;
+import com.ubiqube.etsi.mano.service.VnfPackageRepositoryService;
 import com.ubiqube.etsi.mano.service.auth.model.ServerType;
 import com.ubiqube.etsi.mano.service.cond.ConditionService;
 import com.ubiqube.etsi.mano.service.cond.Context;
@@ -89,7 +89,7 @@ public class VnfIndicatorValueChangeNotificationImpl {
 
 	private final NsdPackageJpa nsdPackageJpa;
 
-	private final VnfPackageServiceImpl vnfPackageServiceImpl;
+	private final VnfPackageRepositoryService vnfPackageServiceImpl;
 
 	private Properties props;
 
@@ -106,7 +106,7 @@ public class VnfIndicatorValueChangeNotificationImpl {
 	private final VnfInstanceLcm vnfLcmOpOccsService;
 
 	public VnfIndicatorValueChangeNotificationImpl(final VnfIndiValueChangeNotificationJpa vnfIndValueNotificationJpa,
-			final VnfPackageServiceImpl vnfPackageServiceImpl, final ServersJpa serversJpa,
+			final VnfPackageRepositoryService vnfPackageServiceImpl, final ServersJpa serversJpa,
 			final VnfInstanceLcm vnfLcmOpOccsService, final VnfLcmInterface vnfLcmInterface,
 			final NsLiveInstanceJpa nsLiveInstanceJpa, final NsdPackageJpa nsdPackageJpa, final NsdInstanceJpa nsdInstanceJpa,
 			final NsBlueprintJpa nsBlueprintJpa, final NsLcmInterface nsLcmInterface,

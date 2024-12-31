@@ -37,14 +37,14 @@ import jakarta.annotation.Nonnull;
  *
  */
 @Service
-public class VnfPackageServiceImpl implements VnfPackageService {
+public class VnfPackageRepositoryService implements VnfPackageService {
 	private final VnfPackageRepository vnfPackageRepository;
 
 	private final VnfPackageJpa vnfPackageJpa;
 
 	private final VnfInstanceJpa vnfInstanceJpa;
 
-	public VnfPackageServiceImpl(final VnfPackageJpa vnfPackageJpa, final VnfInstanceJpa vnfInstanceJpa,
+	public VnfPackageRepositoryService(final VnfPackageJpa vnfPackageJpa, final VnfInstanceJpa vnfInstanceJpa,
 			final VnfPackageRepository vnfPackageRepository) {
 		this.vnfPackageJpa = vnfPackageJpa;
 		this.vnfInstanceJpa = vnfInstanceJpa;

@@ -41,7 +41,7 @@ import com.ubiqube.etsi.mano.service.event.OrchestrationAdapter;
 import com.ubiqube.etsi.mano.service.event.model.NotificationEvent;
 import com.ubiqube.etsi.mano.service.graph.WorkflowEvent;
 import com.ubiqube.etsi.mano.vnfm.jpa.VnfLiveInstanceJpa;
-import com.ubiqube.etsi.mano.vnfm.service.VnfBlueprintService;
+import com.ubiqube.etsi.mano.vnfm.service.VnfBlueprintRepositoryService;
 import com.ubiqube.etsi.mano.vnfm.service.VnfInstanceService;
 import com.ubiqube.etsi.mano.vnfm.service.VnfInstanceServiceVnfm;
 import com.ubiqube.etsi.mano.vnfm.service.vnflcm.VnfLcmExtractor;
@@ -54,14 +54,14 @@ import com.ubiqube.etsi.mano.vnfm.service.vnflcm.VnfLcmExtractor;
 @Service
 public class VnfOrchestrationAdapter implements OrchestrationAdapter<VnfTask, VnfInstance> {
 	private final VnfInstanceService vnfInstancesService;
-	private final VnfBlueprintService blueprintService;
+	private final VnfBlueprintRepositoryService blueprintService;
 	private final VnfLiveInstanceJpa vnfLiveInstanceJpa;
 	private final VnfPackageService vnfPackageService;
 	private final EventManager eventManager;
 	private final VnfInstanceServiceVnfm vnfInstanceServiceVnfm;
 	private final List<VnfLcmExtractor> extractors;
 
-	public VnfOrchestrationAdapter(final VnfInstanceService vnfInstancesService, final VnfBlueprintService blueprintService, final VnfLiveInstanceJpa vnfLiveInstanceJpa,
+	public VnfOrchestrationAdapter(final VnfInstanceService vnfInstancesService, final VnfBlueprintRepositoryService blueprintService, final VnfLiveInstanceJpa vnfLiveInstanceJpa,
 			final EventManager eventManager, final VnfPackageService vnfPackageService, final VnfInstanceServiceVnfm vnfInstanceServiceVnfm, final List<VnfLcmExtractor> extractors) {
 		this.vnfInstancesService = vnfInstancesService;
 		this.blueprintService = blueprintService;

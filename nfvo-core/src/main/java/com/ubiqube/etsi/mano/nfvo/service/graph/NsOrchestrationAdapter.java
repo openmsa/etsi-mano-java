@@ -35,7 +35,7 @@ import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.nfvo.jpa.NsLiveInstanceJpa;
 import com.ubiqube.etsi.mano.nfvo.service.NsBlueprintService;
 import com.ubiqube.etsi.mano.nfvo.service.NsInstanceService;
-import com.ubiqube.etsi.mano.nfvo.service.NsdPackageService;
+import com.ubiqube.etsi.mano.nfvo.service.NsdPackageRepositoryService;
 import com.ubiqube.etsi.mano.service.event.EventManager;
 import com.ubiqube.etsi.mano.service.event.OrchestrationAdapter;
 import com.ubiqube.etsi.mano.service.event.model.NotificationEvent;
@@ -54,10 +54,10 @@ public class NsOrchestrationAdapter implements OrchestrationAdapter<NsTask, NsdI
 	private final NsLiveInstanceJpa liveInstanceJpa;
 	private final NsBlueprintService blueprintService;
 	private final NsInstanceService instanceService;
-	private final NsdPackageService packageService;
+	private final NsdPackageRepositoryService packageService;
 	private final EventManager eventManager;
 
-	public NsOrchestrationAdapter(final NsLiveInstanceJpa nsLiveInstanceJpa, final NsBlueprintService nsBlueprintService, final NsInstanceService nsInstanceService, final NsdPackageService nsdPackageService, final EventManager eventManager) {
+	public NsOrchestrationAdapter(final NsLiveInstanceJpa nsLiveInstanceJpa, final NsBlueprintService nsBlueprintService, final NsInstanceService nsInstanceService, final NsdPackageRepositoryService nsdPackageService, final EventManager eventManager) {
 		this.liveInstanceJpa = nsLiveInstanceJpa;
 		this.blueprintService = nsBlueprintService;
 		this.instanceService = nsInstanceService;

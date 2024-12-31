@@ -44,7 +44,7 @@ import com.ubiqube.etsi.mano.service.event.EventManager;
 import com.ubiqube.etsi.mano.service.graph.WorkflowEvent;
 import com.ubiqube.etsi.mano.test.controllers.TestFactory;
 import com.ubiqube.etsi.mano.vnfm.jpa.VnfLiveInstanceJpa;
-import com.ubiqube.etsi.mano.vnfm.service.VnfBlueprintService;
+import com.ubiqube.etsi.mano.vnfm.service.VnfBlueprintRepositoryService;
 import com.ubiqube.etsi.mano.vnfm.service.VnfInstanceService;
 import com.ubiqube.etsi.mano.vnfm.service.VnfInstanceServiceVnfm;
 
@@ -53,7 +53,7 @@ class VnfOrchestrationAdapterTest {
 	@Mock
 	private VnfInstanceService vnfInstance;
 	@Mock
-	private VnfBlueprintService blueprintService;
+	private VnfBlueprintRepositoryService blueprintService;
 	@Mock
 	private VnfLiveInstanceJpa vnfLiveInstance;
 	@Mock

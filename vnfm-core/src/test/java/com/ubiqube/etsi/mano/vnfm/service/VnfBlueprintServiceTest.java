@@ -45,7 +45,7 @@ class VnfBlueprintServiceTest {
 
 	@Test
 	void testFindById() {
-		final VnfBlueprintService srv = new VnfBlueprintService(blueprintJpa, vnfLiveInstanceJpa);
+		final VnfBlueprintRepositoryService srv = new VnfBlueprintRepositoryService(blueprintJpa, vnfLiveInstanceJpa);
 		final VnfBlueprint bp = TestFactory.createBlueprint();
 		when(blueprintJpa.findById(any())).thenReturn(Optional.of(bp));
 		srv.findById(null);
@@ -54,7 +54,7 @@ class VnfBlueprintServiceTest {
 
 	@Test
 	void testFindByIdFailed() {
-		final VnfBlueprintService srv = new VnfBlueprintService(blueprintJpa, vnfLiveInstanceJpa);
+		final VnfBlueprintRepositoryService srv = new VnfBlueprintRepositoryService(blueprintJpa, vnfLiveInstanceJpa);
 		when(blueprintJpa.findById(any())).thenReturn(Optional.empty());
 		assertThrows(NotFoundException.class, () -> srv.findById(null));
 		assertTrue((true));
@@ -62,7 +62,7 @@ class VnfBlueprintServiceTest {
 
 	@Test
 	void testGetNumberOfLiveInstance() {
-		final VnfBlueprintService srv = new VnfBlueprintService(blueprintJpa, vnfLiveInstanceJpa);
+		final VnfBlueprintRepositoryService srv = new VnfBlueprintRepositoryService(blueprintJpa, vnfLiveInstanceJpa);
 		final VnfCompute comp = new VnfCompute();
 		srv.getNumberOfLiveInstance(null, comp);
 		assertTrue((true));
@@ -70,7 +70,7 @@ class VnfBlueprintServiceTest {
 
 	@Test
 	void testGetNumberOfLiveVl() {
-		final VnfBlueprintService srv = new VnfBlueprintService(blueprintJpa, vnfLiveInstanceJpa);
+		final VnfBlueprintRepositoryService srv = new VnfBlueprintRepositoryService(blueprintJpa, vnfLiveInstanceJpa);
 		final VnfVl vl = new VnfVl();
 		srv.getNumberOfLiveVl(null, vl);
 		assertTrue((true));
@@ -78,14 +78,14 @@ class VnfBlueprintServiceTest {
 
 	@Test
 	void testSave() {
-		final VnfBlueprintService srv = new VnfBlueprintService(blueprintJpa, vnfLiveInstanceJpa);
+		final VnfBlueprintRepositoryService srv = new VnfBlueprintRepositoryService(blueprintJpa, vnfLiveInstanceJpa);
 		srv.save(null);
 		assertTrue((true));
 	}
 
 	@Test
 	void testUpdateState() {
-		final VnfBlueprintService srv = new VnfBlueprintService(blueprintJpa, vnfLiveInstanceJpa);
+		final VnfBlueprintRepositoryService srv = new VnfBlueprintRepositoryService(blueprintJpa, vnfLiveInstanceJpa);
 		final VnfBlueprint plan = TestFactory.createBlueprint();
 		srv.updateState(plan, null);
 		assertTrue((true));

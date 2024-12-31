@@ -21,35 +21,34 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
-import com.ubiqube.etsi.mano.jpa.VimConnectionInformationJpa;
+import com.ubiqube.etsi.mano.dao.mano.cnf.capi.CapiServer;
+import com.ubiqube.etsi.mano.jpa.CapiServerJpa;
 
 /**
- *
- * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
- *
+ * Manage the list of CAPI kubernets server connections.
  */
 @Service
-public class VimServiceImpl implements VimService {
-	private final VimConnectionInformationJpa vimConnectionInformationJpa;
+public class CapiServerRepositoryService {
+	private final CapiServerJpa capiServerJpa;
 
-	public VimServiceImpl(final VimConnectionInformationJpa vimConnectionInformationJpa) {
-		this.vimConnectionInformationJpa = vimConnectionInformationJpa;
+	public CapiServerRepositoryService(final CapiServerJpa capiServerJpa) {
+		this.capiServerJpa = capiServerJpa;
 	}
 
-	@Override
-	public Optional<VimConnectionInformation> findById(final UUID id) {
-		return vimConnectionInformationJpa.findById(id);
+	public Iterable<CapiServer> findAll() {
+		return capiServerJpa.findAll();
 	}
 
-	@Override
-	public Iterable<VimConnectionInformation> findAll() {
-		return vimConnectionInformationJpa.findAll();
+	public CapiServer save(final CapiServer srv) {
+		return capiServerJpa.save(srv);
 	}
 
-	@Override
-	public VimConnectionInformation save(final VimConnectionInformation body) {
-		return vimConnectionInformationJpa.save(body);
+	public void deleteById(final UUID id) {
+		capiServerJpa.deleteById(id);
+	}
+
+	public Optional<CapiServer> findById(final UUID id) {
+		return capiServerJpa.findById(id);
 	}
 
 }

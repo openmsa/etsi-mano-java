@@ -14,15 +14,15 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see https://www.gnu.org/licenses/.
  */
-package com.ubiqube.etsi.mano.vnfm.service;
+package com.ubiqube.etsi.mano.service;
 
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.ubiqube.etsi.mano.dao.mano.pm.PmJob;
-import com.ubiqube.etsi.mano.jpa.PmJobsJpa;
+import com.ubiqube.etsi.mano.dao.mano.GrantResponse;
+import com.ubiqube.etsi.mano.jpa.GrantsResponseJpa;
 
 /**
  *
@@ -30,23 +30,28 @@ import com.ubiqube.etsi.mano.jpa.PmJobsJpa;
  *
  */
 @Service
-public class PmJobsService {
-	private final PmJobsJpa pmJobsJpa;
+public class GrantRepositoryService {
+	private final GrantsResponseJpa grantsResponseJpa;
 
-	public PmJobsService(final PmJobsJpa pmJobsJpa) {
-		this.pmJobsJpa = pmJobsJpa;
+	public GrantRepositoryService(final GrantsResponseJpa grantsResponseJpa) {
+		super();
+		this.grantsResponseJpa = grantsResponseJpa;
 	}
 
-	public void deleteById(final UUID id) {
-		pmJobsJpa.deleteById(id);
+	public Iterable<GrantResponse> findAll() {
+		return grantsResponseJpa.findAll();
 	}
 
-	public PmJob save(final PmJob res) {
-		return pmJobsJpa.save(res);
+	public void delete(final GrantResponse grantResponse) {
+		grantsResponseJpa.delete(grantResponse);
 	}
 
-	public Optional<PmJob> findById(final UUID id) {
-		return pmJobsJpa.findById(id);
+	public GrantResponse save(final GrantResponse grants) {
+		return grantsResponseJpa.save(grants);
+	}
+
+	public Optional<GrantResponse> findById(final UUID grantId) {
+		return grantsResponseJpa.findById(grantId);
 	}
 
 }

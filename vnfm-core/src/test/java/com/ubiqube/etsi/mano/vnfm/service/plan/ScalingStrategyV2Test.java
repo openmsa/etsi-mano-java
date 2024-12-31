@@ -33,7 +33,7 @@ import com.ubiqube.etsi.mano.dao.mano.VnfInstance;
 import com.ubiqube.etsi.mano.dao.mano.VnfPackage;
 import com.ubiqube.etsi.mano.dao.mano.v2.VnfBlueprint;
 import com.ubiqube.etsi.mano.exception.GenericException;
-import com.ubiqube.etsi.mano.vnfm.service.VnfBlueprintService;
+import com.ubiqube.etsi.mano.vnfm.service.VnfBlueprintRepositoryService;
 import com.ubiqube.etsi.mano.vnfm.service.plan.ScalingStrategy.NumberOfCompute;
 
 import jakarta.annotation.Nonnull;
@@ -42,7 +42,7 @@ import jakarta.annotation.Nonnull;
 class ScalingStrategyV2Test {
 	@Mock
 	@Nonnull
-	private VnfBlueprintService planService;
+	private VnfBlueprintRepositoryService planService;
 
 	@Test
 	void testUnknownScalingMode() {

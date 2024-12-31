@@ -14,41 +14,36 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this program.  If not, see https://www.gnu.org/licenses/.
  */
-package com.ubiqube.etsi.mano.service;
+package com.ubiqube.etsi.mano.vnfm.service;
 
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
-import com.ubiqube.etsi.mano.dao.mano.cnf.capi.CapiServer;
-import com.ubiqube.etsi.mano.jpa.CapiServerJpa;
+import com.ubiqube.etsi.mano.dao.mano.alarm.Alarms;
+import com.ubiqube.etsi.mano.vnfm.jpa.AlarmsJpa;
 
 /**
- * Manage the list of CAPI kubernets server connections.
+ *
+ * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
+ *
  */
 @Service
-public class CapiServerService {
-	private final CapiServerJpa capiServerJpa;
+public class AlarmRepositoryService {
+	private final AlarmsJpa alarmsJpa;
 
-	public CapiServerService(final CapiServerJpa capiServerJpa) {
-		this.capiServerJpa = capiServerJpa;
+	public AlarmRepositoryService(final AlarmsJpa alarmsJpa) {
+		super();
+		this.alarmsJpa = alarmsJpa;
 	}
 
-	public Iterable<CapiServer> findAll() {
-		return capiServerJpa.findAll();
+	public Optional<Alarms> findById(final UUID id) {
+		return alarmsJpa.findById(id);
 	}
 
-	public CapiServer save(final CapiServer srv) {
-		return capiServerJpa.save(srv);
-	}
-
-	public void deleteById(final UUID id) {
-		capiServerJpa.deleteById(id);
-	}
-
-	public Optional<CapiServer> findById(final UUID id) {
-		return capiServerJpa.findById(id);
+	public Alarms save(final Alarms alarm) {
+		return alarmsJpa.save(alarm);
 	}
 
 }

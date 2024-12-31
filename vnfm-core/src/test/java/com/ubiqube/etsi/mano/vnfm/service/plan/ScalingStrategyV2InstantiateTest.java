@@ -32,13 +32,13 @@ import com.ubiqube.etsi.mano.dao.mano.VnfInstance;
 import com.ubiqube.etsi.mano.dao.mano.VnfPackage;
 import com.ubiqube.etsi.mano.dao.mano.v2.PlanOperationType;
 import com.ubiqube.etsi.mano.dao.mano.v2.VnfBlueprint;
-import com.ubiqube.etsi.mano.vnfm.service.VnfBlueprintService;
+import com.ubiqube.etsi.mano.vnfm.service.VnfBlueprintRepositoryService;
 import com.ubiqube.etsi.mano.vnfm.service.plan.ScalingStrategy.NumberOfCompute;
 
 @ExtendWith(MockitoExtension.class)
 class ScalingStrategyV2InstantiateTest {
 	@Mock
-	private VnfBlueprintService planService;
+	private VnfBlueprintRepositoryService planService;
 
 	@Test
 	void testInstantiate() {

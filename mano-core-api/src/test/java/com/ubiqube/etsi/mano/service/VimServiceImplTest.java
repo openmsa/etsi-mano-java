@@ -37,21 +37,21 @@ class VimServiceImplTest {
 
 	@Test
 	void testFindAll() throws Exception {
-		final VimServiceImpl srv = new VimServiceImpl(vimConn);
+		final VimRepositoryService srv = new VimRepositoryService(vimConn);
 		srv.findAll();
 		assertTrue(true);
 	}
 
 	@Test
 	void testFindById() throws Exception {
-		final VimServiceImpl srv = new VimServiceImpl(vimConn);
+		final VimRepositoryService srv = new VimRepositoryService(vimConn);
 		srv.findById(UUID.randomUUID());
 		assertTrue(true);
 	}
 
 	@Test
 	void testSave() throws Exception {
-		final VimServiceImpl srv = new VimServiceImpl(vimConn);
+		final VimRepositoryService srv = new VimRepositoryService(vimConn);
 		srv.save(null);
 		assertTrue(true);
 	}

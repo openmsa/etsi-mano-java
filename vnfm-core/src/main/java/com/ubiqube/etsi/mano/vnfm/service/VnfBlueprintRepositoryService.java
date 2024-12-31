@@ -30,11 +30,11 @@ import com.ubiqube.etsi.mano.vnfm.jpa.VnfBlueprintJpa;
 import com.ubiqube.etsi.mano.vnfm.jpa.VnfLiveInstanceJpa;
 
 @Service
-public class VnfBlueprintService {
+public class VnfBlueprintRepositoryService {
 	private final VnfBlueprintJpa blueprintJpa;
 	private final VnfLiveInstanceJpa vnfLiveInstanceJpa;
 
-	public VnfBlueprintService(final VnfBlueprintJpa blueprintJpa, final VnfLiveInstanceJpa vnfLiveInstanceJpa) {
+	public VnfBlueprintRepositoryService(final VnfBlueprintJpa blueprintJpa, final VnfLiveInstanceJpa vnfLiveInstanceJpa) {
 		this.blueprintJpa = blueprintJpa;
 		this.vnfLiveInstanceJpa = vnfLiveInstanceJpa;
 	}

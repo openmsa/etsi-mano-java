@@ -31,13 +31,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ubiqube.etsi.mano.dao.mano.GrantResponse;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
-import com.ubiqube.etsi.mano.service.GrantService;
+import com.ubiqube.etsi.mano.service.GrantRepositoryService;
 import com.ubiqube.etsi.mano.service.event.EventManager;
 
 @ExtendWith(MockitoExtension.class)
 class GrantMngtSol005Test {
 	@Mock
-	private GrantService grantJpa;
+	private GrantRepositoryService grantJpa;
 	@Mock
 	private EventManager eventManager;
 

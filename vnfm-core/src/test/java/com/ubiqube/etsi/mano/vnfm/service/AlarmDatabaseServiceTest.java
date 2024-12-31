@@ -30,20 +30,20 @@ class AlarmDatabaseServiceTest {
 	@Mock
 	private AlarmsJpa alarmsJpa;
 
-	private AlarmDatabaseService createService() {
-		return new AlarmDatabaseService(alarmsJpa);
+	private AlarmRepositoryService createService() {
+		return new AlarmRepositoryService(alarmsJpa);
 	}
 
 	@Test
 	void testFindById() {
-		final AlarmDatabaseService srv = createService();
+		final AlarmRepositoryService srv = createService();
 		srv.findById(null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testSave() {
-		final AlarmDatabaseService srv = createService();
+		final AlarmRepositoryService srv = createService();
 		srv.save(null);
 		assertTrue(true);
 	}

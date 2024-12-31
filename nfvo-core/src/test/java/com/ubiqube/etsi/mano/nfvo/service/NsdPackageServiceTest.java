@@ -46,21 +46,21 @@ class NsdPackageServiceTest {
 
 	@Test
 	void testFindVnfPackageByNsPackage() throws Exception {
-		final NsdPackageService srv = new NsdPackageService(nsdPkgJpa, nsdPackageNsdJpa, nsdPkgVnfJpa);
+		final NsdPackageRepositoryService srv = new NsdPackageRepositoryService(nsdPkgJpa, nsdPackageNsdJpa, nsdPkgVnfJpa);
 		srv.findVnfPackageByNsPackage(null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testFindNestedNsdByNsdPackage() throws Exception {
-		final NsdPackageService srv = new NsdPackageService(nsdPkgJpa, nsdPackageNsdJpa, nsdPkgVnfJpa);
+		final NsdPackageRepositoryService srv = new NsdPackageRepositoryService(nsdPkgJpa, nsdPackageNsdJpa, nsdPkgVnfJpa);
 		srv.findNestedNsdByNsdPackage(null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testFindById() throws Exception {
-		final NsdPackageService srv = new NsdPackageService(nsdPkgJpa, nsdPackageNsdJpa, nsdPkgVnfJpa);
+		final NsdPackageRepositoryService srv = new NsdPackageRepositoryService(nsdPkgJpa, nsdPackageNsdJpa, nsdPkgVnfJpa);
 		final NsdPackage nsdPkg = new NsdPackage();
 		when(nsdPkgJpa.findById(any())).thenReturn(Optional.of(nsdPkg));
 		srv.findById(null);
@@ -69,20 +69,20 @@ class NsdPackageServiceTest {
 
 	@Test
 	void testFindById_NotFound() throws Exception {
-		final NsdPackageService srv = new NsdPackageService(nsdPkgJpa, nsdPackageNsdJpa, nsdPkgVnfJpa);
+		final NsdPackageRepositoryService srv = new NsdPackageRepositoryService(nsdPkgJpa, nsdPackageNsdJpa, nsdPkgVnfJpa);
 		assertThrows(NotFoundException.class, () -> srv.findById(null));
 	}
 
 	@Test
 	void testSave() throws Exception {
-		final NsdPackageService srv = new NsdPackageService(nsdPkgJpa, nsdPackageNsdJpa, nsdPkgVnfJpa);
+		final NsdPackageRepositoryService srv = new NsdPackageRepositoryService(nsdPkgJpa, nsdPackageNsdJpa, nsdPkgVnfJpa);
 		srv.save(null);
 		assertTrue(true);
 	}
 
 	@Test
 	void testFindByNsdId() throws Exception {
-		final NsdPackageService srv = new NsdPackageService(nsdPkgJpa, nsdPackageNsdJpa, nsdPkgVnfJpa);
+		final NsdPackageRepositoryService srv = new NsdPackageRepositoryService(nsdPkgJpa, nsdPackageNsdJpa, nsdPkgVnfJpa);
 		final NsdPackage nsdPkg = new NsdPackage();
 		when(nsdPkgJpa.findByNsdId(any())).thenReturn(Optional.of(nsdPkg));
 		srv.findByNsdId(null);
@@ -91,7 +91,7 @@ class NsdPackageServiceTest {
 
 	@Test
 	void testFindByNsdId_NotFound() throws Exception {
-		final NsdPackageService srv = new NsdPackageService(nsdPkgJpa, nsdPackageNsdJpa, nsdPkgVnfJpa);
+		final NsdPackageRepositoryService srv = new NsdPackageRepositoryService(nsdPkgJpa, nsdPackageNsdJpa, nsdPkgVnfJpa);
 		assertThrows(GenericException.class, () -> srv.findByNsdId(null));
 	}
 }

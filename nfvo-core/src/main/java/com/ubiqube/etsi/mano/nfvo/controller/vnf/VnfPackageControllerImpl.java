@@ -42,7 +42,7 @@ import com.ubiqube.etsi.mano.dao.mano.pkg.UploadUriParameters;
 import com.ubiqube.etsi.mano.exception.ConflictException;
 import com.ubiqube.etsi.mano.exception.PreConditionException;
 import com.ubiqube.etsi.mano.nfvo.factory.VnfPackageFactory;
-import com.ubiqube.etsi.mano.nfvo.service.NsdPackageVnfPackageService;
+import com.ubiqube.etsi.mano.nfvo.service.NsdPackageVnfPackageRepositoryService;
 import com.ubiqube.etsi.mano.repository.VnfPackageRepository;
 import com.ubiqube.etsi.mano.service.Patcher;
 import com.ubiqube.etsi.mano.service.VnfPackageService;
@@ -58,10 +58,10 @@ public class VnfPackageControllerImpl implements VnfPackageController {
 	private final Patcher patcher;
 	private final EventManager eventManager;
 	private final VnfPackageRepository vnfPackageRepository;
-	private final NsdPackageVnfPackageService nsdPackageVnfPackageService;
+	private final NsdPackageVnfPackageRepositoryService nsdPackageVnfPackageService;
 
 	public VnfPackageControllerImpl(final Patcher patcher, final EventManager eventManager, final VnfPackageService vnfPackageService,
-			final VnfPackageRepository vnfPackageRepository, final NsdPackageVnfPackageService nsdPackageVnfPackageService) {
+			final VnfPackageRepository vnfPackageRepository, final NsdPackageVnfPackageRepositoryService nsdPackageVnfPackageService) {
 		this.patcher = patcher;
 		this.eventManager = eventManager;
 		this.vnfPackageService = vnfPackageService;

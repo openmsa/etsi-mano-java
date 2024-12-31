@@ -37,12 +37,12 @@ import com.ubiqube.etsi.mano.dao.mano.nsd.NfpDescriptor;
 import com.ubiqube.etsi.mano.dao.mano.nsd.VnffgDescriptor;
 import com.ubiqube.etsi.mano.dao.mano.nsd.VnffgInstance;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsVirtualLink;
-import com.ubiqube.etsi.mano.nfvo.service.NsdPackageService;
+import com.ubiqube.etsi.mano.nfvo.service.NsdPackageRepositoryService;
 
 @ExtendWith(MockitoExtension.class)
 class NsPlanServiceTest {
 	@Mock
-	private NsdPackageService nsdPackageService;
+	private NsdPackageRepositoryService nsdPackageService;
 
 	@Test
 	void testName() throws Exception {

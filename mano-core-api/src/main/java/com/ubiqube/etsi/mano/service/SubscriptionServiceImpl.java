@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see https://www.gnu.org/licenses/.
  */
 package com.ubiqube.etsi.mano.service;
 
@@ -39,12 +39,12 @@ import com.ubiqube.etsi.mano.grammar.GrammarNodeResult;
 import com.ubiqube.etsi.mano.grammar.GrammarOperandType;
 import com.ubiqube.etsi.mano.grammar.GrammarParser;
 import com.ubiqube.etsi.mano.grammar.GrammarValue;
-import com.ubiqube.etsi.mano.jpa.SubscriptionJpa;
 import com.ubiqube.etsi.mano.service.auth.model.ApiTypesEnum;
 import com.ubiqube.etsi.mano.service.eval.EvalService;
 import com.ubiqube.etsi.mano.service.event.Notifications;
 import com.ubiqube.etsi.mano.service.event.model.EventMessage;
 import com.ubiqube.etsi.mano.service.event.model.Subscription;
+import com.ubiqube.etsi.mano.service.repository.SubscriptionRepositoryService;
 import com.ubiqube.etsi.mano.service.rest.ServerAdapter;
 import com.ubiqube.etsi.mano.service.search.ManoSearch;
 
@@ -54,14 +54,14 @@ import jakarta.annotation.Nullable;
 public class SubscriptionServiceImpl implements SubscriptionService {
 	private static final Logger LOG = LoggerFactory.getLogger(SubscriptionServiceImpl.class);
 
-	private final SubscriptionJpa subscriptionJpa;
+	private final SubscriptionRepositoryService subscriptionJpa;
 	private final GrammarParser grammarParser;
 	private final Notifications notifications;
 	private final ServerService serverService;
 	private final EvalService evalService;
 	private final ManoSearch manoSearch;
 
-	public SubscriptionServiceImpl(final SubscriptionJpa repository, final GrammarParser grammarParser, final Notifications notifications,
+	public SubscriptionServiceImpl(final SubscriptionRepositoryService repository, final GrammarParser grammarParser, final Notifications notifications,
 			final @Lazy ServerService serverService, final EvalService evalService, final ManoSearch manoSearch) {
 		this.subscriptionJpa = repository;
 		this.grammarParser = grammarParser;

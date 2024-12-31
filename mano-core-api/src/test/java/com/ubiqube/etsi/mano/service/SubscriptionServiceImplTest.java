@@ -59,6 +59,7 @@ import com.ubiqube.etsi.mano.service.event.model.EventMessage;
 import com.ubiqube.etsi.mano.service.event.model.FilterAttributes;
 import com.ubiqube.etsi.mano.service.event.model.NotificationEvent;
 import com.ubiqube.etsi.mano.service.event.model.Subscription;
+import com.ubiqube.etsi.mano.service.repository.SubscriptionRepositoryService;
 import com.ubiqube.etsi.mano.service.search.ManoSearch;
 
 import jakarta.persistence.EntityManager;
@@ -66,7 +67,7 @@ import jakarta.persistence.EntityManager;
 @ExtendWith(MockitoExtension.class)
 class SubscriptionServiceImplTest {
 	@Mock
-	private SubscriptionJpa subscriptionJpa;
+	private SubscriptionRepositoryService subscriptionJpa;
 	@Mock
 	private EntityManager em;
 	@Mock

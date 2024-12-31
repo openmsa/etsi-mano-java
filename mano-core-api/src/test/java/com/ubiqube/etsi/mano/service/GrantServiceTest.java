@@ -24,6 +24,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ubiqube.etsi.mano.jpa.GrantsResponseJpa;
+import com.ubiqube.etsi.mano.service.repository.GrantRepositoryService;
 
 @ExtendWith(MockitoExtension.class)
 class GrantServiceTest {

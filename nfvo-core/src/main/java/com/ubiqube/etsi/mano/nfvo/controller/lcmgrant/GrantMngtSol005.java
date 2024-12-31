@@ -28,8 +28,8 @@ import org.springframework.stereotype.Service;
 import com.ubiqube.etsi.mano.controller.lcmgrant.GrantManagement;
 import com.ubiqube.etsi.mano.dao.mano.GrantResponse;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
-import com.ubiqube.etsi.mano.service.GrantRepositoryService;
 import com.ubiqube.etsi.mano.service.event.EventManager;
+import com.ubiqube.etsi.mano.service.repository.GrantRepositoryService;
 
 import jakarta.transaction.Transactional;
 import jakarta.transaction.Transactional.TxType;

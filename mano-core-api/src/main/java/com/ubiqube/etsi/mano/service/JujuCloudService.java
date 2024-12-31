@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see https://www.gnu.org/licenses/.
  */
 package com.ubiqube.etsi.mano.service;
 
@@ -36,12 +36,12 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.ubiqube.etsi.mano.exception.VnfmException;
-import com.ubiqube.etsi.mano.jpa.JujuCloudJpa;
-import com.ubiqube.etsi.mano.jpa.JujuCredentialJpa;
-import com.ubiqube.etsi.mano.jpa.JujuMetadataJpa;
 import com.ubiqube.etsi.mano.service.auth.model.ServerConnection;
 import com.ubiqube.etsi.mano.service.juju.cli.JujuRemoteService;
 import com.ubiqube.etsi.mano.service.juju.entities.JujuCloud;
+import com.ubiqube.etsi.mano.service.repository.juju.JujuCloudRepositoryService;
+import com.ubiqube.etsi.mano.service.repository.juju.JujuCredentialRepositoryService;
+import com.ubiqube.etsi.mano.service.repository.juju.JujuMetadataRepositoryService;
 import com.ubiqube.etsi.mano.service.rest.FluxRest;
 import com.ubiqube.etsi.mano.service.vim.VimException;
 
@@ -50,14 +50,14 @@ import reactor.core.publisher.Mono;
 @Service
 public class JujuCloudService {
 	private static final Logger LOG = LoggerFactory.getLogger(JujuCloudService.class);
-	private final JujuCloudJpa jujuCloudJpa;
-	private final JujuCredentialJpa jujuCredentialJpa;
-	private final JujuMetadataJpa jujuMetadataJpa;
+	private final JujuCloudRepositoryService jujuCloudJpa;
+	private final JujuCredentialRepositoryService jujuCredentialJpa;
+	private final JujuMetadataRepositoryService jujuMetadataJpa;
 	private final JujuRemoteService remoteService;
 	private final Environment environment;
 
-	public JujuCloudService(final JujuCloudJpa jujuCloudJpa, final JujuCredentialJpa jujuCredentialJpa,
-			final JujuMetadataJpa jujuMetadataJpa, final JujuRemoteService remoteService, final Environment environment) {
+	public JujuCloudService(final JujuCloudRepositoryService jujuCloudJpa, final JujuCredentialRepositoryService jujuCredentialJpa,
+			final JujuMetadataRepositoryService jujuMetadataJpa, final JujuRemoteService remoteService, final Environment environment) {
 		this.jujuCloudJpa = jujuCloudJpa;
 		this.jujuCredentialJpa = jujuCredentialJpa;
 		this.jujuMetadataJpa = jujuMetadataJpa;

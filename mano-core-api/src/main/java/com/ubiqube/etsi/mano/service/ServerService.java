@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see https://www.gnu.org/licenses/.
  */
 package com.ubiqube.etsi.mano.service;
 
@@ -37,12 +37,12 @@ import com.ubiqube.etsi.mano.dao.mano.vim.PlanStatusType;
 import com.ubiqube.etsi.mano.dao.subscription.RemoteSubscription;
 import com.ubiqube.etsi.mano.dao.subscription.SubscriptionType;
 import com.ubiqube.etsi.mano.exception.GenericException;
-import com.ubiqube.etsi.mano.jpa.RemoteSubscriptionJpa;
-import com.ubiqube.etsi.mano.jpa.config.ServersJpa;
 import com.ubiqube.etsi.mano.service.auth.model.ApiTypesEnum;
 import com.ubiqube.etsi.mano.service.event.ActionType;
 import com.ubiqube.etsi.mano.service.event.EventManager;
 import com.ubiqube.etsi.mano.service.event.model.Subscription;
+import com.ubiqube.etsi.mano.service.repository.RemoteSubscriptionRepositoryService;
+import com.ubiqube.etsi.mano.service.repository.ServersRepositoryService;
 import com.ubiqube.etsi.mano.service.rest.FluxRest;
 import com.ubiqube.etsi.mano.service.rest.ServerAdapter;
 import com.ubiqube.etsi.mano.service.rest.TracingFluxRest;
@@ -62,14 +62,14 @@ public class ServerService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ServerService.class);
 
-	private final ServersJpa serversJpa;
+	private final ServersRepositoryService serversJpa;
 	private final EventManager eventManager;
 	private final List<HttpGateway> httpGateway;
-	private final RemoteSubscriptionJpa remoteSubscriptionJpa;
+	private final RemoteSubscriptionRepositoryService remoteSubscriptionJpa;
 	private final ConfigurableApplicationContext springContext;
 
-	public ServerService(final ServersJpa serversJpa, final EventManager eventManager, @Lazy final List<HttpGateway> httpGateway, final ConfigurableApplicationContext springContext,
-			final RemoteSubscriptionJpa remoteSubscriptionJpa) {
+	public ServerService(final ServersRepositoryService serversJpa, final EventManager eventManager, @Lazy final List<HttpGateway> httpGateway, final ConfigurableApplicationContext springContext,
+			final RemoteSubscriptionRepositoryService remoteSubscriptionJpa) {
 		this.serversJpa = serversJpa;
 		this.eventManager = eventManager;
 		this.httpGateway = httpGateway.stream().sorted(Comparator.comparing(HttpGateway::getVersion)).toList();

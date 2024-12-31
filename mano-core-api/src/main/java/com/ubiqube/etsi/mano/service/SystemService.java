@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see https://www.gnu.org/licenses/.
  */
 package com.ubiqube.etsi.mano.service;
 
@@ -26,8 +26,6 @@ import com.ubiqube.etsi.mano.dao.mano.ResourceTypeEnum;
 import com.ubiqube.etsi.mano.dao.mano.v2.AbstractTask;
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
 import com.ubiqube.etsi.mano.exception.GenericException;
-import com.ubiqube.etsi.mano.jpa.SysConnectionJpa;
-import com.ubiqube.etsi.mano.jpa.SystemsJpa;
 import com.ubiqube.etsi.mano.orchestrator.entities.SystemConnections;
 import com.ubiqube.etsi.mano.orchestrator.entities.Systems;
 import com.ubiqube.etsi.mano.orchestrator.nodes.contrail.PortTupleNode;
@@ -61,6 +59,8 @@ import com.ubiqube.etsi.mano.orchestrator.nodes.vnfm.VnfExtCp;
 import com.ubiqube.etsi.mano.orchestrator.nodes.vnfm.VnfIndicator;
 import com.ubiqube.etsi.mano.orchestrator.nodes.vnfm.VnfPortNode;
 import com.ubiqube.etsi.mano.service.mapping.SystemConnectionsMapping;
+import com.ubiqube.etsi.mano.service.repository.SystemConnectionsRepositoryService;
+import com.ubiqube.etsi.mano.service.repository.SystemsRepositoryService;
 import com.ubiqube.etsi.mano.vnfm.service.graph.ResourceHolder;
 
 /**
@@ -70,13 +70,13 @@ import com.ubiqube.etsi.mano.vnfm.service.graph.ResourceHolder;
  */
 @Service
 public class SystemService {
-	private final SystemsJpa systemJpa;
-	private final SysConnectionJpa systemConnectionsJpa;
+	private final SystemsRepositoryService systemJpa;
+	private final SystemConnectionsRepositoryService systemConnectionsJpa;
 	private final Patcher patcher;
 	private final SystemConnectionsMapping systemConnectionsMapping;
 	private final ResourceTypeConverter<? extends AbstractTask> resourceTypeConverter;
 
-	public SystemService(final SystemsJpa systemJpa, final Patcher patcher, final SysConnectionJpa systemConnectionsJpa, final SystemConnectionsMapping systemConnectionsMapping, final ResourceTypeConverter resourceTypeConverter) {
+	public SystemService(final SystemsRepositoryService systemJpa, final Patcher patcher, final SystemConnectionsRepositoryService systemConnectionsJpa, final SystemConnectionsMapping systemConnectionsMapping, final ResourceTypeConverter resourceTypeConverter) {
 		this.systemJpa = systemJpa;
 		this.patcher = patcher;
 		this.systemConnectionsJpa = systemConnectionsJpa;

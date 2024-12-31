@@ -49,7 +49,7 @@ import org.springframework.stereotype.Component;
 
 import com.ubiqube.etsi.mano.dao.mano.config.Configurations;
 import com.ubiqube.etsi.mano.exception.GenericException;
-import com.ubiqube.etsi.mano.jpa.config.ConfigurationsJpa;
+import com.ubiqube.etsi.mano.service.repository.ConfigurationsRepositoryService;
 
 import jakarta.annotation.Nullable;
 
@@ -69,11 +69,11 @@ public class K8sPkService {
 	private static final String K8S_PRIVATE_KEY = "k8s.private-key";
 	private static final String K8S_PUBLIC_KEY = "k8s.public-key";
 
-	private final ConfigurationsJpa configurations;
+	private final ConfigurationsRepositoryService configurations;
 
 	private final KeyPair keyPair;
 
-	public K8sPkService(final ConfigurationsJpa configurations) {
+	public K8sPkService(final ConfigurationsRepositoryService configurations) {
 		this.configurations = configurations;
 		keyPair = run();
 	}

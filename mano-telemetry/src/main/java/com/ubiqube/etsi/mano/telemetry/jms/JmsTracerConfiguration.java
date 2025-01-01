@@ -35,7 +35,7 @@ import brave.messaging.MessagingRequest;
 import brave.messaging.MessagingTracing;
 import brave.messaging.MessagingTracingCustomizer;
 import brave.sampler.SamplerFunction;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 @Configuration(proxyBeanMethods = false)
 @Role(BeanDefinition.ROLE_INFRASTRUCTURE)

@@ -34,7 +34,7 @@ import org.springframework.jms.listener.adapter.MessagingMessageListenerAdapter;
 import brave.Span;
 import brave.jakarta.jms.JmsTracing;
 import brave.propagation.CurrentTraceContext;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import jakarta.jms.JMSException;
 import jakarta.jms.Message;
 import jakarta.jms.MessageListener;

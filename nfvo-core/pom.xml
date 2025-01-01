@@ -16,6 +16,10 @@
 			<artifactId>jakarta.validation-api</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.tngtech.archunit</groupId>
+			<artifactId>archunit-junit5</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>com.github.dexecutor</groupId>
 			<artifactId>dexecutor-core</artifactId>
 		</dependency>

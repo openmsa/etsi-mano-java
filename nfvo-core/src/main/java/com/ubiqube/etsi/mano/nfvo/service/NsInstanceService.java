@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 package com.ubiqube.etsi.mano.nfvo.service;
 
@@ -35,30 +35,30 @@ import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsdTask;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.grammar.GrammarNodeResult;
 import com.ubiqube.etsi.mano.grammar.GrammarParser;
-import com.ubiqube.etsi.mano.nfvo.jpa.NsLiveInstanceJpa;
-import com.ubiqube.etsi.mano.nfvo.jpa.NsVirtualLinkJpa;
-import com.ubiqube.etsi.mano.nfvo.jpa.NsVnfPackageJpa;
-import com.ubiqube.etsi.mano.nfvo.jpa.NsdInstanceJpa;
+import com.ubiqube.etsi.mano.nfvo.service.repository.NsLiveInstanceRepositoryService;
+import com.ubiqube.etsi.mano.nfvo.service.repository.NsVirtualLinkRepositoryService;
+import com.ubiqube.etsi.mano.nfvo.service.repository.NsVnfPackageRepositoryService;
+import com.ubiqube.etsi.mano.nfvo.service.repository.NsdInstanceRepositoryService;
 import com.ubiqube.etsi.mano.service.search.ManoSearch;
 
 import jakarta.transaction.Transactional;
 
 @Service
 public class NsInstanceService {
-	private final NsVirtualLinkJpa nsVirtualLinkJpa;
+	private final NsVirtualLinkRepositoryService nsVirtualLinkJpa;
 
-	private final NsVnfPackageJpa vnfPackageJpa;
+	private final NsVnfPackageRepositoryService vnfPackageJpa;
 
-	private final NsdInstanceJpa nsdInstanceJpa;
+	private final NsdInstanceRepositoryService nsdInstanceJpa;
 
-	private final NsLiveInstanceJpa nsLiveInstanceJpa;
+	private final NsLiveInstanceRepositoryService nsLiveInstanceJpa;
 
 	private final GrammarParser grammarParser;
 
 	private final ManoSearch manoSearch;
 
-	public NsInstanceService(final NsVirtualLinkJpa nsVirtualLinkJpa, final NsVnfPackageJpa vnfPackageJpa,
-			final NsdInstanceJpa nsdInstanceJpa, final NsLiveInstanceJpa nsLiveInstanceJpa, final GrammarParser grammarParser,
+	public NsInstanceService(final NsVirtualLinkRepositoryService nsVirtualLinkJpa, final NsVnfPackageRepositoryService vnfPackageJpa,
+			final NsdInstanceRepositoryService nsdInstanceJpa, final NsLiveInstanceRepositoryService nsLiveInstanceJpa, final GrammarParser grammarParser,
 			final ManoSearch manoSearch) {
 		this.nsVirtualLinkJpa = nsVirtualLinkJpa;
 		this.vnfPackageJpa = vnfPackageJpa;

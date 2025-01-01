@@ -48,13 +48,13 @@ import de.codecentric.boot.admin.server.ui.config.AdminServerUiProperties.UiThem
 import de.codecentric.boot.admin.server.ui.config.CssColorUtils;
 import de.codecentric.boot.admin.server.ui.web.UiController;
 import de.codecentric.boot.admin.server.web.InstanceWebProxy.InstanceResponse;
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 public class CustomHint implements RuntimeHintsRegistrar {
 
 	@Override
-	public void registerHints(final @Nonnull RuntimeHints hints, final @Nullable ClassLoader classLoader) {
+	public void registerHints(final @NonNull RuntimeHints hints, final @Nullable ClassLoader classLoader) {
 		hints.resources().registerPattern("META-INF/spring-boot-admin-server-ui/*");
 		hints.reflection().registerType(UiController.Settings.class, MemberCategory.INVOKE_PUBLIC_METHODS);
 		hints.reflection().registerType(UiTheme.class, MemberCategory.INVOKE_PUBLIC_METHODS);

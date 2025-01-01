@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see https://www.gnu.org/licenses/.
  */
 package com.ubiqube.grammar;
 
@@ -34,7 +34,7 @@ import com.ubiqube.etsi.mano.grammar.JsonBeanUtil;
 class JsonBeanUtilTest {
 
 	@Test
-	void testVnfPkg() throws Exception {
+	void testVnfPkg() {
 		final JsonBeanUtil jsonBeanUtil = new JsonBeanUtil();
 		final Object _object = new VnfPkgInfo();
 		final Map<String, JsonBeanProperty> res = jsonBeanUtil.getProperties(_object);
@@ -54,7 +54,7 @@ class JsonBeanUtilTest {
 	}
 
 	@Test
-	void testSubscription() throws Exception {
+	void testSubscription() {
 		final JsonBeanUtil jsonBeanUtil = new JsonBeanUtil();
 		final VnfPkgInfo _object = new VnfPkgInfo();
 		final List<VnfPackageSoftwareImageInfo> softwareImages = new ArrayList<>();
@@ -75,12 +75,33 @@ class JsonBeanUtilTest {
 	}
 
 	@Test
-	void testCache() throws Exception {
+	void testCache() {
 		final JsonBeanUtil jsonBeanUtil = new JsonBeanUtil();
 		final Object _object = new VnfPkgInfo();
 		final Map<String, JsonBeanProperty> res1 = jsonBeanUtil.getProperties(_object);
 		final Map<String, JsonBeanProperty> res2 = jsonBeanUtil.getProperties(_object);
 
 		assertEquals(res1, res2, "Result should be the same.");
+	}
+
+	@Test
+	void testStackOverflow() {
+		final JsonBeanUtil jsonBeanUtil = new JsonBeanUtil();
+		final Map<String, JsonBeanProperty> res = jsonBeanUtil.getPropertiesFromClass(RecursiveClass.class);
+		assertNotNull(res);
+		assertNotNull(res.get("recursiveField"));
+	}
+
+	// A sample class to trigger the stack overflow
+	public static class RecursiveClass {
+		private RecursiveClass recursiveField;
+
+		public RecursiveClass getRecursiveField() {
+			return recursiveField;
+		}
+
+		public void setRecursiveField(final RecursiveClass recursiveField) {
+			this.recursiveField = recursiveField;
+		}
 	}
 }

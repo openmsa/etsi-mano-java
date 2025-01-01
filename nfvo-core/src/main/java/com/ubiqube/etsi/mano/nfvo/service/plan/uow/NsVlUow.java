@@ -28,17 +28,17 @@ import com.ubiqube.etsi.mano.orchestrator.vt.VirtualTaskV3;
 import com.ubiqube.etsi.mano.service.vim.AbstractUnitOfWork;
 import com.ubiqube.etsi.mano.service.vim.Vim;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 public class NsVlUow extends AbstractUnitOfWork<NsVirtualLinkTask> {
-	@Nonnull
+	@NonNull
 	private final NsVirtualLinkTask task;
 	@Nullable
 	private final VlProtocolData vlProtocolData;
-	@Nonnull
+	@NonNull
 	private final Vim vim;
-	@Nonnull
+	@NonNull
 	private final VimConnectionInformation vimConnectionInformation;
 
 	public NsVlUow(final VirtualTaskV3<NsVirtualLinkTask> task, final Vim vim, final VimConnectionInformation vimConnectionInformation) {

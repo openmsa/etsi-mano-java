@@ -16,7 +16,7 @@
  */
 package com.ubiqube.etsi.mano.nfvo.factory;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import com.ubiqube.etsi.mano.dao.mano.InstantiationState;
 import com.ubiqube.etsi.mano.dao.mano.VnfInstance;
@@ -28,7 +28,7 @@ public class NsInstanceFactory {
 		// Nothing.
 	}
 
-	@Nonnull
+	@NonNull
 	public static VnfInstance createNsInstancesNsInstanceVnfInstance(final VnfInstance vnfInstance, final VnfPackage vnfPkgInfo) {
 		final VnfInstance nsInstancesNsInstanceVnfInstance = new VnfInstance();
 		nsInstancesNsInstanceVnfInstance.setId(vnfInstance.getId());

@@ -26,8 +26,8 @@ import com.ubiqube.etsi.mano.service.vim.AbstractUnitOfWork;
 import com.ubiqube.etsi.mano.tf.ContrailApi;
 import com.ubiqube.etsi.mano.tf.entities.ServiceInstanceTask;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  *
@@ -35,9 +35,9 @@ import jakarta.annotation.Nullable;
  *
  */
 public class ServiceInstanceUow extends AbstractUnitOfWork<ServiceInstanceTask> {
-	@Nonnull
+	@NonNull
 	private final SystemConnections vimConnectionInformation;
-	@Nonnull
+	@NonNull
 	private final ServiceInstanceTask task;
 
 	public ServiceInstanceUow(final VirtualTaskV3<ServiceInstanceTask> task, final SystemConnections vim) {

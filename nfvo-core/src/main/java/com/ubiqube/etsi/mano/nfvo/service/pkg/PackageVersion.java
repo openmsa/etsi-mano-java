@@ -16,7 +16,7 @@
  */
 package com.ubiqube.etsi.mano.nfvo.service.pkg;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class PackageVersion {
 	@Nullable

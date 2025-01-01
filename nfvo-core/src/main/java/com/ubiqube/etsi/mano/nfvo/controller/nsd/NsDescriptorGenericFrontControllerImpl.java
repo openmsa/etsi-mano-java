@@ -43,7 +43,7 @@ import com.ubiqube.etsi.mano.dao.mano.NsdPackage;
 import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.repository.ManoResource;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
  *
@@ -54,7 +54,7 @@ import jakarta.annotation.Nonnull;
 public class NsDescriptorGenericFrontControllerImpl implements NsDescriptorGenericFrontController {
 
 	private static final String NSD_SEARCH_DEFAULT_EXCLUDE_FIELDS = "userDefinedData";
-	@Nonnull
+	@NonNull
 	private static final Set<String> NSD_SEARCH_MANDATORY_FIELDS = new HashSet<>(Arrays.asList("id", "nsdOnboardingState", "nsdOperationalState", "nsdUsageState", "_links", "_links.self.href", "_links.nsd_content.href"));
 
 	private final NsdController nsdController;

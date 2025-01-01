@@ -33,8 +33,8 @@ import org.springframework.util.MultiValueMap;
 import com.ubiqube.etsi.mano.controller.nsd.PnfFrontController;
 import com.ubiqube.etsi.mano.dao.mano.PnfDescriptor;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  *
@@ -43,7 +43,7 @@ import jakarta.annotation.Nullable;
  */
 @Service
 public class PnfFrontControllerImpl implements PnfFrontController {
-	@Nonnull
+	@NonNull
 	private static final Set<String> PNFD_SEARCH_MANDATORY_FIELDS = new HashSet<>(Arrays.asList("id"));
 
 	private static final String PNFD_SEARCH_DEFAULT_EXCLUDE_FIELDS = "userDefinedData";

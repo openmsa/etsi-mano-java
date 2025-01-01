@@ -45,8 +45,8 @@ import com.ubiqube.etsi.mano.orchestrator.vt.VirtualTaskV3;
 import com.ubiqube.etsi.mano.service.VnfmInterface;
 import com.ubiqube.etsi.mano.service.vim.AbstractUnitOfWork;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  *
@@ -56,11 +56,11 @@ import jakarta.annotation.Nullable;
 public class VnfInstantiateUow extends AbstractUnitOfWork<NsVnfInstantiateTask> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(VnfInstantiateUow.class);
-	@Nonnull
+	@NonNull
 	private final VnfmInterface vnfm;
-	@Nonnull
+	@NonNull
 	private final NsVnfInstantiateTask task;
-	@Nonnull
+	@NonNull
 	private final BiFunction<Servers, UUID, VnfBlueprint> func;
 
 	public VnfInstantiateUow(final VirtualTaskV3<NsVnfInstantiateTask> task, final VnfmInterface vnfm) {

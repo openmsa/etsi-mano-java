@@ -33,7 +33,7 @@ import com.ubiqube.etsi.mano.dao.mano.alarm.AckState;
 import com.ubiqube.etsi.mano.dao.mano.alarm.Alarms;
 import com.ubiqube.etsi.mano.nfvo.service.NfvoAlarmService;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 @Service
 public class NsAlarmFrontControllerImpl implements NsAlarmFrontController {

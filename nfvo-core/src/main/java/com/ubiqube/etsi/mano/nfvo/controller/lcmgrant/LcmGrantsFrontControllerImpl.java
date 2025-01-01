@@ -34,7 +34,7 @@ import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
 import com.ubiqube.etsi.mano.dao.rfc7807.FailureDetails;
 import com.ubiqube.etsi.mano.service.vim.VimTypeConverter;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.validation.Valid;
 
 /**
@@ -47,7 +47,7 @@ public class LcmGrantsFrontControllerImpl implements LcmGrantsFrontController {
 	private final GrantManagement grantManagement;
 	private final VimTypeConverter vimTypeConverter;
 
-	public LcmGrantsFrontControllerImpl(final @Nonnull GrantManagement grantManagement, final VimTypeConverter vimTypeConverter) {
+	public LcmGrantsFrontControllerImpl(final @NonNull GrantManagement grantManagement, final VimTypeConverter vimTypeConverter) {
 		this.grantManagement = grantManagement;
 		this.vimTypeConverter = vimTypeConverter;
 	}

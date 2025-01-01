@@ -38,12 +38,12 @@ import org.springframework.core.io.InputStreamSource;
 import com.ubiqube.etsi.mano.dao.mano.NsdPackage;
 import com.ubiqube.etsi.mano.exception.GenericException;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 @ExtendWith(MockitoExtension.class)
 class NsDescriptorGenericFrontControllerImplTest {
 	@Mock
-	@Nonnull
+	@NonNull
 	private NsdController nsdController;
 
 	@Test

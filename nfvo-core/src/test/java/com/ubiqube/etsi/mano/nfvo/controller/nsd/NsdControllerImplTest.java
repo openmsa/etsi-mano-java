@@ -43,16 +43,16 @@ import com.ubiqube.etsi.mano.service.search.SearchableService;
 @ExtendWith(MockitoExtension.class)
 class NsdControllerImplTest {
 	@Mock
-	@Nonnull
+	@NonNull
 	private NsdRepository nsdRepository;
 	@Mock
-	@Nonnull
+	@NonNull
 	private Patcher patcher;
 	@Mock
-	@Nonnull
+	@NonNull
 	private EventManager eventManager;
 	@Mock
-	@Nonnull
+	@NonNull
 	private SearchableService searchableService;
 
 	@Test

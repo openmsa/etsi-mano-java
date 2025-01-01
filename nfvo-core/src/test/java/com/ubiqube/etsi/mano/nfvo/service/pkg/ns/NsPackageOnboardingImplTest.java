@@ -41,36 +41,36 @@ import com.ubiqube.etsi.mano.service.event.EventManager;
 import com.ubiqube.etsi.mano.service.pkg.PackageDescriptor;
 import com.ubiqube.etsi.mano.service.pkg.ns.NsPackageProvider;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 @ExtendWith(MockitoExtension.class)
 class NsPackageOnboardingImplTest {
 	@Mock
-	@Nonnull
+	@NonNull
 	private EventManager eventManager;
 	@Mock
-	@Nonnull
+	@NonNull
 	private NsPackageManager packageManager;
 	@Mock
-	@Nonnull
+	@NonNull
 	private NsdRepository nsdRepository;
 	@Mock
-	@Nonnull
+	@NonNull
 	private NsOnboardingMapperService nsOnboardingMapperService;
 	@Mock
-	@Nonnull
+	@NonNull
 	private NsdPackageRepositoryService nsdPackageJpa;
 	@Mock
-	@Nonnull
+	@NonNull
 	private NsPackageProvider packageProvider;
 	@Mock
-	@Nonnull
+	@NonNull
 	private PackageDescriptor<NsPackageProvider> pkgDescr;
 	@Mock
-	@Nonnull
+	@NonNull
 	private ManoResource manoResource;
 	@Mock
-	@Nonnull
+	@NonNull
 	private InputStream inputStream;
 
 	@Test

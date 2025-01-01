@@ -32,7 +32,7 @@ import com.ubiqube.etsi.mano.service.event.Notifications;
 import com.ubiqube.etsi.mano.service.event.model.Subscription;
 import com.ubiqube.etsi.mano.service.rest.ServerAdapter;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 @Service
 public class VnfSubscriptionManagementImpl implements VnfSubscriptionManagement {
@@ -49,7 +49,7 @@ public class VnfSubscriptionManagementImpl implements VnfSubscriptionManagement 
 	}
 
 	@Override
-	public void vnfPackageChangeNotificationPost(@Nonnull final VnfPackageChangeNotification notificationsMessage) {
+	public void vnfPackageChangeNotificationPost(@NonNull final VnfPackageChangeNotification notificationsMessage) {
 		final UUID subscriptionId = UUID.fromString(notificationsMessage.getSubscriptionId());
 
 		final Subscription subscriptionsRepository = subscriptionService.findById(subscriptionId, ApiVersionType.SOL005_VNFPKGM);
@@ -59,7 +59,7 @@ public class VnfSubscriptionManagementImpl implements VnfSubscriptionManagement 
 	}
 
 	@Override
-	public void vnfPackageOnboardingNotificationPost(@Nonnull final VnfPackageOnboardingNotification notificationsMessage) {
+	public void vnfPackageOnboardingNotificationPost(@NonNull final VnfPackageOnboardingNotification notificationsMessage) {
 		final UUID subscriptionId = UUID.fromString(notificationsMessage.getSubscriptionId());
 		final Subscription subscription = subscriptionService.findById(subscriptionId, ApiVersionType.SOL005_VNFPKGM);
 		final URI cbUrl = subscription.getCallbackUri();

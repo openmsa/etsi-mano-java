@@ -18,7 +18,7 @@ package com.ubiqube.etsi.mano.nfvo.factory;
 
 import java.time.OffsetDateTime;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import com.ubiqube.etsi.mano.dao.mano.NsdInstance;
 import com.ubiqube.etsi.mano.dao.mano.v2.BlueprintParameters;
@@ -31,7 +31,7 @@ public final class LcmFactory {
 		// Nothing.
 	}
 
-	@Nonnull
+	@NonNull
 	public static NsBlueprint createNsLcmOpOcc(final NsdInstance nsInstance, final PlanOperationType lcmOperationType) {
 		final NsBlueprint nsLcmOpOccsNsLcmOpOcc = new NsBlueprint();
 		nsLcmOpOccsNsLcmOpOcc.setOperation(lcmOperationType);

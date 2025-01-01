@@ -33,7 +33,7 @@ import com.ubiqube.etsi.mano.model.VnfInstantiate;
 import com.ubiqube.etsi.mano.model.VnfScaleRequest;
 import com.ubiqube.etsi.mano.service.VnfmInterface;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -52,7 +52,7 @@ public class VnfmNfvo implements VnfmInterface {
 	}
 
 	@Override
-	public VnfBlueprint vnfInstatiate(final Servers servers, final @Nonnull String vnfInstanceId, final VnfInstantiate instantiateVnfRequest) {
+	public VnfBlueprint vnfInstatiate(final Servers servers, final @NonNull String vnfInstanceId, final VnfInstantiate instantiateVnfRequest) {
 		return lcm.instantiate(servers, getSafeUUID(vnfInstanceId), instantiateVnfRequest);
 	}
 
@@ -62,17 +62,17 @@ public class VnfmNfvo implements VnfmInterface {
 	}
 
 	@Override
-	public VnfBlueprint vnfTerminate(final Servers servers, final @Nonnull String nsInstanceId) {
+	public VnfBlueprint vnfTerminate(final Servers servers, final @NonNull String nsInstanceId) {
 		return lcm.terminate(servers, getSafeUUID(nsInstanceId), CancelModeTypeEnum.FORCEFUL, null);
 	}
 
 	@Override
-	public VnfBlueprint vnfScale(final Servers servers, final @Nonnull UUID vnfInstanceId, final VnfScaleRequest vnfScaleRequest) {
+	public VnfBlueprint vnfScale(final Servers servers, final @NonNull UUID vnfInstanceId, final VnfScaleRequest vnfScaleRequest) {
 		return lcm.scale(servers, vnfInstanceId, vnfScaleRequest);
 	}
 
 	@Override
-	public VnfBlueprint vnfHeal(final Servers servers, final @Nonnull UUID vnfInstanceId, final VnfHealRequest vnfHealRequest) {
+	public VnfBlueprint vnfHeal(final Servers servers, final @NonNull UUID vnfInstanceId, final VnfHealRequest vnfHealRequest) {
 		return lcm.heal(servers, vnfInstanceId, vnfHealRequest);
 	}
 

@@ -16,7 +16,7 @@
  */
 package com.ubiqube.etsi.mano.nfvo.service.pkg.ns;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import com.ubiqube.etsi.mano.repository.ManoResource;
 import com.ubiqube.etsi.mano.service.pkg.PackageDescriptor;

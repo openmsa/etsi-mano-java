@@ -27,8 +27,8 @@ import com.ubiqube.etsi.mano.service.vim.AbstractUnitOfWork;
 import com.ubiqube.etsi.mano.tf.ContrailApi;
 import com.ubiqube.etsi.mano.tf.entities.PortTupleTask;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  *
@@ -36,9 +36,9 @@ import jakarta.annotation.Nullable;
  *
  */
 public class PortTupleUow extends AbstractUnitOfWork<PortTupleTask> {
-	@Nonnull
+	@NonNull
 	private final SystemConnections vimConnectionInformation;
-	@Nonnull
+	@NonNull
 	private final PortTupleTask task;
 
 	public PortTupleUow(final VirtualTaskV3<PortTupleTask> task, final SystemConnections vimConnectionInformation) {

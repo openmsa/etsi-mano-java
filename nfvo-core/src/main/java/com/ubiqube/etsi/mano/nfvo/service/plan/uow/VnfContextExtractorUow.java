@@ -38,8 +38,8 @@ import com.ubiqube.etsi.mano.orchestrator.vt.VirtualTaskV3;
 import com.ubiqube.etsi.mano.service.VnfmInterface;
 import com.ubiqube.etsi.mano.service.vim.AbstractUnitOfWork;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Extract VNF instance information and put them inside the WF context.
@@ -49,11 +49,11 @@ import jakarta.annotation.Nullable;
  */
 public class VnfContextExtractorUow extends AbstractUnitOfWork<NsVnfExtractorTask> {
 	private static final Pattern pVl = Pattern.compile("virtual_link_(?<idx>\\d+)");
-	@Nonnull
+	@NonNull
 	private final VnfmInterface vnfm;
-	@Nonnull
+	@NonNull
 	private final NsdPackage pack;
-	@Nonnull
+	@NonNull
 	private final NsVnfExtractorTask task;
 
 	public VnfContextExtractorUow(final VirtualTaskV3<NsVnfExtractorTask> task, final VnfmInterface vnfm, final NsdPackage pack) {

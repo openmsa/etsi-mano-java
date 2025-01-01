@@ -23,14 +23,14 @@ import com.ubiqube.etsi.mano.dao.mano.PackageOperationalState;
 import com.ubiqube.etsi.mano.dao.mano.UsageStateEnum;
 import com.ubiqube.etsi.mano.dao.mano.VnfPackage;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 public class VnfPackageFactory {
 	private VnfPackageFactory() {
 		// Nothing.
 	}
 
-	@Nonnull
+	@NonNull
 	public static VnfPackage createVnfPkgInfo(final Map<String, String> userData) {
 		final VnfPackage vnfPkgInfo = new VnfPackage();
 		vnfPkgInfo.setOnboardingState(OnboardingStateType.CREATED);

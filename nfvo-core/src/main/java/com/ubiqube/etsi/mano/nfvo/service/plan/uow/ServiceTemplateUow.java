@@ -24,13 +24,13 @@ import com.ubiqube.etsi.mano.service.vim.AbstractUnitOfWork;
 import com.ubiqube.etsi.mano.tf.ContrailApi;
 import com.ubiqube.etsi.mano.tf.entities.ServiceTemplateTask;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 public class ServiceTemplateUow extends AbstractUnitOfWork<ServiceTemplateTask> {
-	@Nonnull
+	@NonNull
 	private final SystemConnections vimConnectionInformation;
-	@Nonnull
+	@NonNull
 	private final ServiceTemplateTask task;
 
 	public ServiceTemplateUow(final VirtualTaskV3<ServiceTemplateTask> task, final SystemConnections vimConnectionInformation) {

@@ -41,7 +41,7 @@ import com.ubiqube.etsi.mano.service.event.OrchestrationAdapter;
 import com.ubiqube.etsi.mano.service.event.model.NotificationEvent;
 import com.ubiqube.etsi.mano.service.graph.WorkflowEvent;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -77,12 +77,12 @@ public class NsOrchestrationAdapter implements OrchestrationAdapter<NsTask, NsdI
 	}
 
 	@Override
-	public @Nonnull Blueprint<NsTask, NsdInstance> getBluePrint(final UUID blueprintId) {
+	public @NonNull Blueprint<NsTask, NsdInstance> getBluePrint(final UUID blueprintId) {
 		return blueprintService.findById(blueprintId);
 	}
 
 	@Override
-	public @Nonnull Instance getInstance(final UUID blueprintId) {
+	public @NonNull Instance getInstance(final UUID blueprintId) {
 		return instanceService.findById(blueprintId);
 	}
 

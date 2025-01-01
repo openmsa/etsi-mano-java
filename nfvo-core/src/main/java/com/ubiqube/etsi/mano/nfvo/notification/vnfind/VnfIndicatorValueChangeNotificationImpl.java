@@ -69,7 +69,7 @@ import com.ubiqube.etsi.mano.service.cond.Context;
 import com.ubiqube.etsi.mano.service.cond.Node;
 import com.ubiqube.etsi.mano.service.repository.VnfPackageRepositoryService;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.validation.constraints.NotNull;
 
 @Component
@@ -161,7 +161,7 @@ public class VnfIndicatorValueChangeNotificationImpl {
 		}
 	}
 
-	private NsLiveInstance findSingleLiveInstanceByResourceId(final @Nonnull String resourceId) {
+	private NsLiveInstance findSingleLiveInstanceByResourceId(final @NonNull String resourceId) {
 		final List<NsLiveInstance> res = nsLiveInstanceJpa.findByResourceId(resourceId);
 		if (res.size() != 1) {
 			throw new GenericException("Trying to select a single resource with id: " + resourceId + ", but got: " + res.size());

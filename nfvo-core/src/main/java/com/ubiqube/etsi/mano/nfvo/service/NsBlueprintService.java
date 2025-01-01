@@ -33,7 +33,7 @@ import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsBlueprint;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsTask;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsVirtualLink;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 public interface NsBlueprintService {
 
@@ -41,7 +41,7 @@ public interface NsBlueprintService {
 
 	NsBlueprint findById(UUID blueprintId);
 
-	@Nonnull
+	@NonNull
 	NsBlueprint save(NsBlueprint nsBlueprint);
 
 	<U> ResponseEntity<String> search(final MultiValueMap<String, String> requestParams, final Function<NsBlueprint, U> mapper, final String excludeDefaults, final Set<String> mandatoryFields, final Consumer<U> makeLink, Class<U> frontClass);

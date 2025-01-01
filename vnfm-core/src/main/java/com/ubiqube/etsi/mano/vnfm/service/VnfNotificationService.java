@@ -35,7 +35,7 @@ import com.ubiqube.etsi.mano.service.event.ActionType;
 import com.ubiqube.etsi.mano.service.event.EventManager;
 import com.ubiqube.etsi.mano.service.repository.RemoteSubscriptionRepositoryService;
 import com.ubiqube.etsi.mano.service.repository.VnfPackageRepositoryService;
-import com.ubiqube.etsi.mano.vnfm.jpa.VnfPackageOnboardingNotificationJpa;
+import com.ubiqube.etsi.mano.vnfm.service.repository.VnfPackageOnboardingNotificationRepositoryService;
 
 /**
  *
@@ -46,12 +46,12 @@ import com.ubiqube.etsi.mano.vnfm.jpa.VnfPackageOnboardingNotificationJpa;
 public class VnfNotificationService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(VnfNotificationService.class);
-	private final VnfPackageOnboardingNotificationJpa vnfPackageOnboardingNotificationJpa;
+	private final VnfPackageOnboardingNotificationRepositoryService vnfPackageOnboardingNotificationJpa;
 	private final EventManager eventManager;
 	private final RemoteSubscriptionRepositoryService remoteSubscriptionJpa;
 	private final VnfPackageRepositoryService vnfPackageJpa;
 
-	public VnfNotificationService(final VnfPackageOnboardingNotificationJpa vnfPackageOnboardingNotificationJpa, final EventManager eventManager, final RemoteSubscriptionRepositoryService remoteSubscriptionJpa, final VnfPackageRepositoryService vnfPackageJpa) {
+	public VnfNotificationService(final VnfPackageOnboardingNotificationRepositoryService vnfPackageOnboardingNotificationJpa, final EventManager eventManager, final RemoteSubscriptionRepositoryService remoteSubscriptionJpa, final VnfPackageRepositoryService vnfPackageJpa) {
 		this.vnfPackageOnboardingNotificationJpa = vnfPackageOnboardingNotificationJpa;
 		this.eventManager = eventManager;
 		this.remoteSubscriptionJpa = remoteSubscriptionJpa;

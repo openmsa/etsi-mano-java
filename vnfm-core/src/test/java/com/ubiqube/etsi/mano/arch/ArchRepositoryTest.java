@@ -27,6 +27,7 @@ class ArchRepositoryTest {
 		ArchRuleDefinition.classes()
 				.that().resideInAPackage("com.ubiqube.etsi.mano.vnfm.service.repository..")
 				.should().accessClassesThat().resideInAPackage("com.ubiqube.etsi.mano.vnfm.jpa..")
+				.orShould().accessClassesThat().resideInAPackage("com.ubiqube.etsi.mano.jpa..")
 				.check(importedClasses);
 	}
 

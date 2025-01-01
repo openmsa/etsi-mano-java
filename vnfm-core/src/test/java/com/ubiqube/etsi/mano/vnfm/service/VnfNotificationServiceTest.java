@@ -22,6 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -38,12 +39,12 @@ import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.service.event.EventManager;
 import com.ubiqube.etsi.mano.service.repository.RemoteSubscriptionRepositoryService;
 import com.ubiqube.etsi.mano.service.repository.VnfPackageRepositoryService;
-import com.ubiqube.etsi.mano.vnfm.jpa.VnfPackageOnboardingNotificationJpa;
+import com.ubiqube.etsi.mano.vnfm.service.repository.VnfPackageOnboardingNotificationRepositoryService;
 
 @ExtendWith(MockitoExtension.class)
 class VnfNotificationServiceTest {
 	@Mock
-	private VnfPackageOnboardingNotificationJpa vnfPkgOnboardNotif;
+	private VnfPackageOnboardingNotificationRepositoryService vnfPkgOnboardNotif;
 	@Mock
 	private EventManager eventManager;
 	@Mock
@@ -88,7 +89,7 @@ class VnfNotificationServiceTest {
 		final RemoteSubscription remoteSubs = new RemoteSubscription();
 		when(remoteSubscription.findByRemoteSubscriptionId(any())).thenReturn(List.of(remoteSubs));
 		final VnfPackage vnfPkg = new VnfPackage();
-		when(vnfPackageJpa.findByVnfdId(any())).thenReturn(vnfPkg);
+		when(vnfPackageJpa.findByVnfdIdOpt(any())).thenReturn(Optional.of(vnfPkg));
 		srv.onChange(event);
 		assertTrue(true);
 	}

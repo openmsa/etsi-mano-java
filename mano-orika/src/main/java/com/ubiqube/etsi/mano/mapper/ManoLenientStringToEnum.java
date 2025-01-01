@@ -25,7 +25,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.convert.converter.ConverterFactory;
 import org.springframework.util.Assert;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class ManoLenientStringToEnum implements ConverterFactory<String, Enum> {

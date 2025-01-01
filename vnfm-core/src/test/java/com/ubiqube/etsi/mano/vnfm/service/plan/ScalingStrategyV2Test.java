@@ -36,12 +36,12 @@ import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.vnfm.service.plan.ScalingStrategy.NumberOfCompute;
 import com.ubiqube.etsi.mano.vnfm.service.repository.VnfBlueprintRepositoryService;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 @ExtendWith(MockitoExtension.class)
 class ScalingStrategyV2Test {
 	@Mock
-	@Nonnull
+	@NonNull
 	private VnfBlueprintRepositoryService planService;
 
 	@Test

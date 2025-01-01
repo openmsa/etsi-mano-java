@@ -32,13 +32,13 @@ import com.ubiqube.etsi.mano.service.vim.VimManager;
 import com.ubiqube.etsi.mano.vim.k8s.OsClusterService;
 import com.ubiqube.etsi.mano.vnfm.service.plan.contributors.uow.capi.OsCapiClusterUow;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 @Service
 public class OsCapiContainerDeployable extends AbstractVimSystemV3<OsContainerDeployableTask> {
-	@Nonnull
+	@NonNull
 	private final OsClusterService osCluster;
-	@Nonnull
+	@NonNull
 	private final CapiServerJpa capiServerJpa;
 
 	protected OsCapiContainerDeployable(final VimManager vimManager, final CapiServerJpa capiServerJpa, final OsClusterService osCluster) {

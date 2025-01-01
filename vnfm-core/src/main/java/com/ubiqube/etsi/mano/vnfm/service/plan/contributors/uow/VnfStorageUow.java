@@ -23,7 +23,7 @@ import com.ubiqube.etsi.mano.orchestrator.nodes.vnfm.Storage;
 import com.ubiqube.etsi.mano.orchestrator.vt.VirtualTaskV3;
 import com.ubiqube.etsi.mano.service.vim.Vim;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class VnfStorageUow extends AbstractVnfmUow<StorageTask> {
 	private final Vim vim;

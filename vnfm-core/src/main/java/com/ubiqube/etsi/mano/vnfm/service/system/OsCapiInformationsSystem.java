@@ -33,15 +33,15 @@ import com.ubiqube.etsi.mano.vim.k8s.OsClusterService;
 import com.ubiqube.etsi.mano.vnfm.jpa.K8sServerInfoJpa;
 import com.ubiqube.etsi.mano.vnfm.service.plan.contributors.uow.capi.OsCapiClusterInfoUow;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 @Service
 public class OsCapiInformationsSystem extends AbstractVimSystemV3<K8sInformationsTask> {
-	@Nonnull
+	@NonNull
 	private final OsClusterService osClusterService;
-	@Nonnull
+	@NonNull
 	private final K8sServerInfoJpa serverInfoJpa;
-	@Nonnull
+	@NonNull
 	private final CapiServerJpa capiServerJpa;
 
 	protected OsCapiInformationsSystem(final VimManager vimManager, final K8sServerInfoJpa serverInfoJpa, final OsClusterService osClusterService, final CapiServerJpa capiServerJpa) {

@@ -34,7 +34,7 @@ import com.ubiqube.etsi.mano.orchestrator.vt.VirtualTaskV3;
 import com.ubiqube.etsi.mano.service.vim.Vim;
 import com.ubiqube.etsi.mano.vnfm.jpa.K8sServerInfoJpa;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class OsK8sClusterInfoUow extends AbstractVnfmUow<K8sInformationsTask> {
 

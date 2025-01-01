@@ -25,7 +25,7 @@ import com.ubiqube.etsi.mano.orchestrator.ResultType;
 import com.ubiqube.etsi.mano.orchestrator.SystemBuilder;
 import com.ubiqube.etsi.mano.orchestrator.vt.VirtualTaskV3;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -27,15 +27,15 @@ import com.ubiqube.etsi.mano.service.vim.CnfK8sParams;
 import com.ubiqube.etsi.mano.service.vim.Vim;
 import com.ubiqube.etsi.mano.vnfm.service.plan.contributors.uow.AbstractVnfmUow;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 public class OsMagnumContainerUow extends AbstractVnfmUow<OsContainerTask> {
-	@Nonnull
+	@NonNull
 	private final Vim vim;
-	@Nonnull
+	@NonNull
 	private final VimConnectionInformation vimConnectionInformation;
-	@Nonnull
+	@NonNull
 	private final OsContainerTask task;
 
 	public OsMagnumContainerUow(final VirtualTaskV3<OsContainerTask> task, final Vim vim, final VimConnectionInformation vimConnectionInformation) {

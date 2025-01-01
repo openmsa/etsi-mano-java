@@ -31,7 +31,7 @@ import com.ubiqube.etsi.mano.service.system.AbstractVimSystemV3;
 import com.ubiqube.etsi.mano.service.vim.VimManager;
 import com.ubiqube.etsi.mano.vnfm.service.plan.contributors.uow.VnfIndicatorUow;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
  *
@@ -40,7 +40,7 @@ import jakarta.annotation.Nonnull;
  */
 @Service
 public class VnfIndicatorSystem extends AbstractVimSystemV3<VnfIndicatorTask> {
-	@Nonnull
+	@NonNull
 	private final ExternalAlarm externalAlarm;
 
 	public VnfIndicatorSystem(final VimManager vimManager, final ExternalAlarm externalAlarm) {

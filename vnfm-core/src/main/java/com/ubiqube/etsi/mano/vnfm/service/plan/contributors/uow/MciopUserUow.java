@@ -30,7 +30,7 @@ import com.ubiqube.etsi.mano.service.boot.K8sPkService;
 import com.ubiqube.etsi.mano.service.vim.Vim;
 import com.ubiqube.etsi.mano.vnfm.jpa.K8sServerInfoJpa;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * Create a new K8s certificate, for mano operations.

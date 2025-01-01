@@ -45,7 +45,7 @@ import com.ubiqube.etsi.mano.grammar.GrammarValue;
 import com.ubiqube.etsi.mano.mon.dao.TelemetryMetricsResult;
 import com.ubiqube.etsi.mano.vnfm.service.VnfInstanceService;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  *

@@ -26,15 +26,15 @@ import com.ubiqube.etsi.mano.orchestrator.vt.VirtualTaskV3;
 import com.ubiqube.etsi.mano.service.vim.K8sStatus;
 import com.ubiqube.etsi.mano.service.vim.Vim;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 public class WaitK8sClusterUow extends AbstractVnfmUow<OsContainerDeployableTask> {
-	@Nonnull
+	@NonNull
 	private final VimConnectionInformation vimConnectionInformation;
-	@Nonnull
+	@NonNull
 	private final Vim vim;
-	@Nonnull
+	@NonNull
 	private final String toscaName;
 
 	protected WaitK8sClusterUow(final VirtualTaskV3<OsContainerDeployableTask> task, final Vim vim, final VimConnectionInformation vimConnectionInformation) {

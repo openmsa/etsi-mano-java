@@ -51,7 +51,7 @@ import com.ubiqube.etsi.mano.vnfm.fc.vnflcm.VnfInstanceGenericFrontController;
 import com.ubiqube.etsi.mano.vnfm.service.VnfInstanceService;
 import com.ubiqube.etsi.mano.vnfm.service.VnfInstanceServiceVnfm;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 @ExtendWith(MockitoExtension.class)
 class VnfInstanceGenericFrontControllerTest {
@@ -61,13 +61,13 @@ class VnfInstanceGenericFrontControllerTest {
 	private VnfInstanceService vnfInstancesService;
 	@Mock
 	private VnfInstanceServiceVnfm vnfInstanceServiceVnfm;
-	@Nonnull
+	@NonNull
 	private final Function<VnfBlueprint, String> getSelfLink = x -> "http://test-link";
-	@Nonnull
+	@NonNull
 	private final Function<VnfInstance, String> getInstanceSelfLink = x -> "http://test-link";
 	@Mock
 	private VimTypeConverter vimTypeConverter;
-	@Nonnull
+	@NonNull
 	private final Consumer<Object> makeLink = x -> {
 		//
 	};

@@ -28,15 +28,15 @@ import com.ubiqube.etsi.mano.orchestrator.nodes.vnfm.OsContainerDeployableNode;
 import com.ubiqube.etsi.mano.orchestrator.vt.VirtualTaskV3;
 import com.ubiqube.etsi.mano.service.vim.Vim;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 public class OsContainerDeployableUow3 extends AbstractVnfmUow<OsContainerDeployableTask> {
-	@Nonnull
+	@NonNull
 	private final Vim vim;
-	@Nonnull
+	@NonNull
 	private final VimConnectionInformation vci;
-	@Nonnull
+	@NonNull
 	private final OsContainerDeployableTask task;
 
 	public OsContainerDeployableUow3(final VirtualTaskV3<OsContainerDeployableTask> task, final Vim vim, final VimConnectionInformation vimConnectionInformation) {

@@ -33,7 +33,7 @@ import com.ubiqube.etsi.mano.dao.mano.alarm.Alarms;
 import com.ubiqube.etsi.mano.dao.mano.alarm.PerceivedSeverityType;
 import com.ubiqube.etsi.mano.vnfm.fc.vnffm.AlarmFrontController;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  *

@@ -71,8 +71,8 @@ import com.ubiqube.etsi.mano.vnfm.service.VnfLcmService;
 import com.ubiqube.etsi.mano.vnfm.service.graph.VnfBlueprintMapping;
 import com.ubiqube.etsi.mano.vnfm.service.mapping.VnfInstanceMapping;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -160,7 +160,7 @@ public class VnfInstanceLcmImpl implements VnfInstanceLcm {
 
 	@Transactional
 	@Override
-	public void delete(final @Nullable Servers servers, @Nonnull final UUID vnfInstanceId) {
+	public void delete(final @Nullable Servers servers, @NonNull final UUID vnfInstanceId) {
 		final VnfInstance vnfInstance = vnfInstanceServiceVnfm.findById(vnfInstanceId);
 		ensureNotInstantiated(vnfInstance);
 		ensureNotLocked(vnfInstance);
@@ -176,7 +176,7 @@ public class VnfInstanceLcmImpl implements VnfInstanceLcm {
 	}
 
 	@Override
-	public VnfBlueprint instantiate(final @Nullable Servers servers, @Nonnull final UUID vnfInstanceId, final VnfInstantiate instantiateVnfRequest) {
+	public VnfBlueprint instantiate(final @Nullable Servers servers, @NonNull final UUID vnfInstanceId, final VnfInstantiate instantiateVnfRequest) {
 		final VnfInstance vnfInstance = vnfInstanceServiceVnfm.findById(vnfInstanceId);
 		ensureNotInstantiated(vnfInstance);
 		ensureNotLocked(vnfInstance);
@@ -228,7 +228,7 @@ public class VnfInstanceLcmImpl implements VnfInstanceLcm {
 	}
 
 	@Override
-	public VnfBlueprint terminate(final @Nullable Servers servers, @Nonnull final UUID vnfInstanceId, final @Nullable CancelModeTypeEnum terminationType, final @Nullable Integer gracefulTerminationTimeout) {
+	public VnfBlueprint terminate(final @Nullable Servers servers, @NonNull final UUID vnfInstanceId, final @Nullable CancelModeTypeEnum terminationType, final @Nullable Integer gracefulTerminationTimeout) {
 		final VnfInstance vnfInstance = vnfInstanceServiceVnfm.findById(vnfInstanceId);
 		ensureInstantiated(vnfInstance);
 		ensureNotLocked(vnfInstance);
@@ -239,7 +239,7 @@ public class VnfInstanceLcmImpl implements VnfInstanceLcm {
 	}
 
 	@Override
-	public VnfBlueprint scaleToLevel(final @Nullable Servers servers, @Nonnull final UUID uuid, final VnfScaleToLevelRequest scaleVnfToLevelRequest) {
+	public VnfBlueprint scaleToLevel(final @Nullable Servers servers, @NonNull final UUID uuid, final VnfScaleToLevelRequest scaleVnfToLevelRequest) {
 		final VnfInstance vnfInstance = vnfInstanceServiceVnfm.findById(uuid);
 		ensureInstantiated(vnfInstance);
 		ensureNotLocked(vnfInstance);
@@ -249,7 +249,7 @@ public class VnfInstanceLcmImpl implements VnfInstanceLcm {
 	}
 
 	@Override
-	public VnfBlueprint scale(final @Nullable Servers servers, @Nonnull final UUID uuid, final VnfScaleRequest scaleVnfRequest) {
+	public VnfBlueprint scale(final @Nullable Servers servers, @NonNull final UUID uuid, final VnfScaleRequest scaleVnfRequest) {
 		final VnfInstance vnfInstance = vnfInstanceServiceVnfm.findById(uuid);
 		ensureInstantiated(vnfInstance);
 		ensureNotLocked(vnfInstance);
@@ -259,7 +259,7 @@ public class VnfInstanceLcmImpl implements VnfInstanceLcm {
 	}
 
 	@Override
-	public VnfBlueprint operate(final @Nullable Servers servers, @Nonnull final UUID uuid, final VnfOperateRequest operateVnfRequest) {
+	public VnfBlueprint operate(final @Nullable Servers servers, @NonNull final UUID uuid, final VnfOperateRequest operateVnfRequest) {
 		final VnfInstance vnfInstance = vnfInstanceServiceVnfm.findById(uuid);
 		ensureInstantiated(vnfInstance);
 		ensureNotLocked(vnfInstance);
@@ -294,7 +294,7 @@ public class VnfInstanceLcmImpl implements VnfInstanceLcm {
 	}
 
 	@Override
-	public VnfBlueprint heal(final @Nullable Servers servers, @Nonnull final UUID vnfInstanceId, final VnfHealRequest healVnfRequest) {
+	public VnfBlueprint heal(final @Nullable Servers servers, @NonNull final UUID vnfInstanceId, final VnfHealRequest healVnfRequest) {
 		final VnfInstance vnfInstance = vnfInstanceServiceVnfm.findById(vnfInstanceId);
 		ensureInstantiated(vnfInstance);
 		ensureNotLocked(vnfInstance);

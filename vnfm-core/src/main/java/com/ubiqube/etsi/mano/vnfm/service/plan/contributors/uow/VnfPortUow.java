@@ -32,13 +32,13 @@ import com.ubiqube.etsi.mano.service.vim.FixedIp;
 import com.ubiqube.etsi.mano.service.vim.Port;
 import com.ubiqube.etsi.mano.service.vim.Vim;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 public class VnfPortUow extends AbstractVnfmUow<VnfPortTask> {
-	@Nonnull
+	@NonNull
 	private final Vim vim;
-	@Nonnull
+	@NonNull
 	private final VimConnectionInformation vimConnectionInformation;
 
 	public VnfPortUow(final VirtualTaskV3<VnfPortTask> task, final Vim vim, final VimConnectionInformation vimConnectionInformation) {

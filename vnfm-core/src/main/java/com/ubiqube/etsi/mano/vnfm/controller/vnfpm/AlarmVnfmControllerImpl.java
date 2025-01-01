@@ -37,7 +37,7 @@ import com.ubiqube.etsi.mano.service.search.SearchParamBuilder;
 import com.ubiqube.etsi.mano.service.search.SearchableService;
 import com.ubiqube.etsi.mano.vnfm.service.repository.AlarmRepositoryService;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  *

@@ -47,7 +47,7 @@ import com.ubiqube.etsi.mano.service.juju.entities.JujuModel;
 import com.ubiqube.etsi.mano.service.juju.entities.JujuRegion;
 import com.ubiqube.etsi.mano.service.vim.Vim;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class OsContainerUow extends AbstractVnfmUow<OsContainerTask> {
 	private final Vim vim;

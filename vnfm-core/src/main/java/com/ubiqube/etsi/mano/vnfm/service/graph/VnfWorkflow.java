@@ -73,7 +73,7 @@ import com.ubiqube.etsi.mano.vnfm.jpa.VnfLiveInstanceJpa;
 import com.ubiqube.etsi.mano.vnfm.jpa.VnfTaskJpa;
 import com.ubiqube.etsi.mano.vnfm.service.plan.contributors.AbstractVnfmContributor;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  *

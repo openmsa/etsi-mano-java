@@ -25,11 +25,10 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-import javax.annotation.Nonnull;
-
 import org.jgrapht.Graph;
 import org.jgrapht.ListenableGraph;
 import org.jgrapht.ext.JGraphXAdapter;
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;

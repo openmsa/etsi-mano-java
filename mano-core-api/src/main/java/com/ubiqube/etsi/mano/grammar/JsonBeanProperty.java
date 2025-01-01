@@ -74,7 +74,7 @@ public class JsonBeanProperty {
 		return sb.toString();
 	}
 
-	private static String toIndentedString(final @Nullable java.lang.Object o) {
+	private static String toIndentedString(final @Nullable Object o) {
 		if (o == null) {
 			return "null";
 		}

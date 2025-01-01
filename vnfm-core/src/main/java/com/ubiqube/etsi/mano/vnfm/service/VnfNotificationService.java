@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see https://www.gnu.org/licenses/.
  */
 package com.ubiqube.etsi.mano.vnfm.service;
 
@@ -31,10 +31,10 @@ import com.ubiqube.etsi.mano.dao.mano.VnfPackageChangeNotification;
 import com.ubiqube.etsi.mano.dao.mano.VnfPackageOnboardingNotification;
 import com.ubiqube.etsi.mano.dao.subscription.RemoteSubscription;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
-import com.ubiqube.etsi.mano.jpa.RemoteSubscriptionJpa;
-import com.ubiqube.etsi.mano.jpa.VnfPackageJpa;
 import com.ubiqube.etsi.mano.service.event.ActionType;
 import com.ubiqube.etsi.mano.service.event.EventManager;
+import com.ubiqube.etsi.mano.service.repository.RemoteSubscriptionRepositoryService;
+import com.ubiqube.etsi.mano.service.repository.VnfPackageRepositoryService;
 import com.ubiqube.etsi.mano.vnfm.jpa.VnfPackageOnboardingNotificationJpa;
 
 /**
@@ -48,10 +48,10 @@ public class VnfNotificationService {
 	private static final Logger LOG = LoggerFactory.getLogger(VnfNotificationService.class);
 	private final VnfPackageOnboardingNotificationJpa vnfPackageOnboardingNotificationJpa;
 	private final EventManager eventManager;
-	private final RemoteSubscriptionJpa remoteSubscriptionJpa;
-	private final VnfPackageJpa vnfPackageJpa;
+	private final RemoteSubscriptionRepositoryService remoteSubscriptionJpa;
+	private final VnfPackageRepositoryService vnfPackageJpa;
 
-	public VnfNotificationService(final VnfPackageOnboardingNotificationJpa vnfPackageOnboardingNotificationJpa, final EventManager eventManager, final RemoteSubscriptionJpa remoteSubscriptionJpa, final VnfPackageJpa vnfPackageJpa) {
+	public VnfNotificationService(final VnfPackageOnboardingNotificationJpa vnfPackageOnboardingNotificationJpa, final EventManager eventManager, final RemoteSubscriptionRepositoryService remoteSubscriptionJpa, final VnfPackageRepositoryService vnfPackageJpa) {
 		this.vnfPackageOnboardingNotificationJpa = vnfPackageOnboardingNotificationJpa;
 		this.eventManager = eventManager;
 		this.remoteSubscriptionJpa = remoteSubscriptionJpa;
@@ -73,7 +73,7 @@ public class VnfNotificationService {
 		if (event.getChangeType() == PackageChangeType.PKG_DELETE) {
 			vnfPackageJpa.deleteByVnfdId(event.getVnfdId());
 		} else {
-			final Optional<VnfPackage> pkg = vnfPackageJpa.findByVnfdId(event.getVnfdId());
+			final Optional<VnfPackage> pkg = vnfPackageJpa.findByVnfdIdOpt(event.getVnfdId());
 			if (pkg.isPresent()) {
 				final VnfPackage p = pkg.get();
 				p.setOperationalState(PackageOperationalState.fromValue(event.getOperationalState().toString()));

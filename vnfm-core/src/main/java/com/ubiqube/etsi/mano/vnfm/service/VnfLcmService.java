@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see https://www.gnu.org/licenses/.
  */
 package com.ubiqube.etsi.mano.vnfm.service;
 
@@ -37,7 +37,6 @@ import com.ubiqube.etsi.mano.dao.mano.v2.VnfBlueprint;
 import com.ubiqube.etsi.mano.dao.mano.v2.VnfTask;
 import com.ubiqube.etsi.mano.dao.mano.vim.PlanStatusType;
 import com.ubiqube.etsi.mano.dao.mano.vnfi.ChangeExtVnfConnRequest;
-import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.grammar.GrammarNodeResult;
 import com.ubiqube.etsi.mano.grammar.GrammarParser;
 import com.ubiqube.etsi.mano.model.VnfHealRequest;
@@ -46,12 +45,12 @@ import com.ubiqube.etsi.mano.model.VnfScaleRequest;
 import com.ubiqube.etsi.mano.model.VnfScaleToLevelRequest;
 import com.ubiqube.etsi.mano.service.search.ManoSearch;
 import com.ubiqube.etsi.mano.vnfm.controller.vnflcm.VnfLcmFactory;
-import com.ubiqube.etsi.mano.vnfm.jpa.VnfBlueprintJpa;
+import com.ubiqube.etsi.mano.vnfm.service.repository.VnfBlueprintRepositoryService;
 
 @Service
 public class VnfLcmService {
 
-	private final VnfBlueprintJpa vnfBlueprintJpa;
+	private final VnfBlueprintRepositoryService vnfBlueprintJpa;
 
 	private final VnfInstanceService vnfInstancesService;
 
@@ -59,7 +58,7 @@ public class VnfLcmService {
 
 	private final ManoSearch manoSearch;
 
-	public VnfLcmService(final VnfBlueprintJpa planJpa, final VnfInstanceService vnfInstancesService, final GrammarParser grammarParser,
+	public VnfLcmService(final VnfBlueprintRepositoryService planJpa, final VnfInstanceService vnfInstancesService, final GrammarParser grammarParser,
 			final ManoSearch manoSearch) {
 		this.vnfBlueprintJpa = planJpa;
 		this.manoSearch = manoSearch;
@@ -134,7 +133,7 @@ public class VnfLcmService {
 	}
 
 	public VnfBlueprint findById(final UUID id) {
-		return vnfBlueprintJpa.findById(id).orElseThrow(() -> new NotFoundException("Could not find VNF LCM operation: " + id));
+		return vnfBlueprintJpa.findById(id);
 	}
 
 	public List<VnfBlueprint> findByVnfInstanceId(final UUID id) {

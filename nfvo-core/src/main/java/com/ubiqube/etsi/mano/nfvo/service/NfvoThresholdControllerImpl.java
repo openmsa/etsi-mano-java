@@ -28,7 +28,7 @@ import org.springframework.util.MultiValueMap;
 import com.ubiqube.etsi.mano.controller.nspm.NfvoThresholdController;
 import com.ubiqube.etsi.mano.dao.mano.pm.Threshold;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
-import com.ubiqube.etsi.mano.jpa.ThresholdJpa;
+import com.ubiqube.etsi.mano.nfvo.service.repository.ThresholdRepositoryService;
 import com.ubiqube.etsi.mano.service.search.SearchParamBuilder;
 import com.ubiqube.etsi.mano.service.search.SearchableService;
 
@@ -40,10 +40,10 @@ import com.ubiqube.etsi.mano.service.search.SearchableService;
 @Service
 public class NfvoThresholdControllerImpl implements NfvoThresholdController {
 
-	private final ThresholdJpa thresholdJpa;
+	private final ThresholdRepositoryService thresholdJpa;
 	private final SearchableService searchableService;
 
-	public NfvoThresholdControllerImpl(final SearchableService searchableService, final ThresholdJpa thresholdJpa) {
+	public NfvoThresholdControllerImpl(final SearchableService searchableService, final ThresholdRepositoryService thresholdJpa) {
 		this.searchableService = searchableService;
 		this.thresholdJpa = thresholdJpa;
 	}

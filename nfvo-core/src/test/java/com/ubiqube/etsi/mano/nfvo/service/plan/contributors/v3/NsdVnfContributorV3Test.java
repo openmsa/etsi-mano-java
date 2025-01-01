@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 package com.ubiqube.etsi.mano.nfvo.service.plan.contributors.v3;
 
@@ -45,12 +45,12 @@ import com.ubiqube.etsi.mano.dao.mano.nsd.ForwarderMapping;
 import com.ubiqube.etsi.mano.dao.mano.nsd.NsdVnfPackageCopy;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsBlueprint;
 import com.ubiqube.etsi.mano.exception.GenericException;
-import com.ubiqube.etsi.mano.jpa.config.ServersJpa;
 import com.ubiqube.etsi.mano.nfvo.jpa.NsLiveInstanceJpa;
 import com.ubiqube.etsi.mano.orchestrator.SclableResources;
 import com.ubiqube.etsi.mano.service.NsScaleStrategyV3;
 import com.ubiqube.etsi.mano.service.VnfPackageService;
 import com.ubiqube.etsi.mano.service.auth.model.ServerType;
+import com.ubiqube.etsi.mano.service.repository.ServersRepositoryService;
 
 @ExtendWith(MockitoExtension.class)
 class NsdVnfContributorV3Test {
@@ -59,7 +59,7 @@ class NsdVnfContributorV3Test {
 	@Mock
 	private NsScaleStrategyV3 nsScaleStrategy;
 	@Mock
-	private ServersJpa serversJpa;
+	private ServersRepositoryService serversJpa;
 	@Mock
 	private VnfPackageService vnfPackageService;
 

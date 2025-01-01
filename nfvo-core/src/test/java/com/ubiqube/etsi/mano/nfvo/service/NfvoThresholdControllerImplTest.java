@@ -30,7 +30,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.ubiqube.etsi.mano.dao.mano.pm.Threshold;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
-import com.ubiqube.etsi.mano.jpa.ThresholdJpa;
+import com.ubiqube.etsi.mano.nfvo.service.repository.ThresholdRepositoryService;
 import com.ubiqube.etsi.mano.service.search.SearchableService;
 
 @ExtendWith(MockitoExtension.class)
@@ -38,7 +38,7 @@ class NfvoThresholdControllerImplTest {
 	@Mock
 	private SearchableService searchService;
 	@Mock
-	private ThresholdJpa thresholdJpa;
+	private ThresholdRepositoryService thresholdJpa;
 
 	@Test
 	void testSave() {

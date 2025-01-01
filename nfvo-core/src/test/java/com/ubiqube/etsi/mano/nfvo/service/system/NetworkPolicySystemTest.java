@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 package com.ubiqube.etsi.mano.nfvo.service.system;
 
@@ -22,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
@@ -42,11 +41,11 @@ import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsVnfExtractorTask;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsVnfInstantiateTask;
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
 import com.ubiqube.etsi.mano.exception.GenericException;
-import com.ubiqube.etsi.mano.jpa.NsdPackageJpa;
 import com.ubiqube.etsi.mano.nfvo.service.graph.TestNsVt;
 import com.ubiqube.etsi.mano.nfvo.service.plan.contributors.vt.NsVirtualLinkVt;
 import com.ubiqube.etsi.mano.nfvo.service.plan.contributors.vt.NsVnfExtractorVt;
 import com.ubiqube.etsi.mano.nfvo.service.plan.contributors.vt.NsVnfInstantiateVt;
+import com.ubiqube.etsi.mano.nfvo.service.repository.NsdPackageRepositoryService;
 import com.ubiqube.etsi.mano.orchestrator.OrchestrationServiceV3;
 import com.ubiqube.etsi.mano.orchestrator.entities.SystemConnections;
 import com.ubiqube.etsi.mano.orchestrator.vt.VirtualTaskV3;
@@ -118,14 +117,14 @@ class NetworkPolicySystemTest {
 	@Test
 	void testNsVnfContextExtractorSystem() {
 		final VnfmInterface vnfm = Mockito.mock(VnfmInterface.class);
-		final NsdPackageJpa nsdJpa = Mockito.mock(NsdPackageJpa.class);
+		final NsdPackageRepositoryService nsdJpa = Mockito.mock(NsdPackageRepositoryService.class);
 		final NsVnfContextExtractorSystem sys = new NsVnfContextExtractorSystem(vnfm, vimManager, nsdJpa);
 		final NsVnfExtractorTask nt = new NsVnfExtractorTask();
 		nt.setNsdId(UUID.randomUUID().toString());
 		final VirtualTaskV3<NsVnfExtractorTask> task = new NsVnfExtractorVt(nt);
 		final VimConnectionInformation vimConn = null;
 		final NsdPackage nsPkg = new NsdPackage();
-		when(nsdJpa.findById(any())).thenReturn(Optional.of(nsPkg));
+		when(nsdJpa.findById(any())).thenReturn(nsPkg);
 		sys.getImplementation(orchestrationService, task, vimConn);
 		assertNotNull(sys.getVimType());
 		assertNotNull(sys.getType());
@@ -135,7 +134,7 @@ class NetworkPolicySystemTest {
 	@Test
 	void testNsVnfContextExtractorSystem_NotFound() {
 		final VnfmInterface vnfm = Mockito.mock(VnfmInterface.class);
-		final NsdPackageJpa nsdJpa = Mockito.mock(NsdPackageJpa.class);
+		final NsdPackageRepositoryService nsdJpa = Mockito.mock(NsdPackageRepositoryService.class);
 		final NsVnfContextExtractorSystem sys = new NsVnfContextExtractorSystem(vnfm, vimManager, nsdJpa);
 		final NsVnfExtractorTask nt = new NsVnfExtractorTask();
 		nt.setNsdId(UUID.randomUUID().toString());

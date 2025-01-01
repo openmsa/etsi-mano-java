@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 package com.ubiqube.etsi.mano.nfvo.notification.nsind;
 
@@ -47,23 +47,23 @@ import com.ubiqube.etsi.mano.dao.mano.nslcm.scale.ScaleNsData;
 import com.ubiqube.etsi.mano.dao.mano.nslcm.scale.ScaleType;
 import com.ubiqube.etsi.mano.dao.mano.nslcm.scale.ScalingDirectionType;
 import com.ubiqube.etsi.mano.exception.GenericException;
-import com.ubiqube.etsi.mano.jpa.NsIndiValueChangeNotificationJpa;
-import com.ubiqube.etsi.mano.jpa.NsdPackageJpa;
 import com.ubiqube.etsi.mano.nfvo.controller.nslcm.NsInstanceControllerService;
+import com.ubiqube.etsi.mano.nfvo.service.repository.NsIndiValueChangeNotificationRepositoryService;
+import com.ubiqube.etsi.mano.nfvo.service.repository.NsdPackageRepositoryService;
 
 @Component
 public class NsIndicatorValueChangeNotificationImpl {
 	private static final Logger LOG = LoggerFactory.getLogger(NsIndicatorValueChangeNotificationImpl.class);
 
-	private final NsIndiValueChangeNotificationJpa nsIndValueNotificationJpa;
+	private final NsIndiValueChangeNotificationRepositoryService nsIndValueNotificationJpa;
 
-	private final NsdPackageJpa nsdPackageJpa;
+	private final NsdPackageRepositoryService nsdPackageJpa;
 
 	private final NsInstanceControllerService nsInstanceControllerService;
 
 	private Properties props;
 
-	public NsIndicatorValueChangeNotificationImpl(final NsIndiValueChangeNotificationJpa nsIndValueNotificationJpa, final NsdPackageJpa nsdPackageJpa, final NsInstanceControllerService nsInstanceControllerService) {
+	public NsIndicatorValueChangeNotificationImpl(final NsIndiValueChangeNotificationRepositoryService nsIndValueNotificationJpa, final NsdPackageRepositoryService nsdPackageJpa, final NsInstanceControllerService nsInstanceControllerService) {
 		this.nsIndValueNotificationJpa = nsIndValueNotificationJpa;
 		this.nsdPackageJpa = nsdPackageJpa;
 		this.nsInstanceControllerService = nsInstanceControllerService;
@@ -107,9 +107,9 @@ public class NsIndicatorValueChangeNotificationImpl {
 				}
 				conditions: for (final JsonNode jsonNode : actualObj) {
 					final Map<String, Object> condition = mapper.convertValue(jsonNode,
-                            new TypeReference<>() {
-                                //
-                            });
+							new TypeReference<>() {
+								//
+							});
 					final Map.Entry<String, Object> c = condition.entrySet().iterator().next();
 					final String indicatorName = c.getKey();
 					Double nsVnfIndicatorValue;
@@ -173,9 +173,9 @@ public class NsIndicatorValueChangeNotificationImpl {
 		Map<String, Object> action = new HashMap<>();
 		for (final JsonNode jsonNode : actualObj) {
 			action = mapper.convertValue(jsonNode,
-                    new TypeReference<>() {
-                        //
-                    });
+					new TypeReference<>() {
+						//
+					});
 		}
 		if (action.isEmpty()) {
 			return;

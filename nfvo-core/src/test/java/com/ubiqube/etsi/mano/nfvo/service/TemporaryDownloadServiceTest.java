@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 package com.ubiqube.etsi.mano.nfvo.service;
 
@@ -34,14 +34,14 @@ import com.ubiqube.etsi.mano.dao.mano.TemporaryDownload;
 import com.ubiqube.etsi.mano.dao.mano.TemporaryDownload.ObjectType;
 import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
-import com.ubiqube.etsi.mano.nfvo.jpa.TemporaryDownloadJpa;
+import com.ubiqube.etsi.mano.nfvo.service.repository.TemporaryDownloadRepositoryService;
 import com.ubiqube.etsi.mano.repository.NsdRepository;
 import com.ubiqube.etsi.mano.repository.VnfPackageRepository;
 
 @ExtendWith(MockitoExtension.class)
 class TemporaryDownloadServiceTest {
 	@Mock
-	private TemporaryDownloadJpa temporaryJpa;
+	private TemporaryDownloadRepositoryService temporaryJpa;
 	@Mock
 	private NsdRepository nsdRepo;
 	@Mock

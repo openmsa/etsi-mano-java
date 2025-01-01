@@ -26,8 +26,8 @@ import com.ubiqube.etsi.mano.dao.mano.pm.PerformanceInformationAvailableNotifica
 import com.ubiqube.etsi.mano.dao.mano.pm.ThresholdCrossedNotification;
 import com.ubiqube.etsi.mano.dao.subscription.RemoteSubscription;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
-import com.ubiqube.etsi.mano.nfvo.jpa.PerformanceInformationAvailableNotificationJpa;
-import com.ubiqube.etsi.mano.nfvo.jpa.ThresholdCrossedNotificationJpa;
+import com.ubiqube.etsi.mano.nfvo.service.repository.PerformanceInformationAvailableNotificationRepositoryService;
+import com.ubiqube.etsi.mano.nfvo.service.repository.ThresholdCrossedNotificationRepositoryService;
 import com.ubiqube.etsi.mano.service.repository.RemoteSubscriptionRepositoryService;
 
 /**
@@ -42,12 +42,12 @@ public class VnfPerformanceNotificationService {
 
 	private final RemoteSubscriptionRepositoryService remoteSubscriptionJpa;
 
-	private final ThresholdCrossedNotificationJpa vnfPmJpa;
+	private final ThresholdCrossedNotificationRepositoryService vnfPmJpa;
 
-	private final PerformanceInformationAvailableNotificationJpa availableJpa;
+	private final PerformanceInformationAvailableNotificationRepositoryService availableJpa;
 
-	public VnfPerformanceNotificationService(final RemoteSubscriptionRepositoryService remoteSubscriptionJpa, final ThresholdCrossedNotificationJpa vnfIndJpa,
-			final PerformanceInformationAvailableNotificationJpa availableJpa) {
+	public VnfPerformanceNotificationService(final RemoteSubscriptionRepositoryService remoteSubscriptionJpa, final ThresholdCrossedNotificationRepositoryService vnfIndJpa,
+			final PerformanceInformationAvailableNotificationRepositoryService availableJpa) {
 		this.remoteSubscriptionJpa = remoteSubscriptionJpa;
 		this.vnfPmJpa = vnfIndJpa;
 		this.availableJpa = availableJpa;

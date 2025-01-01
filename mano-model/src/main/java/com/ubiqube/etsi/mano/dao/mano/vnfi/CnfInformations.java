@@ -20,8 +20,8 @@ import java.io.Serializable;
 
 import com.ubiqube.etsi.mano.utils.ToStringUtil;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,7 +41,7 @@ public class CnfInformations implements Serializable {
 
 	private String masterFlavorId;
 
-	@Nonnull
+	@NonNull
 	private String clusterTemplate;
 
 	@Nullable

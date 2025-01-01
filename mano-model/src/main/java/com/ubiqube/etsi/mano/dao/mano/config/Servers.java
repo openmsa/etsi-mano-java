@@ -30,8 +30,8 @@ import com.ubiqube.etsi.mano.service.rest.model.ServerConnection;
 import com.ubiqube.etsi.mano.service.rest.model.ServerType;
 import com.ubiqube.etsi.mano.utils.ToStringUtil;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -53,7 +53,7 @@ public class Servers extends ServerConnection {
 	private static final long serialVersionUID = 1L;
 
 	@Builder
-	public Servers(final UUID id, final String name, final AuthentificationInformations authentification, @Nonnull final String url, final boolean ignoreSsl, final String tlsCert, @Nullable final String version, @Nullable final ServerType serverType, final long tupleVersion,
+	public Servers(final UUID id, final String name, final AuthentificationInformations authentification, @NonNull final String url, final boolean ignoreSsl, final String tlsCert, @Nullable final String version, @Nullable final ServerType serverType, final long tupleVersion,
 			final Set<RemoteSubscription> remoteSubscriptions, final PlanStatusType serverStatus, final SubscriptionType subscriptionType, final Set<String> capabilities) {
 		super(id, name, authentification, url, ignoreSsl, tlsCert, version, serverType, tupleVersion);
 		this.remoteSubscriptions = remoteSubscriptions;
@@ -82,7 +82,7 @@ public class Servers extends ServerConnection {
 
 	private Audit audit = new Audit();
 
-	public Servers(final AuthentificationInformations authentication, final @Nonnull String callbackUri) {
+	public Servers(final AuthentificationInformations authentication, final @NonNull String callbackUri) {
 		super(authentication, callbackUri);
 	}
 

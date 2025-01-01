@@ -42,7 +42,7 @@ import com.mano.etsi.grammar.v1.EtsiFilterBaseListener;
 import com.ubiqube.etsi.mano.grammar.Node;
 import com.ubiqube.etsi.mano.grammar.Node.Operand;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  *

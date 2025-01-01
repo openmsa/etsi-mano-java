@@ -20,7 +20,7 @@ import java.util.UUID;
 
 import com.ubiqube.etsi.mano.dao.mano.pkg.ConnectionPoint;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;

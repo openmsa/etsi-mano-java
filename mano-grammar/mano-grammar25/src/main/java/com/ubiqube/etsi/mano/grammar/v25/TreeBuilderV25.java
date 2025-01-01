@@ -45,14 +45,14 @@ import com.mano.etsi.mano.grammar.v25.EtsiFilterV25BaseListener;
 import com.ubiqube.etsi.mano.grammar.Node;
 import com.ubiqube.etsi.mano.grammar.Node.Operand;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 public class TreeBuilderV25 extends EtsiFilterV25BaseListener {
 	private static final String CURRENT_NODE_IS_NULL = "Current node is null";
 	@Nullable
 	private Node<String> currentNode;
-	@Nonnull
+	@NonNull
 	private final List<Node<String>> listNode = new ArrayList<>();
 
 	public List<Node<String>> getListNode() {

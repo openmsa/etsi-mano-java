@@ -148,7 +148,7 @@ public class Poc {
 	}
 
 	@GetMapping("/plan/ns/3d/{id}")
-	public ResponseEntity<BufferedImage> getNs3dPlan(@PathVariable("id") final UUID id, @Nonnull @RequestParam("class") final String clazz, @NotNull @RequestParam("name") final String name) {
+	public ResponseEntity<BufferedImage> getNs3dPlan(@PathVariable("id") final UUID id, @NonNull @RequestParam("class") final String clazz, @NotNull @RequestParam("name") final String name) {
 		final Map<String, Class<? extends Node>> map = new HashMap<>();
 		map.put("VnfCreateNode", VnfCreateNode.class);
 		map.put("PtLinkNode", PtLinkNode.class);

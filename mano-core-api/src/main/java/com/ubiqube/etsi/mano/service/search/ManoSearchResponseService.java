@@ -27,7 +27,5 @@ import org.springframework.http.ResponseEntity;
  */
 public interface ManoSearchResponseService {
 
-// <T, U> ResponseEntity<String> search(@Nullable MultiValueMap<String, String> parameters, final Class<?> clazz, @Nullable final String excludeDefaults, @Nullable final Set<String> mandatoryFields, final List<?> list, final Function<T, U> target, final Consumer<U> makeLink);
-
 	<T, U> ResponseEntity<String> search(List<T> result, SearchParamBuilder<T, U> params);
 }

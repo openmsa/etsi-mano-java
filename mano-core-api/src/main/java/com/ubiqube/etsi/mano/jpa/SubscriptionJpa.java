@@ -32,7 +32,6 @@ import jakarta.annotation.Nullable;
 
 /**
  * JPA repository for Subscriptions.
- * TODO: Missing RepositoryService.
  */
 public interface SubscriptionJpa extends CrudRepository<Subscription, UUID> {
 

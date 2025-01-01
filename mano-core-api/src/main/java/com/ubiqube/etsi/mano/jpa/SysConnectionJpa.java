@@ -25,7 +25,6 @@ import com.ubiqube.etsi.mano.orchestrator.entities.SystemConnections;
 
 /**
  * JPA repository for system connections.
- * TODO: Missing RepositoryService.
  */
 public interface SysConnectionJpa extends CrudRepository<SystemConnections, UUID> {
 	List<SystemConnections> findByModuleName(String moduleName);

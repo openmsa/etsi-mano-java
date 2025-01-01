@@ -21,7 +21,6 @@ import org.springframework.data.repository.ListCrudRepository;
 import com.ubiqube.etsi.mano.dao.mano.config.Configurations;
 
 /**
- * TODO: Missing RepositoryService.
  *
  * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *

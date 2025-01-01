@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see https://www.gnu.org/licenses/.
  */
 package com.ubiqube.etsi.mano.service.event;
 
@@ -49,7 +49,6 @@ import com.ubiqube.etsi.mano.dao.rfc7807.FailureDetails;
 import com.ubiqube.etsi.mano.dao.subscription.RemoteSubscription;
 import com.ubiqube.etsi.mano.dao.subscription.SubscriptionType;
 import com.ubiqube.etsi.mano.exception.GenericException;
-import com.ubiqube.etsi.mano.jpa.config.ServersJpa;
 import com.ubiqube.etsi.mano.model.ApiVersionInformation;
 import com.ubiqube.etsi.mano.service.HttpGateway;
 import com.ubiqube.etsi.mano.service.ServerService;
@@ -62,6 +61,7 @@ import com.ubiqube.etsi.mano.service.auth.model.ServerType;
 import com.ubiqube.etsi.mano.service.event.model.FilterAttributes;
 import com.ubiqube.etsi.mano.service.event.model.Subscription;
 import com.ubiqube.etsi.mano.service.mapping.ApiVersionMapping;
+import com.ubiqube.etsi.mano.service.repository.ServersRepositoryService;
 import com.ubiqube.etsi.mano.service.rest.FluxRest;
 import com.ubiqube.etsi.mano.service.rest.ManoClient;
 import com.ubiqube.etsi.mano.service.rest.ProblemDetailException;
@@ -82,14 +82,14 @@ public class CommonActionController {
 	private static final List<ApiVersionType> VNFM_FRAGMENT = Arrays.asList(ApiVersionType.SOL003_VNFLCM, ApiVersionType.SOL003_VNFPM, ApiVersionType.SOL003_VNFFM, ApiVersionType.SOL003_VNFIND, ApiVersionType.SOL003_VRQAN, ApiVersionType.SOL003_VNFSNAPSHOTPKGM);
 	private static final List<ApiVersionType> NFVO_FRAGMENT = Arrays.asList(ApiVersionType.SOL003_GRANT, ApiVersionType.SOL005_VNFPKGM, ApiVersionType.SOL005_NSD, ApiVersionType.SOL005_NSLCM, ApiVersionType.SOL005_NSPM, ApiVersionType.SOL005_NSFM, ApiVersionType.SOL005_NFVICI, ApiVersionType.SOL005_VNFSNAPSHOTPKGM, ApiVersionType.SOL005_LCMCOORD);
 
-	private final ServersJpa serversJpa;
+	private final ServersRepositoryService serversJpa;
 	private final List<HttpGateway> httpGateway;
 	private final ManoProperties manoProperties;
 	private final ObjectProvider<SecutiryConfig> secutiryConfig;
 	private final ApiVersionMapping apiVersionMapping;
 	private final ServerService serverService;
 
-	public CommonActionController(final ServersJpa serversJpa, final List<com.ubiqube.etsi.mano.service.HttpGateway> httpGateway,
+	public CommonActionController(final ServersRepositoryService serversJpa, final List<com.ubiqube.etsi.mano.service.HttpGateway> httpGateway,
 			final ManoProperties manoProperties, final ObjectProvider<SecutiryConfig> secutiryConfig, final ServerService serverService, final ApiVersionMapping apiVersionMapping) {
 		this.serversJpa = serversJpa;
 		this.httpGateway = httpGateway;

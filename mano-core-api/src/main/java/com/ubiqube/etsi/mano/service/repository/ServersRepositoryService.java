@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ubiqube.etsi.mano.dao.mano.config.Servers;
 import com.ubiqube.etsi.mano.dao.mano.vim.PlanStatusType;
 import com.ubiqube.etsi.mano.jpa.config.ServersJpa;
+import com.ubiqube.etsi.mano.service.auth.model.ServerType;
 
 @Service
 public class ServersRepositoryService {
@@ -41,5 +42,9 @@ public class ServersRepositoryService {
 
 	public List<Servers> findByServerStatusIn(final List<PlanStatusType> of) {
 		return serversJpa.findByServerStatusIn(of);
+	}
+
+	public List<Servers> findByServerTypeAndServerStatusIn(final ServerType vnfm, final List<PlanStatusType> asList) {
+		return serversJpa.findByServerTypeAndServerStatusIn(vnfm, asList);
 	}
 }

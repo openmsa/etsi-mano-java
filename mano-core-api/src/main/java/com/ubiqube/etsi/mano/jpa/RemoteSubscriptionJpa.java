@@ -24,7 +24,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.ubiqube.etsi.mano.dao.subscription.RemoteSubscription;
 
 /**
- * TODO: Missing RepositoryService.
  *
  * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *

@@ -25,7 +25,6 @@ import com.ubiqube.etsi.mano.dao.mano.pm.Threshold;
 
 /**
  * JPA repository for Threshold.
- * TODO: Missing RepositoryService.
  */
 @Repository
 public interface ThresholdJpa extends CrudRepository<Threshold, UUID> {

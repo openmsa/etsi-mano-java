@@ -28,7 +28,6 @@ import com.ubiqube.etsi.mano.dao.mano.vim.PlanStatusType;
 import com.ubiqube.etsi.mano.service.auth.model.ServerType;
 
 /**
- * TODO: Missing RepositoryService.
  *
  * @author Olivier Vignaud {@literal <ovi@ubiqube.com>}
  *

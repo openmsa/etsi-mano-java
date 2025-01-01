@@ -10,6 +10,10 @@ import jakarta.annotation.Nullable;
 
 public class VersionExtractor {
 
+	private VersionExtractor() {
+		//
+	}
+
 	public static @Nullable String extractVersion(final Class<?> version, final SubscriptionType type, final ServerService serverService) {
 		final String versionString = extractVersion(version);
 		return serverService.convertManoVersionToFe(type, versionString).map(Version::toString).orElse(null);

@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see https://www.gnu.org/licenses/.
  */
 package com.ubiqube.etsi.mano.service.vim;
 
@@ -25,7 +25,6 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -41,11 +40,10 @@ import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.jpa.CnfServerJpa;
 import com.ubiqube.etsi.mano.jpa.VimConnectionInformationJpa;
-import com.ubiqube.etsi.mano.jpa.VrQanJpa;
 import com.ubiqube.etsi.mano.service.SystemService;
 import com.ubiqube.etsi.mano.service.event.EventManager;
 import com.ubiqube.etsi.mano.service.event.model.NotificationEvent;
-import com.ubiqube.etsi.mano.service.mapping.ConnectionMapping;
+import com.ubiqube.etsi.mano.service.repository.VrQanRepositoryService;
 import com.ubiqube.etsi.mano.service.search.ManoSearch;
 import com.ubiqube.etsi.mano.vim.dto.SwImage;
 
@@ -71,7 +69,7 @@ public class VimManager {
 
 	private final CnfServerJpa cnfServerJpa;
 
-	private final VrQanJpa vrQanJpa;
+	private final VrQanRepositoryService vrQanJpa;
 
 	private final EventManager em;
 
@@ -82,7 +80,7 @@ public class VimManager {
 	private final VimTypeConverter vimTypeConverter;
 
 	public VimManager(final List<Vim> vims, final VimConnectionInformationJpa vimConnectionInformationJpa, final SystemService systemService,
-			final CnfServerJpa cnfServerJpa, final VrQanJpa vrQanJpa, final EventManager em, final ManoSearch manoSearch, final CnfInformationsMapping cnfMapper, final VimTypeConverter vimTypeConverter) {
+			final CnfServerJpa cnfServerJpa, final VrQanRepositoryService vrQanJpa, final EventManager em, final ManoSearch manoSearch, final CnfInformationsMapping cnfMapper, final VimTypeConverter vimTypeConverter) {
 		this.vims = vims;
 		this.vimConnectionInformationJpa = vimConnectionInformationJpa;
 		this.systemService = systemService;

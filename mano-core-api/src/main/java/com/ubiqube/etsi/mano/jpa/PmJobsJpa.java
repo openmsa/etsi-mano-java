@@ -25,7 +25,6 @@ import com.ubiqube.etsi.mano.dao.mano.pm.PmJob;
 
 /**
  * JPA repository for PM jobs.
- * TODO: Missing RepositoryService.
  */
 @Repository
 public interface PmJobsJpa extends CrudRepository<PmJob, UUID> {

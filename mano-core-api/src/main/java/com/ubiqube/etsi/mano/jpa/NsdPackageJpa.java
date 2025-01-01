@@ -26,7 +26,6 @@ import com.ubiqube.etsi.mano.dao.mano.OnboardingStateType;
 
 /**
  * Repository interface for NsdPackage
- * TODO: Missing RepositorySevice class.
  */
 public interface NsdPackageJpa extends CrudRepository<NsdPackage, UUID> {
 	Optional<NsdPackage> findByNsdInvariantId(String nsdInvariantId);

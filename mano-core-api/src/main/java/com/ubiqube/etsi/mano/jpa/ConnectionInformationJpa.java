@@ -26,13 +26,24 @@ import com.ubiqube.etsi.mano.dao.mano.cnf.ConnectionType;
 
 /**
  * Repository interface for ConnectionInformation
- * TODO: Missing RepositorySevice class.
  *
  * @version 1.0
  */
 public interface ConnectionInformationJpa extends CrudRepository<ConnectionInformation, UUID> {
+	/**
+	 * Finds a list of ConnectionInformation entities by their connection type.
+	 *
+	 * @param type the connection type to search for
+	 * @return a list of ConnectionInformation entities with the specified connection type
+	 */
 	List<ConnectionInformation> findByConnType(ConnectionType type);
 
+	/**
+	 * Finds a ConnectionInformation entity by its name.
+	 *
+	 * @param repository the name of the ConnectionInformation entity to search for
+	 * @return the ConnectionInformation entity with the specified name, or null if not found
+	 */
 	ConnectionInformation findByName(String repository);
 
 }

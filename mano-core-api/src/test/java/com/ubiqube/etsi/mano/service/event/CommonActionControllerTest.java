@@ -1,18 +1,18 @@
 /**
- *     Copyright (C) 2019-2024 Ubiqube.
+ * Copyright (C) 2019-2024 Ubiqube.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see https://www.gnu.org/licenses/.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see https://www.gnu.org/licenses/.
  */
 package com.ubiqube.etsi.mano.service.event;
 
@@ -46,13 +46,13 @@ import com.ubiqube.etsi.mano.dao.mano.config.LocalAuth;
 import com.ubiqube.etsi.mano.dao.mano.config.Servers;
 import com.ubiqube.etsi.mano.dao.mano.vim.PlanStatusType;
 import com.ubiqube.etsi.mano.dao.subscription.SubscriptionType;
-import com.ubiqube.etsi.mano.jpa.config.ServersJpa;
 import com.ubiqube.etsi.mano.service.EndpointService.Endpoint;
 import com.ubiqube.etsi.mano.service.HttpGateway;
 import com.ubiqube.etsi.mano.service.ServerService;
 import com.ubiqube.etsi.mano.service.auth.model.ServerType;
 import com.ubiqube.etsi.mano.service.event.model.Subscription;
 import com.ubiqube.etsi.mano.service.mapping.ApiVersionMapping;
+import com.ubiqube.etsi.mano.service.repository.ServersRepositoryService;
 import com.ubiqube.etsi.mano.service.rest.FluxRest;
 import com.ubiqube.etsi.mano.service.rest.ServerAdapter;
 import com.ubiqube.etsi.mano.utils.Version;
@@ -60,7 +60,7 @@ import com.ubiqube.etsi.mano.utils.Version;
 @ExtendWith(MockitoExtension.class)
 class CommonActionControllerTest {
 	@Mock
-	private ServersJpa serversJpa;
+	private ServersRepositoryService serversJpa;
 	@Mock
 	private Environment env;
 	@Mock
@@ -126,7 +126,7 @@ class CommonActionControllerTest {
 		final Endpoint endpoint = new Endpoint("vnfind", Version.of("1.23.2"), serverAdapter, List.of());
 		final MultiValueMap<String, Endpoint> dedupe = new LinkedMultiValueMap<>();
 		dedupe.add("vnfind", endpoint);
-//		when(hg.getVersion()).thenReturn(new Version("4.3.2"));
+// when(hg.getVersion()).thenReturn(new Version("4.3.2"));
 		when(serversJpa.save(any())).thenReturn(server);
 		final Servers res = cac.registerServer(id, Map.of());
 		assertNotNull(res);

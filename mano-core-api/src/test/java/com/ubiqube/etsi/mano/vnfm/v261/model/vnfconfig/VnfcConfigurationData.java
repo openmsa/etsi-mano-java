@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -59,7 +59,7 @@ public class VnfcConfigurationData {
 	 * @return vnfcInstanceId
 	 **/
 	@Schema(required = true, description = "Identifier of a VNFC instance to which this set of configuration data applies. ")
-	@Nonnull
+	@NonNull
 
 	public String getVnfcInstanceId() {
 		return vnfcInstanceId;

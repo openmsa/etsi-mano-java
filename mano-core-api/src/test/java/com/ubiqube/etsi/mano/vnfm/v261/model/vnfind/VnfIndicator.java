@@ -23,7 +23,7 @@ import org.springframework.validation.annotation.Validated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.validation.Valid;
 
 /**
@@ -59,7 +59,7 @@ public class VnfIndicator {
 	 * @return id
 	 **/
 	@Schema(required = true, description = "Identifier of this VNF indicator. ")
-	@Nonnull
+	@NonNull
 
 	public String getId() {
 		return id;
@@ -103,7 +103,7 @@ public class VnfIndicator {
 	 * @return value
 	 **/
 	@Schema(required = true, description = "Provides the value of the indicator. The value format is defined in the VNFD. ETSI GS NFV-SOL 001 specifies the structure and format of the  VNFD based on TOSCA specifications. ")
-	@Nonnull
+	@NonNull
 
 	public Object getValue() {
 		return value;
@@ -125,7 +125,7 @@ public class VnfIndicator {
 	 * @return vnfInstanceId
 	 **/
 	@Schema(required = true, description = "Identifier of the \"Individual VNF instance\" which provides the indicator value. ")
-	@Nonnull
+	@NonNull
 
 	public String getVnfInstanceId() {
 		return vnfInstanceId;
@@ -146,7 +146,7 @@ public class VnfIndicator {
 	 * @return links
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	@Valid
 

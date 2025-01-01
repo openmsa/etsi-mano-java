@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -71,7 +71,7 @@ public class VnffgInfo {
 	 * @return id
 	 **/
 	@Schema(required = true, description = "Identifier of this VNFFG instance. ")
-	@Nonnull
+	@NonNull
 
 	public String getId() {
 		return id;
@@ -92,7 +92,7 @@ public class VnffgInfo {
 	 * @return vnffgdId
 	 **/
 	@Schema(required = true, description = "Identifier of the VNFFGD in the NSD. ")
-	@Nonnull
+	@NonNull
 
 	public String getVnffgdId() {
 		return vnffgdId;
@@ -118,7 +118,7 @@ public class VnffgInfo {
 	 * @return vnfInstanceId
 	 **/
 	@Schema(required = true, description = "Identifier(s) of the constituent VNF instance(s) of this VNFFG instance. ")
-	@Nonnull
+	@NonNull
 
 	public List<String> getVnfInstanceId() {
 		return vnfInstanceId;

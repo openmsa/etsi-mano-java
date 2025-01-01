@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.validation.Valid;
 
 /**
@@ -99,7 +99,7 @@ public class VnfIdentifierCreationNotification {
 	 * @return id
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	public String getId() {
 		return id;
@@ -121,7 +121,7 @@ public class VnfIdentifierCreationNotification {
 	 * @return notificationType
 	 **/
 	@Schema(required = true, description = "Discriminator for the different notification types. Shall be set to \"VnfIdentifierCreationNotification\" for this notification type. ")
-	@Nonnull
+	@NonNull
 
 	public NotificationTypeEnum getNotificationType() {
 		return notificationType;
@@ -142,7 +142,7 @@ public class VnfIdentifierCreationNotification {
 	 * @return subscriptionId
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	public String getSubscriptionId() {
 		return subscriptionId;
@@ -163,7 +163,7 @@ public class VnfIdentifierCreationNotification {
 	 * @return timeStamp
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	@Valid
 	public OffsetDateTime getTimeStamp() {
@@ -185,7 +185,7 @@ public class VnfIdentifierCreationNotification {
 	 * @return vnfInstanceId
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	public String getVnfInstanceId() {
 		return vnfInstanceId;
@@ -206,7 +206,7 @@ public class VnfIdentifierCreationNotification {
 	 * @return _links
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	@Valid
 	public LccnLinks getLinks() {

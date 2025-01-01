@@ -29,7 +29,7 @@ import com.ubiqube.etsi.mano.service.HttpGateway;
 import com.ubiqube.etsi.mano.service.rest.ManoQueryBuilder;
 import com.ubiqube.etsi.mano.service.rest.QueryParameters;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import jakarta.validation.constraints.NotNull;
 
 /**

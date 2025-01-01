@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
   * Links to resources related to this notification. 
@@ -45,7 +45,7 @@ public class SubscriptionThresholdCrossedNotificationThresholdCrossedNotificatio
    * @return subscription
   **/
   @JsonProperty("subscription")
-  @Nonnull
+  @NonNull
   public PmJobsPmJobReportsLinksSelf getSubscription() {
     return subscription;
   }
@@ -64,7 +64,7 @@ public class SubscriptionThresholdCrossedNotificationThresholdCrossedNotificatio
    * @return objectInstance
   **/
   @JsonProperty("objectInstance")
-  @Nonnull
+  @NonNull
   public PmJobsPmJobReportsLinksSelf getObjectInstance() {
     return objectInstance;
   }
@@ -83,7 +83,7 @@ public class SubscriptionThresholdCrossedNotificationThresholdCrossedNotificatio
    * @return threshold
   **/
   @JsonProperty("threshold")
-  @Nonnull
+  @NonNull
   public PmJobsPmJobReportsLinksSelf getThreshold() {
     return threshold;
   }

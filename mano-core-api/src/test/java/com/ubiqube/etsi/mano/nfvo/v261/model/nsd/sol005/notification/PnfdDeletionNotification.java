@@ -20,7 +20,7 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -75,7 +75,7 @@ public class PnfdDeletionNotification {
 	 * @return id
 	 **/
 	@Schema(required = true, description = "Identifier of this notification. If a notification is sent multiple times due to multiple subscriptions, the \"id\" attribute of all these notifications shall have the same value. ")
-	@Nonnull
+	@NonNull
 
 	public String getId() {
 		return id;
@@ -97,7 +97,7 @@ public class PnfdDeletionNotification {
 	 * @return notificationType
 	 **/
 	@Schema(required = true, description = "Discriminator for the different notification types. Shall be set to \"PnfdDeletionNotification \" for this notification type. ")
-	@Nonnull
+	@NonNull
 
 	public String getNotificationType() {
 		return notificationType;
@@ -118,7 +118,7 @@ public class PnfdDeletionNotification {
 	 * @return subscriptionId
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	public String getSubscriptionId() {
 		return subscriptionId;
@@ -139,7 +139,7 @@ public class PnfdDeletionNotification {
 	 * @return timeStamp
 	 **/
 	@Schema(required = true, description = "Date-time of the generation of the notification. ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 
@@ -162,7 +162,7 @@ public class PnfdDeletionNotification {
 	 * @return pnfdInfoId
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	public String getPnfdInfoId() {
 		return pnfdInfoId;
@@ -183,7 +183,7 @@ public class PnfdDeletionNotification {
 	 * @return pnfdId
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	public String getPnfdId() {
 		return pnfdId;
@@ -204,7 +204,7 @@ public class PnfdDeletionNotification {
 	 * @return links
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	@Valid
 

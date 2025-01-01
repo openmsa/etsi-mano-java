@@ -24,7 +24,7 @@ import com.ubiqube.etsi.mano.service.cond.Node;
 import com.ubiqube.etsi.mano.service.cond.SimpleNodeReturn;
 import com.ubiqube.etsi.mano.service.cond.ast.GenericCondition;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class RightVisitor extends SimpleNodeReturn<Void> {
 

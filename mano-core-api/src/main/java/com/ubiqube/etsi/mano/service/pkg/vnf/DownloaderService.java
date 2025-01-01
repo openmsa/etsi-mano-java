@@ -62,7 +62,7 @@ import com.ubiqube.etsi.mano.service.utils.MultiHashInputStream;
 import com.ubiqube.etsi.mano.service.vim.VimException;
 
 import io.micrometer.context.ContextExecutorService;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  *

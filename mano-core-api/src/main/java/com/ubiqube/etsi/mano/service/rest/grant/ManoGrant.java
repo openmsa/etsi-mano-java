@@ -34,7 +34,7 @@ import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.service.HttpGateway;
 import com.ubiqube.etsi.mano.service.rest.QueryParameters;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
  *
@@ -45,7 +45,7 @@ public class ManoGrant {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ManoGrant.class);
 	private static final Pattern UUID_REGEXP = Pattern.compile("(?<uuid>[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89aAbB][a-f0-9]{3}-[a-f0-9]{12})$");
-	@Nonnull
+	@NonNull
 	private final QueryParameters client;
 	private UUID id;
 

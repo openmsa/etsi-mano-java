@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -61,7 +61,7 @@ public class UpdateVnffgData {
 	 * @return vnffgInfoId
 	 **/
 	@Schema(required = true, description = "Identifier of an existing VNFFG to be updated for the NS Instance. ")
-	@Nonnull
+	@NonNull
 
 	public String getVnffgInfoId() {
 		return vnffgInfoId;

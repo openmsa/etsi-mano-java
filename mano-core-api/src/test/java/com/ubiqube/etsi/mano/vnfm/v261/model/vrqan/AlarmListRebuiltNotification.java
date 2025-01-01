@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.validation.Valid;
 
 /**
@@ -96,7 +96,7 @@ public class AlarmListRebuiltNotification {
 	 * @return id
 	 **/
 	@Schema(required = true, description = "Identifier of this notification. If a notification is sent multiple times due to multiple subscriptions, the \"id\" attribute of all these notifications shall have the same value. ")
-	@Nonnull
+	@NonNull
 
 	public String getId() {
 		return id;
@@ -118,7 +118,7 @@ public class AlarmListRebuiltNotification {
 	 * @return notificationType
 	 **/
 	@Schema(required = true, description = "Discriminator for the different notification types. Shall be set to \"AlarmListRebuiltNotification\" for this notification type. ")
-	@Nonnull
+	@NonNull
 
 	public NotificationTypeEnum getNotificationType() {
 		return notificationType;
@@ -139,7 +139,7 @@ public class AlarmListRebuiltNotification {
 	 * @return subscriptionId
 	 **/
 	@Schema(required = true, description = "Identifier of the subscription that this notification relates to. ")
-	@Nonnull
+	@NonNull
 
 	public String getSubscriptionId() {
 		return subscriptionId;
@@ -160,7 +160,7 @@ public class AlarmListRebuiltNotification {
 	 * @return timeStamp
 	 **/
 	@Schema(required = true, description = "Date-time of the generation of the notification. ")
-	@Nonnull
+	@NonNull
 
 	public String getTimeStamp() {
 		return timeStamp;
@@ -181,7 +181,7 @@ public class AlarmListRebuiltNotification {
 	 * @return links
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	@Valid
 

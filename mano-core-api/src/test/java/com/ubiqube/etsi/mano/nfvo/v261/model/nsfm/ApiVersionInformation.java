@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -55,7 +55,7 @@ public class ApiVersionInformation {
 	 * @return uriPrefix
 	 **/
 	@Schema(required = true, description = "Specifies the URI prefix for the API, in the following form {apiRoot}/{apiName}/{apiMajorVersion}/. ")
-	@Nonnull
+	@NonNull
 
 	public String getUriPrefix() {
 		return uriPrefix;
@@ -81,7 +81,7 @@ public class ApiVersionInformation {
 	 * @return apiVersions
 	 **/
 	@Schema(required = true, description = "Version(s) supported for the API signalled by the uriPrefix attribute. ")
-	@Nonnull
+	@NonNull
 	@Valid
 	public List<ApiVersionInformationApiVersions> getApiVersions() {
 		return apiVersions;

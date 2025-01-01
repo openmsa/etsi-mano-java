@@ -25,7 +25,7 @@ import org.springframework.validation.annotation.Validated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.validation.Valid;
 
 /**
@@ -52,7 +52,7 @@ public class VnfInstanceSubscriptionFilterVersions {
 	 * @return vnfSoftwareVersion
 	 **/
 	@Schema(required = true, description = "Software version to match. ")
-	@Nonnull
+	@NonNull
 
 	public String getVnfSoftwareVersion() {
 		return vnfSoftwareVersion;

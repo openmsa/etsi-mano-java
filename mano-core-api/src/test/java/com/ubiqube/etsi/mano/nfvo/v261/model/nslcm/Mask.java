@@ -18,7 +18,7 @@ package com.ubiqube.etsi.mano.nfvo.v261.model.nslcm;
 
 import java.util.Objects;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -58,7 +58,7 @@ public class Mask {
 	 * @return startingPoint
 	 **/
 	@Schema(required = true, description = "Indicates the offset between the last bit of the source mac address and the first bit of the sequence of bits to be matched. ")
-	@Nonnull
+	@NonNull
 
 	public Integer getStartingPoint() {
 		return startingPoint;
@@ -79,7 +79,7 @@ public class Mask {
 	 * @return length
 	 **/
 	@Schema(required = true, description = "Indicates the number of bits to be matched. ")
-	@Nonnull
+	@NonNull
 
 	public Integer getLength() {
 		return length;
@@ -100,7 +100,7 @@ public class Mask {
 	 * @return value
 	 **/
 	@Schema(required = true, description = "Provide the sequence of bit values to be matched. ")
-	@Nonnull
+	@NonNull
 
 	public String getValue() {
 		return value;

@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -59,7 +59,7 @@ public class ScaleByStepData {
 	 * @return aspectId
 	 **/
 	@Schema(required = true, description = "Identifier of (reference to) the aspect of the VNF that is requested to be scaled, as declared in the VNFD. ")
-	@Nonnull
+	@NonNull
 
 	public String getAspectId() {
 		return aspectId;

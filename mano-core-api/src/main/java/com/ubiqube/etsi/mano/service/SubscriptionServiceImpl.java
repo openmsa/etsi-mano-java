@@ -48,7 +48,7 @@ import com.ubiqube.etsi.mano.service.repository.SubscriptionRepositoryService;
 import com.ubiqube.etsi.mano.service.rest.ServerAdapter;
 import com.ubiqube.etsi.mano.service.search.ManoSearch;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 @Service
 public class SubscriptionServiceImpl implements SubscriptionService {

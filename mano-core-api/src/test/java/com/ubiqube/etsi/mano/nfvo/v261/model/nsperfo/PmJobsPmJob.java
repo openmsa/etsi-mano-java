@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +55,7 @@ public class PmJobsPmJob  {
    * @return id
   **/
   @JsonProperty("id")
-  @Nonnull
+  @NonNull
   public String getId() {
     return id;
   }
@@ -74,7 +74,7 @@ public class PmJobsPmJob  {
    * @return objectInstanceIds
   **/
   @JsonProperty("objectInstanceIds")
-  @Nonnull
+  @NonNull
   public List<String> getObjectInstanceIds() {
     return objectInstanceIds;
   }
@@ -98,7 +98,7 @@ public class PmJobsPmJob  {
    * @return criteria
   **/
   @JsonProperty("criteria")
-  @Nonnull
+  @NonNull
   public PmJobsPmJobCriteria getCriteria() {
     return criteria;
   }

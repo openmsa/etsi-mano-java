@@ -36,7 +36,7 @@ import com.ubiqube.etsi.mano.service.auth.model.AuthentificationInformations.Aut
 import com.ubiqube.etsi.mano.service.auth.model.OAuth2GrantType;
 import com.ubiqube.etsi.mano.service.rest.FluxRest;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  *

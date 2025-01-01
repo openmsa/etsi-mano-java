@@ -19,7 +19,7 @@ package com.ubiqube.etsi.mano.nfvo.v261.model.nsperfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.validation.Valid;
 import jakarta.xml.bind.annotation.XmlEnum;
 import jakarta.xml.bind.annotation.XmlEnumValue;
@@ -90,7 +90,7 @@ public class ThresholdsThresholdCriteria {
 	 * @return performanceMetric
 	 **/
 	@JsonProperty("performanceMetric")
-	@Nonnull
+	@NonNull
 	public String getPerformanceMetric() {
 		return performanceMetric;
 	}
@@ -113,7 +113,7 @@ public class ThresholdsThresholdCriteria {
 	 * @return thresholdType
 	 **/
 	@JsonProperty("thresholdType")
-	@Nonnull
+	@NonNull
 	public String getThresholdType() {
 		if (thresholdType == null) {
 			return null;

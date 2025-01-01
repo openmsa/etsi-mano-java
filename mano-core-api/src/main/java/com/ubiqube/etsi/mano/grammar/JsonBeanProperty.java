@@ -20,8 +20,8 @@ import java.beans.PropertyDescriptor;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  *
@@ -29,13 +29,13 @@ import jakarta.annotation.Nullable;
  *
  */
 public class JsonBeanProperty {
-	@Nonnull
+	@NonNull
 	private PropertyDescriptor propertyDescriptor;
-	@Nonnull
+	@NonNull
 	private String jsonName;
-	@Nonnull
+	@NonNull
 	private Map<String, JsonBeanProperty> right;
-	@Nonnull
+	@NonNull
 	private List<JsonBeanProperty> listAccessors;
 
 	public JsonBeanProperty(final PropertyDescriptor propertyDescriptor, final String jsonName) {

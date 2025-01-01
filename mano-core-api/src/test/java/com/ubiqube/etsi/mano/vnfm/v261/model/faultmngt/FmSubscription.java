@@ -19,7 +19,7 @@ package com.ubiqube.etsi.mano.vnfm.v261.model.faultmngt;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -60,7 +60,7 @@ public class FmSubscription {
 	 * @return id
 	 **/
 	@Schema(required = true, description = "Identifier of this \"Individual subscription\" resource. ")
-	@Nonnull
+	@NonNull
 
 	public String getId() {
 		return id;
@@ -105,7 +105,7 @@ public class FmSubscription {
 	 * @return callbackUri
 	 **/
 	@Schema(required = true, description = "The URI of the endpoint to send the notification to. ")
-	@Nonnull
+	@NonNull
 
 	public String getCallbackUri() {
 		return callbackUri;
@@ -126,7 +126,7 @@ public class FmSubscription {
 	 * @return links
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	@Valid
 

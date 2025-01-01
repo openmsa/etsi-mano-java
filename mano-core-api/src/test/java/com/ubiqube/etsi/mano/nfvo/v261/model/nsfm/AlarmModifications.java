@@ -18,7 +18,7 @@ package com.ubiqube.etsi.mano.nfvo.v261.model.nsfm;
 
 import java.util.Objects;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -86,7 +86,7 @@ public class AlarmModifications {
 	 * @return ackState
 	 **/
 	@Schema(required = true, description = "New value of the \"ackState\" attribute in \"Alarm\". Permitted values: - ACKNOWLEDGED ")
-	@Nonnull
+	@NonNull
 
 	public AckStateEnum getAckState() {
 		return ackState;

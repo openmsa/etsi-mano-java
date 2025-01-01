@@ -22,15 +22,15 @@ import java.util.function.Function;
 import com.ubiqube.etsi.mano.dao.mano.version.ApiVersionType;
 import com.ubiqube.etsi.mano.service.HttpGateway;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class QueryParameters {
-	@Nonnull
+	@NonNull
 	private final ServerAdapter server;
 	@Nullable
 	private Function<HttpGateway, ?> requestObject;

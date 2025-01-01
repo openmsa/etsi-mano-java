@@ -19,7 +19,7 @@ package com.ubiqube.etsi.mano.vnfm.v261.model.nsperfo;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -92,7 +92,7 @@ public class ThresholdCriteria {
 	 * @return performanceMetric
 	 **/
 	@Schema(required = true, description = "Defines the performance metric associated with the threshold. Valid values are specified as \"Measurement Name\" values in clause 7.2 of ETSI GS NFV-IFA 027. ")
-	@Nonnull
+	@NonNull
 
 	public String getPerformanceMetric() {
 		return performanceMetric;
@@ -116,7 +116,7 @@ public class ThresholdCriteria {
 	 * @return thresholdType
 	 **/
 	@Schema(required = true, description = "Type of threshold. This attribute determines which other attributes are present in the data structure. Permitted values: * SIMPLE: Single-valued static threshold In the present document, simple thresholds are defined. The definition of additional threshold types is left for future specification. ")
-	@Nonnull
+	@NonNull
 
 	public ThresholdTypeEnum getThresholdType() {
 		return thresholdType;

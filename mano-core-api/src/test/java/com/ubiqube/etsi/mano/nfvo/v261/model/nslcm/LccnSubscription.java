@@ -19,7 +19,7 @@ package com.ubiqube.etsi.mano.nfvo.v261.model.nslcm;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -61,7 +61,7 @@ public class LccnSubscription {
 	 * @return id
 	 **/
 	@Schema(required = true, description = "Identifier of this subscription resource. ")
-	@Nonnull
+	@NonNull
 
 	public String getId() {
 		return id;
@@ -106,7 +106,7 @@ public class LccnSubscription {
 	 * @return callbackUri
 	 **/
 	@Schema(required = true, description = "The URI of the endpoint to send the notification to. ")
-	@Nonnull
+	@NonNull
 
 	public String getCallbackUri() {
 		return callbackUri;
@@ -127,7 +127,7 @@ public class LccnSubscription {
 	 * @return links
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	@Valid
 

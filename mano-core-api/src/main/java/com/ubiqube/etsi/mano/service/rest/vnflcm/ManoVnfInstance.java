@@ -28,7 +28,7 @@ import com.ubiqube.etsi.mano.service.HttpGateway;
 import com.ubiqube.etsi.mano.service.rest.ManoQueryBuilder;
 import com.ubiqube.etsi.mano.service.rest.QueryParameters;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
  *
@@ -36,7 +36,7 @@ import jakarta.annotation.Nonnull;
  *
  */
 public class ManoVnfInstance {
-	@Nonnull
+	@NonNull
 	private final QueryParameters client;
 
 	public ManoVnfInstance(final QueryParameters manoClient) {

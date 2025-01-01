@@ -47,7 +47,7 @@ import com.ubiqube.etsi.mano.service.repository.VrQanRepositoryService;
 import com.ubiqube.etsi.mano.service.search.ManoSearch;
 import com.ubiqube.etsi.mano.vim.dto.SwImage;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.transaction.Transactional;
 import jakarta.transaction.Transactional.TxType;
 
@@ -228,7 +228,7 @@ public class VimManager {
 
 	public List<SoftwareImage> getDetailedImageList(final VimConnectionInformation vimConn) {
 		final Vim vim = findVim(vimConn);
-		@Nonnull
+		@NonNull
 		final Storage storage = vim.storage(vimConn);
 		final List<SwImage> preList = storage.getImageList();
 		return preList.stream().map(x -> mapper(storage, x)).toList();

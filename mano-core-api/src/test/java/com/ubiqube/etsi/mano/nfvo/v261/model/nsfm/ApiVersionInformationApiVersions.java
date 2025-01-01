@@ -20,7 +20,7 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -53,7 +53,7 @@ public class ApiVersionInformationApiVersions {
 	 * @return version
 	 **/
 	@Schema(required = true, description = "Identifies a supported version. The value of the version attribute shall be a version identifier as specified in clause 4.6.1. ")
-	@Nonnull
+	@NonNull
 
 	public String getVersion() {
 		return version;

@@ -19,7 +19,7 @@ package com.ubiqube.etsi.mano.common.v261;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import com.ubiqube.etsi.mano.common.v261.model.vnf.PackageChangeType;
 import com.ubiqube.etsi.mano.common.v261.model.vnf.PackageOperationalStateType;
@@ -39,8 +39,8 @@ public class VnfSubscriptionFactory261 {
 		// Nothing.
 	}
 
-	@Nonnull
-	public static VnfPackageChangeNotification createVnfPackageChangeNotification(final boolean deleted, final UUID subscriptionId, @Nonnull final UUID vnfPkgId, final UUID eventId, final String vnfdId, final PackageOperationalStateType state, final Linkable links) {
+	@NonNull
+	public static VnfPackageChangeNotification createVnfPackageChangeNotification(final boolean deleted, final UUID subscriptionId, @NonNull final UUID vnfPkgId, final UUID eventId, final String vnfdId, final PackageOperationalStateType state, final Linkable links) {
 		final VnfPackageChangeNotification ret = new VnfPackageChangeNotification();
 		if (deleted) {
 			ret.setChangeType(PackageChangeType.PKG_DELETE);
@@ -59,8 +59,8 @@ public class VnfSubscriptionFactory261 {
 		return ret;
 	}
 
-	@Nonnull
-	public static VnfPackageOnboardingNotification createNotificationVnfPackageOnboardingNotification(final UUID id, final UUID subscriptionId, @Nonnull final UUID vnfPkgId, final String vnfdId, final Linkable links) {
+	@NonNull
+	public static VnfPackageOnboardingNotification createNotificationVnfPackageOnboardingNotification(final UUID id, final UUID subscriptionId, @NonNull final UUID vnfPkgId, final String vnfdId, final Linkable links) {
 		final VnfPackageOnboardingNotification ret = new VnfPackageOnboardingNotification();
 		ret.setId(id.toString());
 		ret.setTimeStamp(OffsetDateTime.now());
@@ -72,8 +72,8 @@ public class VnfSubscriptionFactory261 {
 		return ret;
 	}
 	
-	@Nonnull
-	public static VnfIndicatorValueChangeNotification createNotificationVnfIndicatorValueChangeNotification(final UUID id, final UUID subscriptionId, @Nonnull final String vnfIndicatorId, final String vnfInstanceId, String value, String vnfdId, final Linkable links) {
+	@NonNull
+	public static VnfIndicatorValueChangeNotification createNotificationVnfIndicatorValueChangeNotification(final UUID id, final UUID subscriptionId, @NonNull final String vnfIndicatorId, final String vnfInstanceId, String value, String vnfdId, final Linkable links) {
 		final VnfIndicatorValueChangeNotification ret = new VnfIndicatorValueChangeNotification();
 		ret.setId(id.toString());
 		ret.setTimeStamp(OffsetDateTime.now());

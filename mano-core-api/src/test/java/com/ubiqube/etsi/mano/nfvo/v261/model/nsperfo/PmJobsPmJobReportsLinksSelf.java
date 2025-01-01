@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
   * This type represents a link to a resource. 
@@ -38,7 +38,7 @@ public class PmJobsPmJobReportsLinksSelf  {
    * @return href
   **/
   @JsonProperty("href")
-  @Nonnull
+  @NonNull
   public String getHref() {
     return href;
   }

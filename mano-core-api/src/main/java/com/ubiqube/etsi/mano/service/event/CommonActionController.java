@@ -67,7 +67,7 @@ import com.ubiqube.etsi.mano.service.rest.ManoClient;
 import com.ubiqube.etsi.mano.service.rest.ProblemDetailException;
 import com.ubiqube.etsi.mano.service.rest.ServerAdapter;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  *

@@ -19,7 +19,7 @@ package com.ubiqube.etsi.mano.nfvo.v261.model.nsfm;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -52,7 +52,7 @@ public class FaultyResourceInfo {
 	 * @return faultyResource
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	@Valid
 	public ResourceHandle getFaultyResource() {
@@ -74,7 +74,7 @@ public class FaultyResourceInfo {
 	 * @return faultyResourceType
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	@Valid
 	public FaultyResourceType getFaultyResourceType() {

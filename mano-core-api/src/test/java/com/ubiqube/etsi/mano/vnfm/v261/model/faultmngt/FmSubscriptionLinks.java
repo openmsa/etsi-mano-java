@@ -19,7 +19,7 @@ package com.ubiqube.etsi.mano.vnfm.v261.model.faultmngt;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -51,7 +51,7 @@ public class FmSubscriptionLinks {
 	 * @return self
 	 **/
 	@Schema(required = true, description = "URI of this resource. ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 

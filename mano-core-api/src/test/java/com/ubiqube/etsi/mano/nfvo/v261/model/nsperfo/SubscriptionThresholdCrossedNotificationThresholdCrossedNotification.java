@@ -21,7 +21,7 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.validation.Valid;
 import jakarta.xml.bind.annotation.XmlEnum;
 import jakarta.xml.bind.annotation.XmlEnumValue;
@@ -134,7 +134,7 @@ public class SubscriptionThresholdCrossedNotificationThresholdCrossedNotificatio
 	 * @return id
 	 **/
 	@JsonProperty("id")
-	@Nonnull
+	@NonNull
 	public String getId() {
 		return id;
 	}
@@ -155,7 +155,7 @@ public class SubscriptionThresholdCrossedNotificationThresholdCrossedNotificatio
 	 * @return notificationType
 	 **/
 	@JsonProperty("notificationType")
-	@Nonnull
+	@NonNull
 	public String getNotificationType() {
 		return notificationType;
 	}
@@ -175,7 +175,7 @@ public class SubscriptionThresholdCrossedNotificationThresholdCrossedNotificatio
 	 * @return subscriptionId
 	 **/
 	@JsonProperty("subscriptionId")
-	@Nonnull
+	@NonNull
 	public String getSubscriptionId() {
 		return subscriptionId;
 	}
@@ -195,7 +195,7 @@ public class SubscriptionThresholdCrossedNotificationThresholdCrossedNotificatio
 	 * @return timeStamp
 	 **/
 	@JsonProperty("timeStamp")
-	@Nonnull
+	@NonNull
 	public Date getTimeStamp() {
 		return timeStamp;
 	}
@@ -215,7 +215,7 @@ public class SubscriptionThresholdCrossedNotificationThresholdCrossedNotificatio
 	 * @return thresholdId
 	 **/
 	@JsonProperty("thresholdId")
-	@Nonnull
+	@NonNull
 	public String getThresholdId() {
 		return thresholdId;
 	}
@@ -237,7 +237,7 @@ public class SubscriptionThresholdCrossedNotificationThresholdCrossedNotificatio
 	 * @return crossingDirection
 	 **/
 	@JsonProperty("crossingDirection")
-	@Nonnull
+	@NonNull
 	public String getCrossingDirection() {
 		if (crossingDirection == null) {
 			return null;
@@ -260,7 +260,7 @@ public class SubscriptionThresholdCrossedNotificationThresholdCrossedNotificatio
 	 * @return objectInstanceId
 	 **/
 	@JsonProperty("objectInstanceId")
-	@Nonnull
+	@NonNull
 	public String getObjectInstanceId() {
 		return objectInstanceId;
 	}
@@ -280,7 +280,7 @@ public class SubscriptionThresholdCrossedNotificationThresholdCrossedNotificatio
 	 * @return performanceMetric
 	 **/
 	@JsonProperty("performanceMetric")
-	@Nonnull
+	@NonNull
 	public String getPerformanceMetric() {
 		return performanceMetric;
 	}
@@ -300,7 +300,7 @@ public class SubscriptionThresholdCrossedNotificationThresholdCrossedNotificatio
 	 * @return performanceValue
 	 **/
 	@JsonProperty("performanceValue")
-	@Nonnull
+	@NonNull
 	public Object getPerformanceValue() {
 		return performanceValue;
 	}
@@ -320,7 +320,7 @@ public class SubscriptionThresholdCrossedNotificationThresholdCrossedNotificatio
 	 * @return links
 	 **/
 	@JsonProperty("_links")
-	@Nonnull
+	@NonNull
 	public SubscriptionThresholdCrossedNotificationThresholdCrossedNotificationLinks getLinks() {
 		return links;
 	}

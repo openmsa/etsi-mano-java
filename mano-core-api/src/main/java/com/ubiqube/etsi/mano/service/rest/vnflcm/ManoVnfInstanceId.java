@@ -37,8 +37,8 @@ import com.ubiqube.etsi.mano.model.VnfScaleToLevelRequest;
 import com.ubiqube.etsi.mano.service.HttpGateway;
 import com.ubiqube.etsi.mano.service.rest.QueryParameters;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  *
@@ -48,7 +48,7 @@ import jakarta.annotation.Nullable;
 public class ManoVnfInstanceId {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ManoVnfInstanceId.class);
-	@Nonnull
+	@NonNull
 	private final QueryParameters client;
 
 	public ManoVnfInstanceId(final QueryParameters manoClient, final UUID vnfInstanceId) {

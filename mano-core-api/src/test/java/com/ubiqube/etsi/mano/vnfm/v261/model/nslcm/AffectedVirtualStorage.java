@@ -30,7 +30,7 @@ package com.ubiqube.etsi.mano.vnfm.v261.model.nslcm;
 
 import java.util.Map;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ubiqube.etsi.mano.common.v261.model.ResourceHandle;
@@ -75,7 +75,7 @@ public class AffectedVirtualStorage {
 	 **/
 	@JsonProperty("id")
 	@Schema(required = true, description = "Identifier of the storage instance, identifying the applicable \"virtualStorageResourceInfo\" entry in the \"VnfInstance\" data type. ")
-	@Nonnull
+	@NonNull
 	public String getId() {
 		return id;
 	}
@@ -96,7 +96,7 @@ public class AffectedVirtualStorage {
 	 **/
 	@JsonProperty("virtualStorageDescId")
 	@Schema(required = true, description = "Identifier of the related VirtualStorage descriptor in the VNFD. ")
-	@Nonnull
+	@NonNull
 	public String getVirtualStorageDescId() {
 		return virtualStorageDescId;
 	}
@@ -119,7 +119,7 @@ public class AffectedVirtualStorage {
 	 **/
 	@JsonProperty("changeType")
 	@Schema(required = true, description = "Signals the type of change. Permitted values: * ADDED * REMOVED * MODIFIED * TEMPORARY For a temporary resource, an AffectedVirtualStorage structure exists as long as the temporary resource exists. ")
-	@Nonnull
+	@NonNull
 	public ChangeTypeEnum getChangeType() {
 		return changeType;
 	}
@@ -142,7 +142,7 @@ public class AffectedVirtualStorage {
 	 **/
 	@JsonProperty("storageResource")
 	@Schema(required = true, description = "Reference to the VirtualStorage resource. Detailed information is  (for new and modified resources) or has been (for removed resources) available from the VIM. ")
-	@Nonnull
+	@NonNull
 	public ResourceHandle getStorageResource() {
 		return storageResource;
 	}

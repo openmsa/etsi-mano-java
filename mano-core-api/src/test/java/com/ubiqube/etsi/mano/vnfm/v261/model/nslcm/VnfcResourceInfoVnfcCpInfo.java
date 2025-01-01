@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -78,7 +78,7 @@ public class VnfcResourceInfoVnfcCpInfo {
 	 * @return id
 	 **/
 	@Schema(required = true, description = "Identifier of this VNFC CP instance and the associated array entry. ")
-	@Nonnull
+	@NonNull
 	public String getId() {
 		return id;
 	}
@@ -98,7 +98,7 @@ public class VnfcResourceInfoVnfcCpInfo {
 	 * @return cpdId
 	 **/
 	@Schema(required = true, description = "Identifier of the VDU CPD, cpdId, in the VNFD. ")
-	@Nonnull
+	@NonNull
 	public String getCpdId() {
 		return cpdId;
 	}

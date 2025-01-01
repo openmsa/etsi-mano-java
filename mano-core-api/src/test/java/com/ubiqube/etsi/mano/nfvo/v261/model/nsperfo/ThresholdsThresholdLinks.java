@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
   * Links for this resource. 
@@ -43,7 +43,7 @@ public class ThresholdsThresholdLinks  {
    * @return self
   **/
   @JsonProperty("self")
-  @Nonnull
+  @NonNull
   public PmJobsPmJobReportsLinksSelf getSelf() {
     return self;
   }

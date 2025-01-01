@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
   * This type represents a subscription request. 
@@ -65,7 +65,7 @@ public class SubscriptionsPmSubscriptionRequest  {
    * @return callbackUri
   **/
   @JsonProperty("callbackUri")
-  @Nonnull
+  @NonNull
   public String getCallbackUri() {
     return callbackUri;
   }

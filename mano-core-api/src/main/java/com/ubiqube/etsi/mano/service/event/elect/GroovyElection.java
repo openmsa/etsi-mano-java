@@ -48,7 +48,7 @@ import com.ubiqube.etsi.mano.exception.GenericException;
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
 import io.micrometer.context.ContextExecutorService;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

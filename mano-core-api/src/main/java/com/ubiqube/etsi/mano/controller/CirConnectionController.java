@@ -43,7 +43,7 @@ import com.ubiqube.etsi.mano.service.event.EventManager;
 import com.ubiqube.etsi.mano.service.mapping.CirConnectionControllerMapping;
 import com.ubiqube.etsi.mano.service.vim.CirConnectionManager;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import jakarta.validation.Valid;
 
 @RestController

@@ -23,7 +23,7 @@ import org.springframework.validation.annotation.Validated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.validation.Valid;
 
 /**
@@ -53,7 +53,7 @@ public class LccnLinks {
 	 * @return vnfInstance
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	@Valid
 	public NotificationLink getVnfInstance() {
@@ -75,7 +75,7 @@ public class LccnLinks {
 	 * @return subscription
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	@Valid
 	public NotificationLink getSubscription() {

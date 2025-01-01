@@ -18,7 +18,7 @@ package com.ubiqube.etsi.mano.nfvo.v261.model.nslcm;
 
 import java.util.Objects;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -49,7 +49,7 @@ public class LocationConstraintsCivicAddressElement {
 	 * @return caType
 	 **/
 	@Schema(required = true, description = "Describe the content type of caValue. The value of caType shall comply with Section 3.4 of IETF RFC 4776 [13]. ")
-	@Nonnull
+	@NonNull
 
 	public Integer getCaType() {
 		return caType;
@@ -70,7 +70,7 @@ public class LocationConstraintsCivicAddressElement {
 	 * @return caValue
 	 **/
 	@Schema(required = true, description = "Content of civic address element corresponding to the caType. The format caValue shall comply with Section 3.4 of IETF RFC 4776 [13]. ")
-	@Nonnull
+	@NonNull
 
 	public String getCaValue() {
 		return caValue;

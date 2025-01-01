@@ -26,7 +26,7 @@ import com.ubiqube.etsi.mano.service.rest.vnflcm.ManoVnfLcmOpOccs;
 import com.ubiqube.etsi.mano.service.rest.vnfpkg.ManoVnfPackage;
 import com.ubiqube.etsi.mano.service.rest.vnfpm.ManoVnfPm;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
  *
@@ -34,7 +34,7 @@ import jakarta.annotation.Nonnull;
  *
  */
 public class ManoClient {
-	@Nonnull
+	@NonNull
 	private final QueryParameters params;
 
 	public ManoClient(final ServerAdapter server) {

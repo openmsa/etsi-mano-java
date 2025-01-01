@@ -19,7 +19,7 @@ package com.ubiqube.etsi.mano.vnfm.v261.model.vnflcm;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -56,7 +56,7 @@ public class ExtLinkPortInfo {
 	 * @return id
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	public String getId() {
 		return id;
@@ -77,7 +77,7 @@ public class ExtLinkPortInfo {
 	 * @return resourceHandle
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	@Valid
 	public ResourceHandle getResourceHandle() {

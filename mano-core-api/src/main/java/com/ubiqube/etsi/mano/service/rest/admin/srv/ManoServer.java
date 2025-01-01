@@ -30,8 +30,8 @@ import com.ubiqube.etsi.mano.service.rest.McConstants;
 import com.ubiqube.etsi.mano.service.rest.QueryParameters;
 import com.ubiqube.etsi.mano.service.rest.ServerAdapter;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  *
@@ -39,7 +39,7 @@ import jakarta.annotation.Nullable;
  *
  */
 public class ManoServer {
-	@Nonnull
+	@NonNull
 	private final QueryParameters client;
 
 	public ManoServer(final QueryParameters client) {

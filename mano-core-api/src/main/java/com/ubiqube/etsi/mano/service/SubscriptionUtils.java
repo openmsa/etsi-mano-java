@@ -30,7 +30,7 @@ import com.ubiqube.etsi.mano.service.event.model.FilterAttributes;
 import com.ubiqube.etsi.mano.service.event.model.NotificationEvent;
 import com.ubiqube.etsi.mano.service.event.model.Subscription;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class SubscriptionUtils {
 	private static final Logger LOG = LoggerFactory.getLogger(SubscriptionUtils.class);

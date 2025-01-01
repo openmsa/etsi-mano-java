@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import java.util.Date;
 
 /**
@@ -68,7 +68,7 @@ public class SubscriptionPerformanceInformationAvailableNotificationPerformanceI
    * @return id
   **/
   @JsonProperty("id")
-  @Nonnull
+  @NonNull
   public String getId() {
     return id;
   }
@@ -87,7 +87,7 @@ public class SubscriptionPerformanceInformationAvailableNotificationPerformanceI
    * @return notificationType
   **/
   @JsonProperty("notificationType")
-  @Nonnull
+  @NonNull
   public String getNotificationType() {
     return notificationType;
   }
@@ -106,7 +106,7 @@ public class SubscriptionPerformanceInformationAvailableNotificationPerformanceI
    * @return subscriptionId
   **/
   @JsonProperty("subscriptionId")
-  @Nonnull
+  @NonNull
   public String getSubscriptionId() {
     return subscriptionId;
   }
@@ -125,7 +125,7 @@ public class SubscriptionPerformanceInformationAvailableNotificationPerformanceI
    * @return timeStamp
   **/
   @JsonProperty("timeStamp")
-  @Nonnull
+  @NonNull
   public Date getTimeStamp() {
     return timeStamp;
   }
@@ -144,7 +144,7 @@ public class SubscriptionPerformanceInformationAvailableNotificationPerformanceI
    * @return objectInstanceId
   **/
   @JsonProperty("objectInstanceId")
-  @Nonnull
+  @NonNull
   public String getObjectInstanceId() {
     return objectInstanceId;
   }
@@ -163,7 +163,7 @@ public class SubscriptionPerformanceInformationAvailableNotificationPerformanceI
    * @return links
   **/
   @JsonProperty("_links")
-  @Nonnull
+  @NonNull
   public SubscriptionPerformanceInformationAvailableNotificationPerformanceInformationAvailableNotificationLinks getLinks() {
     return links;
   }

@@ -18,7 +18,7 @@ package com.ubiqube.etsi.mano.nfvo.v261.model.nslcm;
 
 import java.util.Objects;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -71,7 +71,7 @@ public class CreateNsRequest {
 	 * @return nsName
 	 **/
 	@Schema(required = true, description = "Human-readable name of the NS instance to be created. ")
-	@Nonnull
+	@NonNull
 
 	public String getNsName() {
 		return nsName;
@@ -92,7 +92,7 @@ public class CreateNsRequest {
 	 * @return nsDescription
 	 **/
 	@Schema(required = true, description = "Human-readable description of the NS instance to be created. ")
-	@Nonnull
+	@NonNull
 
 	public String getNsDescription() {
 		return nsDescription;

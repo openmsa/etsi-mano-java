@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -61,7 +61,7 @@ public class PnfExtCpInfo {
 	 * @return cpInstanceId
 	 **/
 	@Schema(required = true, description = "Identifier of the CP in the scope of the PNF. ")
-	@Nonnull
+	@NonNull
 
 	public String getCpInstanceId() {
 		return cpInstanceId;
@@ -83,7 +83,7 @@ public class PnfExtCpInfo {
 	 * @return cpdId
 	 **/
 	@Schema(required = true, description = "Identifier of (reference to) the Connection Point Descriptor (CPD) for this CP. ")
-	@Nonnull
+	@NonNull
 
 	public String getCpdId() {
 		return cpdId;

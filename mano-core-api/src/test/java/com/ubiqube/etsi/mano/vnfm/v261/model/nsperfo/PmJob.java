@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -64,7 +64,7 @@ public class PmJob {
 	 * @return id
 	 **/
 	@Schema(required = true, description = "Identifier of this PM job. ")
-	@Nonnull
+	@NonNull
 
 	public String getId() {
 		return id;
@@ -90,7 +90,7 @@ public class PmJob {
 	 * @return objectInstanceIds
 	 **/
 	@Schema(required = true, description = "Identifiers of the VNF instances for which performance information is collected. ")
-	@Nonnull
+	@NonNull
 
 	public List<String> getObjectInstanceIds() {
 		return objectInstanceIds;
@@ -111,7 +111,7 @@ public class PmJob {
 	 * @return criteria
 	 **/
 	@Schema(required = true, description = "Criteria of the collection of performance information. ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 

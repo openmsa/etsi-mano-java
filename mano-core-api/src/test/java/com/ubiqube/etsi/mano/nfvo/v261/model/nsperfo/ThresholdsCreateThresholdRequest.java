@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
   * This type represents a request to create a threshold. 
@@ -43,7 +43,7 @@ public class ThresholdsCreateThresholdRequest  {
    * @return objectInstanceId
   **/
   @JsonProperty("objectInstanceId")
-  @Nonnull
+  @NonNull
   public String getObjectInstanceId() {
     return objectInstanceId;
   }
@@ -62,7 +62,7 @@ public class ThresholdsCreateThresholdRequest  {
    * @return criteria
   **/
   @JsonProperty("criteria")
-  @Nonnull
+  @NonNull
   public ThresholdsThresholdCriteria getCriteria() {
     return criteria;
   }

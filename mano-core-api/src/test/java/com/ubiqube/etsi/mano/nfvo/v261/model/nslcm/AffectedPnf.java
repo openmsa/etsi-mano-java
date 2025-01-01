@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -141,7 +141,7 @@ public class AffectedPnf {
 	 * @return pnfId
 	 **/
 	@Schema(required = true, description = "Identifier of the affected PNF. This identifier is allocated by the OSS/BSS. ")
-	@Nonnull
+	@NonNull
 
 	public String getPnfId() {
 		return pnfId;
@@ -162,7 +162,7 @@ public class AffectedPnf {
 	 * @return pnfdId
 	 **/
 	@Schema(required = true, description = "Identifier of the PNFD on which the PNF is based. ")
-	@Nonnull
+	@NonNull
 
 	public String getPnfdId() {
 		return pnfdId;
@@ -183,7 +183,7 @@ public class AffectedPnf {
 	 * @return pnfProfileId
 	 **/
 	@Schema(required = true, description = "Identifier of the VNF profile of the NSD. ")
-	@Nonnull
+	@NonNull
 
 	public String getPnfProfileId() {
 		return pnfProfileId;
@@ -229,7 +229,7 @@ public class AffectedPnf {
 	 * @return cpInstanceId
 	 **/
 	@Schema(required = true, description = "Identifier of the CP in the scope of the PNF. ")
-	@Nonnull
+	@NonNull
 
 	public List<String> getCpInstanceId() {
 		return cpInstanceId;

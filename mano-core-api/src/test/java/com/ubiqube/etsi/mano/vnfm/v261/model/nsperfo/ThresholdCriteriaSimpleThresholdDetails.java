@@ -18,7 +18,7 @@ package com.ubiqube.etsi.mano.vnfm.v261.model.nsperfo;
 
 import java.util.Objects;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -53,7 +53,7 @@ public class ThresholdCriteriaSimpleThresholdDetails {
 	 * @return thresholdValue
 	 **/
 	@Schema(required = true, description = "The threshold value. Shall be represented as a floating point number. ")
-	@Nonnull
+	@NonNull
 
 	public Integer getThresholdValue() {
 		return thresholdValue;
@@ -82,7 +82,7 @@ public class ThresholdCriteriaSimpleThresholdDetails {
 	 * @return hysteresis
 	 **/
 	@Schema(required = true, description = "The hysteresis of the threshold. Shall be represented as a non-negative floating point number. A notification with crossing direction \"UP\" will be generated if the measured value reaches or exceeds \"thresholdValue\" + \"hysteresis\". A notification with crossing direction \"DOWN\" will be generated if the measured value reaches or undercuts \"thresholdValue\" - \"hysteresis\". The hysteresis is defined to prevent storms of threshold crossing notifications. When processing a request to create a threshold, implementations should enforce a suitable minimum value for this attribute (e.g. override the value or reject the request). ")
-	@Nonnull
+	@NonNull
 
 	public Integer getHysteresis() {
 		return hysteresis;

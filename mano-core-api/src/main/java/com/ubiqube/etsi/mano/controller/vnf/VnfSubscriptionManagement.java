@@ -16,15 +16,15 @@
  */
 package com.ubiqube.etsi.mano.controller.vnf;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import com.ubiqube.etsi.mano.dao.mano.VnfPackageChangeNotification;
 import com.ubiqube.etsi.mano.dao.mano.VnfPackageOnboardingNotification;
 
 public interface VnfSubscriptionManagement {
 
-	void vnfPackageChangeNotificationPost(@Nonnull final VnfPackageChangeNotification notificationsMessage);
+	void vnfPackageChangeNotificationPost(@NonNull final VnfPackageChangeNotification notificationsMessage);
 
-	void vnfPackageOnboardingNotificationPost(@Nonnull final VnfPackageOnboardingNotification notificationsMessage);
+	void vnfPackageOnboardingNotificationPost(@NonNull final VnfPackageOnboardingNotification notificationsMessage);
 
 }

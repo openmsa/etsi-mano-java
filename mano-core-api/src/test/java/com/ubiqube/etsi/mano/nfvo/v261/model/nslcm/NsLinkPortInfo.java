@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -62,7 +62,7 @@ public class NsLinkPortInfo {
 	 * @return id
 	 **/
 	@Schema(required = true, description = "Identifier of this link port as provided by the entity that has created the link port. ")
-	@Nonnull
+	@NonNull
 
 	public String getId() {
 		return id;
@@ -83,7 +83,7 @@ public class NsLinkPortInfo {
 	 * @return resourceHandle
 	 **/
 	@Schema(required = true, description = "Identifier of the virtualised network resource realizing this link port. ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 

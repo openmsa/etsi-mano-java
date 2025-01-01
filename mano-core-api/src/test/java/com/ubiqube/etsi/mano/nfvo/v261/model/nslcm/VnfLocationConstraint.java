@@ -19,7 +19,7 @@ package com.ubiqube.etsi.mano.nfvo.v261.model.nslcm;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -56,7 +56,7 @@ public class VnfLocationConstraint {
 	 * @return vnfProfileId
 	 **/
 	@Schema(required = true, description = "Identifier of (reference to) a vnfProfile to which the additional parameters apply. ")
-	@Nonnull
+	@NonNull
 
 	public String getVnfProfileId() {
 		return vnfProfileId;

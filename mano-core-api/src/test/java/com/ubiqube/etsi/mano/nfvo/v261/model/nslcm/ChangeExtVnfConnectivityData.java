@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -70,7 +70,7 @@ public class ChangeExtVnfConnectivityData {
 	 * @return vnfInstanceId
 	 **/
 	@Schema(required = true, description = "Identifier of the VNF instance. ")
-	@Nonnull
+	@NonNull
 
 	public String getVnfInstanceId() {
 		return vnfInstanceId;
@@ -96,7 +96,7 @@ public class ChangeExtVnfConnectivityData {
 	 * @return extVirtualLink
 	 **/
 	@Schema(required = true, description = "Information about external VLs to change (e.g. connect the VNF to). ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 

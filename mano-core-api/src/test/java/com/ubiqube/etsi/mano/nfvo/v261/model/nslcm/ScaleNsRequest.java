@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -98,7 +98,7 @@ public class ScaleNsRequest {
 	 * @return scaleType
 	 **/
 	@Schema(required = true, description = "Indicates the type of scaling to be performed. Possible values: - SCALE_NS - SCALE_VNF ")
-	@Nonnull
+	@NonNull
 
 	public ScaleTypeEnum getScaleType() {
 		return scaleType;

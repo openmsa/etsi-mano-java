@@ -34,8 +34,8 @@ import org.springframework.util.MultiValueMap;
 
 import com.ubiqube.etsi.mano.service.HttpGateway;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 /**
  *
@@ -43,7 +43,7 @@ import jakarta.annotation.Nullable;
  *
  */
 public class ManoQueryBuilder<U, R> {
-	@Nonnull
+	@NonNull
 	private final QueryParameters client;
 	@Nullable
 	private Function<HttpGateway, ParameterizedTypeReference<List<Class<?>>>> inClassList;

@@ -19,7 +19,7 @@ package com.ubiqube.etsi.mano.nfvo.v261.model.nslcm;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -151,7 +151,7 @@ public class AffectedVnf {
 	 * @return vnfInstanceId
 	 **/
 	@Schema(required = true, description = "Identifier of the VNF instance.  ")
-	@Nonnull
+	@NonNull
 
 	public String getVnfInstanceId() {
 		return vnfInstanceId;
@@ -172,7 +172,7 @@ public class AffectedVnf {
 	 * @return vnfdId
 	 **/
 	@Schema(required = true, description = "Identifier of the VNFD of the VNF Instance. ")
-	@Nonnull
+	@NonNull
 
 	public String getVnfdId() {
 		return vnfdId;
@@ -193,7 +193,7 @@ public class AffectedVnf {
 	 * @return vnfProfileId
 	 **/
 	@Schema(required = true, description = "Identifier of the VNF profile of the NSD. ")
-	@Nonnull
+	@NonNull
 
 	public String getVnfProfileId() {
 		return vnfProfileId;

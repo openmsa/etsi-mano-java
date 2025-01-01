@@ -30,7 +30,7 @@ package com.ubiqube.etsi.mano.vnfm.v261.model.nslcm;
 
 import java.util.Map;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -118,7 +118,7 @@ public class AffectedVirtualLink {
 	 **/
 	@JsonProperty("id")
 	@Schema(required = true, description = "Identifier of the virtual link instance, identifying the applicable \"vnfVirtualLinkResourceInfo\" entry in the \"VnfInstance\" data type. ")
-	@Nonnull
+	@NonNull
 	public String getId() {
 		return id;
 	}
@@ -139,7 +139,7 @@ public class AffectedVirtualLink {
 	 **/
 	@JsonProperty("virtualLinkDescId")
 	@Schema(required = true, description = "Identifier of the related VLD in the VNFD. ")
-	@Nonnull
+	@NonNull
 	public String getVirtualLinkDescId() {
 		return virtualLinkDescId;
 	}
@@ -163,7 +163,7 @@ public class AffectedVirtualLink {
 	 **/
 	@JsonProperty("changeType")
 	@Schema(required = true, description = "Signals the type of change. Permitted values: * ADDED * REMOVED * MODIFIED * TEMPORARY * LINK_PORT_ADDED * LINK_PORT_REMOVED For a temporary resource, an AffectedVirtualLink structure exists as long as the temporary resource exists. ")
-	@Nonnull
+	@NonNull
 	public ChangeTypeEnum getChangeType() {
 		return changeType;
 	}
@@ -186,7 +186,7 @@ public class AffectedVirtualLink {
 	 **/
 	@JsonProperty("networkResource")
 	@Schema(required = true, description = "Reference to the VirtualNetwork resource. Detailed information is (for new and modified resources) or has been (for removed resources) available from the VIM. ")
-	@Nonnull
+	@NonNull
 	public ResourceHandle getNetworkResource() {
 		return networkResource;
 	}

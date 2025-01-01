@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -60,7 +60,7 @@ public class MoveVnfInstanceData {
 	 * @return targetNsInstanceId
 	 **/
 	@Schema(required = true, description = "Specify the target NS instance where the VNF instances are moved to. ")
-	@Nonnull
+	@NonNull
 
 	public String getTargetNsInstanceId() {
 		return targetNsInstanceId;

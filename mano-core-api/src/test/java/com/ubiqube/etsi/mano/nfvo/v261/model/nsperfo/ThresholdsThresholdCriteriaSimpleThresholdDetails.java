@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
   * Details of a simple threshold. Shall be present if thresholdType=\"SIMPLE\". 
@@ -44,7 +44,7 @@ public class ThresholdsThresholdCriteriaSimpleThresholdDetails  {
    * @return thresholdValue
   **/
   @JsonProperty("thresholdValue")
-  @Nonnull
+  @NonNull
   public Integer getThresholdValue() {
     return thresholdValue;
   }
@@ -63,7 +63,7 @@ public class ThresholdsThresholdCriteriaSimpleThresholdDetails  {
    * @return hysteresis
   **/
   @JsonProperty("hysteresis")
-  @Nonnull
+  @NonNull
   public Integer getHysteresis() {
     return hysteresis;
   }

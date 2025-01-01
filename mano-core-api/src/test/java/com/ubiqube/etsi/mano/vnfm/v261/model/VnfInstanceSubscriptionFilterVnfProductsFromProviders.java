@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -53,7 +53,7 @@ public class VnfInstanceSubscriptionFilterVnfProductsFromProviders {
 	 * @return vnfProvider
 	 **/
 	@Schema(required = true, description = "Name of the VNF provider to match. ")
-	@Nonnull
+	@NonNull
 
 	public String getVnfProvider() {
 		return vnfProvider;

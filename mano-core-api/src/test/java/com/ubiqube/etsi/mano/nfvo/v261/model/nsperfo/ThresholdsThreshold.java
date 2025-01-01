@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
   * This type represents a threshold. 
@@ -53,7 +53,7 @@ public class ThresholdsThreshold  {
    * @return id
   **/
   @JsonProperty("id")
-  @Nonnull
+  @NonNull
   public String getId() {
     return id;
   }
@@ -72,7 +72,7 @@ public class ThresholdsThreshold  {
    * @return objectInstanceId
   **/
   @JsonProperty("objectInstanceId")
-  @Nonnull
+  @NonNull
   public String getObjectInstanceId() {
     return objectInstanceId;
   }
@@ -91,7 +91,7 @@ public class ThresholdsThreshold  {
    * @return criteria
   **/
   @JsonProperty("criteria")
-  @Nonnull
+  @NonNull
   public ThresholdsThresholdCriteria getCriteria() {
     return criteria;
   }
@@ -110,7 +110,7 @@ public class ThresholdsThreshold  {
    * @return links
   **/
   @JsonProperty("_links")
-  @Nonnull
+  @NonNull
   public ThresholdsThresholdLinks getLinks() {
     return links;
   }

@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
   * Links to resources related to this notification. 
@@ -49,7 +49,7 @@ public class SubscriptionPerformanceInformationAvailableNotificationPerformanceI
    * @return subscription
   **/
   @JsonProperty("subscription")
-  @Nonnull
+  @NonNull
   public PmJobsPmJobReportsLinksSelf getSubscription() {
     return subscription;
   }
@@ -86,7 +86,7 @@ public class SubscriptionPerformanceInformationAvailableNotificationPerformanceI
    * @return pmJob
   **/
   @JsonProperty("pmJob")
-  @Nonnull
+  @NonNull
   public PmJobsPmJobReportsLinksSelf getPmJob() {
     return pmJob;
   }
@@ -105,7 +105,7 @@ public class SubscriptionPerformanceInformationAvailableNotificationPerformanceI
    * @return performanceReport
   **/
   @JsonProperty("performanceReport")
-  @Nonnull
+  @NonNull
   public PmJobsPmJobReportsLinksSelf getPerformanceReport() {
     return performanceReport;
   }

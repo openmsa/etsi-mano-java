@@ -19,7 +19,7 @@ package com.ubiqube.etsi.mano.nfvo.v261.model.nslcm;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -66,7 +66,7 @@ public class PnfInfo {
 	 * @return pnfId
 	 **/
 	@Schema(required = true, description = "Identifier of the PNF. This identifier is allocated by the OSS/BSS. ")
-	@Nonnull
+	@NonNull
 
 	public String getPnfId() {
 		return pnfId;
@@ -107,7 +107,7 @@ public class PnfInfo {
 	 * @return pnfdId
 	 **/
 	@Schema(required = true, description = "Identifier of the PNFD on which the PNF is based. ")
-	@Nonnull
+	@NonNull
 
 	public String getPnfdId() {
 		return pnfdId;
@@ -129,7 +129,7 @@ public class PnfInfo {
 	 * @return pnfdInfoId
 	 **/
 	@Schema(required = true, description = "Identifier of the PNFD information onject related to this PNF. This identifier is allocated by the NFVO ")
-	@Nonnull
+	@NonNull
 
 	public String getPnfdInfoId() {
 		return pnfdInfoId;
@@ -150,7 +150,7 @@ public class PnfInfo {
 	 * @return pnfProfileId
 	 **/
 	@Schema(required = true, description = "Identifier of the related PnfProfile in the NSD on which the PNF is based. ")
-	@Nonnull
+	@NonNull
 
 	public String getPnfProfileId() {
 		return pnfProfileId;

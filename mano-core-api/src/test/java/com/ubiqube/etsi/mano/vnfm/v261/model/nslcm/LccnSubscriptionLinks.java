@@ -28,7 +28,7 @@
 
 package com.ubiqube.etsi.mano.vnfm.v261.model.nslcm;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ubiqube.etsi.mano.common.v261.model.Link;
@@ -57,7 +57,7 @@ public class LccnSubscriptionLinks {
 	 **/
 	@JsonProperty("self")
 	@Schema(required = true, description = "URI of this resource. ")
-	@Nonnull
+	@NonNull
 	public Link getSelf() {
 		return self;
 	}

@@ -30,8 +30,8 @@ import com.ubiqube.etsi.mano.orchestrator.Relation;
 import com.ubiqube.etsi.mano.orchestrator.Vertex2d;
 import com.ubiqube.etsi.mano.orchestrator.nodes.Node;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -69,9 +69,9 @@ public class Graph2dBuilder {
 	}
 
 	public class ChildBuilder {
-		@Nonnull
+		@NonNull
 		private final Class<? extends Node> class1;
-		@Nonnull
+		@NonNull
 		private final String name;
 
 		public ChildBuilder(final Class<? extends Node> class1, final String name) {

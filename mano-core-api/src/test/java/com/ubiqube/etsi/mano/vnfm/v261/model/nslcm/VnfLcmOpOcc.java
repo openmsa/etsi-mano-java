@@ -35,7 +35,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -117,7 +117,7 @@ public class VnfLcmOpOcc {
 	 * @return id
 	 **/
 	@Schema(required = true, description = "Identifier of this VNF lifecycle management operation occurrence. ")
-	@Nonnull
+	@NonNull
 	public String getId() {
 		return id;
 	}
@@ -137,7 +137,7 @@ public class VnfLcmOpOcc {
 	 * @return operationState
 	 **/
 	@Schema(required = true, description = "The state of the LCM operation. ")
-	@Nonnull
+	@NonNull
 	@Valid
 	public LcmOperationStateType getOperationState() {
 		return operationState;
@@ -158,7 +158,7 @@ public class VnfLcmOpOcc {
 	 * @return stateEnteredTime
 	 **/
 	@Schema(required = true, description = "Date-time when the current state was entered. ")
-	@Nonnull
+	@NonNull
 	public OffsetDateTime getStateEnteredTime() {
 		return stateEnteredTime;
 	}
@@ -178,7 +178,7 @@ public class VnfLcmOpOcc {
 	 * @return startTime
 	 **/
 	@Schema(required = true, description = "Date-time of the start of the operation. ")
-	@Nonnull
+	@NonNull
 	public OffsetDateTime getStartTime() {
 		return startTime;
 	}
@@ -198,7 +198,7 @@ public class VnfLcmOpOcc {
 	 * @return vnfInstanceId
 	 **/
 	@Schema(required = true, description = "Identifier of the VNF instance to which the operation applies ")
-	@Nonnull
+	@NonNull
 	public String getVnfInstanceId() {
 		return vnfInstanceId;
 	}
@@ -239,7 +239,7 @@ public class VnfLcmOpOcc {
 	 * @return operation
 	 **/
 	@Schema(required = true, description = "Type of the actual LCM operation represented by this VNF LCM operation occurrence. ")
-	@Nonnull
+	@NonNull
 	@Valid
 	public LcmOperationType getOperation() {
 		return operation;
@@ -263,7 +263,7 @@ public class VnfLcmOpOcc {
 	 * @return isAutomaticInvocation
 	 **/
 	@Schema(required = true, description = "Set to true if this VNF LCM operation occurrence has been triggered by an automated procedure inside the VNFM (i.e. ScaleVnf / ScaleVnfToLevel triggered by auto-scale, or HealVnf triggered by auto-heal). Set to false otherwise. ")
-	@Nonnull
+	@NonNull
 	public Boolean isIsAutomaticInvocation() {
 		return isAutomaticInvocation;
 	}
@@ -290,7 +290,7 @@ public class VnfLcmOpOcc {
 	 * @return operationParams
 	 **/
 	@Schema(required = true, description = "Input parameters of the LCM operation. This attribute shall be formatted according to the request data type of the related LCM operation. The following mapping between operationType and the data type of this attribute shall apply: * INSTANTIATE: InstantiateVnfRequest * SCALE: ScaleVnfRequest * SCALE_TO_LEVEL: ScaleVnfToLevelRequest * CHANGE_FLAVOUR: ChangeVnfFlavourRequest * OPERATE: OperateVnfRequest * HEAL: HealVnfRequest * CHANGE_EXT_CONN: ChangeExtVnfConnectivityRequest * TERMINATE: TerminateVnfRequest * MODIFY_INFO: VnfInfoModificationRequest ")
-	@Nonnull
+	@NonNull
 	public Object getOperationParams() {
 		return operationParams;
 	}
@@ -312,7 +312,7 @@ public class VnfLcmOpOcc {
 	 * @return isCancelPending
 	 **/
 	@Schema(required = true, description = "If the VNF LCM operation occurrence is in \"STARTING\", \"PROCESSING\" or \"ROLLING_BACK\" state and the operation is being cancelled, this attribute shall be set to true. Otherwise, it shall be set to false. ")
-	@Nonnull
+	@NonNull
 	public Boolean isIsCancelPending() {
 		return isCancelPending;
 	}

@@ -28,7 +28,7 @@
 
 package com.ubiqube.etsi.mano.vnfm.v261.model.nslcm;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ubiqube.etsi.mano.common.v261.model.SubscriptionAuthentication;
@@ -86,7 +86,7 @@ public class LccnSubscriptionRequest {
 	 **/
 	@JsonProperty("callbackUri")
 	@Schema(required = true, description = "The URI of the endpoint to send the notification to. ")
-	@Nonnull
+	@NonNull
 	public String getCallbackUri() {
 		return callbackUri;
 	}

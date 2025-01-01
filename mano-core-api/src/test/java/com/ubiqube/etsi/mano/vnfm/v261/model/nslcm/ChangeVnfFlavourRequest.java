@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ubiqube.etsi.mano.common.v261.model.VimConnectionInfo;
@@ -79,7 +79,7 @@ public class ChangeVnfFlavourRequest {
 	 **/
 	@JsonProperty("newFlavourId")
 	@Schema(required = true, description = "Identifier of the VNF deployment flavour to be instantiated. ")
-	@Nonnull
+	@NonNull
 	public String getNewFlavourId() {
 		return newFlavourId;
 	}

@@ -20,8 +20,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Set;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -67,8 +67,8 @@ public final class MapperForView {
 		return mapper;
 	}
 
-	@Nonnull
-	private static List<ViewHolder> buildViewList(@Nonnull final Set<String> exclude) {
+	@NonNull
+	private static List<ViewHolder> buildViewList(@NonNull final Set<String> exclude) {
 		return exclude.stream()
 				.map(ViewHolder::new)
 				.toList();

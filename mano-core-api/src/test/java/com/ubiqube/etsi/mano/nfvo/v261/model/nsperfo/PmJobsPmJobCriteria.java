@@ -22,7 +22,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.validation.constraints.Min;
 
 /**
@@ -152,7 +152,7 @@ public class PmJobsPmJobCriteria {
 	 * @return collectionPeriod
 	 **/
 	@JsonProperty("collectionPeriod")
-	@Nonnull
+	@NonNull
 	@Min(0)
 	public Integer getCollectionPeriod() {
 		return collectionPeriod;
@@ -182,7 +182,7 @@ public class PmJobsPmJobCriteria {
 	 * @return reportingPeriod
 	 **/
 	@JsonProperty("reportingPeriod")
-	@Nonnull
+	@NonNull
 	@Min(0)
 	public Integer getReportingPeriod() {
 		return reportingPeriod;

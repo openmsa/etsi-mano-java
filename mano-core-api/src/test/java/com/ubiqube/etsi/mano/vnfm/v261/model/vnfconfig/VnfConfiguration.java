@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -55,7 +55,7 @@ public class VnfConfiguration {
 	 * @return vnfConfigurationData
 	 **/
 	@Schema(required = true, description = "Configuration parameters of the VNF instance. ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 

@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -85,7 +85,7 @@ public class CreatePmJobRequest {
 	 * @return criteria
 	 **/
 	@Schema(required = true, description = "Criteria of the collection of performance information. ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 

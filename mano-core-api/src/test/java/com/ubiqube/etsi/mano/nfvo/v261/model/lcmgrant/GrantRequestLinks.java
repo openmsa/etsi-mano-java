@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ubiqube.etsi.mano.common.v261.model.Link;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.validation.Valid;
 
 /**
@@ -51,7 +51,7 @@ public class GrantRequestLinks {
 	 * @return vnfLcmOpOcc
 	 **/
 	@Schema(required = true, description = "Related lifecycle management operation occurrence. ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 
@@ -74,7 +74,7 @@ public class GrantRequestLinks {
 	 * @return vnfInstance
 	 **/
 	@Schema(required = true, description = "Related VNF instance. ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 

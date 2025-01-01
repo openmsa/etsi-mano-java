@@ -30,7 +30,7 @@ package com.ubiqube.etsi.mano.vnfm.v261.model.nslcm;
 
 import java.util.Map;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -98,7 +98,7 @@ public class ScaleVnfRequest {
 	 **/
 	@JsonProperty("type")
 	@Schema(required = true, description = "Indicates the type of the scale operation requested. Permitted values: * SCALE_OUT: adding additional VNFC instances to the VNF to increase   capacity * SCALE_IN: removing VNFC instances from the VNF in order to release   unused capacity. ")
-	@Nonnull
+	@NonNull
 	public TypeEnum getType() {
 		return type;
 	}
@@ -119,7 +119,7 @@ public class ScaleVnfRequest {
 	 **/
 	@JsonProperty("aspectId")
 	@Schema(required = true, description = "Identifier of the scaling aspect. ")
-	@Nonnull
+	@NonNull
 	public String getAspectId() {
 		return aspectId;
 	}

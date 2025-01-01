@@ -26,7 +26,7 @@ import java.util.stream.IntStream;
 
 import com.ubiqube.etsi.mano.exception.GenericException;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class MultiHashInputStream extends InputStream {
 

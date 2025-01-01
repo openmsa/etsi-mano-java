@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import java.util.Date;
 
 /**
@@ -62,7 +62,7 @@ public class PmJobsPmJobReports  {
    * @return href
   **/
   @JsonProperty("href")
-  @Nonnull
+  @NonNull
   public String getHref() {
     return href;
   }
@@ -81,7 +81,7 @@ public class PmJobsPmJobReports  {
    * @return readyTime
   **/
   @JsonProperty("readyTime")
-  @Nonnull
+  @NonNull
   public Date getReadyTime() {
     return readyTime;
   }
@@ -136,7 +136,7 @@ public class PmJobsPmJobReports  {
    * @return links
   **/
   @JsonProperty("_links")
-  @Nonnull
+  @NonNull
   public PmJobsPmJobReportsLinks getLinks() {
     return links;
   }

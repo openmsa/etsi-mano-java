@@ -27,10 +27,10 @@ import com.ubiqube.etsi.mano.dao.mano.cnf.ConnectionInformation;
 import com.ubiqube.etsi.mano.service.rest.QueryParameters;
 import com.ubiqube.etsi.mano.service.rest.ServerAdapter;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 public class ManoCir {
-	@Nonnull
+	@NonNull
 	private final QueryParameters client;
 
 	public ManoCir(final QueryParameters client) {

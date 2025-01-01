@@ -36,7 +36,7 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -74,7 +74,7 @@ public class CpConfiguration {
 	 * @return cpId
 	 **/
 	@Schema(required = true, description = "Identifier of a CP instance within the namespace of a specific VNF instance or a VNFC instance. ")
-	@Nonnull
+	@NonNull
 
 	public String getCpId() {
 		return cpId;
@@ -95,7 +95,7 @@ public class CpConfiguration {
 	 * @return cpdId
 	 **/
 	@Schema(required = true, description = "Identifier of the CPD in the VNFD. ")
-	@Nonnull
+	@NonNull
 
 	public String getCpdId() {
 		return cpdId;
@@ -121,7 +121,7 @@ public class CpConfiguration {
 	 * @return addresses
 	 **/
 	@Schema(required = true, description = "Network address and port assigned to the CP. ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 

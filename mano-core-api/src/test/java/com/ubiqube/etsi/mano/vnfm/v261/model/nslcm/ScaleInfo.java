@@ -28,7 +28,7 @@
 
 package com.ubiqube.etsi.mano.vnfm.v261.model.nslcm;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -57,7 +57,7 @@ public class ScaleInfo {
 	 **/
 	@JsonProperty("aspectId")
 	@Schema(required = true, description = "Identifier of the scaling aspect. ")
-	@Nonnull
+	@NonNull
 	public String getAspectId() {
 		return aspectId;
 	}
@@ -78,7 +78,7 @@ public class ScaleInfo {
 	 **/
 	@JsonProperty("scaleLevel")
 	@Schema(required = true, description = "Indicates the scale level. The minimum value shall be 0 and the maximum value shall be <= maxScaleLevel as described in the VNFD. ")
-	@Nonnull
+	@NonNull
 	public Integer getScaleLevel() {
 		return scaleLevel;
 	}

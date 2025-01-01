@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import java.util.List;
 
 /**
@@ -45,7 +45,7 @@ public class PmJobsPmJobReportsLinks  {
    * @return self
   **/
   @JsonProperty("self")
-  @Nonnull
+  @NonNull
   public PmJobsPmJobReportsLinksSelf getSelf() {
     return self;
   }

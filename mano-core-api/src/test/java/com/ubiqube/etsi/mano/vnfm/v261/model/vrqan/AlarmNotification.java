@@ -19,7 +19,7 @@ package com.ubiqube.etsi.mano.vnfm.v261.model.vrqan;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -96,7 +96,7 @@ public class AlarmNotification {
 	 * @return id
 	 **/
 	@Schema(required = true, description = "Identifier of this notification. If a notification is sent multiple times due to multiple subscriptions, the \"id\" attribute of all these notifications shall have the same value. ")
-	@Nonnull
+	@NonNull
 
 	public String getId() {
 		return id;
@@ -117,7 +117,7 @@ public class AlarmNotification {
 	 * @return notificationType
 	 **/
 	@Schema(required = true, description = "Discriminator for the different notification types. Shall be set to \"AlarmNotification\" for this notification type. ")
-	@Nonnull
+	@NonNull
 
 	public NotificationTypeEnum getNotificationType() {
 		return notificationType;
@@ -138,7 +138,7 @@ public class AlarmNotification {
 	 * @return subscriptionId
 	 **/
 	@Schema(required = true, description = "Identifier of the subscription that this notification relates to. ")
-	@Nonnull
+	@NonNull
 
 	public String getSubscriptionId() {
 		return subscriptionId;
@@ -159,7 +159,7 @@ public class AlarmNotification {
 	 * @return timeStamp
 	 **/
 	@Schema(required = true, description = "Date-time of the generation of the notification. ")
-	@Nonnull
+	@NonNull
 
 	public String getTimeStamp() {
 		return timeStamp;
@@ -180,7 +180,7 @@ public class AlarmNotification {
 	 * @return alarm
 	 **/
 	@Schema(required = true, description = "Information about an alarm including AlarmId, affected VNF identifier, and FaultDetails. ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 
@@ -203,7 +203,7 @@ public class AlarmNotification {
 	 * @return links
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	@Valid
 

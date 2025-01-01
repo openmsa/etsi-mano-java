@@ -25,7 +25,7 @@ import org.springframework.validation.annotation.Validated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 
@@ -87,7 +87,7 @@ public class VimConstraint {
 	 * @return resource
 	 **/
 	@Schema(required = true, description = "References to resources in the constraint rule. The NFVO shall ensure that all resources in this list are managed through the same VIM connection. If \"sameResourceGroup\" is set to true, the NFVO shall further ensure that all resources in this list are part of the same infrastructure resource group in that VIM connection. ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 	@Size(min = 2)

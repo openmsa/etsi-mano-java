@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -68,7 +68,7 @@ public class NsVirtualLinkInfo {
 	 * @return id
 	 **/
 	@Schema(required = true, description = "Identifier of the VL instance. ")
-	@Nonnull
+	@NonNull
 
 	public String getId() {
 		return id;
@@ -89,7 +89,7 @@ public class NsVirtualLinkInfo {
 	 * @return nsVirtualLinkDescId
 	 **/
 	@Schema(required = true, description = "Identifier of the VLD in the NSD. ")
-	@Nonnull
+	@NonNull
 
 	public String getNsVirtualLinkDescId() {
 		return nsVirtualLinkDescId;
@@ -110,7 +110,7 @@ public class NsVirtualLinkInfo {
 	 * @return nsVirtualLinkProfileId
 	 **/
 	@Schema(required = true, description = "Identifier of the VL profile in the NSD. ")
-	@Nonnull
+	@NonNull
 
 	public String getNsVirtualLinkProfileId() {
 		return nsVirtualLinkProfileId;

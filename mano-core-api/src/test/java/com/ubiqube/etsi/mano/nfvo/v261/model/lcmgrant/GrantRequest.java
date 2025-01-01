@@ -26,7 +26,7 @@ import org.springframework.validation.annotation.Validated;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.validation.Valid;
 
 /**
@@ -100,7 +100,7 @@ public class GrantRequest {
 	 * @return vnfInstanceId
 	 **/
 	@Schema(required = true, description = "Identifier of the VNF instance which this grant request is related to. Shall also be provided for VNFs that not yet exist but are planned to exist in the future, i.e. if the grant is requested for InstantiateVNF. ")
-	@Nonnull
+	@NonNull
 
 	public String getVnfInstanceId() {
 		return vnfInstanceId;
@@ -122,7 +122,7 @@ public class GrantRequest {
 	 * @return vnfLcmOpOccId
 	 **/
 	@Schema(required = true, description = "The identifier of the VNF lifecycle management operation occurrence associated to the GrantRequest. ")
-	@Nonnull
+	@NonNull
 
 	public String getVnfLcmOpOccId() {
 		return vnfLcmOpOccId;
@@ -144,7 +144,7 @@ public class GrantRequest {
 	 * @return vnfdId
 	 **/
 	@Schema(required = true, description = "Identifier of the VNFD that defines the VNF for which the LCM operation is to be granted. ")
-	@Nonnull
+	@NonNull
 
 	public String getVnfdId() {
 		return vnfdId;
@@ -189,7 +189,7 @@ public class GrantRequest {
 	 * @return operation
 	 **/
 	@Schema(required = true, description = "The lifecycle management operation for which granting is requested. The VNF LCM operations CreateVnfIdentifier, DeleteVnfIdentifier, QueryVnf and ModifyVnfInformation can be executed by the VNFM without requesting granting. ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 
@@ -215,7 +215,7 @@ public class GrantRequest {
 	 * @return isAutomaticInvocation
 	 **/
 	@Schema(required = true, description = "Set to true if this VNF LCM operation occurrence has been triggered by an automated procedure inside the VNFM (i.e. ScaleVnf / ScaleVnfToLevel triggered by auto-scale, or HealVnf triggered by auto-heal). Set to false otherwise. ")
-	@Nonnull
+	@NonNull
 
 	public Boolean isAutomaticInvocation() {
 		return isAutomaticInvocation;

@@ -48,7 +48,7 @@ import com.ubiqube.etsi.mano.service.rest.ServerAdapter;
 import com.ubiqube.etsi.mano.service.rest.TracingFluxRest;
 import com.ubiqube.etsi.mano.utils.Version;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import jakarta.transaction.Transactional;
 
 /**

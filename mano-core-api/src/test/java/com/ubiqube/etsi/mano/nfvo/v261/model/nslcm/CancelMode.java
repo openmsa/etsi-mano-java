@@ -19,7 +19,7 @@ package com.ubiqube.etsi.mano.nfvo.v261.model.nslcm;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -53,7 +53,7 @@ public class CancelMode {
 	 * @return cancelMode
 	 **/
 	@Schema(required = true, description = "Cancellation mode to apply. ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 

@@ -18,7 +18,7 @@ package com.ubiqube.etsi.mano.nfvo.v261.model.nslcm;
 
 import java.util.Objects;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -132,7 +132,7 @@ public class AffectedSap {
 	 * @return sapInstanceId
 	 **/
 	@Schema(required = true, description = "Identifier of the nested NS instance. ")
-	@Nonnull
+	@NonNull
 
 	public String getSapInstanceId() {
 		return sapInstanceId;
@@ -153,7 +153,7 @@ public class AffectedSap {
 	 * @return sapdId
 	 **/
 	@Schema(required = true, description = "Identifier of the NSD of the nested NS instance. ")
-	@Nonnull
+	@NonNull
 
 	public String getSapdId() {
 		return sapdId;

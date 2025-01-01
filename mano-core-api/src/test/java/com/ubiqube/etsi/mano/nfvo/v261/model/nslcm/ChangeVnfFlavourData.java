@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -74,7 +74,7 @@ public class ChangeVnfFlavourData {
 	 * @return vnfInstanceId
 	 **/
 	@Schema(required = true, description = "Identifier of the VNF instance to be modified. ")
-	@Nonnull
+	@NonNull
 
 	public String getVnfInstanceId() {
 		return vnfInstanceId;
@@ -95,7 +95,7 @@ public class ChangeVnfFlavourData {
 	 * @return newFlavourId
 	 **/
 	@Schema(required = true, description = "Identifier of the VNF deployment flavor to be instantiated. ")
-	@Nonnull
+	@NonNull
 
 	public String getNewFlavourId() {
 		return newFlavourId;

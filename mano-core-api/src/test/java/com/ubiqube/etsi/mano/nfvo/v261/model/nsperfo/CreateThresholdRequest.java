@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
   * Request parameters to create a threshold resource.             
@@ -37,7 +37,7 @@ public class CreateThresholdRequest  {
    * @return createThresholdRequest
   **/
   @JsonProperty("CreateThresholdRequest")
-  @Nonnull
+  @NonNull
   public ThresholdsCreateThresholdRequest getCreateThresholdRequest() {
     return createThresholdRequest;
   }

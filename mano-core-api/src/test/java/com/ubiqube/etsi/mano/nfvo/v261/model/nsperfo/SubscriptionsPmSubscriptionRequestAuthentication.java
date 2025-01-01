@@ -22,7 +22,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.validation.Valid;
 import jakarta.xml.bind.annotation.XmlEnumValue;
 
@@ -96,7 +96,7 @@ public class SubscriptionsPmSubscriptionRequestAuthentication {
 	 * @return authType
 	 **/
 	@JsonProperty("authType")
-	@Nonnull
+	@NonNull
 	public List<AuthTypeEnum> getAuthType() {
 		return authType;
 	}

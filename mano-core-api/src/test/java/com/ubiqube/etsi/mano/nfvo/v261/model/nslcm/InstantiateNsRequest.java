@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -92,7 +92,7 @@ public class InstantiateNsRequest {
 	 * @return nsFlavourId
 	 **/
 	@Schema(required = true, description = "Identifier of the NS deployment flavor to be instantiated. ")
-	@Nonnull
+	@NonNull
 
 	public String getNsFlavourId() {
 		return nsFlavourId;

@@ -21,7 +21,7 @@ import org.mapstruct.MappingConstants;
 
 import com.ubiqube.etsi.mano.dao.mano.vim.vnfi.CnfInformations;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CnfInformationsMapping {

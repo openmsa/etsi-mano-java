@@ -51,7 +51,7 @@ import com.ubiqube.etsi.mano.dao.mano.config.Configurations;
 import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.service.repository.ConfigurationsRepositoryService;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * The role of this service is to create and store a RSA private key for k8s

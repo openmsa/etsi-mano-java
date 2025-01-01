@@ -20,7 +20,7 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -74,7 +74,7 @@ public class NsdOnBoardingNotification {
 	 * @return id
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	public String getId() {
 		return id;
@@ -96,7 +96,7 @@ public class NsdOnBoardingNotification {
 	 * @return notificationType
 	 **/
 	@Schema(required = true, description = "Discriminator for the different notification types. Shall be set to \"NsdOnboardingNotification\" for this notification type. ")
-	@Nonnull
+	@NonNull
 
 	public String getNotificationType() {
 		return notificationType;
@@ -117,7 +117,7 @@ public class NsdOnBoardingNotification {
 	 * @return subscriptionId
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	public String getSubscriptionId() {
 		return subscriptionId;
@@ -138,7 +138,7 @@ public class NsdOnBoardingNotification {
 	 * @return timeStamp
 	 **/
 	@Schema(required = true, description = "Date-time of the generation of the notification. ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 
@@ -161,7 +161,7 @@ public class NsdOnBoardingNotification {
 	 * @return nsdInfoId
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	public String getNsdInfoId() {
 		return nsdInfoId;
@@ -182,7 +182,7 @@ public class NsdOnBoardingNotification {
 	 * @return nsdId
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	public String getNsdId() {
 		return nsdId;
@@ -203,7 +203,7 @@ public class NsdOnBoardingNotification {
 	 * @return links
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	@Valid
 

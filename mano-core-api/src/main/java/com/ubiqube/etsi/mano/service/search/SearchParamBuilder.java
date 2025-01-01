@@ -28,7 +28,7 @@ import org.springframework.util.MultiValueMap;
 
 import com.ubiqube.etsi.mano.grammar.GrammarNode;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 import lombok.Builder;
 import lombok.Data;
 

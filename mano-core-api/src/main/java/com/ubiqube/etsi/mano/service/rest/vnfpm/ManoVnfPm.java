@@ -23,7 +23,7 @@ import com.ubiqube.etsi.mano.dao.mano.version.ApiVersionType;
 import com.ubiqube.etsi.mano.service.HttpGateway;
 import com.ubiqube.etsi.mano.service.rest.QueryParameters;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
  * Sol003 VNF PM.
@@ -32,7 +32,7 @@ import jakarta.annotation.Nonnull;
  *
  */
 public class ManoVnfPm {
-	@Nonnull
+	@NonNull
 	private final QueryParameters client;
 
 	public ManoVnfPm(final QueryParameters manoClient) {

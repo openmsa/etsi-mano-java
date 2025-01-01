@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 
@@ -140,7 +140,7 @@ public class PlacementConstraint {
 	 * @return affinityOrAntiAffinity
 	 **/
 	@Schema(required = true, description = "The type of the constraint. Permitted values: * AFFINITY * ANTI_AFFINITY ")
-	@Nonnull
+	@NonNull
 
 	public AffinityOrAntiAffinityEnum getAffinityOrAntiAffinity() {
 		return affinityOrAntiAffinity;
@@ -163,7 +163,7 @@ public class PlacementConstraint {
 	 * @return scope
 	 **/
 	@Schema(required = true, description = "The scope of the placement constraint indicating the category of the \"place\" where the constraint applies. Permitted values: * NFVI_POP * ZONE * ZONE_GROUP * NFVI_NODE ")
-	@Nonnull
+	@NonNull
 
 	public ScopeEnum getScope() {
 		return scope;
@@ -189,7 +189,7 @@ public class PlacementConstraint {
 	 * @return resource
 	 **/
 	@Schema(required = true, description = "References to resources in the constraint rule. ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 	@Size(min = 2)

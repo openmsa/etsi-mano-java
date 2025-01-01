@@ -18,7 +18,7 @@ package com.ubiqube.etsi.mano.nfvo.v261.model.nslcm;
 
 import java.util.Objects;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -93,7 +93,7 @@ public class ScaleNsByStepsData {
 	 * @return scalingDirection
 	 **/
 	@Schema(required = true, description = "The scaling direction. Possible values are: - SCALE_IN - SCALE_OUT. ")
-	@Nonnull
+	@NonNull
 
 	public ScalingDirectionEnum getScalingDirection() {
 		return scalingDirection;
@@ -114,7 +114,7 @@ public class ScaleNsByStepsData {
 	 * @return aspectId
 	 **/
 	@Schema(required = true, description = "The aspect of the NS that is requested to be scaled, as declared in the NSD. ")
-	@Nonnull
+	@NonNull
 
 	public String getAspectId() {
 		return aspectId;

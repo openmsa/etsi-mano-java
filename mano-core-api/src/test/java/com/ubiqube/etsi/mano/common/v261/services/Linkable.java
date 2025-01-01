@@ -18,7 +18,7 @@ package com.ubiqube.etsi.mano.common.v261.services;
 
 import java.util.UUID;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import com.ubiqube.etsi.mano.common.v261.model.vnf.PkgmLinks;
 import com.ubiqube.etsi.mano.common.v261.model.vnf.PkgmSubscription;
@@ -44,11 +44,11 @@ public interface Linkable {
 
 	String getSelfLink(VnfPkgInfo vnfPkgInfo);
 
-	PkgmLinks createVnfPackageOnboardingNotificationLinks(@Nonnull UUID vnfPkgId, String vnfdId, UUID subscriptionId);
+	PkgmLinks createVnfPackageOnboardingNotificationLinks(@NonNull UUID vnfPkgId, String vnfdId, UUID subscriptionId);
 
-	VnfIndicatorValueChangeNotificationLinks createVnfIndicatorValueChangeNotificationLinks(@Nonnull String vnfIndicatorId, String vnfInstanceId, UUID subscriptionId);
+	VnfIndicatorValueChangeNotificationLinks createVnfIndicatorValueChangeNotificationLinks(@NonNull String vnfIndicatorId, String vnfInstanceId, UUID subscriptionId);
 	
-	PkgmSubscriptionLinks createSubscriptionsPkgmSubscriptionLinks(@Nonnull String subscriptionId);
+	PkgmSubscriptionLinks createSubscriptionsPkgmSubscriptionLinks(@NonNull String subscriptionId);
 
 	void makeSubscriptionLink(PkgmSubscription pkgmSubscription);
 }

@@ -20,7 +20,7 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 import jakarta.validation.Valid;
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import org.springframework.validation.annotation.Validated;
 
@@ -77,7 +77,7 @@ public class PnfdOnBoardingFailureNotification {
 	 * @return id
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	public String getId() {
 		return id;
@@ -99,7 +99,7 @@ public class PnfdOnBoardingFailureNotification {
 	 * @return notificationType
 	 **/
 	@Schema(required = true, description = "Discriminator for the different notification types. Shall be set to \"PnfdOnboardingFailureNotification\" for this notification type. ")
-	@Nonnull
+	@NonNull
 
 	public String getNotificationType() {
 		return notificationType;
@@ -120,7 +120,7 @@ public class PnfdOnBoardingFailureNotification {
 	 * @return subscriptionId
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	public String getSubscriptionId() {
 		return subscriptionId;
@@ -141,7 +141,7 @@ public class PnfdOnBoardingFailureNotification {
 	 * @return timeStamp
 	 **/
 	@Schema(required = true, description = "Date-time of the generation of the notification. ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 
@@ -164,7 +164,7 @@ public class PnfdOnBoardingFailureNotification {
 	 * @return pnfdInfoId
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	public String getPnfdInfoId() {
 		return pnfdInfoId;
@@ -206,7 +206,7 @@ public class PnfdOnBoardingFailureNotification {
 	 * @return onboardingFailureDetails
 	 **/
 	@Schema(required = true, description = "Failure details of current onboarding procedure. See clause 6.3 of ETSI GS NFV-SOL 013 for the details of \"ProblemDetails\" structure. ")
-	@Nonnull
+	@NonNull
 
 	@Valid
 
@@ -229,7 +229,7 @@ public class PnfdOnBoardingFailureNotification {
 	 * @return links
 	 **/
 	@Schema(required = true, description = "")
-	@Nonnull
+	@NonNull
 
 	@Valid
 

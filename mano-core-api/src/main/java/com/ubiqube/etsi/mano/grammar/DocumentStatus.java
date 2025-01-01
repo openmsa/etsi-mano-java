@@ -16,7 +16,7 @@
  */
 package com.ubiqube.etsi.mano.grammar;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 public class DocumentStatus {
 	public enum Status {
@@ -29,7 +29,7 @@ public class DocumentStatus {
 		this.status = status;
 	}
 
-	@Nonnull
+	@NonNull
 	private Status status;
 	private boolean result;
 

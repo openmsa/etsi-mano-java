@@ -18,7 +18,7 @@ package com.ubiqube.etsi.mano.service.pkg.vnf;
 
 import java.util.Set;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import com.ubiqube.etsi.mano.dao.mano.VnfCompute;
 import com.ubiqube.etsi.mano.dao.mano.VnfPackage;
@@ -36,7 +36,7 @@ public final class VisitorUtils {
 		// Nothing.
 	}
 
-	@Nonnull
+	@NonNull
 	public static VnfCompute findVnfCompute(final VnfPackage vnfPackage, final String y) {
 		return vnfPackage.getVnfCompute().stream()
 				.filter(x -> x.getToscaName().equals(y))

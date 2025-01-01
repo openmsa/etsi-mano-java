@@ -20,7 +20,7 @@ import com.ubiqube.etsi.mano.service.rest.QueryParameters;
 import com.ubiqube.etsi.mano.service.rest.admin.srv.ManoServer;
 import com.ubiqube.etsi.mano.service.rest.admin.vim.ManoVim;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 /**
  *
@@ -28,7 +28,7 @@ import jakarta.annotation.Nonnull;
  *
  */
 public class ManoAdmin {
-	@Nonnull
+	@NonNull
 	private final QueryParameters client;
 
 	public ManoAdmin(final QueryParameters manoClient) {

@@ -31,7 +31,7 @@ package com.ubiqube.etsi.mano.vnfm.v261.model.nslcm;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.annotation.Nonnull;
+import org.jspecify.annotations.NonNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ubiqube.etsi.mano.common.v261.model.nslcm.CpProtocolInfo;
@@ -67,7 +67,7 @@ public class VnfInstanceInstantiatedVnfInfoExtCpInfo {
 	 **/
 	@JsonProperty("id")
 	@Schema(required = true, description = "Identifier of the external CP instance and the related information instance. ")
-	@Nonnull
+	@NonNull
 	public String getId() {
 		return id;
 	}
@@ -88,7 +88,7 @@ public class VnfInstanceInstantiatedVnfInfoExtCpInfo {
 	 **/
 	@JsonProperty("cpdId")
 	@Schema(required = true, description = "Identifier of the external CPD, VnfExtCpd, in the VNFD. ")
-	@Nonnull
+	@NonNull
 	public String getCpdId() {
 		return cpdId;
 	}

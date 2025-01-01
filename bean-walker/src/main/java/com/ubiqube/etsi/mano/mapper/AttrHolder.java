@@ -18,7 +18,7 @@ package com.ubiqube.etsi.mano.mapper;
 
 import java.util.Deque;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class AttrHolder {
 	private Deque<AttrNode> stack;

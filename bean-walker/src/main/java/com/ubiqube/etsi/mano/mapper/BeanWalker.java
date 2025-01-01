@@ -33,7 +33,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class BeanWalker {
 	private static final Logger LOG = LoggerFactory.getLogger(BeanWalker.class);

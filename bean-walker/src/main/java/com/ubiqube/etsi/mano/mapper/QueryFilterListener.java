@@ -22,14 +22,14 @@ import java.util.Deque;
 import java.util.List;
 import java.util.Objects;
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
 
 public class QueryFilterListener implements BeanListener {
 	private ListRecord lr;
-	@Nonnull
+	@NonNull
 	private final Deque<ListRecord> queue = new ArrayDeque<>();
-	@Nonnull
+	@NonNull
 	private final List<ListRecord> results = new ArrayList<>();
 
 	@Override
@@ -114,16 +114,16 @@ public class QueryFilterListener implements BeanListener {
 
 	public class ListRecord {
 		private final String name;
-		@Nonnull
+		@NonNull
 		private final List<Object> list;
-		@Nonnull
+		@NonNull
 		private final List<ListRecord> child;
 
 		public ListRecord(final String name) {
 			this(name, new ArrayList<>());
 		}
 
-		public ListRecord(final String name, final @Nonnull List<Object> list) {
+		public ListRecord(final String name, final @NonNull List<Object> list) {
 			this.name = name;
 			this.list = list;
 			child = new ArrayList<>();

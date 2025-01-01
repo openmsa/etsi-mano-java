@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class CollectHashMapListener extends AbstractCollectListener {
 	private final LinkedList<ClassTypeHolder> obj = new LinkedList<>();

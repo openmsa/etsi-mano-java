@@ -22,7 +22,7 @@ import java.util.List;
 
 import com.ubiqube.etsi.mano.service.event.model.FilterAttributes;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class SpelWriter {
 	private final BasicConverter basicConverter;

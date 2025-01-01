@@ -16,7 +16,7 @@
  */
 package com.ubiqube.etsi.mano.mapper;
 
-import jakarta.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public interface BeanListener {
 

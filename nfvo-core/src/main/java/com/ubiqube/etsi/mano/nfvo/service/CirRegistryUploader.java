@@ -52,11 +52,11 @@ public class CirRegistryUploader implements RegistryUploader {
 
 	private final VnfPackageRepository packageRepository;
 	private final DockerService dockerService;
-	private final CirConnectionManager vimManager;
+	private final CirConnectionManager cirConnManager;
 	private final CirConnectionControllerMapping mapper;
 
 	public CirRegistryUploader(final VnfPackageRepository packageRepository, final DockerService dockerService, final CirConnectionManager vimManager, final CirConnectionControllerMapping mapper) {
-		this.vimManager = vimManager;
+		this.cirConnManager = vimManager;
 		this.packageRepository = packageRepository;
 		this.dockerService = dockerService;
 		this.mapper = mapper;
@@ -102,15 +102,15 @@ public class CirRegistryUploader implements RegistryUploader {
 	}
 
 	private ConnectionInformation getCirConnection() {
-		final Iterator<ConnectionInformation> cirConnIte = vimManager.findAll().iterator();
+		final Iterator<ConnectionInformation> cirConnIte = cirConnManager.findAll().iterator();
 		if (!cirConnIte.hasNext()) {
 			throw new GenericException("No CIR connection information found.");
 		}
 		final List<ConnectionInformation> lst = StreamSupport.stream(Spliterators.spliteratorUnknownSize(cirConnIte, Spliterator.ORDERED), false)
-				.filter(x -> x.getConnType().equals(ConnectionType.OCI))
+				.filter(x -> ConnectionType.OCI.equals(x.getConnType()))
 				.toList();
 		if (lst.isEmpty()) {
-			throw new GenericException("No suitable CIR connection information found.");
+			throw new GenericException("No suitable CIR connection information found for OCI storage.");
 		}
 		return lst.getFirst();
 	}

@@ -19,6 +19,7 @@ package com.ubiqube.etsi.mano.vnfm.controller;
 import java.io.IOException;
 import java.util.UUID;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -44,8 +45,6 @@ import com.ubiqube.etsi.mano.service.repository.CapiServerRepositoryService;
 import com.ubiqube.etsi.mano.vim.k8s.OsClusterService;
 import com.ubiqube.etsi.mano.vim.k8s.conn.K8s;
 import com.ubiqube.etsi.mano.vnfm.service.plan.contributors.uow.capi.CapiServerMapping;
-
-import org.jspecify.annotations.Nullable;
 
 @RestController
 @RequestMapping("/vnfm-admin/capi")
@@ -88,6 +87,11 @@ public class CapiController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable final UUID id) {
 		capiServer.deleteById(id);
+	}
+
+	@GetMapping("/retry/{id}")
+	public void retry(@PathVariable final UUID id) {
+		eventManager.sendAction(ActionType.REGISTER_CAPI, id);
 	}
 
 	@PatchMapping(value = "/{id}")

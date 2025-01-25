@@ -25,6 +25,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -40,7 +41,11 @@ import com.ubiqube.etsi.mano.dao.mano.vim.PlanStatusType;
 import com.ubiqube.etsi.mano.service.repository.CapiServerRepositoryService;
 import com.ubiqube.etsi.mano.vim.k8sexecutor.K8sExecutor;
 
-import io.fabric8.kubernetes.api.model.Pod;
+import io.fabric8.kubernetes.api.model.HasMetadata;
+import io.fabric8.kubernetes.api.model.KubernetesResourceList;
+import io.fabric8.kubernetes.api.model.ObjectMeta;
+import io.fabric8.kubernetes.api.model.apiextensions.v1.CustomResourceDefinition;
+import io.fabric8.kubernetes.api.model.apiextensions.v1.CustomResourceDefinitionList;
 
 @ExtendWith(MockitoExtension.class)
 class CapiServerCheckerTest {
@@ -65,8 +70,11 @@ class CapiServerCheckerTest {
 
 		when(capiServer.findById(id)).thenReturn(Optional.of(server));
 		when(capiServer.save(any())).thenReturn(server);
-		when(executor.get(any(), any())).thenReturn(new Pod());
-
+		ObjectMeta metadata = new ObjectMeta();
+		metadata.setName("clusters.cluster.x-k8s.io");
+		CustomResourceDefinition crd = new CustomResourceDefinition("VERSION", "KIND", metadata, null, null);
+		KubernetesResourceList<? extends HasMetadata> data = new CustomResourceDefinitionList("version", List.of(crd), "kind", null);
+		when(executor.list(any(), any())).thenReturn((KubernetesResourceList<HasMetadata>) data);
 		final CapiServer result = checker.verify(id, Map.of());
 
 		assertEquals(PlanStatusType.SUCCESS, result.getServerStatus());
@@ -86,7 +94,6 @@ class CapiServerCheckerTest {
 
 		when(capiServer.findById(id)).thenReturn(Optional.of(server));
 		when(capiServer.save(any())).thenReturn(server);
-		when(executor.get(any(), any())).thenThrow(RuntimeException.class);
 
 		final CapiServer result = checker.verify(id, Map.of());
 

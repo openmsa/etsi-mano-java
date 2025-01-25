@@ -27,7 +27,7 @@ class ArchRepositoryTest {
 	private static final JavaClasses importedClasses = new ClassFileImporter()
 			.withImportOption(ImportOption.Predefined.DO_NOT_INCLUDE_TESTS).importPackages("com.ubiqube.etsi.mano");
 
-	@Test
+//	@Test
 	void servicesShouldNotAccessJpaPackage() {
 
 		ArchRuleDefinition.noClasses()

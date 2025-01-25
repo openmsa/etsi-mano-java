@@ -61,7 +61,7 @@ public class CirConnectionManager {
 		try {
 			cirServerChecker.verify(vci);
 			vci.setFailureDetails(null);
-			vci.setServerStatus(PlanStatusType.STARTED);
+			vci.setServerStatus(PlanStatusType.SUCCESS);
 			return save(vci);
 		} catch (final RuntimeException e) {
 			LOG.warn("", e);

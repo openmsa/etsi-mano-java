@@ -82,7 +82,6 @@ public class CapiController {
 		final K8s srv = osClusterService.fromKubeConfig(context, file.getBytes());
 		final CapiServer res = capiServer.save(mapper.map(srv));
 		eventManager.sendAction(ActionType.REGISTER_CAPI, res.getId());
-		eventManager.sendAction(ActionType.REGISTER_CAPI, res.getId());
 		return ResponseEntity.ok(res);
 	}
 

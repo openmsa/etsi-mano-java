@@ -26,10 +26,11 @@ import org.springframework.stereotype.Service;
 import com.ubiqube.etsi.mano.dao.mano.cnf.capi.CapiServer;
 import com.ubiqube.etsi.mano.dao.mano.vim.PlanStatusType;
 import com.ubiqube.etsi.mano.dao.rfc7807.FailureDetails;
+import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.service.repository.CapiServerRepositoryService;
 import com.ubiqube.etsi.mano.vim.k8sexecutor.K8sExecutor;
 
-import io.fabric8.kubernetes.api.model.Pod;
+import io.fabric8.kubernetes.api.model.KubernetesResourceList;
 import io.fabric8.kubernetes.client.Config;
 import io.fabric8.kubernetes.client.ConfigBuilder;
 
@@ -54,9 +55,9 @@ public class CapiServerChecker {
 					.withCaCertData(res.getCertificateAuthorityData())
 					.withClientCertData(res.getClientCertificateData())
 					.withClientKeyData(res.getClientKeyData())
+					.withOauthTokenProvider(res::getToken)
 					.build();
-			final Pod pod = new Pod();
-			executor.get(cfg, c -> c.resource(pod).get());
+			haveCapiClusterDefinition(cfg);
 			res.setServerStatus(PlanStatusType.SUCCESS);
 			res.setError(null);
 			return capiServer.save(res);
@@ -66,6 +67,17 @@ public class CapiServerChecker {
 			res.setServerStatus(PlanStatusType.FAILED);
 			return capiServer.save(res);
 		}
+	}
+
+	private void haveCapiClusterDefinition(final Config cfg) {
+		KubernetesResourceList<io.fabric8.kubernetes.api.model.apiextensions.v1.CustomResourceDefinition> query = executor.list(cfg, c -> c.apiextensions().v1().customResourceDefinitions().list());
+		if (null == query) {
+			throw new GenericException("Failed to get CRD");
+		}
+		query.getItems().stream()
+				.filter(crd -> "clusters.cluster.x-k8s.io".equals(crd.getMetadata().getName()))
+				.findFirst()
+				.orElseThrow(() -> new GenericException("CRD not found"));
 	}
 
 }

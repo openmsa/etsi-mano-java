@@ -71,10 +71,19 @@ public class ContainerExecutor {
 		if (!haveCni(vnfPackage)) {
 			return;
 		}
+		Optional<VimConnectionInformation> k8sVim = vimManager.findByChildOf(vci.getVimId());
+		if (k8sVim.isPresent()) {
+			addVim(grants, k8sVim.get());
+			return;
+		}
 		VimConnectionInformation vimc = ccmManager.getVimConnection(vci, grants, vnfPackage);
 		vimc = storeIfNeeded(vimc);
-		final Set vims = new LinkedHashSet<>(grants.getVimConnections());
-		vims.add(vimc);
+		addVim(grants, vimc);
+	}
+
+	private void addVim(final GrantResponse grants, final VimConnectionInformation vimConnectionInformation) {
+		Set<VimConnectionInformation> vims = new LinkedHashSet<>(grants.getVimConnections());
+		vims.add(vimConnectionInformation);
 		grants.setVimConnections(vims);
 	}
 

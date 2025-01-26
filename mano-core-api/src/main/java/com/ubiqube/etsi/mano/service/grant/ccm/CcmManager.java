@@ -51,10 +51,10 @@ public class CcmManager {
 		final K8sServers ret = toK8sServers(res, grants.getVnfInstanceId());
 		ret.setId(UUID.randomUUID());
 		ret.setVnfInstanceId(UUID.fromString(grants.getVnfInstanceId()));
-		return mapToConnection(ret);
+		return mapToConnection(ret, vimInfo.getVimId());
 	}
 
-	private static VimConnectionInformation mapToConnection(final K8sServers r) {
+	private static VimConnectionInformation mapToConnection(final K8sServers r, final String vimId) {
 		final KubernetesV1Auth ai = new KubernetesV1Auth();
 		ai.setClientCertificateData(r.getUserCrt());
 		ai.setClientKeyData(r.getUserKey());
@@ -65,6 +65,7 @@ public class CcmManager {
 		conn.setAccessInfo(ai);
 		conn.setInterfaceInfo(ii);
 		conn.setVimType("UBINFV.CISM.V_1");
+		conn.setChildOf(vimId);
 		// Use endpoint to make repeatable ID.
 		conn.setVimId(UUID.nameUUIDFromBytes(ii.getEndpoint().getBytes()).toString());
 		return conn;

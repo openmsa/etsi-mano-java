@@ -25,6 +25,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.jspecify.annotations.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -47,7 +48,6 @@ import com.ubiqube.etsi.mano.service.repository.VrQanRepositoryService;
 import com.ubiqube.etsi.mano.service.search.ManoSearch;
 import com.ubiqube.etsi.mano.vim.dto.SwImage;
 
-import org.jspecify.annotations.NonNull;
 import jakarta.transaction.Transactional;
 import jakarta.transaction.Transactional.TxType;
 
@@ -267,4 +267,9 @@ public class VimManager {
 		}
 		return vci;
 	}
+
+	public Optional<VimConnectionInformation> findByChildOf(final String id) {
+		return vimConnectionInformationJpa.findByChildOf(id);
+	}
+
 }

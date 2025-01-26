@@ -30,4 +30,6 @@ public interface VimConnectionInformationJpa extends CrudRepository<VimConnectio
 
 	Optional<VimConnectionInformation> findByVimId(String id);
 
+	Optional<VimConnectionInformation> findByChildOf(String id);
+
 }

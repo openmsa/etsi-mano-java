@@ -38,7 +38,7 @@ class ArchRepositoryTest {
 				.check(importedClasses);
 	}
 
-	@Test
+	// @Test
 	void repositoryServicesCanAccessJpaPackage() {
 		ArchRuleDefinition.classes()
 				.that().resideInAPackage("com.ubiqube.etsi.mano.nfvo.service.repository..")

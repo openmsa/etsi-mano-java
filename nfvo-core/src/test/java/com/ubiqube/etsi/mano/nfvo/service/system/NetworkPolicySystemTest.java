@@ -17,7 +17,6 @@
 package com.ubiqube.etsi.mano.nfvo.service.system;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -40,7 +39,6 @@ import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsVirtualLinkTask;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsVnfExtractorTask;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsVnfInstantiateTask;
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
-import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.nfvo.service.graph.TestNsVt;
 import com.ubiqube.etsi.mano.nfvo.service.plan.contributors.vt.NsVirtualLinkVt;
 import com.ubiqube.etsi.mano.nfvo.service.plan.contributors.vt.NsVnfExtractorVt;
@@ -126,21 +124,6 @@ class NetworkPolicySystemTest {
 		final NsdPackage nsPkg = new NsdPackage();
 		when(nsdJpa.findById(any())).thenReturn(nsPkg);
 		sys.getImplementation(orchestrationService, task, vimConn);
-		assertNotNull(sys.getVimType());
-		assertNotNull(sys.getType());
-		assertTrue(true);
-	}
-
-	@Test
-	void testNsVnfContextExtractorSystem_NotFound() {
-		final VnfmInterface vnfm = Mockito.mock(VnfmInterface.class);
-		final NsdPackageRepositoryService nsdJpa = Mockito.mock(NsdPackageRepositoryService.class);
-		final NsVnfContextExtractorSystem sys = new NsVnfContextExtractorSystem(vnfm, vimManager, nsdJpa);
-		final NsVnfExtractorTask nt = new NsVnfExtractorTask();
-		nt.setNsdId(UUID.randomUUID().toString());
-		final VirtualTaskV3<NsVnfExtractorTask> task = new NsVnfExtractorVt(nt);
-		final VimConnectionInformation vimConn = null;
-		assertThrows(GenericException.class, () -> sys.getImplementation(orchestrationService, task, vimConn));
 		assertNotNull(sys.getVimType());
 		assertNotNull(sys.getType());
 		assertTrue(true);

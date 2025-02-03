@@ -31,6 +31,7 @@ import com.ubiqube.etsi.mano.service.repository.CapiServerRepositoryService;
 import com.ubiqube.etsi.mano.vim.k8sexecutor.K8sExecutor;
 
 import io.fabric8.kubernetes.api.model.KubernetesResourceList;
+import io.fabric8.kubernetes.api.model.apiextensions.v1.CustomResourceDefinition;
 import io.fabric8.kubernetes.client.Config;
 import io.fabric8.kubernetes.client.ConfigBuilder;
 
@@ -74,10 +75,11 @@ public class CapiServerChecker {
 		if (null == query) {
 			throw new GenericException("Failed to get CRD");
 		}
-		query.getItems().stream()
+		CustomResourceDefinition res = query.getItems().stream()
 				.filter(crd -> "clusters.cluster.x-k8s.io".equals(crd.getMetadata().getName()))
 				.findFirst()
 				.orElseThrow(() -> new GenericException("CRD not found"));
+		LOG.info("CRD found: {}", res.getMetadata().getName());
 	}
 
 }

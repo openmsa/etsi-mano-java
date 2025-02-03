@@ -314,7 +314,6 @@ class SubscriptionServiceImplTest {
 	@ParameterizedTest
 	@EnumSource(NotificationEvent.class)
 	void testConvert(final NotificationEvent notificationEvent) {
-		final SubscriptionServiceImpl subs = new SubscriptionServiceImpl(subscriptionJpa, grammar, notifications, serverService, evalService, manoSearch);
 		// return null if not found.
 		SubscriptionUtils.convert(notificationEvent);
 		assertTrue(true);

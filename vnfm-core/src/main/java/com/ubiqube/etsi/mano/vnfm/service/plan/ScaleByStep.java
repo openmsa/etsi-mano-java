@@ -48,7 +48,7 @@ public class ScaleByStep {
 	}
 
 	public NumberOfCompute handleStep(final BlueprintParameters parameters, final VnfPackage vnfPackage, final VnfCompute compute, final VnfInstance instance) {
-		LOG.debug("Handling step with parameters: {}, vnfPackage: {}, compute: {}, instance: {}", parameters, vnfPackage, compute, instance);
+		LOG.trace("Handling step with parameters: {}, vnfPackage: {}, compute: {}, instance: {}", parameters, vnfPackage, compute, instance);
 		final int currentInst = planService.getNumberOfLiveInstance(instance, compute);
 		LOG.debug("Current number of live instances: {}", currentInst);
 		final int baseStep = getBaseStep(instance, parameters.getAspectId());

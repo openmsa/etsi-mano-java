@@ -15,27 +15,22 @@
 		<dependency>
 			<groupId>com.github.mwiede</groupId>
 			<artifactId>jsch</artifactId>
-			<version>${version.jsch}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.sshd</groupId>
 			<artifactId>sshd-core</artifactId>
-			<version>${version.apache.mina}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.sshd</groupId>
 			<artifactId>sshd-scp</artifactId>
-			<version>${version.apache.mina}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.sshd</groupId>
 			<artifactId>sshd-sftp</artifactId>
-			<version>${version.apache.mina}</version>
 		</dependency>
 		<dependency>
 			<groupId>net.i2p.crypto</groupId>
 			<artifactId>eddsa</artifactId>
-			<version>${version.eddsa}</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>

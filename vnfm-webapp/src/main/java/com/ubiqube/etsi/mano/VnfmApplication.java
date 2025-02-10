@@ -29,6 +29,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import com.ubiqube.etsi.mano.docker.HelmDockerService;
 import com.ubiqube.etsi.mano.docker.HelmOciDockerService;
 import com.ubiqube.etsi.mano.docker.JibDockerService;
+import com.ubiqube.etsi.mano.orchestrator.v4.Q4Workflow;
+import com.ubiqube.etsi.mano.orchestrator.v4.Q4WorkflowImpl;
 
 @SpringBootApplication
 @EnableScheduling
@@ -54,5 +56,10 @@ public class VnfmApplication extends SpringBootServletInitializer {
 	@Bean
 	HelmDockerService helmDockerService() {
 		return new HelmDockerService();
+	}
+
+	@Bean
+	Q4Workflow q4Workflow() {
+		return new Q4WorkflowImpl();
 	}
 }

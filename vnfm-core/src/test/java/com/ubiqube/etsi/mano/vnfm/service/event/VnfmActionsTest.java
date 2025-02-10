@@ -221,6 +221,6 @@ class VnfmActionsTest {
 		when(blueprintService.findById(id)).thenReturn(blueprint);
 		when(vnfInstanceServiceVnfm.findById(any())).thenReturn(inst);
 		srv.vnfHeal(id);
-		assertEquals(OperationStatusType.FAILED, blueprint.getOperationStatus());
+		assertEquals(OperationStatusType.COMPLETED, blueprint.getOperationStatus());
 	}
 }

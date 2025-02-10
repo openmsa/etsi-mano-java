@@ -41,6 +41,7 @@ import com.ubiqube.etsi.mano.dao.mano.v2.VnfTask;
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
 import com.ubiqube.etsi.mano.orchestrator.OrchExecutionResults;
 import com.ubiqube.etsi.mano.orchestrator.Planner;
+import com.ubiqube.etsi.mano.orchestrator.v4.Q4Workflow;
 import com.ubiqube.etsi.mano.service.VimResourceService;
 import com.ubiqube.etsi.mano.service.vim.Vim;
 import com.ubiqube.etsi.mano.service.vim.VimManager;
@@ -72,9 +73,11 @@ class VnfmActionsTest {
 	private VnfWorkflow workflow;
 	@Mock
 	private Planner<Task> planner;
+	@Mock
+	private Q4Workflow executor;
 
 	private VnfmActions createService() {
-		return new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow, planner);
+		return new VnfmActions(vimManager, orchestrationAdapter, vnfInstanceService, blueprintService, vimResourceService, vnfLiveInstance, vnfInstanceServiceVnfm, workflow, planner, executor);
 	}
 
 	@Test

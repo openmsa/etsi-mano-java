@@ -16,16 +16,22 @@
  */
 package com.ubiqube.etsi.mano.vnfm.service.plan.contributors.uow;
 
+import org.jspecify.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.ubiqube.etsi.mano.dao.mano.v2.StorageTask;
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
 import com.ubiqube.etsi.mano.orchestrator.Context3d;
 import com.ubiqube.etsi.mano.orchestrator.nodes.vnfm.Storage;
 import com.ubiqube.etsi.mano.orchestrator.vt.VirtualTaskV3;
 import com.ubiqube.etsi.mano.service.vim.Vim;
-
-import org.jspecify.annotations.Nullable;
+import com.ubiqube.etsi.mano.service.vim.VimVolume;
 
 public class VnfStorageUow extends AbstractVnfmUow<StorageTask> {
+	/** Logger. */
+	private static final Logger LOG = LoggerFactory.getLogger(VnfStorageUow.class);
+
 	private final Vim vim;
 	private final VimConnectionInformation vimConnectionInformation;
 	private final StorageTask task;
@@ -45,8 +51,14 @@ public class VnfStorageUow extends AbstractVnfmUow<StorageTask> {
 	@Override
 	public @Nullable String rollback(final Context3d context) {
 		final StorageTask params = getVirtualTask().getTemplateParameters();
+		waitForStatus(params.getVimResourceId());
 		vim.storage(vimConnectionInformation).deleteStorage(params.getVimResourceId());
 		return null;
+	}
+
+	private void waitForStatus(final String vimResourceId) {
+		VimVolume st = vim.storage(vimConnectionInformation).getStorage(vimResourceId);
+		LOG.info("Waiting for storage {} to be deleted: {}", vimResourceId, st.getStatus());
 	}
 
 }

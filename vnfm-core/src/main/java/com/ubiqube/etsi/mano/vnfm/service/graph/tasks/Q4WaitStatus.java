@@ -30,6 +30,7 @@ public class Q4WaitStatus implements Q4Task {
 	public String execute(final Q4Context context3d) {
 		long startTime = System.currentTimeMillis();
 		ComputeInfo comp = vim.getCompute(vimConnectionInformation, resourceId);
+		LOG.info("Waiting for compute: {}", resourceId);
 		while (!isFinished(comp)) {
 			if ((System.currentTimeMillis() - startTime) > TIMEOUT) {
 				throw new GenericException("Timeout while waiting for compute status: " + comp.getStatus() + "/" + comp.getTaskState());
@@ -47,6 +48,10 @@ public class Q4WaitStatus implements Q4Task {
 	}
 
 	private boolean isFinished(final ComputeInfo comp) {
+		if (null == comp) {
+			// In this case, the compute is not found.
+			return true;
+		}
 		String task = comp.getTaskState();
 		if (task != null) {
 			return false;

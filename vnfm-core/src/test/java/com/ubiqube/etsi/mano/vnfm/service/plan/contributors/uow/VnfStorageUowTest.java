@@ -18,6 +18,7 @@ package com.ubiqube.etsi.mano.vnfm.service.plan.contributors.uow;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,7 @@ import com.ubiqube.etsi.mano.orchestrator.Context3d;
 import com.ubiqube.etsi.mano.orchestrator.vt.VirtualTaskV3;
 import com.ubiqube.etsi.mano.service.vim.Storage;
 import com.ubiqube.etsi.mano.service.vim.Vim;
+import com.ubiqube.etsi.mano.service.vim.VimVolume;
 import com.ubiqube.etsi.mano.vnfm.service.plan.contributors.vt.StorageVt;
 
 @ExtendWith(MockitoExtension.class)
@@ -56,12 +58,25 @@ class VnfStorageUowTest {
 	}
 
 	@Test
-	void testRollbaxk() {
+	void testRollbackNullResource() {
 		final StorageTask nt = new StorageTask();
 		final VirtualTaskV3<StorageTask> vt = new StorageVt(nt);
 		final VimConnectionInformation vimConn = new VimConnectionInformation();
 		final VnfStorageUow uow = new VnfStorageUow(vt, vim, vimConn);
 		when(vim.storage(vimConn)).thenReturn(storage);
+		uow.rollback(context);
+		assertTrue(true);
+	}
+
+	@Test
+	void testRollback() {
+		final StorageTask nt = new StorageTask();
+		final VirtualTaskV3<StorageTask> vt = new StorageVt(nt);
+		final VimConnectionInformation vimConn = new VimConnectionInformation();
+		final VnfStorageUow uow = new VnfStorageUow(vt, vim, vimConn);
+		when(vim.storage(vimConn)).thenReturn(storage);
+		VimVolume st0 = new VimVolume();
+		when(storage.getStorage(any())).thenReturn(st0);
 		uow.rollback(context);
 		assertTrue(true);
 	}

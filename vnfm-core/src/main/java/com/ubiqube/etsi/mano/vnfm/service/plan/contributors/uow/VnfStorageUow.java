@@ -58,6 +58,10 @@ public class VnfStorageUow extends AbstractVnfmUow<StorageTask> {
 
 	private void waitForStatus(final String vimResourceId) {
 		VimVolume st = vim.storage(vimConnectionInformation).getStorage(vimResourceId);
+		if (null == st) {
+			LOG.info("Storage {} not found", vimResourceId);
+			return;
+		}
 		LOG.info("Waiting for storage {} to be deleted: {}", vimResourceId, st.getStatus());
 	}
 

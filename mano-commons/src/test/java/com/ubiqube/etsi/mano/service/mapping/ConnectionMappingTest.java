@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -31,10 +32,13 @@ import org.mapstruct.factory.Mappers;
 
 import com.ubiqube.etsi.mano.dao.mano.AccessInfo;
 import com.ubiqube.etsi.mano.dao.mano.InterfaceInfo;
+import com.ubiqube.etsi.mano.dao.mano.ai.BasicAccess;
 import com.ubiqube.etsi.mano.dao.mano.ai.KeystoneAuthV3;
 import com.ubiqube.etsi.mano.dao.mano.ai.KubernetesV1Auth;
+import com.ubiqube.etsi.mano.dao.mano.ai.OAuth2Access;
 import com.ubiqube.etsi.mano.dao.mano.cnf.ConnectionInformation;
 import com.ubiqube.etsi.mano.dao.mano.ii.K8sInterfaceInfo;
+import com.ubiqube.etsi.mano.dao.mano.ii.OpenstackV3InterfaceInfo;
 import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.service.auth.model.AuthParamBasic;
 import com.ubiqube.etsi.mano.service.auth.model.AuthParamOauth2;
@@ -45,7 +49,8 @@ import com.ubiqube.etsi.mano.service.auth.model.OAuth2GrantType;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 class ConnectionMappingTest {
-	ConnectionMapping mapper = Mappers.getMapper(ConnectionMapping.class);
+	private final ConnectionMapping mapper = Mappers.getMapper(ConnectionMapping.class);
+
 	private final PodamFactoryImpl podam;
 
 	public ConnectionMappingTest() {
@@ -268,5 +273,158 @@ class ConnectionMappingTest {
 		final Map<String, String> res = mapper.map(kii);
 		assertNotNull(res);
 		assertEquals("data", res.get("certificate-authority-data"));
+	}
+
+	@Test
+	void testMapToHelmInterfaceInfoEmpty() {
+		assertNull(mapper.mapToHelmInterfaceInfo(null));
+		InterfaceInfo res = mapper.mapToHelmInterfaceInfo(Map.of());
+		assertNotNull(res);
+	}
+
+	@Test
+	void testMapToHelmInterfaceInfo() {
+		assertNull(mapper.mapToHelmInterfaceInfo(null));
+		InterfaceInfo res = mapper.mapToHelmInterfaceInfo(Map.of(
+				"connectionTimeout", "456",
+				"endpoint", "endp",
+				"id", UUID.randomUUID().toString(),
+				"iface", "true",
+				"natHost", "",
+				"nonStrictSsl", "true",
+				"readTimeout", "789",
+				"regionName", "region",
+				"retry", "4",
+				"sdnEndpoint", "sdnEndpoint"));
+		assertNotNull(res);
+	}
+
+	@Test
+	void testMapToK8sInterfaceInfo() {
+		assertNull(mapper.mapToK8sInterfaceInfo(null));
+		Map<String, String> map = new HashMap<>();
+		map.put("certificate-authority-data", "");
+		map.put("connectionTimeout", "741");
+		map.put("endpoint", "");
+		map.put("id", UUID.randomUUID().toString());
+		map.put("iface", "");
+		map.put("natHost", "");
+		map.put("nonStrictSsl", "false");
+		map.put("readTimeout", "12");
+		map.put("regionName", "");
+		map.put("retry", "4");
+		map.put("sdnEndpoint", "");
+
+		K8sInterfaceInfo res = mapper.mapToK8sInterfaceInfo(map);
+		assertNotNull(res);
+	}
+
+	@Test
+	void testMapToOpenstackV3InterfaceInfo() {
+		assertNull(mapper.mapToOpenstackV3InterfaceInfo(null));
+		Map<String, String> map = new HashMap<>();
+		map.put("certificate-authority-data", "");
+		map.put("connectionTimeout", "741");
+		map.put("endpoint", "");
+		map.put("id", UUID.randomUUID().toString());
+		map.put("iface", "");
+		map.put("natHost", "");
+		map.put("nonStrictSsl", "false");
+		map.put("readTimeout", "12");
+		map.put("regionName", "");
+		map.put("retry", "4");
+		map.put("sdnEndpoint", "");
+		map.put("skipCertificateHostnameCheck", "false");
+		map.put("skipCertificateVerification", "false");
+		map.put("trustedCertificates", "false");
+		OpenstackV3InterfaceInfo res = mapper.mapToOpenstackV3InterfaceInfo(map);
+		assertNotNull(res);
+	}
+
+	@Test
+	void testMapToKeystoneAuthV3() {
+		assertNull(mapper.mapToKeystoneAuthV3(null));
+		Map<String, String> map = new HashMap<>();
+		map.put("id", UUID.randomUUID().toString());
+		map.put("password", "");
+		map.put("username", "");
+		map.put("project", "false");
+		map.put("projectDomain", "12");
+		map.put("projectId", "");
+		map.put("region", "4");
+		map.put("userDomain", "");
+		KeystoneAuthV3 res = mapper.mapToKeystoneAuthV3(map);
+		assertNotNull(res);
+	}
+
+	@Test
+	void testMapToHelmEmpty() {
+		assertNull(mapper.mapToHelm(null));
+		BasicAccess res = mapper.mapToHelm(Map.of());
+		assertNotNull(res);
+	}
+
+	@Test
+	void testMapToHelm() {
+		assertNull(mapper.mapToHelm(null));
+		Map<String, String> map = new HashMap<>();
+		map.put("id", UUID.randomUUID().toString());
+		map.put("password", "");
+		map.put("username", "");
+		BasicAccess res = mapper.mapToHelm(map);
+		assertNotNull(res);
+	}
+
+	@Test
+	void testMapToK8sAuth() {
+		assertNull(mapper.mapToK8sAuth(null));
+		Map<String, String> map = new HashMap<>();
+		map.put("id", UUID.randomUUID().toString());
+		map.put("client-certificate-data", "");
+		map.put("client-key-data", "");
+		KubernetesV1Auth res = mapper.mapToK8sAuth(map);
+		assertNotNull(res);
+	}
+
+	@Test
+	void testMapMapToOAuth2Access() {
+		assertNull(mapper.mapToOAuth2Access(null));
+		AuthParamOauth2 pojo = podam.manufacturePojo(AuthParamOauth2.class);
+		OAuth2Access res = mapper.mapToOAuth2Access(pojo);
+		assertNotNull(res);
+	}
+
+	@Test
+	void testMapMapToOAuth2AccessNoGrant() {
+		assertNull(mapper.mapToOAuth2Access(null));
+		AuthParamOauth2 pojo = podam.manufacturePojo(AuthParamOauth2.class);
+		pojo.setGrantType(null);
+		OAuth2Access res = mapper.mapToOAuth2Access(pojo);
+		assertNotNull(res);
+	}
+
+	@Test
+	void testMapToBasicAccess() {
+		assertNull(mapper.mapToBasicAccess(null));
+		AuthParamBasic pojo = podam.manufacturePojo(AuthParamBasic.class);
+		Object res = mapper.mapToBasicAccess(pojo);
+		assertNotNull(res);
+	}
+
+	@Test
+	void testMapFromConnectionInformationToVimConnectionInformation() {
+		assertNull(mapper.mapFromConnectionInformationToVimConnectionInformation(null));
+		ConnectionInformation pojo = podam.manufacturePojo(ConnectionInformation.class);
+		Object res = mapper.mapFromConnectionInformationToVimConnectionInformation(pojo);
+		assertNotNull(res);
+	}
+
+	@Test
+	void testMapFromConnectionInformationToVimConnectionInformationExtraNull() {
+		assertNull(mapper.mapFromConnectionInformationToVimConnectionInformation(null));
+		ConnectionInformation pojo = podam.manufacturePojo(ConnectionInformation.class);
+		pojo.setExtra(null);
+		Object res = mapper.mapFromConnectionInformationToVimConnectionInformation(pojo);
+		assertNotNull(res);
 	}
 }

@@ -53,18 +53,20 @@ public interface ConnectionMapping extends StringToUriMapping {
 		if (ii == null) {
 			return null;
 		}
-		if ("ETSINFV.OPENSTACK_KEYSTONE.V_3".equals(vimType)) {
+		switch (vimType) {
+		case "ETSINFV.OPENSTACK_KEYSTONE.V_3":
 			return mapToOpenstackV3InterfaceInfo(ii);
-		}
-		if ("UBINFV.CISM.V_1".equals(vimType)) {
+		case "UBINFV.CISM.V_1":
 			return mapToK8sInterfaceInfo(ii);
-		}
-		if ("UBINFV.HELM_BASIC.V_1".equals(vimType) || "UBINFV.OCI_BASIC.V_1".equals(vimType)) {
+		case "UBINFV.HELM_BASIC.V_1":
+		case "UBINFV.OCI_BASIC.V_1":
 			return mapToHelmInterfaceInfo(ii);
-		}
-		if ("PAAS".equals(vimType)) {
+		case "PAAS":
 			// XXX: This need works works.
 			return new InterfaceInfo();
+		case null:
+		default:
+			break;
 		}
 		throw new GenericException("Unknown vimType: " + vimType);
 	}
@@ -89,18 +91,20 @@ public interface ConnectionMapping extends StringToUriMapping {
 		if (ai == null) {
 			return null;
 		}
-		if ("ETSINFV.OPENSTACK_KEYSTONE.V_3".equals(vimType)) {
+		switch (vimType) {
+		case "ETSINFV.OPENSTACK_KEYSTONE.V_3":
 			return mapToKeystoneAuthV3(ai);
-		}
-		if ("UBINFV.CISM.V_1".equals(vimType)) {
+		case "UBINFV.CISM.V_1":
 			return mapToK8sAuth(ai);
-		}
-		if ("UBINFV.HELM_BASIC.V_1".equals(vimType) || "UBINFV.OCI_BASIC.V_1".equals(vimType)) {
+		case "UBINFV.HELM_BASIC.V_1":
+		case "UBINFV.OCI_BASIC.V_1":
 			return mapToHelm(ai);
-		}
-		if ("PAAS".equals(vimType)) {
+		case "PAAS":
 			// XXX: This need works works.
 			return new AccessInfo();
+		case null:
+		default:
+			break;
 		}
 		throw new GenericException("Vim type: " + vimType);
 	}

@@ -58,8 +58,7 @@ public interface ConnectionMapping extends StringToUriMapping {
 			return mapToOpenstackV3InterfaceInfo(ii);
 		case "UBINFV.CISM.V_1":
 			return mapToK8sInterfaceInfo(ii);
-		case "UBINFV.HELM_BASIC.V_1":
-		case "UBINFV.OCI_BASIC.V_1":
+		case "UBINFV.HELM_BASIC.V_1", "UBINFV.OCI_BASIC.V_1":
 			return mapToHelmInterfaceInfo(ii);
 		case "PAAS":
 			// XXX: This need works works.
@@ -96,8 +95,7 @@ public interface ConnectionMapping extends StringToUriMapping {
 			return mapToKeystoneAuthV3(ai);
 		case "UBINFV.CISM.V_1":
 			return mapToK8sAuth(ai);
-		case "UBINFV.HELM_BASIC.V_1":
-		case "UBINFV.OCI_BASIC.V_1":
+		case "UBINFV.HELM_BASIC.V_1", "UBINFV.OCI_BASIC.V_1":
 			return mapToHelm(ai);
 		case "PAAS":
 			// XXX: This need works works.

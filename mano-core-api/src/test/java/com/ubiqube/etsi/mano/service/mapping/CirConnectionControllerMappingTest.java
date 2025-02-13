@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -54,7 +54,7 @@ class CirConnectionControllerMappingTest {
 		dto.setGeoloc(new GeoPoint(1, 45));
 		dto.setIgnoreSsl(true);
 		dto.setName("name");
-		dto.setUrl(new URL("http://example.com"));
+		dto.setUrl(URI.create("http://example.com").toURL());
 
 		ConnectionInformation result = mapper.map(dto);
 
@@ -70,7 +70,7 @@ class CirConnectionControllerMappingTest {
 	}
 
 	@Test
-	void testName() throws Exception {
+	void testName() {
 		ConnectionInformation ci = podam.manufacturePojo(ConnectionInformation.class);
 		RegistryInformations ri = mapper.map(ci);
 		assertEquals(ci.getAuthentification().getAuthParamBasic().getPassword(), ri.getPassword());

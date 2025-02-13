@@ -25,14 +25,14 @@ class VnfPackageMappingTest {
 	private final VnfPackageMappingImpl mapper = new VnfPackageMappingImpl();
 
 	@Test
-	public void testMap_NullInput() {
+	void testMap_NullInput() {
 		ProviderData providerData = null;
 		VnfPackage result = mapper.map(providerData);
 		assertNull(result);
 	}
 
 	@Test
-	public void testMap_ValidInput() {
+	void testMap_ValidInput() {
 		ProviderData providerData = new ProviderData();
 		providerData.setDescriptorId("descriptorId");
 		providerData.setAttributes(Arrays.asList(new Attributes(), new Attributes()));

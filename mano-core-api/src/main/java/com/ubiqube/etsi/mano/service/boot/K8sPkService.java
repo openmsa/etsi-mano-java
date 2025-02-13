@@ -26,11 +26,13 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Optional;
 
 import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import org.bouncycastle.asn1.x500.X500Name;
+import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import org.bouncycastle.openssl.PEMException;
 import org.bouncycastle.openssl.PEMKeyPair;
 import org.bouncycastle.openssl.PEMParser;
@@ -43,6 +45,7 @@ import org.bouncycastle.pkcs.PKCS10CertificationRequest;
 import org.bouncycastle.pkcs.PKCS10CertificationRequestBuilder;
 import org.bouncycastle.pkcs.jcajce.JcaPKCS10CertificationRequestBuilder;
 import org.bouncycastle.util.io.pem.PemWriter;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -50,8 +53,6 @@ import org.springframework.stereotype.Component;
 import com.ubiqube.etsi.mano.dao.mano.config.Configurations;
 import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.service.repository.ConfigurationsRepositoryService;
-
-import org.jspecify.annotations.Nullable;
 
 /**
  * The role of this service is to create and store a RSA private key for k8s
@@ -97,16 +98,30 @@ public class K8sPkService {
 			return convert(pkp);
 		}
 		if (!(o instanceof final PrivateKeyInfo pki)) {
-			throw new GenericException("Could not load private key of type :" + o.getClass());
+			throw new GenericException("Could not load private key of type: " + o.getClass());
 		}
 		final Optional<Configurations> pubDbOpt = configurations.findById(K8S_PUBLIC_KEY);
 		if (pubDbOpt.isEmpty()) {
 			return null;
 		}
 		final String pubDb = pubDbOpt.get().getWalue();
-		final RSAPublicKey pub = decodePem(pubDb);
-		final PrivateKey privKey = converter(pki);
-		return new KeyPair(pub, privKey);
+		Object oPub = decodePem(pubDb);
+		if (oPub instanceof final RSAPublicKey pub) {
+			return new KeyPair(pub, converter(pki));
+		}
+		if (oPub instanceof final SubjectPublicKeyInfo spki) {
+			return new KeyPair(convert(spki), converter(pki));
+		}
+		throw new GenericException("Could not load public key of type: " + oPub.getClass());
+	}
+
+	private PublicKey convert(final SubjectPublicKeyInfo spki) {
+		final JcaPEMKeyConverter converter = new JcaPEMKeyConverter();
+		try {
+			return converter.getPublicKey(spki);
+		} catch (final PEMException e) {
+			throw new GenericException(e);
+		}
 	}
 
 	private static PrivateKey converter(final PrivateKeyInfo pki) {

@@ -229,10 +229,6 @@
 			<artifactId>spring-boot-actuator</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.ubiqube.mano.juju</groupId>
-			<artifactId>juju-client</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.ubiqube.mano.service.search</groupId>
 			<artifactId>mano-search-api</artifactId>
 		</dependency>

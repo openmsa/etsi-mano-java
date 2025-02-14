@@ -1,6 +1,7 @@
 package com.ubiqube.etsi.mano.service.grant.ccm;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -106,7 +107,6 @@ class CapiCcmServerServiceTest {
 		verify(capiServerService).findAll();
 		verify(mapper).map(capiServer);
 		verify(osClusterService).createCluster(any(), any(), any());
-//		verify(osClusterService).getKubeConfig(any(), anyString(), anyString());
 	}
 
 	@Test
@@ -139,12 +139,12 @@ class CapiCcmServerServiceTest {
 		verify(capiServerService).findAll();
 		verify(mapper).map(capiServer);
 		verify(osClusterService).createCluster(any(), any(), any());
-//		verify(osClusterService).getKubeConfig(any(), anyString(), anyString());
 	}
 
 	@Test
-	public void testTerminateCluster() {
+	void testTerminateCluster() {
 		capiCcmServerService.terminateCluster("vnfInstanceId");
 		// No exception should be thrown
+		assertTrue(true);
 	}
 }

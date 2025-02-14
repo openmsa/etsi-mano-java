@@ -171,4 +171,10 @@ class CapiControllerTest {
 		verify(capiServerJpa, never()).save(any(CapiServer.class));
 		verify(eventManager, never()).sendAction(any(ActionType.class), any(UUID.class));
 	}
+
+	@Test
+	void testRetry() {
+		final CapiController srv = createService();
+		srv.retry(null);
+	}
 }

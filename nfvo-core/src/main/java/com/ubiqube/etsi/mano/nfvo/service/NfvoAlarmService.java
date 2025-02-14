@@ -22,6 +22,7 @@ import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
@@ -32,8 +33,6 @@ import com.ubiqube.etsi.mano.exception.ConflictException;
 import com.ubiqube.etsi.mano.service.search.SearchParamBuilder;
 import com.ubiqube.etsi.mano.service.search.SearchableService;
 import com.ubiqube.etsi.mano.vnfm.jpa.AlarmsJpa;
-
-import org.jspecify.annotations.Nullable;
 
 /**
  *
@@ -58,7 +57,7 @@ public class NfvoAlarmService {
 	public Alarms modify(final UUID safeUUID, final AckState ackState, @Nullable final String ifMatch) {
 		final Alarms alarm = alarmJpa.findById(safeUUID).orElseThrow();
 		Optional.ofNullable(ackState).ifPresent(alarm::setAckState);
-		if ((ifMatch != null) && (alarm.getVersion() + "").equals(ifMatch)) {
+		if ((ifMatch != null) && !(alarm.getVersion() + "").equals(ifMatch)) {
 			throw new ConflictException("Version header doesn't match: " + ifMatch + " want: " + alarm.getVersion());
 		}
 		return alarmJpa.save(alarm);

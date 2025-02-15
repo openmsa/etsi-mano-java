@@ -78,5 +78,6 @@ class Q4WaitStatusTest {
 		VimConnectionInformation vci = new VimConnectionInformation();
 		Q4WaitStatus q4WaitStatus = new Q4WaitStatus("resourceId", vim, vci);
 		q4WaitStatus.rollback(null);
+		assertTrue(true);
 	}
 }

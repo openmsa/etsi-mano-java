@@ -1,7 +1,6 @@
 package com.ubiqube.etsi.mano.repository.msa;
 
 import static org.junit.jupiter.api.Assertions.assertSame;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -40,7 +39,7 @@ class ContentManagerMsaTest {
 
 		contentManagerMsa.store(path, stream);
 
-		verify(lowDriver, times(1)).add(eq(path.toString()), eq(stream));
+		verify(lowDriver, times(1)).add(path.toString(), stream);
 	}
 
 	@Test

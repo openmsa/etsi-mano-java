@@ -56,7 +56,7 @@ class ConnectionInformationRepositoryServiceTest {
 	}
 
 	@Test
-	public void testFindById() {
+	void testFindById() {
 		UUID id = UUID.randomUUID();
 		ConnectionInformation connInfo = new ConnectionInformation();
 		when(connectionJpa.findById(id)).thenReturn(Optional.of(connInfo));

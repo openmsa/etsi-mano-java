@@ -1,6 +1,7 @@
 package com.ubiqube.etsi.mano.service.graph.vnfm;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -11,47 +12,50 @@ import org.junit.jupiter.api.Test;
 
 import com.ubiqube.etsi.mano.orchestrator.nodes.ConnectivityEdge;
 
-public class EdgeListenerTest {
+class EdgeListenerTest {
 
-    private EdgeListener<String> edgeListener;
+	private EdgeListener<String> edgeListener;
 
-    @BeforeEach
-    public void setUp() {
-        edgeListener = new EdgeListener<>();
-    }
+	@BeforeEach
+	public void setUp() {
+		edgeListener = new EdgeListener<>();
+	}
 
-    @Test
-    public void testEdgeAdded() {
-        ConnectivityEdge<String> edge = new ConnectivityEdge<>();
-        GraphEdgeChangeEvent<String, ConnectivityEdge<String>> event = mock(GraphEdgeChangeEvent.class);
-        when(event.getEdge()).thenReturn(edge);
-        when(event.getEdgeSource()).thenReturn("source");
-        when(event.getEdgeTarget()).thenReturn("target");
+	@Test
+	void testEdgeAdded() {
+		ConnectivityEdge<String> edge = new ConnectivityEdge<>();
+		GraphEdgeChangeEvent<String, ConnectivityEdge<String>> event = mock(GraphEdgeChangeEvent.class);
+		when(event.getEdge()).thenReturn(edge);
+		when(event.getEdgeSource()).thenReturn("source");
+		when(event.getEdgeTarget()).thenReturn("target");
 
-        edgeListener.edgeAdded(event);
+		edgeListener.edgeAdded(event);
 
-        assertEquals("source", edge.getSource());
-        assertEquals("target", edge.getTarget());
-    }
+		assertEquals("source", edge.getSource());
+		assertEquals("target", edge.getTarget());
+	}
 
-    @Test
-    public void testVertexAdded() {
-        GraphVertexChangeEvent<String> event = mock(GraphVertexChangeEvent.class);
-        edgeListener.vertexAdded(event);
-        // No assertion needed as the method does nothing
-    }
+	@Test
+	void testVertexAdded() {
+		GraphVertexChangeEvent<String> event = mock(GraphVertexChangeEvent.class);
+		edgeListener.vertexAdded(event);
+		// No assertion needed as the method does nothing
+		assertTrue(true);
+	}
 
-    @Test
-    public void testVertexRemoved() {
-        GraphVertexChangeEvent<String> event = mock(GraphVertexChangeEvent.class);
-        edgeListener.vertexRemoved(event);
-        // No assertion needed as the method does nothing
-    }
+	@Test
+	void testVertexRemoved() {
+		GraphVertexChangeEvent<String> event = mock(GraphVertexChangeEvent.class);
+		edgeListener.vertexRemoved(event);
+		// No assertion needed as the method does nothing
+		assertTrue(true);
+	}
 
-    @Test
-    public void testEdgeRemoved() {
-        GraphEdgeChangeEvent<String, ConnectivityEdge<String>> event = mock(GraphEdgeChangeEvent.class);
-        edgeListener.edgeRemoved(event);
-        // No assertion needed as the method does nothing
-    }
+	@Test
+	void testEdgeRemoved() {
+		GraphEdgeChangeEvent<String, ConnectivityEdge<String>> event = mock(GraphEdgeChangeEvent.class);
+		edgeListener.edgeRemoved(event);
+		// No assertion needed as the method does nothing
+		assertTrue(true);
+	}
 }

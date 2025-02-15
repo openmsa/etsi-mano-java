@@ -18,7 +18,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class VersionFilterTest {
+class VersionFilterTest {
 
 	@InjectMocks
 	private VersionFilter versionFilter;

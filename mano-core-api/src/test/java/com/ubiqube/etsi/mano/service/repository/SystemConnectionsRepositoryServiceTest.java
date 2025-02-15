@@ -17,46 +17,46 @@ import org.mockito.MockitoAnnotations;
 import com.ubiqube.etsi.mano.jpa.SysConnectionJpa;
 import com.ubiqube.etsi.mano.orchestrator.entities.SystemConnections;
 
-public class SystemConnectionsRepositoryServiceTest {
+class SystemConnectionsRepositoryServiceTest {
 
-    @Mock
-    private SysConnectionJpa systemConnectionsJpa;
+	@Mock
+	private SysConnectionJpa systemConnectionsJpa;
 
-    @InjectMocks
-    private SystemConnectionsRepositoryService systemConnectionsRepositoryService;
+	@InjectMocks
+	private SystemConnectionsRepositoryService systemConnectionsRepositoryService;
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
+	@BeforeEach
+	public void setUp() {
+		MockitoAnnotations.openMocks(this);
+	}
 
-    @Test
-    public void testFindById() {
-        UUID id = UUID.randomUUID();
-        SystemConnections sc = new SystemConnections();
-        when(systemConnectionsJpa.findById(id)).thenReturn(Optional.of(sc));
+	@Test
+	void testFindById() {
+		UUID id = UUID.randomUUID();
+		SystemConnections sc = new SystemConnections();
+		when(systemConnectionsJpa.findById(id)).thenReturn(Optional.of(sc));
 
-        Optional<SystemConnections> result = systemConnectionsRepositoryService.findById(id);
-        assertTrue(result.isPresent());
-        assertEquals(sc, result.get());
-    }
+		Optional<SystemConnections> result = systemConnectionsRepositoryService.findById(id);
+		assertTrue(result.isPresent());
+		assertEquals(sc, result.get());
+	}
 
-    @Test
-    public void testSave() {
-        SystemConnections sc = new SystemConnections();
-        when(systemConnectionsJpa.save(sc)).thenReturn(sc);
+	@Test
+	void testSave() {
+		SystemConnections sc = new SystemConnections();
+		when(systemConnectionsJpa.save(sc)).thenReturn(sc);
 
-        SystemConnections result = systemConnectionsRepositoryService.save(sc);
-        assertEquals(sc, result);
-    }
+		SystemConnections result = systemConnectionsRepositoryService.save(sc);
+		assertEquals(sc, result);
+	}
 
-    @Test
-    public void testFindByModuleName() {
-        String moduleName = "testModule";
-        List<SystemConnections> scList = List.of(new SystemConnections());
-        when(systemConnectionsJpa.findByModuleName(moduleName)).thenReturn(scList);
+	@Test
+	void testFindByModuleName() {
+		String moduleName = "testModule";
+		List<SystemConnections> scList = List.of(new SystemConnections());
+		when(systemConnectionsJpa.findByModuleName(moduleName)).thenReturn(scList);
 
-        List<SystemConnections> result = systemConnectionsRepositoryService.findByModuleName(moduleName);
-        assertEquals(scList, result);
-    }
+		List<SystemConnections> result = systemConnectionsRepositoryService.findByModuleName(moduleName);
+		assertEquals(scList, result);
+	}
 }

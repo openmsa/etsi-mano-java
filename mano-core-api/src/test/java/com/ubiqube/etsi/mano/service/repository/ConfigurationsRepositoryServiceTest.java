@@ -15,7 +15,7 @@ import org.mockito.MockitoAnnotations;
 import com.ubiqube.etsi.mano.dao.mano.config.Configurations;
 import com.ubiqube.etsi.mano.jpa.config.ConfigurationsJpa;
 
-public class ConfigurationsRepositoryServiceTest {
+class ConfigurationsRepositoryServiceTest {
 
 	@Mock
 	private ConfigurationsJpa configurationsJpa;

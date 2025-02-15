@@ -12,7 +12,7 @@ import com.ubiqube.etsi.mano.grammar.GrammarException;
 import com.ubiqube.etsi.mano.grammar.GrammarValue;
 import com.ubiqube.etsi.mano.service.search.SearchException;
 
-public class ConvertHelperTest {
+class ConvertHelperTest {
 
 	@Test
 	void testConvertComparableString() {

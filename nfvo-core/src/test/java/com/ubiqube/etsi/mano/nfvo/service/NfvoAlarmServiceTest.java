@@ -24,7 +24,6 @@ import org.springframework.util.MultiValueMap;
 import com.ubiqube.etsi.mano.dao.mano.alarm.AckState;
 import com.ubiqube.etsi.mano.dao.mano.alarm.Alarms;
 import com.ubiqube.etsi.mano.exception.ConflictException;
-import com.ubiqube.etsi.mano.service.search.SearchParamBuilder;
 import com.ubiqube.etsi.mano.service.search.SearchableService;
 import com.ubiqube.etsi.mano.vnfm.jpa.AlarmsJpa;
 
@@ -90,7 +89,6 @@ class NfvoAlarmServiceTest {
 		Consumer<Object> makeLinks = mock(Consumer.class);
 		Set<String> mandatoryFields = mock(Set.class);
 		Class<Object> frontClass = Object.class;
-		SearchParamBuilder params = mock(SearchParamBuilder.class);
 		ResponseEntity<String> responseEntity = ResponseEntity.ok("result");
 
 		when(searchableService.search(any())).thenReturn(responseEntity);

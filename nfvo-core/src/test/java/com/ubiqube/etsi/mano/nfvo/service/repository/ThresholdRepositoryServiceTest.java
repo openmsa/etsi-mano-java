@@ -17,59 +17,59 @@ import org.mockito.MockitoAnnotations;
 import com.ubiqube.etsi.mano.dao.mano.pm.Threshold;
 import com.ubiqube.etsi.mano.jpa.ThresholdJpa;
 
-public class ThresholdRepositoryServiceTest {
+class ThresholdRepositoryServiceTest {
 
-    @Mock
-    private ThresholdJpa thresholdJpa;
+	@Mock
+	private ThresholdJpa thresholdJpa;
 
-    @InjectMocks
-    private ThresholdRepositoryService thresholdRepositoryService;
+	@InjectMocks
+	private ThresholdRepositoryService thresholdRepositoryService;
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
+	@BeforeEach
+	void setUp() {
+		MockitoAnnotations.openMocks(this);
+	}
 
-    @Test
-    void testSave() {
-        Threshold threshold = new Threshold();
-        when(thresholdJpa.save(threshold)).thenReturn(threshold);
+	@Test
+	void testSave() {
+		Threshold threshold = new Threshold();
+		when(thresholdJpa.save(threshold)).thenReturn(threshold);
 
-        Threshold result = thresholdRepositoryService.save(threshold);
+		Threshold result = thresholdRepositoryService.save(threshold);
 
-        assertEquals(threshold, result);
-        verify(thresholdJpa).save(threshold);
-    }
+		assertEquals(threshold, result);
+		verify(thresholdJpa).save(threshold);
+	}
 
-    @Test
-    void testDeleteById() {
-        UUID id = UUID.randomUUID();
+	@Test
+	void testDeleteById() {
+		UUID id = UUID.randomUUID();
 
-        thresholdRepositoryService.deleteById(id);
+		thresholdRepositoryService.deleteById(id);
 
-        verify(thresholdJpa).deleteById(id);
-    }
+		verify(thresholdJpa).deleteById(id);
+	}
 
-    @Test
-    void testFindById() {
-        UUID id = UUID.randomUUID();
-        Threshold threshold = new Threshold();
-        when(thresholdJpa.findById(id)).thenReturn(Optional.of(threshold));
+	@Test
+	void testFindById() {
+		UUID id = UUID.randomUUID();
+		Threshold threshold = new Threshold();
+		when(thresholdJpa.findById(id)).thenReturn(Optional.of(threshold));
 
-        Optional<Threshold> result = thresholdRepositoryService.findById(id);
+		Optional<Threshold> result = thresholdRepositoryService.findById(id);
 
-        assertEquals(Optional.of(threshold), result);
-        verify(thresholdJpa).findById(id);
-    }
+		assertEquals(Optional.of(threshold), result);
+		verify(thresholdJpa).findById(id);
+	}
 
-    @Test
-    void testFindByIdNotFound() {
-        UUID id = UUID.randomUUID();
-        when(thresholdJpa.findById(id)).thenReturn(Optional.empty());
+	@Test
+	void testFindByIdNotFound() {
+		UUID id = UUID.randomUUID();
+		when(thresholdJpa.findById(id)).thenReturn(Optional.empty());
 
-        Optional<Threshold> result = thresholdRepositoryService.findById(id);
+		Optional<Threshold> result = thresholdRepositoryService.findById(id);
 
-        assertFalse(result.isPresent());
-        verify(thresholdJpa).findById(id);
-    }
+		assertFalse(result.isPresent());
+		verify(thresholdJpa).findById(id);
+	}
 }

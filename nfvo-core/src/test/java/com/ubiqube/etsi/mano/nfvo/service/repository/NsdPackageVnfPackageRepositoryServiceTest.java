@@ -1,10 +1,11 @@
 package com.ubiqube.etsi.mano.nfvo.service.repository;
 
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-import java.util.Set;
 import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,40 +17,40 @@ import com.ubiqube.etsi.mano.dao.mano.NsdPackage;
 import com.ubiqube.etsi.mano.dao.mano.NsdPackageVnfPackage;
 import com.ubiqube.etsi.mano.nfvo.jpa.NsdPackageVnfPackageJpa;
 
-public class NsdPackageVnfPackageRepositoryServiceTest {
+class NsdPackageVnfPackageRepositoryServiceTest {
 
-    @Mock
-    private NsdPackageVnfPackageJpa nsdPackageVnfPackageJpa;
+	@Mock
+	private NsdPackageVnfPackageJpa nsdPackageVnfPackageJpa;
 
-    @InjectMocks
-    private NsdPackageVnfPackageRepositoryService nsdPackageVnfPackageRepositoryService;
+	@InjectMocks
+	private NsdPackageVnfPackageRepositoryService nsdPackageVnfPackageRepositoryService;
 
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
+	@BeforeEach
+	public void setUp() {
+		MockitoAnnotations.openMocks(this);
+	}
 
-    @Test
-    public void testFindByNsdPackage() {
-        NsdPackage nsdPackage = new NsdPackage();
-        Set<NsdPackageVnfPackage> expectedSet = new HashSet<>();
-        when(nsdPackageVnfPackageJpa.findByNsdPackage(nsdPackage)).thenReturn(expectedSet);
+	@Test
+	void testFindByNsdPackage() {
+		NsdPackage nsdPackage = new NsdPackage();
+		Set<NsdPackageVnfPackage> expectedSet = new HashSet<>();
+		when(nsdPackageVnfPackageJpa.findByNsdPackage(nsdPackage)).thenReturn(expectedSet);
 
-        Set<NsdPackageVnfPackage> resultSet = nsdPackageVnfPackageRepositoryService.findByNsdPackage(nsdPackage);
+		Set<NsdPackageVnfPackage> resultSet = nsdPackageVnfPackageRepositoryService.findByNsdPackage(nsdPackage);
 
-        assertEquals(expectedSet, resultSet);
-        verify(nsdPackageVnfPackageJpa).findByNsdPackage(nsdPackage);
-    }
+		assertEquals(expectedSet, resultSet);
+		verify(nsdPackageVnfPackageJpa).findByNsdPackage(nsdPackage);
+	}
 
-    @Test
-    public void testFindByVnfdId() {
-        String vnfdId = "vnfdId";
-        Set<NsdPackageVnfPackage> expectedSet = new HashSet<>();
-        when(nsdPackageVnfPackageJpa.findByVnfdId(vnfdId)).thenReturn(expectedSet);
+	@Test
+	void testFindByVnfdId() {
+		String vnfdId = "vnfdId";
+		Set<NsdPackageVnfPackage> expectedSet = new HashSet<>();
+		when(nsdPackageVnfPackageJpa.findByVnfdId(vnfdId)).thenReturn(expectedSet);
 
-        Set<NsdPackageVnfPackage> resultSet = nsdPackageVnfPackageRepositoryService.findByVnfdId(vnfdId);
+		Set<NsdPackageVnfPackage> resultSet = nsdPackageVnfPackageRepositoryService.findByVnfdId(vnfdId);
 
-        assertEquals(expectedSet, resultSet);
-        verify(nsdPackageVnfPackageJpa).findByVnfdId(vnfdId);
-    }
+		assertEquals(expectedSet, resultSet);
+		verify(nsdPackageVnfPackageJpa).findByVnfdId(vnfdId);
+	}
 }

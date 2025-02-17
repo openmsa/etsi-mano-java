@@ -16,6 +16,7 @@
  */
 package com.ubiqube.etsi.mano.service.mon;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -25,11 +26,15 @@ import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mapstruct.factory.Mappers;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.ResponseEntity;
 
+import com.ubiqube.etsi.mano.dao.mano.ai.KeystoneAuthV3;
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
+import com.ubiqube.etsi.mano.exception.GenericException;
+import com.ubiqube.etsi.mano.service.mapping.MonitoringMapper;
 import com.ubiqube.etsi.mano.service.mon.cli.MetricsRemoteService;
 import com.ubiqube.etsi.mano.service.mon.cli.MonPollingRemoteService;
 import com.ubiqube.etsi.mano.service.mon.data.BatchPollingJob;
@@ -42,12 +47,14 @@ class DummyExternalMonitoringTest {
 	private MetricsRemoteService metricsRemoteService;
 	@Mock
 	private ResponseEntity<BatchPollingJob> resp;
+	private final MonitoringMapper mapper = Mappers.getMapper(MonitoringMapper.class);
 
 	@Test
 	void testCreateBatch() {
-		final DummyExternalMonitoring srv = new DummyExternalMonitoring(remoteService, metricsRemoteService);
+		final DummyExternalMonitoring srv = CreateService();
 		final VimConnectionInformation vim = new VimConnectionInformation();
 		vim.setVimId(UUID.randomUUID().toString());
+		vim.setAccessInfo(new KeystoneAuthV3());
 		when(remoteService.register(any())).thenReturn(resp);
 		final BatchPollingJob bpj = new BatchPollingJob();
 		when(resp.getBody()).thenReturn(bpj);
@@ -56,8 +63,23 @@ class DummyExternalMonitoringTest {
 	}
 
 	@Test
+	void testCreateBatchFailed() {
+		final DummyExternalMonitoring srv = CreateService();
+		final VimConnectionInformation vim = new VimConnectionInformation();
+		vim.setVimId(UUID.randomUUID().toString());
+		final BatchPollingJob bpj = new BatchPollingJob();
+		Set<String> set = Set.of("val");
+		assertThrows(GenericException.class, () -> srv.createBatch(null, set, 4L, vim));
+		assertTrue(true);
+	}
+
+	private DummyExternalMonitoring CreateService() {
+		return new DummyExternalMonitoring(remoteService, metricsRemoteService, mapper);
+	}
+
+	@Test
 	void testDeleteResource() {
-		final DummyExternalMonitoring srv = new DummyExternalMonitoring(remoteService, metricsRemoteService);
+		final DummyExternalMonitoring srv = CreateService();
 		final String id = UUID.randomUUID().toString();
 		srv.deleteResources(id);
 		assertTrue(true);
@@ -65,7 +87,7 @@ class DummyExternalMonitoringTest {
 
 	@Test
 	void testSearch() {
-		final DummyExternalMonitoring srv = new DummyExternalMonitoring(remoteService, metricsRemoteService);
+		final DummyExternalMonitoring srv = CreateService();
 		srv.searchMetric(null);
 		assertTrue(true);
 	}

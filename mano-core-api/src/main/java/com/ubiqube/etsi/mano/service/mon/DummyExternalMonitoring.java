@@ -31,13 +31,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 
+import com.ubiqube.etsi.mano.dao.mano.AccessInfo;
+import com.ubiqube.etsi.mano.dao.mano.ai.KeystoneAuthV3;
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
+import com.ubiqube.etsi.mano.exception.GenericException;
 import com.ubiqube.etsi.mano.mon.dao.TelemetryMetricsResult;
+import com.ubiqube.etsi.mano.service.mapping.MonitoringMapper;
 import com.ubiqube.etsi.mano.service.mon.cli.MetricsRemoteService;
 import com.ubiqube.etsi.mano.service.mon.cli.MonPollingRemoteService;
 import com.ubiqube.etsi.mano.service.mon.data.BatchPollingJob;
 import com.ubiqube.etsi.mano.service.mon.data.Metric;
 import com.ubiqube.etsi.mano.service.mon.dto.ConnInfo;
+import com.ubiqube.etsi.mano.service.mon.dto.KeystoneV3;
 import com.ubiqube.etsi.mano.service.mon.dto.PollingJob;
 
 /**
@@ -51,10 +56,12 @@ public class DummyExternalMonitoring implements ExternalMonitoring {
 	private static final Logger LOG = LoggerFactory.getLogger(DummyExternalMonitoring.class);
 	private final MonPollingRemoteService remoteService;
 	private final MetricsRemoteService metricsRemoteService;
+	private final MonitoringMapper mapper;
 
-	public DummyExternalMonitoring(final MonPollingRemoteService remoteService, final MetricsRemoteService metricsRemoteService) {
+	public DummyExternalMonitoring(final MonPollingRemoteService remoteService, final MetricsRemoteService metricsRemoteService, final MonitoringMapper mapper) {
 		this.remoteService = remoteService;
 		this.metricsRemoteService = metricsRemoteService;
+		this.mapper = mapper;
 	}
 
 	@Override
@@ -70,17 +77,25 @@ public class DummyExternalMonitoring implements ExternalMonitoring {
 		return Objects.requireNonNull(ret.getBody()).getId();
 	}
 
-	private static ConnInfo convert(final VimConnectionInformation vimConnectionInformation) {
-		final ConnInfo ci = new ConnInfo();
+	private ConnInfo convert(final VimConnectionInformation vimConnectionInformation) {
+		final ConnInfo ci = createConnInfo(vimConnectionInformation);
 		// Not sure every VIMId are UUID.
 		ci.setConnId(UUID.fromString(vimConnectionInformation.getVimId()));
-		ci.setAccessInfo(vimConnectionInformation.getAccessInfo());
 		ci.setExtra(vimConnectionInformation.getExtra());
 		ci.setIgnoreSsl(true);
-		ci.setInterfaceInfo(vimConnectionInformation.getInterfaceInfo());
 		ci.setName(vimConnectionInformation.getVimId());
 		ci.setType(vimConnectionInformation.getVimType());
 		return ci;
+	}
+
+	private ConnInfo createConnInfo(final VimConnectionInformation vimConnectionInformation) {
+		AccessInfo ai = vimConnectionInformation.getAccessInfo();
+		if (ai instanceof KeystoneAuthV3 ka3) {
+			KeystoneV3 obj = mapper.toKeystoneV3(vimConnectionInformation);
+			mapper.toKeystoneV3(ka3, obj);
+			return obj;
+		}
+		throw new GenericException(("Unsupported access info type: " + (ai == null ? null : ai.getClass())));
 	}
 
 	@Override

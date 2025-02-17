@@ -55,6 +55,8 @@ spring:
   cloud:
     discovery:
       enabled: true
+    refresh:
+      enabled: false
   jmx:
     enabled: true
   security:

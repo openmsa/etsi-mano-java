@@ -8,7 +8,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<artifactId>mano-eureka</artifactId>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>mano-eureka</name>
 	<description>Eureka server for ETSI-MANO project</description>
 	<properties>
@@ -77,9 +77,29 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.graalvm.buildtools</groupId>
+				<artifactId>native-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>build-native</id>
+						<goals>
+							<goal>compile-no-fork</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<imageName>atv</imageName>
+					<buildArgs>
+						<buildArg>
+							--static
+						</buildArg>
+					</buildArgs>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-
   <scm>
     <tag>mano-eureka-4.0.0</tag>
   </scm>

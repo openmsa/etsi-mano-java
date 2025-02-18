@@ -19,10 +19,10 @@ package com.ubiqube.etsi.mano.service.rest.vnffm;
 import java.util.List;
 import java.util.UUID;
 
-import com.ubiqube.etsi.mano.alarm.entities.alarm.Alarm;
-import com.ubiqube.etsi.mano.service.rest.QueryParameters;
-
 import org.jspecify.annotations.NonNull;
+
+import com.ubiqube.etsi.mano.alarm.entities.alarm.dto.AlarmDto;
+import com.ubiqube.etsi.mano.service.rest.QueryParameters;
 
 public class ManoVnfFm {
 	@NonNull
@@ -32,7 +32,7 @@ public class ManoVnfFm {
 		this.manoClient = manoClient;
 	}
 
-	public List<Alarm> find() {
+	public List<AlarmDto> find() {
 		return List.of();
 	}
 

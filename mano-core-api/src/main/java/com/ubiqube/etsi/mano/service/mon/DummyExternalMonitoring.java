@@ -35,12 +35,12 @@ import com.ubiqube.etsi.mano.dao.mano.AccessInfo;
 import com.ubiqube.etsi.mano.dao.mano.ai.KeystoneAuthV3;
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
 import com.ubiqube.etsi.mano.exception.GenericException;
+import com.ubiqube.etsi.mano.mon.api.entities.BatchPollingJobDto;
+import com.ubiqube.etsi.mano.mon.api.entities.MetricDto;
 import com.ubiqube.etsi.mano.mon.dao.TelemetryMetricsResult;
 import com.ubiqube.etsi.mano.service.mapping.MonitoringMapper;
 import com.ubiqube.etsi.mano.service.mon.cli.MetricsRemoteService;
 import com.ubiqube.etsi.mano.service.mon.cli.MonPollingRemoteService;
-import com.ubiqube.etsi.mano.service.mon.data.BatchPollingJob;
-import com.ubiqube.etsi.mano.service.mon.data.Metric;
 import com.ubiqube.etsi.mano.service.mon.dto.ConnInfo;
 import com.ubiqube.etsi.mano.service.mon.dto.KeystoneV3;
 import com.ubiqube.etsi.mano.service.mon.dto.PollingJob;
@@ -70,10 +70,10 @@ public class DummyExternalMonitoring implements ExternalMonitoring {
 		final PollingJob pj = new PollingJob();
 		pj.setInterval(pollingInterval);
 		pj.setConnection(convert(vimConnectionInformation));
-		final List<Metric> lst = metrics.stream().map(x -> new Metric(x, x)).toList();
+		final List<MetricDto> lst = metrics.stream().map(x -> new MetricDto(x, x)).toList();
 		pj.setMetrics(lst);
 		pj.setResourceId(resourceId);
-		final ResponseEntity<BatchPollingJob> ret = remoteService.register(pj);
+		final ResponseEntity<BatchPollingJobDto> ret = remoteService.register(pj);
 		return Objects.requireNonNull(ret.getBody()).getId();
 	}
 

@@ -34,10 +34,10 @@ import org.springframework.http.ResponseEntity;
 import com.ubiqube.etsi.mano.dao.mano.ai.KeystoneAuthV3;
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
 import com.ubiqube.etsi.mano.exception.GenericException;
+import com.ubiqube.etsi.mano.mon.api.entities.BatchPollingJobDto;
 import com.ubiqube.etsi.mano.service.mapping.MonitoringMapper;
 import com.ubiqube.etsi.mano.service.mon.cli.MetricsRemoteService;
 import com.ubiqube.etsi.mano.service.mon.cli.MonPollingRemoteService;
-import com.ubiqube.etsi.mano.service.mon.data.BatchPollingJob;
 
 @ExtendWith(MockitoExtension.class)
 class DummyExternalMonitoringTest {
@@ -46,7 +46,7 @@ class DummyExternalMonitoringTest {
 	@Mock
 	private MetricsRemoteService metricsRemoteService;
 	@Mock
-	private ResponseEntity<BatchPollingJob> resp;
+	private ResponseEntity<BatchPollingJobDto> resp;
 	private final MonitoringMapper mapper = Mappers.getMapper(MonitoringMapper.class);
 
 	@Test
@@ -56,7 +56,7 @@ class DummyExternalMonitoringTest {
 		vim.setVimId(UUID.randomUUID().toString());
 		vim.setAccessInfo(new KeystoneAuthV3());
 		when(remoteService.register(any())).thenReturn(resp);
-		final BatchPollingJob bpj = new BatchPollingJob();
+		final BatchPollingJobDto bpj = new BatchPollingJobDto();
 		when(resp.getBody()).thenReturn(bpj);
 		srv.createBatch(null, Set.of("val"), 4L, vim);
 		assertTrue(true);
@@ -67,7 +67,7 @@ class DummyExternalMonitoringTest {
 		final DummyExternalMonitoring srv = CreateService();
 		final VimConnectionInformation vim = new VimConnectionInformation();
 		vim.setVimId(UUID.randomUUID().toString());
-		final BatchPollingJob bpj = new BatchPollingJob();
+		final BatchPollingJobDto bpj = new BatchPollingJobDto();
 		Set<String> set = Set.of("val");
 		assertThrows(GenericException.class, () -> srv.createBatch(null, set, 4L, vim));
 		assertTrue(true);

@@ -18,7 +18,7 @@ package com.ubiqube.etsi.mano.service.rest.vnffm;
 
 import java.util.UUID;
 
-import com.ubiqube.etsi.mano.alarm.entities.alarm.Alarm;
+import com.ubiqube.etsi.mano.alarm.entities.alarm.dto.AlarmDto;
 import com.ubiqube.etsi.mano.service.rest.QueryParameters;
 
 public class ManoVnfFmId {
@@ -27,11 +27,11 @@ public class ManoVnfFmId {
 		throw new UnsupportedOperationException();
 	}
 
-	public Alarm find() {
+	public AlarmDto find() {
 		throw new UnsupportedOperationException();
 	}
 
-	public Alarm patch(final Alarm alarm) {
+	public AlarmDto patch(final AlarmDto alarm) {
 		throw new UnsupportedOperationException();
 	}
 

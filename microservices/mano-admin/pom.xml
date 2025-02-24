@@ -78,7 +78,7 @@
 					<imageName>atv</imageName>
 					<buildArgs>
 						<buildArg>
-							--static
+							--static --libc=musl
 						</buildArg>
 					</buildArgs>
 				</configuration>

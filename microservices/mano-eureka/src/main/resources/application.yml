@@ -59,6 +59,9 @@ spring:
       enabled: false
   jmx:
     enabled: true
+  output:
+    ansi:
+      enabled: ALWAYS
   security:
     user:
       name: admin

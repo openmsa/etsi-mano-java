@@ -57,35 +57,91 @@
 		</dependency>
 	</dependencies>
 	<build>
+		<finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.graalvm.buildtools</groupId>
-				<artifactId>native-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+					<classifier>${repackage.classifier}</classifier>
+					<image>
+						<builder>paketobuildpacks/builder:tiny</builder>
+						<env>
+							<BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
+						</env>
+					</image>
+				</configuration>
 				<executions>
 					<execution>
-						<id>build-native</id>
+						<id>process-aot</id>
 						<goals>
-							<goal>compile-no-fork</goal>
+							<goal>process-aot</goal>
 						</goals>
-						<phase>package</phase>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
 				<configuration>
-					<imageName>atv</imageName>
-					<buildArgs>
-						<buildArg>
-							--static --libc=musl
-						</buildArg>
-					</buildArgs>
+					<excludes>**/*.jar</excludes>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
+	<profiles>
+		<profile>
+			<id>native</id>
+			<properties>
+				<repackage.classifier>exec</repackage.classifier>
+				<native-buildtools.version>0.10.5</native-buildtools.version>
+			</properties>
+			<dependencies>
+				<dependency>
+					<groupId>org.junit.platform</groupId>
+					<artifactId>junit-platform-launcher</artifactId>
+					<scope>test</scope>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.graalvm.buildtools</groupId>
+						<artifactId>native-maven-plugin</artifactId>
+						<extensions>true</extensions>
+						<configuration>
+							<buildArgs>
+								<buildArg>--static</buildArg>
+								<buildArg>--libc=musl</buildArg>
+							</buildArgs>
+						</configuration>
+						<executions>
+							<execution>
+								<id>test-native</id>
+								<phase>test</phase>
+								<goals>
+									<goal>test</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>build-native</id>
+								<phase>package</phase>
+								<goals>
+									<goal>build</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
   <scm>
     <tag>mano-admin-4.0.0</tag>
   </scm>

@@ -59,6 +59,8 @@ spring:
       enabled: false
   jmx:
     enabled: true
+  main:
+    allow-circular-references: true
   output:
     ansi:
       enabled: ALWAYS

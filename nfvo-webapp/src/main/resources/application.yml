@@ -1,4 +1,9 @@
 #debug: true
+eureka:
+  client:
+    enabled: false
+    serviceUrl:
+      defaultZone: http://admin@admin:mano-eureka:8761/eureka/
 logging:
   level:
     "[com.ubiqube.etsi.mano.service.rest.ManoLoggingHandler]": WARN
@@ -61,6 +66,9 @@ management:
   tracing:
     sampling:
       probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://mano-zipkin:9411/api/v2/spans
 
 mano:
   config:

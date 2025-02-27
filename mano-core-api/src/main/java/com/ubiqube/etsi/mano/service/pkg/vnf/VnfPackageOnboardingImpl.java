@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Optional;
 
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -44,8 +45,6 @@ import com.ubiqube.etsi.mano.service.event.model.NotificationEvent;
 import com.ubiqube.etsi.mano.service.pkg.PackageDescriptor;
 import com.ubiqube.etsi.mano.service.pkg.bean.ProviderData;
 import com.ubiqube.etsi.mano.service.utils.MultiHashInputStream;
-
-import org.jspecify.annotations.Nullable;
 
 /**
  *
@@ -108,7 +107,7 @@ public class VnfPackageOnboardingImpl {
 			ret = finishOnboarding(vnfPackage);
 			buildChecksum(ret, data);
 			eventManager.sendNotification(NotificationEvent.VNF_PKG_ONBOARDING, vnfPackage.getId(), Map.of());
-		} catch (final RuntimeException | IOException e) {
+		} catch (final LinkageError | RuntimeException | IOException e) {
 			LOG.error("", e);
 			final VnfPackage v2 = vnfPackageService.findById(vnfPackage.getId());
 			vnfPackageRepository.deleteRepositoryOnly(v2.getId());
@@ -185,14 +184,14 @@ public class VnfPackageOnboardingImpl {
 		if (version != null) {
 			part++;
 		}
-        return switch (part) {
-            case 0 -> Optional.empty();
-            case 1 -> vnfPackageService.findByVnfdIdOpt(descriptorId);
-            case 2 -> vnfPackageService.findByVnfdIdAndSoftwareVersion(descriptorId, version);
-            case 3 -> vnfPackageService.findByVnfdIdFlavorIdVnfdVersion(descriptorId, flavor,
-                    version);
-            default -> throw new GenericException("Unknown version " + part);
-        };
-    }
+		return switch (part) {
+		case 0 -> Optional.empty();
+		case 1 -> vnfPackageService.findByVnfdIdOpt(descriptorId);
+		case 2 -> vnfPackageService.findByVnfdIdAndSoftwareVersion(descriptorId, version);
+		case 3 -> vnfPackageService.findByVnfdIdFlavorIdVnfdVersion(descriptorId, flavor,
+				version);
+		default -> throw new GenericException("Unknown version " + part);
+		};
+	}
 
 }

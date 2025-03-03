@@ -63,17 +63,8 @@ class NetworkPolicySystemTest {
 	@SuppressWarnings("null")
 	private static Stream<Arguments> providerClass() {
 		return Stream.of(
-				Arguments.of(args.of("NetworkPolicySystem", () -> new NetworkPolicySystem(Mockito.mock(VimManager.class)))),
 				Arguments.of(args.of("NsSapSystem", () -> new NsSapSystem(Mockito.mock(VimManager.class)))),
-				Arguments.of(args.of("NsVnfCreateSystem", () -> new NsVnfCreateSystem(null, Mockito.mock(VimManager.class)))),
-				Arguments.of(args.of("PortTupleSystem", () -> new PortTupleSystem(Mockito.mock(VimManager.class)))),
-				Arguments.of(args.of("PtLinkSystem", () -> new PtLinkSystem(Mockito.mock(VimManager.class)))),
-				Arguments.of(args.of("ServiceInstanceSystem", () -> new ServiceInstanceSystem(Mockito.mock(VimManager.class)))),
-				Arguments.of(args.of("ServiceTemplateSystem", () -> new ServiceTemplateSystem(Mockito.mock(VimManager.class))))
-		// Arguments.of(args.of("NsVnfContextExtractorSystem", () -> new
-		// NsVnfContextExtractorSystem(Mockito.mock(VnfmInterface.class),
-		// Mockito.mock(VimManager.class), null)))
-		);
+				Arguments.of(args.of("NsVnfCreateSystem", () -> new NsVnfCreateSystem(null, Mockito.mock(VimManager.class)))));
 	}
 
 	@ParameterizedTest

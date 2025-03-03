@@ -31,7 +31,7 @@ import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsBlueprint;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsdTask;
 import com.ubiqube.etsi.mano.nfvo.jpa.NsLiveInstanceJpa;
 import com.ubiqube.etsi.mano.nfvo.service.plan.contributors.vt.NsCreateVt;
-import com.ubiqube.etsi.mano.nfvo.service.plan.uow.NetworkPolicyUow;
+import com.ubiqube.etsi.mano.nfvo.service.plan.uow.TestUnitOfWork;
 import com.ubiqube.etsi.mano.orchestrator.uow.UnitOfWorkV3;
 import com.ubiqube.etsi.mano.orchestrator.vt.VirtualTaskV3;
 
@@ -47,7 +47,7 @@ class NsOrchListenetImplTest {
 		final NsdTask task = new NsdTask();
 		final NsCreateVt vt = new NsCreateVt(task);
 		final VirtualTaskV3 vt2 = vt;
-		final UnitOfWorkV3 uow = new NetworkPolicyUow(vt2, null);
+		final UnitOfWorkV3 uow = new TestUnitOfWork(vt2, null);
 		lis.onStart(uow);
 		assertTrue(true);
 	}
@@ -59,7 +59,7 @@ class NsOrchListenetImplTest {
 		final NsdTask task = new NsdTask();
 		final NsCreateVt vt = new NsCreateVt(task);
 		final VirtualTaskV3 vt2 = vt;
-		final UnitOfWorkV3 uow = new NetworkPolicyUow(vt2, null);
+		final UnitOfWorkV3 uow = new TestUnitOfWork(vt2, null);
 		lis.onTerminate(uow, null);
 		assertTrue(true);
 	}
@@ -77,7 +77,7 @@ class NsOrchListenetImplTest {
 		task.setChangeType(ChangeType.ADDED);
 		final NsCreateVt vt = new NsCreateVt(task);
 		final VirtualTaskV3 vt2 = vt;
-		final UnitOfWorkV3 uow = new NetworkPolicyUow(vt2, null);
+		final UnitOfWorkV3 uow = new TestUnitOfWork(vt2, null);
 		lis.onTerminate(uow, "");
 		assertTrue(true);
 	}
@@ -90,7 +90,7 @@ class NsOrchListenetImplTest {
 		task.setChangeType(ChangeType.REMOVED);
 		final NsCreateVt vt = new NsCreateVt(task);
 		final VirtualTaskV3 vt2 = vt;
-		final UnitOfWorkV3 uow = new NetworkPolicyUow(vt2, null);
+		final UnitOfWorkV3 uow = new TestUnitOfWork(vt2, null);
 		lis.onTerminate(uow, "");
 		assertTrue(true);
 	}
@@ -103,7 +103,7 @@ class NsOrchListenetImplTest {
 		task.setChangeType(ChangeType.ADDED);
 		final NsCreateVt vt = new NsCreateVt(task);
 		final VirtualTaskV3 vt2 = vt;
-		final UnitOfWorkV3 uow = new NetworkPolicyUow(vt2, null);
+		final UnitOfWorkV3 uow = new TestUnitOfWork(vt2, null);
 		lis.onTerminate(uow, null);
 		assertTrue(true);
 	}
@@ -116,7 +116,7 @@ class NsOrchListenetImplTest {
 		task.setChangeType(ChangeType.REMOVED);
 		final NsCreateVt vt = new NsCreateVt(task);
 		final VirtualTaskV3 vt2 = vt;
-		final UnitOfWorkV3 uow = new NetworkPolicyUow(vt2, null);
+		final UnitOfWorkV3 uow = new TestUnitOfWork(vt2, null);
 		lis.onError(uow, new RuntimeException());
 		assertTrue(true);
 	}

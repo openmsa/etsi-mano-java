@@ -26,6 +26,14 @@ public class TestUnitOfWorkV3 implements UnitOfWorkV3<TestTask> {
 
 	private VirtualTaskV3<TestTask> task;
 
+	public TestUnitOfWorkV3() {
+		//
+	}
+
+	public TestUnitOfWorkV3(final VirtualTaskV3<TestTask> task, final String res) {
+		this.task = task;
+	}
+
 	@Override
 	public VirtualTaskV3<TestTask> getVirtualTask() {
 		return task;
@@ -37,26 +45,22 @@ public class TestUnitOfWorkV3 implements UnitOfWorkV3<TestTask> {
 
 	@Override
 	public String execute(final Context3d context) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public String rollback(final Context3d context) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Class<? extends Node> getType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void setResource(final String res) {
-		// TODO Auto-generated method stub
-
+		//
 	}
 
 }

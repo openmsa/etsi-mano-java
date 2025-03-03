@@ -22,6 +22,7 @@ import com.ubiqube.etsi.mano.dao.mano.v2.AbstractTask;
 
 public class TestTask extends AbstractTask {
 
+	private static final long serialVersionUID = 1L;
 	private final ResourceTypeEnum Rtype;
 
 	public TestTask(final ResourceTypeEnum type) {
@@ -30,20 +31,17 @@ public class TestTask extends AbstractTask {
 
 	@Override
 	public void setVimReservationId(final String reservationId) {
-		// TODO Auto-generated method stub
-
+		//
 	}
 
 	@Override
 	public void setResourceGroupId(final String resourceGroupId) {
-		// TODO Auto-generated method stub
-
+		//
 	}
 
 	@Override
 	public void setZoneId(final String zoneId) {
-		// TODO Auto-generated method stub
-
+		//
 	}
 
 	@Override
@@ -53,7 +51,6 @@ public class TestTask extends AbstractTask {
 
 	@Override
 	public ScaleInfo getScaleInfo() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

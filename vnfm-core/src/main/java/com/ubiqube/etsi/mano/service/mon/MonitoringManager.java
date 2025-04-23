@@ -21,6 +21,7 @@ import static com.ubiqube.etsi.mano.Constants.getSafeUUID;
 import java.util.List;
 import java.util.UUID;
 
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -44,8 +45,6 @@ import com.ubiqube.etsi.mano.grammar.GrammarParser;
 import com.ubiqube.etsi.mano.grammar.GrammarValue;
 import com.ubiqube.etsi.mano.mon.dao.TelemetryMetricsResult;
 import com.ubiqube.etsi.mano.vnfm.service.VnfInstanceService;
-
-import org.jspecify.annotations.Nullable;
 
 /**
  *
@@ -114,7 +113,7 @@ public class MonitoringManager {
 	private static VnfIndicator convertToVnfIndicator(final TelemetryMetricsResult x) {
 		final VnfIndicator ret = new VnfIndicator();
 		// Id
-		ret.setName(x.getMasterJobId());
+		ret.setToscaName(x.getMasterJobId());
 		// TODO: Fix this double type assignation.
 //		ret.setValue(Optional.ofNullable((Object) x.getValue()).orElse(x.getText()));
 		ret.setVnfInstanceId(x.getKey());

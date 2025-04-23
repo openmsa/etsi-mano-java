@@ -58,7 +58,7 @@ public class OsContainerContributor extends AbstractVnfmContributor<Object> {
 	@Override
 	public List<SclableResources<Object>> contribute(final VnfPackage bundle, final VnfBlueprint parameters) {
 		final List<SclableResources<Object>> ret = new ArrayList<>();
-        bundle.getOsContainerDeployableUnits().forEach(x -> {
+		bundle.getOsContainerDeployableUnits().forEach(x -> {
 			x.getVirtualStorageReq().forEach(y -> {
 				final StorageTask st = createTask(StorageTask::new);
 				st.setType(ResourceTypeEnum.STORAGE);
@@ -69,32 +69,32 @@ public class OsContainerContributor extends AbstractVnfmContributor<Object> {
 			final OsContainerDeployableTask t = createTask(OsContainerDeployableTask::new);
 			t.setBlueprint(parameters);
 			t.setOsContainerDeployableUnit(x);
-			t.setToscaName(x.getName());
+			t.setToscaName(x.getToscaName());
 			t.setNetwork("public");
 			t.setVnfInstId(parameters.getVnfInstance().getId().toString());
 			t.setType(ResourceTypeEnum.OS_CONTAINER_DEPLOYABLE);
 			ret.add(create(OsContainerDeployableNode.class, t.getClass(), t.getToscaName(), 1, t, parameters.getInstance(), parameters));
 			final K8sInformationsTask inf = createTask(K8sInformationsTask::new);
-			inf.setToscaName(x.getName());
+			inf.setToscaName(x.getToscaName());
 			inf.setBlueprint(parameters);
 			inf.setVnfInstId(parameters.getVnfInstance().getId().toString());
 			inf.setType(ResourceTypeEnum.OS_CONTAINER_INFO);
 			ret.add(create(OsK8sInformationsNode.class, inf.getClass(), inf.getToscaName(), 1, inf, parameters.getInstance(), parameters));
 			final MciopUserTask mciop = createTask(MciopUserTask::new);
-			mciop.setToscaName(x.getName());
-			mciop.setParentVdu(x.getName());
+			mciop.setToscaName(x.getToscaName());
+			mciop.setParentVdu(x.getToscaName());
 			mciop.setType(ResourceTypeEnum.MCIOP_USER);
 			ret.add(create(MciopUser.class, mciop.getClass(), mciop.getToscaName(), 1, mciop, parameters.getInstance(), parameters));
 
 		});
 		bundle.getOsContainer().forEach(x -> {
 			final OsContainerTask t = createTask(OsContainerTask::new);
-			t.setToscaName(x.getName());
+			t.setToscaName(x.getToscaName());
 			t.setBlueprint(parameters);
 			t.setType(ResourceTypeEnum.OS_CONTAINER);
 			t.setChangeType(ChangeType.ADDED);
 			t.setOsContainer(x);
-			final String deploy = findDu(bundle.getOsContainerDeployableUnits(), x.getName());
+			final String deploy = findDu(bundle.getOsContainerDeployableUnits(), x.getToscaName());
 			t.setDeployableName(deploy);
 			ret.add(create(OsContainerNode.class, t.getClass(), t.getToscaName(), 1, t, parameters.getInstance(), parameters));
 		});
@@ -116,7 +116,7 @@ public class OsContainerContributor extends AbstractVnfmContributor<Object> {
 	private static String findDu(final Set<OsContainerDeployableUnit> osContainerDeployableUnits, final String name) {
 		return osContainerDeployableUnits.stream()
 				.filter(x -> x.getContainerReq().contains(name))
-				.map(OsContainerDeployableUnit::getName)
+				.map(OsContainerDeployableUnit::getToscaName)
 				.findFirst()
 				.orElseThrow(() -> new NotFoundException("Unable to find Deployable unit [" + name + "]"));
 	}

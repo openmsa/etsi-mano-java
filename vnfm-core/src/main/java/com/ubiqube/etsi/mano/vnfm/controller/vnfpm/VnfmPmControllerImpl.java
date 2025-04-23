@@ -28,6 +28,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
@@ -58,7 +59,6 @@ import com.ubiqube.etsi.mano.service.search.SearchParamBuilder;
 import com.ubiqube.etsi.mano.service.search.SearchableService;
 import com.ubiqube.etsi.mano.vnfm.service.repository.PmJobsRepositoryService;
 
-import org.jspecify.annotations.Nullable;
 import jakarta.transaction.Transactional;
 
 /**
@@ -210,7 +210,7 @@ public class VnfmPmControllerImpl implements VnfmPmController {
 		final List<ResolvedObjectId> osDu = insts.stream()
 				.map(VnfInstance::getVnfPkg)
 				.flatMap(x -> x.getOsContainerDeployableUnits().stream())
-				.filter(x -> x.getName().equals(str))
+				.filter(x -> x.getToscaName().equals(str))
 				.map(x -> new ResolvedObjectId(null, str, ObjectType.OS_CONTAINER, x.getId()))
 				.toList();
 		final List<ResolvedObjectId> ret = new ArrayList<>(osDu);

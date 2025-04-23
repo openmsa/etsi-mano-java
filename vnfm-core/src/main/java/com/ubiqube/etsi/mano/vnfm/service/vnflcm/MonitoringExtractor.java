@@ -47,7 +47,7 @@ public class MonitoringExtractor implements VnfLcmExtractor {
 	private static VnfMonitoringParameter createMonitoring(final VnfLiveInstance vli, final MonitoringTask mt) {
 		final VnfMonitoringParameter mon = new VnfMonitoringParameter();
 		mon.setId(vli.getId());
-		mon.setName(mt.getMonitoringParams().getName());
+		mon.setName(mt.getMonitoringParams().getToscaName());
 		mon.setPerformanceMetric(mt.getMonitoringParams().getPerformanceMetric());
 		return mon;
 	}

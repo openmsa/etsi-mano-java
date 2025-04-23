@@ -22,6 +22,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -53,8 +54,6 @@ import com.ubiqube.etsi.mano.vnfm.service.VnfInstanceServiceVnfm;
 import com.ubiqube.etsi.mano.vnfm.service.plan.ScalingStrategy;
 import com.ubiqube.etsi.mano.vnfm.service.plan.ScalingStrategy.NumberOfCompute;
 
-import org.jspecify.annotations.Nullable;
-
 /**
  *
  * @author olivier
@@ -76,7 +75,7 @@ public class ComputeContributor extends AbstractVnfmContributor<Object> {
 
 	@Override
 	public List<SclableResources<Object>> contribute(final VnfPackage bundle, final VnfBlueprint parameters) {
-        final Instance vnfInstance = vnfInstanceServiceVnfm.findById(parameters.getInstance().getId());
+		final Instance vnfInstance = vnfInstanceServiceVnfm.findById(parameters.getInstance().getId());
 		final Set<ScaleInfo> scaling = merge(parameters, vnfInstance);
 		final List<SclableResources<Object>> ret = new ArrayList<>();
 		bundle.getVnfCompute().forEach(x -> {
@@ -116,7 +115,7 @@ public class ComputeContributor extends AbstractVnfmContributor<Object> {
 			x.getMonitoringParameters().forEach(y -> {
 				final MonitoringTask mt = createTask(MonitoringTask::new);
 				mt.setType(ResourceTypeEnum.MONITORING);
-				mt.setToscaName(x.getToscaName() + "-" + y.getName());
+				mt.setToscaName(x.getToscaName() + "-" + y.getToscaName());
 				mt.setParentAlias(x.getToscaName());
 				mt.setMonitoringParams(y);
 				mt.setVnfCompute(x);
@@ -129,8 +128,8 @@ public class ComputeContributor extends AbstractVnfmContributor<Object> {
 			final VnfIndicatorTask vnfIndicatorTask = createTask(VnfIndicatorTask::new);
 			vnfIndicatorTask.setVnfIndicator(vnfIndicator);
 			vnfIndicatorTask.setType(ResourceTypeEnum.VNF_INDICATOR);
-			vnfIndicatorTask.setToscaName(vnfIndicator.getName());
-			vnfIndicatorTask.setName(vnfIndicator.getName());
+			vnfIndicatorTask.setToscaName(vnfIndicator.getToscaName());
+			vnfIndicatorTask.setName(vnfIndicator.getToscaName());
 			ret.add(create(VnfIndicator.class, vnfIndicatorTask.getClass(), vnfIndicatorTask.getName(), 1, vnfIndicatorTask, parameters.getInstance(), parameters));
 
 //			for (final MonitoringParams monitoringParams : vnfIndicator.getMonitoringParameters()) {

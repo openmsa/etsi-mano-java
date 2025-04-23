@@ -78,11 +78,11 @@ class OsContainerContributorTest {
 		final VnfPackage pkg = new VnfPackage();
 		final OsContainerDeployableUnit du = new OsContainerDeployableUnit();
 		du.setVirtualStorageReq(Set.of("sto"));
-		du.setName("du");
+		du.setToscaName("du");
 		du.setContainerReq(Set.of("osc"));
 		pkg.setOsContainerDeployableUnits(Set.of(du));
 		final OsContainer osc = new OsContainer();
-		osc.setName("osc");
+		osc.setToscaName("osc");
 		pkg.setOsContainer(Set.of(osc));
 		pkg.setMciops(Set.of());
 		final VnfStorage sto = new VnfStorage();
@@ -99,11 +99,11 @@ class OsContainerContributorTest {
 		final VnfPackage pkg = new VnfPackage();
 		final OsContainerDeployableUnit du = new OsContainerDeployableUnit();
 		du.setVirtualStorageReq(Set.of("stoww"));
-		du.setName("du");
+		du.setToscaName("du");
 		du.setContainerReq(Set.of("osc"));
 		pkg.setOsContainerDeployableUnits(Set.of(du));
 		final OsContainer osc = new OsContainer();
-		osc.setName("osc");
+		osc.setToscaName("osc");
 		pkg.setOsContainer(Set.of(osc));
 		pkg.setMciops(Set.of());
 		final VnfStorage sto = new VnfStorage();

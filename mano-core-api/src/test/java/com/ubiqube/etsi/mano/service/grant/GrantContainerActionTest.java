@@ -92,7 +92,7 @@ class GrantContainerActionTest {
 		grant.setVnfdId(UUID.randomUUID().toString());
 		final VnfPackage vnfPkg = TestFactory.createVnfPkg(UUID.randomUUID());
 		final OsContainer osc = new OsContainer();
-		osc.setName("osc1");
+		osc.setToscaName("osc1");
 		final SoftwareImage si1 = new SoftwareImage();
 		osc.setArtifacts(Map.of("art1", si1));
 		vnfPkg.getOsContainer().add(osc);
@@ -119,7 +119,7 @@ class GrantContainerActionTest {
 		grant.setVnfdId(UUID.randomUUID().toString());
 		final VnfPackage vnfPkg = TestFactory.createVnfPkg(UUID.randomUUID());
 		final OsContainer osc = new OsContainer();
-		osc.setName("osc1");
+		osc.setToscaName("osc1");
 		final SoftwareImage si1 = new SoftwareImage();
 		osc.setArtifacts(Map.of("art1", si1));
 		vnfPkg.getOsContainer().add(osc);

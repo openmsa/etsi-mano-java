@@ -28,6 +28,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -50,8 +51,6 @@ import com.ubiqube.etsi.mano.repository.ManoResource;
 import com.ubiqube.etsi.mano.repository.VnfPackageRepository;
 import com.ubiqube.etsi.mano.service.VnfPackageService;
 import com.ubiqube.etsi.mano.service.rest.FluxRest;
-
-import org.jspecify.annotations.Nullable;
 
 @Service
 public class GrantContainerAction {
@@ -145,7 +144,7 @@ public class GrantContainerAction {
 		vnfPkg.getOsContainer().stream().forEach(x -> {
 			final List<ConnectionInformation> res = connJpa.findByConnType(ct);
 			final ConnectionInformation conn = checkAndGet(res, ct);
-			final SoftwareImage ref = find(vnfPkg.getOsContainer(), x.getName());
+			final SoftwareImage ref = find(vnfPkg.getOsContainer(), x.getToscaName());
 			if (ref != null) {
 				final ManoResource bin = vnfRepository.getBinary(vnfPkg.getId(), Constants.REPOSITORY_FOLDER_ARTIFACTS + "/" + ref.getImagePath());
 				final String imageName = buildImageName(conn, "mano", ref.getName());
@@ -154,7 +153,7 @@ public class GrantContainerAction {
 				try (InputStream is = bin.getInputStream()) {
 					dockerService.sendToRegistry(is, ref.getImagePath(), regInfo, imageName, tag);
 				} catch (final DockerApiException e) {
-					LOG.warn("Could not upload blob: {}", x.getName());
+					LOG.warn("Could not upload blob: {}", x.getToscaName());
 					LOG.trace("", e);
 				} catch (final IOException e) {
 					throw new GenericException(e);
@@ -195,7 +194,7 @@ public class GrantContainerAction {
 				return null;
 			}
 		}
-		return osContainer.stream().filter(x -> x.getName().equals(vduId))
+		return osContainer.stream().filter(x -> x.getToscaName().equals(vduId))
 				.map(x -> x.getArtifacts().entrySet().iterator().next())
 				.map(Entry::getValue)
 				.findFirst()

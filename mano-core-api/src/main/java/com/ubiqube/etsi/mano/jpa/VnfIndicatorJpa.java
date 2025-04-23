@@ -24,6 +24,6 @@ import com.ubiqube.etsi.mano.dao.mano.VnfIndicator;
 
 public interface VnfIndicatorJpa extends CrudRepository<VnfIndicator, UUID>{
 	
-	VnfIndicator findByName(String name);
+	VnfIndicator findByToscaName(String name);
 
 }

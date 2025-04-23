@@ -84,7 +84,7 @@ class VnfPlanServiceTest {
 
 	private static Set<VnfIndicator> createVnfIndicator() {
 		final VnfIndicator vi001 = new VnfIndicator();
-		vi001.setName("vi001");
+		vi001.setToscaName("vi001");
 		return Set.of(vi001);
 	}
 
@@ -97,13 +97,13 @@ class VnfPlanServiceTest {
 
 	private static Set<OsContainer> createOsContainer() {
 		final OsContainer oc001 = new OsContainer();
-		oc001.setName("oc001");
+		oc001.setToscaName("oc001");
 		return Set.of(oc001);
 	}
 
 	private static Set<MonitoringParams> createMonitoring() {
 		final MonitoringParams mp001 = new MonitoringParams();
-		mp001.setName("mon001");
+		mp001.setToscaName("mon001");
 		return Set.of(mp001);
 	}
 
@@ -115,7 +115,7 @@ class VnfPlanServiceTest {
 
 	private static OsContainerDeployableUnit createDeployableUnit() {
 		final OsContainerDeployableUnit ocdu = new OsContainerDeployableUnit();
-		ocdu.setName("ocdu-001");
+		ocdu.setToscaName("ocdu-001");
 		ocdu.setVirtualStorageReq(Set.of());
 		ocdu.setContainerReq(Set.of("oc001"));
 		return ocdu;

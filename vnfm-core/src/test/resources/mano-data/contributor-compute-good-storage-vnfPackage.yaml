@@ -9,7 +9,7 @@ vnfCompute:
   - "sto01"
   ports: []
   monitoringParameters:
-  - name: "mon"
+  - toscaName: "mon"
     objectType: "VNFC"
   vduProfile:
     minNumberOfInstances: 0

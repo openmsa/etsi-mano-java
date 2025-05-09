@@ -37,6 +37,7 @@ import com.ubiqube.etsi.mano.exception.NotFoundException;
 import com.ubiqube.etsi.mano.test.ext.YamlParameterResolver;
 import com.ubiqube.etsi.mano.test.ext.YamlTestData;
 import com.ubiqube.etsi.mano.vnfm.jpa.VnfLiveInstanceJpa;
+import com.ubiqube.etsi.mano.vnfm.service.TagService;
 import com.ubiqube.etsi.mano.vnfm.service.VnfInstanceServiceVnfm;
 import com.ubiqube.etsi.mano.vnfm.service.plan.ScalingStrategy;
 import com.ubiqube.etsi.mano.vnfm.service.plan.ScalingStrategy.NumberOfCompute;
@@ -49,10 +50,12 @@ class ComputeContributorTest {
 	private ScalingStrategy scalingStrategy;
 	@Mock
 	private VnfInstanceServiceVnfm vnfInstanceServiceVnfm;
+	@Mock
+	private TagService tagService;
 
 	@Test
 	void testContribute_Minimal() {
-		final ComputeContributor con = new ComputeContributor(vnfLiveInstance, scalingStrategy, vnfInstanceServiceVnfm);
+		final ComputeContributor con = new ComputeContributor(vnfLiveInstance, scalingStrategy, vnfInstanceServiceVnfm, tagService);
 		final VnfPackage pkg = new VnfPackage();
 		pkg.setVnfCompute(Set.of());
 		final VnfBlueprint bp = new VnfBlueprint();
@@ -70,7 +73,7 @@ class ComputeContributorTest {
 	@Test
 	void testContribute_GoodStorage(@YamlTestData("contributor-compute-good-storage-vnfPackage.yaml") final VnfPackage pkgIn,
 			@YamlTestData("contributor-compute-good-storage-vnfBlueprint.yaml") final VnfBlueprint bpIn) {
-		final ComputeContributor con = new ComputeContributor(vnfLiveInstance, scalingStrategy, vnfInstanceServiceVnfm);
+		final ComputeContributor con = new ComputeContributor(vnfLiveInstance, scalingStrategy, vnfInstanceServiceVnfm, tagService);
 		when(vnfInstanceServiceVnfm.findById(any())).thenReturn(bpIn.getInstance());
 		final NumberOfCompute numComp = new NumberOfCompute(0, 1, null);
 		when(scalingStrategy.getNumberOfCompute(any(), any(), any(), any(), any())).thenReturn(numComp);
@@ -81,7 +84,7 @@ class ComputeContributorTest {
 	@Test
 	void testContributePotrs(@YamlTestData("contributor-compute-ports-vnfPackage.yaml") final VnfPackage pkgIn,
 			@YamlTestData("contributor-compute-ports-vnfBlueprint.yaml") final VnfBlueprint bpIn) {
-		final ComputeContributor con = new ComputeContributor(vnfLiveInstance, scalingStrategy, vnfInstanceServiceVnfm);
+		final ComputeContributor con = new ComputeContributor(vnfLiveInstance, scalingStrategy, vnfInstanceServiceVnfm, tagService);
 		when(vnfInstanceServiceVnfm.findById(any())).thenReturn(bpIn.getVnfInstance());
 		final NumberOfCompute numComp = new NumberOfCompute(0, 1, null);
 		when(scalingStrategy.getNumberOfCompute(any(), any(), any(), any(), any())).thenReturn(numComp);
@@ -92,7 +95,7 @@ class ComputeContributorTest {
 	@Test
 	void testContribute_CrashOnUnknownStorage(@YamlTestData("contributor-compute-bad-storage-vnfPackage.yaml") final VnfPackage pkgIn,
 			@YamlTestData("contributor-compute-bad-storage-vnfBlueprint.yaml") final VnfBlueprint bpIn) {
-		final ComputeContributor con = new ComputeContributor(vnfLiveInstance, scalingStrategy, vnfInstanceServiceVnfm);
+		final ComputeContributor con = new ComputeContributor(vnfLiveInstance, scalingStrategy, vnfInstanceServiceVnfm, tagService);
 		when(vnfInstanceServiceVnfm.findById(any())).thenReturn(bpIn.getInstance());
 		final NumberOfCompute numComp = new NumberOfCompute(0, 1, null);
 		when(scalingStrategy.getNumberOfCompute(any(), any(), any(), any(), any())).thenReturn(numComp);

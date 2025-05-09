@@ -50,6 +50,7 @@ import com.ubiqube.etsi.mano.orchestrator.nodes.vnfm.Storage;
 import com.ubiqube.etsi.mano.orchestrator.nodes.vnfm.VnfIndicator;
 import com.ubiqube.etsi.mano.orchestrator.nodes.vnfm.VnfPortNode;
 import com.ubiqube.etsi.mano.vnfm.jpa.VnfLiveInstanceJpa;
+import com.ubiqube.etsi.mano.vnfm.service.TagService;
 import com.ubiqube.etsi.mano.vnfm.service.VnfInstanceServiceVnfm;
 import com.ubiqube.etsi.mano.vnfm.service.plan.ScalingStrategy;
 import com.ubiqube.etsi.mano.vnfm.service.plan.ScalingStrategy.NumberOfCompute;
@@ -66,11 +67,13 @@ public class ComputeContributor extends AbstractVnfmContributor<Object> {
 
 	private final ScalingStrategy scalingStrategy;
 	private final VnfInstanceServiceVnfm vnfInstanceServiceVnfm;
+	private final TagService tagService;
 
-	protected ComputeContributor(final VnfLiveInstanceJpa vnfInstanceJpa, final ScalingStrategy scalingStrategy, final VnfInstanceServiceVnfm vnfInstanceServiceVnfm) {
+	protected ComputeContributor(final VnfLiveInstanceJpa vnfInstanceJpa, final ScalingStrategy scalingStrategy, final VnfInstanceServiceVnfm vnfInstanceServiceVnfm, final TagService tagService) {
 		super(vnfInstanceJpa);
 		this.scalingStrategy = scalingStrategy;
 		this.vnfInstanceServiceVnfm = vnfInstanceServiceVnfm;
+		this.tagService = tagService;
 	}
 
 	@Override
@@ -81,6 +84,7 @@ public class ComputeContributor extends AbstractVnfmContributor<Object> {
 		bundle.getVnfCompute().forEach(x -> {
 			final ComputeTask computeTask = createTask(ComputeTask::new);
 			computeTask.setVnfCompute(x);
+			computeTask.setTags(tagService.buildTags(parameters.getInstance().getId()));
 			computeTask.setType(ResourceTypeEnum.COMPUTE);
 			computeTask.setToscaName(x.getToscaName());
 			final NumberOfCompute numInst = scalingStrategy.getNumberOfCompute(parameters, bundle, scaling, x, parameters.getVnfInstance());

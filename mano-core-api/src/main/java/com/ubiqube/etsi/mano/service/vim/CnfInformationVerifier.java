@@ -19,6 +19,8 @@ package com.ubiqube.etsi.mano.service.vim;
 import java.util.List;
 import java.util.Objects;
 
+import org.jspecify.annotations.Nullable;
+
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
 import com.ubiqube.etsi.mano.dao.mano.vim.vnfi.ClusterMachine;
 import com.ubiqube.etsi.mano.dao.mano.vim.vnfi.CnfInformations;
@@ -67,7 +69,7 @@ public class CnfInformationVerifier {
 		}
 	}
 
-	private List<NetworkObject> findNetworkByNameOrId(final String netName, final String netId) {
+	private List<NetworkObject> findNetworkByNameOrId(final @Nullable String netName, final String netId) {
 		if (netName != null) {
 			return vim.network(vci).search(NetowrkSearchField.NAME, List.of(netName));
 		}
@@ -77,7 +79,7 @@ public class CnfInformationVerifier {
 	private void verifyMachine(final ClusterMachine machine, final List<Flavor> flavors) {
 		final String flavor = machine.getFlavor();
 		final String flavorId = machine.getFlavorId();
-		if (flavor == null && flavorId == null) {
+		if ((flavor == null) && (flavorId == null)) {
 			throw new VimException("You must have a flavor or a flavorId");
 		}
 		if (flavor != null) {

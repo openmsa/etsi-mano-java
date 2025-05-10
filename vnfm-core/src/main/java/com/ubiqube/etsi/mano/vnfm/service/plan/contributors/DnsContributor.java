@@ -21,11 +21,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.ubiqube.etsi.mano.dao.mano.ResourceTypeEnum;
 import com.ubiqube.etsi.mano.dao.mano.VnfPackage;
 import com.ubiqube.etsi.mano.dao.mano.v2.DnsHostTask;
 import com.ubiqube.etsi.mano.dao.mano.v2.DnsZoneTask;
 import com.ubiqube.etsi.mano.dao.mano.v2.VnfBlueprint;
+import com.ubiqube.etsi.mano.dao.mano.vim.ResourceTypeEnum;
 import com.ubiqube.etsi.mano.orchestrator.SclableResources;
 import com.ubiqube.etsi.mano.orchestrator.nodes.vnfm.DnsHost;
 import com.ubiqube.etsi.mano.orchestrator.nodes.vnfm.DnsZone;

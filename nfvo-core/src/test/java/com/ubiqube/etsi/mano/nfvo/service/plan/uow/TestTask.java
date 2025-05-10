@@ -16,9 +16,9 @@
  */
 package com.ubiqube.etsi.mano.nfvo.service.plan.uow;
 
-import com.ubiqube.etsi.mano.dao.mano.ResourceTypeEnum;
 import com.ubiqube.etsi.mano.dao.mano.ScaleInfo;
 import com.ubiqube.etsi.mano.dao.mano.v2.AbstractTask;
+import com.ubiqube.etsi.mano.dao.mano.vim.ResourceTypeEnum;
 
 public class TestTask extends AbstractTask {
 

@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.ubiqube.etsi.mano.dao.mano.ResourceTypeEnum;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsTask;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsVirtualLinkTask;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsVnfExtractorTask;
@@ -34,6 +33,7 @@ import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsVnfTask;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsdExtractorTask;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsdInstantiateTask;
 import com.ubiqube.etsi.mano.dao.mano.v2.nfvo.NsdTask;
+import com.ubiqube.etsi.mano.dao.mano.vim.ResourceTypeEnum;
 import com.ubiqube.etsi.mano.dao.mano.vnffg.VnffgLoadbalancerTask;
 import com.ubiqube.etsi.mano.dao.mano.vnffg.VnffgPortPairTask;
 import com.ubiqube.etsi.mano.dao.mano.vnffg.VnffgPostTask;

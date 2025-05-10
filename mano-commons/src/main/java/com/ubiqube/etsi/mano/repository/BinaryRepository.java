@@ -34,4 +34,8 @@ public interface BinaryRepository {
 	void delete(UUID id, String filename);
 
 	void delete(UUID id);
+
+	boolean exist(UUID id);
+
+	boolean exist(UUID id, String filename);
 }

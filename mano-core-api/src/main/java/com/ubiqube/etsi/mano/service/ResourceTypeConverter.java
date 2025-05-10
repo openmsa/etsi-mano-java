@@ -19,8 +19,8 @@ package com.ubiqube.etsi.mano.service;
 import java.util.Optional;
 import java.util.function.Function;
 
-import com.ubiqube.etsi.mano.dao.mano.ResourceTypeEnum;
 import com.ubiqube.etsi.mano.dao.mano.v2.AbstractTask;
+import com.ubiqube.etsi.mano.dao.mano.vim.ResourceTypeEnum;
 import com.ubiqube.etsi.mano.orchestrator.vt.VirtualTaskV3;
 import com.ubiqube.etsi.mano.vnfm.service.graph.ResourceHolder;
 

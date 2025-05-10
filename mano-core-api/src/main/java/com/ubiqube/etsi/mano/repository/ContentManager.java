@@ -34,4 +34,6 @@ public interface ContentManager {
 
 	void delete(Path path);
 
+	boolean exist(Path path);
+
 }

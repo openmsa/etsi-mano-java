@@ -31,7 +31,6 @@ public class ContentManagerMsa implements ContentManager {
 	private final Low lowDriver;
 
 	public ContentManagerMsa(final Low lowDriver) {
-		super();
 		this.lowDriver = lowDriver;
 	}
 
@@ -53,6 +52,11 @@ public class ContentManagerMsa implements ContentManager {
 	@Override
 	public void delete(final Path path) {
 		lowDriver.delete(path.toString());
+	}
+
+	@Override
+	public boolean exist(final Path path) {
+		return lowDriver.exist(path.toString());
 	}
 
 }

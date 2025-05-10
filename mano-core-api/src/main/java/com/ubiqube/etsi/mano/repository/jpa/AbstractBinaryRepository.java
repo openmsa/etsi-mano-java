@@ -22,6 +22,8 @@ import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.UUID;
 
+import org.jspecify.annotations.Nullable;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ubiqube.etsi.mano.exception.GenericException;
@@ -30,7 +32,6 @@ import com.ubiqube.etsi.mano.repository.ContentManager;
 import com.ubiqube.etsi.mano.repository.ManoResource;
 import com.ubiqube.etsi.mano.repository.NamingStrategy;
 
-import org.jspecify.annotations.Nullable;
 import jakarta.validation.constraints.NotNull;
 
 public abstract class AbstractBinaryRepository implements BinaryRepository {
@@ -98,6 +99,18 @@ public abstract class AbstractBinaryRepository implements BinaryRepository {
 	public void delete(@NotNull final UUID id) {
 		final Path path = namingStrategy.getRoot(getFrontClass(), id);
 		contentManager.delete(path);
+	}
+
+	@Override
+	public boolean exist(final UUID id) {
+		final Path path = namingStrategy.getRoot(getFrontClass(), id);
+		return contentManager.exist(path);
+	}
+
+	@Override
+	public boolean exist(final UUID id, final String filename) {
+		final Path path = namingStrategy.getRoot(getFrontClass(), id, filename);
+		return contentManager.exist(path);
 	}
 
 	protected abstract Class<?> getFrontClass();

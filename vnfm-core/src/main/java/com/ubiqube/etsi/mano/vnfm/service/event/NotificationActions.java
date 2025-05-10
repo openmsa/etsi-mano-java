@@ -21,8 +21,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.UUID;
 
-import jakarta.validation.constraints.NotNull;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -43,6 +41,8 @@ import com.ubiqube.etsi.mano.utils.TemporaryFileSentry;
 import com.ubiqube.etsi.mano.vnfm.jpa.VnfPackageOnboardingNotificationJpa;
 import com.ubiqube.etsi.mano.vnfm.service.VnfmVersionManager;
 
+import jakarta.validation.constraints.NotNull;
+
 @Service
 public class NotificationActions {
 
@@ -58,7 +58,6 @@ public class NotificationActions {
 	public NotificationActions(final VnfPackageJpa vnfPackageJpa, final VnfPackageOnboardingNotificationJpa vnfPackageOnboardingNotificationJpa,
 			final VnfmVersionManager vnfmVersionManager, final VnfPackageRepository vnfPackageRepository, final VnfPackageOnboardingImpl vnfPackageOnboarding,
 			final ServerService serverService) {
-		super();
 		this.vnfPackageJpa = vnfPackageJpa;
 		this.vnfPackageOnboardingNotificationJpa = vnfPackageOnboardingNotificationJpa;
 		this.vnfmVersionManager = vnfmVersionManager;
@@ -85,6 +84,9 @@ public class NotificationActions {
 	}
 
 	private void downloadToTmpFile(final VnfPackage localPackage) {
+		if (vnfPackageRepository.exist(localPackage.getId())) {
+			return;
+		}
 		try (TemporaryFileSentry tfs = new TemporaryFileSentry()) {
 			final Path file = tfs.get();
 			vnfmVersionManager.getPackageContent(localPackage.getNfvoId(), file);

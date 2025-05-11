@@ -19,6 +19,8 @@ package com.ubiqube.etsi.mano.vnfm.service.plan.contributors.uow;
 import java.util.Comparator;
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
+
 import com.ubiqube.etsi.mano.dao.mano.VnfLinkPort;
 import com.ubiqube.etsi.mano.dao.mano.v2.ComputeTask;
 import com.ubiqube.etsi.mano.dao.mano.vim.VimConnectionInformation;
@@ -32,8 +34,6 @@ import com.ubiqube.etsi.mano.orchestrator.nodes.vnfm.VnfPortNode;
 import com.ubiqube.etsi.mano.orchestrator.vt.VirtualTaskV3;
 import com.ubiqube.etsi.mano.service.vim.ComputeParameters;
 import com.ubiqube.etsi.mano.service.vim.Vim;
-
-import org.jspecify.annotations.Nullable;
 
 public class VnfComputeUow extends AbstractVnfmUow<ComputeTask> {
 
@@ -82,6 +82,7 @@ public class VnfComputeUow extends AbstractVnfmUow<ComputeTask> {
 				.securityGroup(security)
 				.affinityRules(affinity)
 				.portsId(ports)
+				.metadata(task.getTags())
 				.build();
 		return vim.createCompute(computeParams);
 	}

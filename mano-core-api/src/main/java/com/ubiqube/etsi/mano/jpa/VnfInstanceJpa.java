@@ -16,12 +16,14 @@
  */
 package com.ubiqube.etsi.mano.jpa;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.data.repository.CrudRepository;
 
+import com.ubiqube.etsi.mano.dao.mano.InstantiationState;
 import com.ubiqube.etsi.mano.dao.mano.VnfInstance;
 
 public interface VnfInstanceJpa extends CrudRepository<VnfInstance, UUID> {
@@ -31,4 +33,6 @@ public interface VnfInstanceJpa extends CrudRepository<VnfInstance, UUID> {
 	Optional<VnfInstance> findByVnfPkg_IdAndNsInstance_Id(UUID vnfPackageId, UUID nsInstanceid);
 
 	Set<VnfInstance> findByVnfPkg_Id(UUID nsInstanceid);
+
+	List<VnfInstance> findByInstantiationState(InstantiationState state);
 }

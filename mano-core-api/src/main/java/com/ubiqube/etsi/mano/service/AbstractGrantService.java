@@ -188,7 +188,7 @@ public abstract class AbstractGrantService implements VimResourceService {
 					final String res = modules.stream()
 							.map(y -> vimConnections.stream()
 									.filter(z -> vimEqual(z, y)).findAny())
-							.filter(z -> z.isPresent())
+							.filter(Optional::isPresent)
 							.map(z -> z.get().getVimId())
 							.findAny()
 							.orElseThrow(() -> new GenericException("Unable to find connection : " + x.getType()));
@@ -217,6 +217,8 @@ public abstract class AbstractGrantService implements VimResourceService {
 
 	private static String findImage(final GrantVimAssetsEntity vimAssets, final String imageName) {
 		Objects.requireNonNull(vimAssets.getSoftwareImages(), "Could not map " + imageName + ", Grant did not return software images.");
+		// Image comparison should be a global function, to match NFVO decision, like
+		// SHA first then name.
 		return vimAssets.getSoftwareImages().stream()
 				.filter(x -> x.getVnfdSoftwareImageId().equals(imageName))
 				.map(VimSoftwareImageEntity::getVimSoftwareImageId)

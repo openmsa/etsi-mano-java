@@ -24,10 +24,12 @@ import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
 
+import com.ubiqube.etsi.mano.dao.mano.InstantiationState;
 import com.ubiqube.etsi.mano.dao.mano.NsdInstance;
 import com.ubiqube.etsi.mano.dao.mano.VnfInstance;
 import com.ubiqube.etsi.mano.dao.mano.VnfLiveInstance;
@@ -42,7 +44,6 @@ import com.ubiqube.etsi.mano.service.search.SearchParamBuilder;
 import com.ubiqube.etsi.mano.service.search.SearchableService;
 import com.ubiqube.etsi.mano.vnfm.jpa.VnfLiveInstanceJpa;
 
-import org.jspecify.annotations.Nullable;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 
@@ -160,5 +161,10 @@ public class VnfInstanceServiceImpl implements VnfInstanceService {
 	@Override
 	public List<VnfLiveInstance> findByVnfInstanceId(final UUID id) {
 		return vnfLiveInstanceJpa.findByVnfInstanceId(id);
+	}
+
+	@Override
+	public List<VnfInstance> findByInstantiationState(final InstantiationState state) {
+		return vnfInstanceJpa.findByInstantiationState(state);
 	}
 }

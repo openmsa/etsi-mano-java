@@ -23,14 +23,14 @@ import java.util.UUID;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 
+import com.ubiqube.etsi.mano.dao.mano.InstantiationState;
 import com.ubiqube.etsi.mano.dao.mano.NsdInstance;
 import com.ubiqube.etsi.mano.dao.mano.VnfInstance;
 import com.ubiqube.etsi.mano.dao.mano.VnfLiveInstance;
-
-import org.jspecify.annotations.Nullable;
 
 public interface VnfInstanceService {
 
@@ -63,4 +63,6 @@ public interface VnfInstanceService {
 	VnfInstance findById(UUID id);
 
 	List<VnfLiveInstance> findByVnfInstanceId(final UUID id);
+
+	List<VnfInstance> findByInstantiationState(InstantiationState state);
 }

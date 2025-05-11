@@ -50,4 +50,9 @@ public class TenantIdentifierResolver implements CurrentTenantIdentifierResolver
 		return tenant.isPresent();
 	}
 
+	@Override
+	public boolean isRoot(final String tenantId) {
+		return "ROOT".equals(tenantId);
+	}
+
 }

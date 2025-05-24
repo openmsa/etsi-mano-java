@@ -12,7 +12,7 @@
 	<artifactId>mano-dns-aggregator</artifactId>
 	<packaging>pom</packaging>
 	<modules>
-		<module>mano-dns-api</module>
+		<module>mano-dns-grpc-client</module>
 		<module>mano-dns-server</module>
 		<module>mano-dns-pdns-aggregator</module>
 	</modules>

@@ -15,6 +15,7 @@
 		<module>mano-dns-grpc-client</module>
 		<module>mano-dns-server</module>
 		<module>mano-dns-pdns-aggregator</module>
+		<module>mano-dns-api</module>
 	</modules>
 	<properties>
 		<ubiqube.grpc.version>1.62.2</ubiqube.grpc.version>

@@ -10,6 +10,10 @@
 	<artifactId>mano-pdns-api</artifactId>
 	<dependencies>
 		<dependency>
+			<groupId>com.ubiqube.mano</groupId>
+			<artifactId>mano-dns-api</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 		</dependency>
@@ -40,6 +44,11 @@
 		<dependency>
 			<groupId>org.jspecify</groupId>
 			<artifactId>jspecify</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>

@@ -58,6 +58,7 @@ public class VnfPortUow extends AbstractVnfmUow<VnfPortTask> {
 					.name(getVirtualTask().getAlias())
 					.networkId(ext.getResourceId())
 					.nicType(NicType.fromValue(getVirtualTask().getTemplateParameters().getVnfLinkPort().getVnicType()))
+					.qosPolicyId(task.getQosPolicyId())
 					.build();
 			p = vim.network(vimConnectionInformation).createPort(pp);
 		} else {
@@ -67,6 +68,7 @@ public class VnfPortUow extends AbstractVnfmUow<VnfPortTask> {
 					.name(getVirtualTask().getAlias())
 					.networkId(extNetwork)
 					.nicType(NicType.fromValue(extCp.getVnicType()))
+					.qosPolicyId(task.getQosPolicyId())
 					.build();
 			p = vim.network(vimConnectionInformation).createPort(pp);
 		}

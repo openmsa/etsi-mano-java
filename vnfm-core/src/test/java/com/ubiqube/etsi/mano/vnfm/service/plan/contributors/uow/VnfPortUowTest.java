@@ -62,7 +62,7 @@ class VnfPortUowTest {
 		when(vim.network(vimConn)).thenReturn(network);
 		final Port port = new Port();
 		port.setId(UUID.randomUUID());
-		when(network.createPort(any(), any(), any(), any(), any())).thenReturn(port);
+		when(network.createPort(any())).thenReturn(port);
 		uow.execute(context);
 		assertTrue(true);
 	}
@@ -80,7 +80,7 @@ class VnfPortUowTest {
 		when(vim.network(vimConn)).thenReturn(network);
 		final Port port = new Port();
 		port.setId(UUID.randomUUID());
-		when(network.createPort(any(), any(), any(), any(), any())).thenReturn(port);
+		when(network.createPort(any())).thenReturn(port);
 		uow.execute(context);
 		assertTrue(true);
 	}

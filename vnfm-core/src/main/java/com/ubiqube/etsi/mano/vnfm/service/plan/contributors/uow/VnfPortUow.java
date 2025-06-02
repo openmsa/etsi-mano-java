@@ -18,6 +18,9 @@ package com.ubiqube.etsi.mano.vnfm.service.plan.contributors.uow;
 
 import java.util.stream.Collectors;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+
 import com.ubiqube.etsi.mano.dao.mano.ExtManagedVirtualLinkDataEntity;
 import com.ubiqube.etsi.mano.dao.mano.VnfLinkPort;
 import com.ubiqube.etsi.mano.dao.mano.common.NicType;
@@ -30,10 +33,8 @@ import com.ubiqube.etsi.mano.orchestrator.nodes.vnfm.VnfPortNode;
 import com.ubiqube.etsi.mano.orchestrator.vt.VirtualTaskV3;
 import com.ubiqube.etsi.mano.service.vim.FixedIp;
 import com.ubiqube.etsi.mano.service.vim.Port;
+import com.ubiqube.etsi.mano.service.vim.PortParameters;
 import com.ubiqube.etsi.mano.service.vim.Vim;
-
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
 
 public class VnfPortUow extends AbstractVnfmUow<VnfPortTask> {
 	@NonNull
@@ -53,11 +54,21 @@ public class VnfPortUow extends AbstractVnfmUow<VnfPortTask> {
 		Port p;
 		if (task.getExternal() != null) {
 			final ExtManagedVirtualLinkDataEntity ext = task.getExternal();
-			p = vim.network(vimConnectionInformation).createPort(getVirtualTask().getAlias(), ext.getResourceId(), null, null, NicType.fromValue(getVirtualTask().getTemplateParameters().getVnfLinkPort().getVnicType()));
+			PortParameters pp = PortParameters.builder()
+					.name(getVirtualTask().getAlias())
+					.networkId(ext.getResourceId())
+					.nicType(NicType.fromValue(getVirtualTask().getTemplateParameters().getVnfLinkPort().getVnicType()))
+					.build();
+			p = vim.network(vimConnectionInformation).createPort(pp);
 		} else {
 			final VnfLinkPort extCp = task.getVnfLinkPort();
 			final String extNetwork = context.get(Network.class, extCp.getVirtualLink());
-			p = vim.network(vimConnectionInformation).createPort(getVirtualTask().getAlias(), extNetwork, null, null, NicType.fromValue(getVirtualTask().getTemplateParameters().getVnfLinkPort().getVnicType()));
+			PortParameters pp = PortParameters.builder()
+					.name(getVirtualTask().getAlias())
+					.networkId(extNetwork)
+					.nicType(NicType.fromValue(extCp.getVnicType()))
+					.build();
+			p = vim.network(vimConnectionInformation).createPort(pp);
 		}
 		task.setIpSubnet(p.getFixedIps().stream().map(this::map).collect(Collectors.toSet()));
 		task.setMacAddress(p.getMacAddress());
